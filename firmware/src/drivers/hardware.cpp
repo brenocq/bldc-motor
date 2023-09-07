@@ -1,16 +1,12 @@
 //--------------------------------------------------
 // BLDC Motor Controller
-// clock.h
+// hardware.cpp
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#ifndef BLDC_DRIVERS_CLOCK_CLOCK_H
-#define BLDC_DRIVERS_CLOCK_CLOCK_H
+#include <drivers/hardware.h>
+#include <system/hal.h>
 
-namespace Clock {
+void Hardware::delay(float s) { HAL_Delay(s * 1000); }
 
-void init();
-
-};
-
-#endif // BLDC_DRIVERS_CLOCK_CLOCK_H
+void Hardware::delayMs(float ms) { HAL_Delay(ms); }

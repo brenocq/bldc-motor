@@ -1,0 +1,44 @@
+//--------------------------------------------------
+// BLDC Motor Controller
+// gpio.h
+// Date: 2023-09-07
+// By Breno Cunha Queiroz
+//--------------------------------------------------
+#ifndef BLDC_DRIVERS_GPIO_GPIO_H
+#define BLDC_DRIVERS_GPIO_GPIO_H
+#include <drivers/gpio/modes.h>
+#include <drivers/gpio/ports.h>
+
+namespace Gpio {
+
+bool init();
+bool deinit();
+
+void write(Gpio gpio, bool high);
+bool read(Gpio gpio);
+
+//---------- GPIO pins ----------//
+constexpr Gpio SWO_PIN = PB3;
+constexpr Gpio SWDIO_PIN = PA13;
+constexpr Gpio SWCLK_PIN = PA14;
+
+constexpr Gpio LED_PIN = PA5;
+
+//---------- GPIO configs ----------//
+struct GpioConfig {
+    Gpio gpio;
+    Mode mode;
+};
+
+// clang-format off
+inline const std::array gpioList{
+    GpioConfig{LED_PIN,     Mode::OUTPUT},
+    GpioConfig{SWO_PIN,     Mode::SWO},
+    GpioConfig{SWDIO_PIN,   Mode::SWDIO},
+    GpioConfig{SWCLK_PIN,   Mode::SWCLK},
+};
+// clang-format on
+
+} // namespace Gpio
+
+#endif // BLDC_DRIVERS_GPIO_GPIO_H

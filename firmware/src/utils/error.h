@@ -4,8 +4,8 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#ifndef UTILS_ERROR_H
-#define UTILS_ERROR_H
+#ifndef BLDC_UTILS_ERROR_H
+#define BLDC_UTILS_ERROR_H
 
 namespace Error {
 
@@ -15,4 +15,4 @@ void logicFault();
 
 } // namespace Error
 
-#endif // UTILS_ERROR_H
+#endif // BLDC_UTILS_ERROR_H
