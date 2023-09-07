@@ -1,13 +1,18 @@
 //--------------------------------------------------
 // BLDC Motor Controller
-// main.cpp
+// error.h
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#include <system/hal.h>
-#include <drivers/clock/clock.h>
+#ifndef UTILS_ERROR_H
+#define UTILS_ERROR_H
 
-int main() {
-    HAL_Init();
-    Clock::init();
-}
+namespace Error {
+
+void hardFault();
+void memFault();
+void logicFault();
+
+} // namespace Error
+
+#endif // UTILS_ERROR_H

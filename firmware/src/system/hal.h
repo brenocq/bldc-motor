@@ -1,13 +1,7 @@
 //--------------------------------------------------
 // BLDC Motor Controller
-// main.cpp
+// hal.h
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#include <system/hal.h>
-#include <drivers/clock/clock.h>
-
-int main() {
-    HAL_Init();
-    Clock::init();
-}
+#include "stm32f4xx_hal.h"
