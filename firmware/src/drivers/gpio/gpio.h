@@ -24,6 +24,9 @@ constexpr Gpio SWCLK_PIN = PA14;
 
 constexpr Gpio LED_PIN = PA5;
 
+constexpr Gpio USB_DM_PIN = PA11;
+constexpr Gpio USB_DP_PIN = PA12;
+
 //---------- GPIO configs ----------//
 struct GpioConfig {
     Gpio gpio;
@@ -36,6 +39,8 @@ inline const std::array gpioList{
     GpioConfig{SWO_PIN,     Mode::SWO},
     GpioConfig{SWDIO_PIN,   Mode::SWDIO},
     GpioConfig{SWCLK_PIN,   Mode::SWCLK},
+    //GpioConfig{USB_DM_PIN,  Mode::OTG_FS_DM},
+    //GpioConfig{USB_DP_PIN,  Mode::OTG_FS_DP},
 };
 // clang-format on
 

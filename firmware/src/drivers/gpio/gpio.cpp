@@ -4,8 +4,8 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#include <system/hal.h>
 #include <drivers/gpio/gpio.h>
+#include <system/hal.h>
 
 namespace Gpio {
 
@@ -15,6 +15,7 @@ void initI2c(Gpio gpio);
 void initUart(Gpio gpio, Mode mode);
 void initTimer(Gpio gpio, Mode mode);
 void initTrace(Gpio gpio);
+void initUsb(Gpio gpio, Mode mode);
 
 /**
  * @brief Check if GPIO configuration is valid
@@ -83,6 +84,8 @@ bool Gpio::init() {
             initI2c(gpioConfig.gpio);
         else if (gpioConfig.mode >= Mode::USART1_TX && gpioConfig.mode <= Mode::USART6_CK)
             initUart(gpioConfig.gpio, gpioConfig.mode);
+        else if (gpioConfig.mode >= OTG_FS_DM && gpioConfig.mode <= OTG_HS_ULPI_NXT)
+            initUsb(gpioConfig.gpio, gpioConfig.mode);
         else if (gpioConfig.mode >= Mode::SWO && gpioConfig.mode <= Mode::TRACE_D3)
             initTrace(gpioConfig.gpio);
         else
@@ -158,6 +161,16 @@ void Gpio::initTrace(Gpio gpio) {
     // HAL_GPIO_Init(convert(gpio.port), &gpioInit);
 }
 
+void Gpio::initUsb(Gpio gpio, Mode mode) {
+    GPIO_InitTypeDef gpioInit{};
+    gpioInit.Pin = convert(gpio.pin);
+    gpioInit.Mode = GPIO_MODE_AF_PP;
+    gpioInit.Pull = GPIO_NOPULL;
+    gpioInit.Speed = GPIO_SPEED_FREQ_HIGH;
+    gpioInit.Alternate = getAlternateFunc(gpio, mode);
+    HAL_GPIO_Init(convert(gpio.port), &gpioInit);
+}
+
 bool Gpio::validGpioConfig(GpioConfig gpioConfig) {
     Gpio gpio = gpioConfig.gpio;
     Mode mode = gpioConfig.mode;
@@ -168,7 +181,7 @@ bool Gpio::validGpioConfig(GpioConfig gpioConfig) {
 
     // Check alternate function list
     std::array<Mode, NUM_AFS> afs = afList[gpio.getIdx()];
-    for (int i = 0; i < afs.size(); i++)
+    for (size_t i = 0; i < afs.size(); i++)
         if (afs[i] == mode)
             return true;
     return false;
@@ -176,7 +189,7 @@ bool Gpio::validGpioConfig(GpioConfig gpioConfig) {
 
 uint8_t Gpio::getAlternateFunc(Gpio gpio, Mode mode) {
     std::array<Mode, NUM_AFS> afs = afList[gpio.getIdx()];
-    for (int i = 0; i < NUM_AFS; i++)
+    for (size_t i = 0; i < NUM_AFS; i++)
         if (afs[i] == mode)
             return i;
     return NUM_AFS;

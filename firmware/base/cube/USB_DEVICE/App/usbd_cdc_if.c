@@ -243,7 +243,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   /* USER CODE END 5 */
 }
 
-#include <hardware/drivers/usb/usb.h>
+#include <drivers/usb/usb.h>
 /**
   * @brief  Data received over USB OUT endpoint are sent over CDC interface
   *         through this function.

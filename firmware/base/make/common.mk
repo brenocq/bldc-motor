@@ -123,18 +123,18 @@ ifdef USE_ST_HAL
     CPPFLAGS += -I$(STM32_CUBE_PATH)
     CPPFLAGS += -I$(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/inc
 	# USB
-    #CPPFLAGS += -I$(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
-    #CPPFLAGS += -I$(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
-    #CPPFLAGS += -I$(STM32_CUBE_PATH)/USB_DEVICE/App
-    #CPPFLAGS += -I$(STM32_CUBE_PATH)/USB_DEVICE/Target
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/USB_DEVICE/App
+    CPPFLAGS += -I$(STM32_CUBE_PATH)/USB_DEVICE/Target
 
     # A simply expanded variable is used here to perform the find command only once.
     HAL_SRC := $(shell find $(STM32_CUBE_PATH)/HAL/$(SERIES_FOLDER)/src/*.c ! -name '*_template.c')
 	# USB
-    #HAL_SRC += $(shell find $(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Core/Src/*.c)
-    #HAL_SRC += $(shell find $(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/*.c)
-    #HAL_SRC += $(shell find $(STM32_CUBE_PATH)/USB_DEVICE/Target/*.c)
-    #HAL_SRC += $(shell find $(STM32_CUBE_PATH)/USB_DEVICE/App/*.c)
+    HAL_SRC += $(shell find $(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Core/Src/*.c)
+    HAL_SRC += $(shell find $(STM32_CUBE_PATH)/Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/*.c)
+    HAL_SRC += $(shell find $(STM32_CUBE_PATH)/USB_DEVICE/Target/*.c)
+    HAL_SRC += $(shell find $(STM32_CUBE_PATH)/USB_DEVICE/App/*.c)
 
     SRC += $(HAL_SRC)
 endif
