@@ -36,7 +36,7 @@ AS      = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 OBJDUMP = arm-none-eabi-objdump
 SIZE    = arm-none-eabi-size
-GDB			= arm-none-eabi-gdb
+GDB     = arm-none-eabi-gdb
 
 
 # Flags - Overall Options
@@ -93,8 +93,8 @@ CPPFLAGS += -mthumb
 CPPFLAGS += -masm-syntax-unified
 
 # Output files
-ELF_FILE_NAME ?= stm32_executable.elf
-BIN_FILE_NAME ?= stm32_bin_image.bin
+ELF_FILE_NAME ?= firmware.elf
+BIN_FILE_NAME ?= firmware.bin
 OBJ_FILE_NAME ?= startup_$(MAPPED_DEVICE).o
 
 ELF_FILE_PATH = $(BUILD_FOLDER)/$(ELF_FILE_NAME)
@@ -140,6 +140,7 @@ ifdef USE_ST_HAL
 endif
 
 # Make all
+.PHONY: all
 all:$(BIN_FILE_PATH)
 
 $(BIN_FILE_PATH): $(ELF_FILE_PATH)
@@ -155,6 +156,7 @@ $(BUILD_FOLDER):
 	mkdir $(BUILD_FOLDER)
 
 # Make clean
+.PHONY: clean
 clean:
 	@echo "---------- CLEAN ----------"
 	rm -f $(ELF_FILE_PATH)
@@ -162,13 +164,25 @@ clean:
 	rm -f $(OBJ_FILE_PATH)
 
 # Flash code
+.PHONY: flash
 flash:
 	@echo "---------- FLASH ----------"
 	st-flash write $(BUILD_FOLDER)/$(BIN_FILE_NAME) $(FLASH)
 
 # Get SWO output
+.PHONY: trace
 trace:
 	@echo "---------- TRACE ----------"
 	st-trace
 
-.PHONY: all clean flash
+
+#---------- Debugging ----------#
+# Usage: First run `make openocd`, then `make gdb`
+
+.PHONY: openocd
+openocd:
+	cd $(STM32_BASE_PATH)/openocd && openocd -f stm32f4.cfg -c "gdb_port 3333"
+
+.PHONY: gdb
+gdb:
+	$(GDB) $(BUILD_FOLDER)/$(ELF_FILE_NAME) -ex "target extended-remote localhost:3333"

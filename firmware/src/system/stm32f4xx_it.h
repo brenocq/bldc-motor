@@ -4,12 +4,10 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#ifndef __STM32F4xx_IT_H
-#define __STM32F4xx_IT_H
+#ifndef BLDC_SYSTEM_STM32F4XX_IT_H
+#define BLDC_SYSTEM_STM32F4XX_IT_H
 
-#ifdef __cplusplus
- extern "C" {
-#endif
+extern "C" {
 
 void NMI_Handler(void);
 void HardFault_Handler(void);
@@ -21,8 +19,6 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 
-#ifdef __cplusplus
 }
-#endif
 
-#endif /* __STM32F4xx_IT_H */
+#endif // BLDC_SYSTEM_STM32F4XX_IT

@@ -16,8 +16,8 @@ int main() {
     Clock::init();
     if (!Gpio::init())
         Error::hardFault();
-    if (!Usb::init())
-        Error::hardFault();
+    //if (!Usb::init())
+    //    Error::hardFault();
 
     uint8_t str[] = "Hi!\n";
     while (true) {

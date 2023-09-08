@@ -4,9 +4,9 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#include <utils/error.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
+#include <utils/error.h>
 
 void Error::hardFault() {
     while (true) {
@@ -22,7 +22,12 @@ void Error::memFault() {
     }
 }
 
-void Error::logicFault() {
+void Error::busFault() {
+    while (true) {
+    }
+}
+
+void Error::usageFault() {
     while (true) {
     }
 }

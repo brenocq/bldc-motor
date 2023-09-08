@@ -11,7 +11,8 @@ namespace Error {
 
 void hardFault();
 void memFault();
-void logicFault();
+void busFault();
+void usageFault();
 
 } // namespace Error
 
