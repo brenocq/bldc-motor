@@ -24,8 +24,11 @@ constexpr Gpio SWCLK_PIN = PA14;
 
 constexpr Gpio LED_PIN = PA5;
 
-constexpr Gpio USB_DM_PIN = PA11;
-constexpr Gpio USB_DP_PIN = PA12;
+constexpr Gpio USB_DM_PIN = PA11;//< XXX Not connected in the NUCLEO board
+constexpr Gpio USB_DP_PIN = PA12;//< XXX Not connected in the NUCLEO board
+
+constexpr Gpio UART_TX_PIN = PA2;
+constexpr Gpio UART_RX_PIN = PA3;
 
 //---------- GPIO configs ----------//
 struct GpioConfig {
@@ -39,6 +42,8 @@ inline const std::array gpioList{
     GpioConfig{SWO_PIN,     Mode::SWO},
     GpioConfig{SWDIO_PIN,   Mode::SWDIO},
     GpioConfig{SWCLK_PIN,   Mode::SWCLK},
+    GpioConfig{UART_TX_PIN, Mode::USART2_TX},
+    GpioConfig{UART_RX_PIN, Mode::USART2_RX},
     //GpioConfig{USB_DM_PIN,  Mode::OTG_FS_DM},
     //GpioConfig{USB_DP_PIN,  Mode::OTG_FS_DP},
 };
