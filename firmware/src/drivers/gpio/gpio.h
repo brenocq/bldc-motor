@@ -30,6 +30,10 @@ constexpr Gpio USB_DP_PIN = PA12;//< XXX Not connected in the NUCLEO board
 constexpr Gpio UART_TX_PIN = PA2;
 constexpr Gpio UART_RX_PIN = PA3;
 
+constexpr Gpio ENC_CSN_PIN = PC8;// Encoder chip select
+constexpr Gpio ENC_CLK_PIN = PC6;// Encoder clock
+constexpr Gpio ENC_DO_PIN = PC5;// Encoder data output
+
 //---------- GPIO configs ----------//
 struct GpioConfig {
     Gpio gpio;
@@ -44,8 +48,11 @@ inline const std::array gpioList{
     GpioConfig{SWCLK_PIN,   Mode::SWCLK},
     GpioConfig{UART_TX_PIN, Mode::USART2_TX},
     GpioConfig{UART_RX_PIN, Mode::USART2_RX},
-    //GpioConfig{USB_DM_PIN,  Mode::OTG_FS_DM},
-    //GpioConfig{USB_DP_PIN,  Mode::OTG_FS_DP},
+    GpioConfig{ENC_CSN_PIN, Mode::OUTPUT},
+    GpioConfig{ENC_CLK_PIN, Mode::OUTPUT},
+    GpioConfig{ENC_DO_PIN,  Mode::INPUT},
+    // GpioConfig{USB_DM_PIN,  Mode::OTG_FS_DM},
+    // GpioConfig{USB_DP_PIN,  Mode::OTG_FS_DP},
 };
 // clang-format on
 
