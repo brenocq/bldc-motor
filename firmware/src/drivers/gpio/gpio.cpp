@@ -11,6 +11,7 @@ namespace Gpio {
 
 void initInput(Gpio gpio);
 void initOutput(Gpio gpio);
+void initAnalog(Gpio gpio);
 void initI2c(Gpio gpio);
 void initUart(Gpio gpio, Mode mode);
 void initTimer(Gpio gpio, Mode mode);
@@ -78,6 +79,8 @@ bool Gpio::init() {
             initInput(gpioConfig.gpio);
         else if (gpioConfig.mode == Mode::OUTPUT)
             initOutput(gpioConfig.gpio);
+        else if (gpioConfig.mode == Mode::ANALOG)
+            initAnalog(gpioConfig.gpio);
         else if (gpioConfig.mode >= Mode::TIM1_CH1 && gpioConfig.mode <= Mode::TIM14_CH1)
             initTimer(gpioConfig.gpio, gpioConfig.mode);
         else if (gpioConfig.mode >= Mode::I2C1_SDA && gpioConfig.mode <= Mode::FMPI2C1_SMBA)
@@ -105,8 +108,7 @@ void Gpio::initInput(Gpio gpio) {
     GPIO_InitTypeDef gpioInit{};
     gpioInit.Pin = convert(gpio.pin);
     gpioInit.Mode = GPIO_MODE_INPUT;
-    gpioInit.Pull = GPIO_PULLDOWN;
-    gpioInit.Speed = GPIO_SPEED_FREQ_LOW;
+    gpioInit.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(convert(gpio.port), &gpioInit);
 }
 
@@ -116,6 +118,14 @@ void Gpio::initOutput(Gpio gpio) {
     gpioInit.Mode = GPIO_MODE_OUTPUT_PP;
     gpioInit.Pull = GPIO_NOPULL;
     gpioInit.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(convert(gpio.port), &gpioInit);
+}
+
+void Gpio::initAnalog(Gpio gpio) {
+    GPIO_InitTypeDef gpioInit{};
+    gpioInit.Pin = convert(gpio.pin);
+    gpioInit.Mode = GPIO_MODE_ANALOG;
+    gpioInit.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(convert(gpio.port), &gpioInit);
 }
 
@@ -176,7 +186,7 @@ bool Gpio::validGpioConfig(GpioConfig gpioConfig) {
     Mode mode = gpioConfig.mode;
 
     // Return true if mode is always valid
-    if (mode == Mode::NA || mode == Mode::INPUT || mode == Mode::OUTPUT)
+    if (mode == Mode::NA || mode == Mode::INPUT || mode == Mode::OUTPUT || mode == Mode::ANALOG)
         return true;
 
     // Check alternate function list

@@ -13,6 +13,7 @@ enum Mode {
     NA = 0, ///< No mode configured (not applicable)
     INPUT,  ///< Input
     OUTPUT, ///< Output
+    ANALOG, ///< Analog
 
     //----- I2C -----//
     I2C1_SDA,     ///< I2C1 SDA

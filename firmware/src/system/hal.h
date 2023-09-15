@@ -11,6 +11,9 @@
 #undef I2C1
 #undef I2C2
 #undef I2C3
+#undef ADC1
+#undef ADC2
+#undef ADC3
 #undef TIM1
 #undef TIM2
 #undef TIM3

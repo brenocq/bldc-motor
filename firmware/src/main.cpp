@@ -4,6 +4,7 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
@@ -19,12 +20,15 @@ int main() {
         Error::hardFault();
     if (!Uart::init())
         Error::hardFault();
+    if (!Adc::init())
+        Error::hardFault();
     if (!encoder.init())
         Error::hardFault();
 
     while (true) {
-        float angle = encoder.readAngle();
-        Uart::transmit("Angle: " + std::to_string(angle) + "\n");
+        // float angle = encoder.readAngle();
+        uint16_t volt = Adc::read(Gpio::VOLT_PIN);
+        Uart::transmit("Voltage: " + std::to_string(volt) + "\n");
 
         Gpio::write(Gpio::LED_PIN, true);
         Hardware::delay(0.5f);

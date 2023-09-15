@@ -24,15 +24,17 @@ constexpr Gpio SWCLK_PIN = PA14;
 
 constexpr Gpio LED_PIN = PA5;
 
-constexpr Gpio USB_DM_PIN = PA11;//< XXX Not connected in the NUCLEO board
-constexpr Gpio USB_DP_PIN = PA12;//< XXX Not connected in the NUCLEO board
+constexpr Gpio USB_DM_PIN = PA11; //< XXX Not connected in the NUCLEO board
+constexpr Gpio USB_DP_PIN = PA12; //< XXX Not connected in the NUCLEO board
 
 constexpr Gpio UART_TX_PIN = PA2;
 constexpr Gpio UART_RX_PIN = PA3;
 
-constexpr Gpio ENC_CSN_PIN = PC8;// Encoder chip select
-constexpr Gpio ENC_CLK_PIN = PC6;// Encoder clock
-constexpr Gpio ENC_DO_PIN = PC5;// Encoder data output
+constexpr Gpio ENC_CSN_PIN = PC8; // Encoder chip select
+constexpr Gpio ENC_CLK_PIN = PC6; // Encoder clock
+constexpr Gpio ENC_DO_PIN = PC5;  // Encoder data output
+
+constexpr Gpio VOLT_PIN = PA0; // Motor input voltage
 
 //---------- GPIO configs ----------//
 struct GpioConfig {
@@ -51,6 +53,7 @@ inline const std::array gpioList{
     GpioConfig{ENC_CSN_PIN, Mode::OUTPUT},
     GpioConfig{ENC_CLK_PIN, Mode::OUTPUT},
     GpioConfig{ENC_DO_PIN,  Mode::INPUT},
+    GpioConfig{VOLT_PIN,    Mode::ANALOG},
     // GpioConfig{USB_DM_PIN,  Mode::OTG_FS_DM},
     // GpioConfig{USB_DP_PIN,  Mode::OTG_FS_DP},
 };
