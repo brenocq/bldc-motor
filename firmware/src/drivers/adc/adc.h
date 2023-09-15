@@ -16,6 +16,8 @@ bool deinit();
 
 uint16_t read(Gpio::Gpio gpio);
 
+constexpr uint16_t MAX_READ = 4095;
+
 //---------- ADC configs ----------//
 enum class Peripheral : uint8_t { ADC1 = 1, ADC2, ADC3 };
 

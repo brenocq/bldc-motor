@@ -10,6 +10,7 @@
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <drivers/uart/uart.h>
+#include <drivers/voltage/voltage.h>
 #include <system/hal.h>
 #include <utils/error.h>
 
@@ -24,11 +25,13 @@ int main() {
         Error::hardFault();
     if (!encoder.init())
         Error::hardFault();
+    if (!voltage.init())
+        Error::hardFault();
 
     while (true) {
         // float angle = encoder.readAngle();
-        uint16_t volt = Adc::read(Gpio::VOLT_PIN);
-        Uart::transmit("Voltage: " + std::to_string(volt) + "\n");
+        float volt = voltage.read();
+        Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
 
         Gpio::write(Gpio::LED_PIN, true);
         Hardware::delay(0.5f);
