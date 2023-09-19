@@ -8,6 +8,7 @@
 #define BLDC_DRIVERS_GPIO_PORTS_H
 #include <array>
 #include <cstdint>
+#include <string>
 
 // clang-format off
 #define DEFINE_GPIO_PORT(x) \
@@ -42,6 +43,7 @@ struct Gpio {
     bool operator!=(const Gpio& o) const { return !(*this == o); }
     bool operator<(const Gpio& o) const { return port < o.port || pin < o.pin; }
     uint8_t getIdx() const { return uint8_t(port) * 16 + pin; }
+    std::string toString() const { return char('A' + (int)port) + std::to_string(pin); }
 };
 
 // Create definitions for PA0, PA1, ..., PH2

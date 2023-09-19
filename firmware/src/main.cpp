@@ -6,6 +6,7 @@
 //--------------------------------------------------
 #include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
+#include <drivers/current/current.h>
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
@@ -28,14 +29,19 @@ int main() {
         Error::hardFault();
     if (!voltage.init())
         Error::hardFault();
+    if (!current.init())
+        Error::hardFault();
     if (!motor.init())
         Error::hardFault();
 
     while (true) {
-        float angle = encoder.readAngle();
+        // float angle = encoder.readAngle();
         float volt = voltage.read();
-        Uart::transmit("Angle: " + std::to_string(angle) + "\n");
+        float currW = current.readW();
+        float currUV = current.readUV();
+        // Uart::transmit("Angle: " + std::to_string(angle) + "\n");
         Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
+        Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
 
         Gpio::write(Gpio::LED_PIN, true);
         Hardware::delay(0.5f);

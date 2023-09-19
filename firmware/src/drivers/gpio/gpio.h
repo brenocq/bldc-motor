@@ -39,6 +39,13 @@ constexpr Gpio ENC_DO_PIN = PC5;  // Encoder data output
 
 constexpr Gpio VOLT_PIN = PA0; // Motor input voltage
 
+constexpr Gpio CURR_W_G1_PIN = PA7;   // Current W gain 1
+constexpr Gpio CURR_W_G0_PIN = PB12;  // Current W gain 0
+constexpr Gpio CURR_UV_G1_PIN = PA6;  // Current UV gain 1
+constexpr Gpio CURR_UV_G0_PIN = PA11; // Current UV gain 0
+constexpr Gpio CURR_W_PIN = PA1;      // Current W
+constexpr Gpio CURR_UV_PIN = PA4;     // Current UV
+
 constexpr Gpio MOTOR_UH_PIN = PB10; // Motor U phase high side
 constexpr Gpio MOTOR_UL_PIN = PB15; // Motor U phase low side
 constexpr Gpio MOTOR_VH_PIN = PB4;  // Motor V phase high side
@@ -64,6 +71,12 @@ inline const std::array gpioList{
     GpioConfig{ENC_CLK_PIN, Mode::OUTPUT},
     GpioConfig{ENC_DO_PIN,  Mode::INPUT},
     GpioConfig{VOLT_PIN,    Mode::ANALOG},
+    GpioConfig{CURR_W_G1_PIN, Mode::OUTPUT},
+    GpioConfig{CURR_W_G0_PIN, Mode::OUTPUT},
+    GpioConfig{CURR_UV_G1_PIN, Mode::OUTPUT},
+    GpioConfig{CURR_UV_G0_PIN, Mode::OUTPUT},
+    GpioConfig{CURR_W_PIN, Mode::ANALOG},
+    GpioConfig{CURR_UV_PIN, Mode::ANALOG},
     GpioConfig{MOTOR_UH_PIN, Mode::OUTPUT},
     GpioConfig{MOTOR_UL_PIN, Mode::OUTPUT},
     GpioConfig{MOTOR_VH_PIN, Mode::OUTPUT},

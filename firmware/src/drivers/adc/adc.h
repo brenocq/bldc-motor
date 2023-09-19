@@ -16,7 +16,7 @@ bool deinit();
 
 uint16_t read(Gpio::Gpio gpio);
 
-constexpr uint16_t MAX_READ = 4095;
+constexpr float MAX_READ = 4095;
 
 //---------- ADC configs ----------//
 enum class Peripheral : uint8_t { ADC1 = 1, ADC2, ADC3 };
@@ -28,6 +28,8 @@ struct AdcConfig {
 
 inline const std::array adcList{
     AdcConfig{Gpio::VOLT_PIN, Peripheral::ADC1},
+    AdcConfig{Gpio::CURR_W_PIN, Peripheral::ADC3},
+    AdcConfig{Gpio::CURR_UV_PIN, Peripheral::ADC2},
 };
 
 } // namespace Adc

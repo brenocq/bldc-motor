@@ -116,20 +116,21 @@ bool Adc::init() {
         if (usedAdc[i]) {
             enableClock(Peripheral(i));
 
-            hadc1.Instance = getInstance(Peripheral(i));
-            hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
-            hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-            hadc1.Init.ScanConvMode = DISABLE;
-            hadc1.Init.ContinuousConvMode = DISABLE;
-            hadc1.Init.DiscontinuousConvMode = DISABLE;
-            hadc1.Init.NbrOfDiscConversion = 0;
-            hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-            hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-            hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-            hadc1.Init.NbrOfConversion = 1;
-            hadc1.Init.DMAContinuousRequests = DISABLE;
-            hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-            if (HAL_ADC_Init(&hadc1) != HAL_OK)
+            ADC_HandleTypeDef* handle = getHandle(Peripheral(i));
+            handle->Instance = getInstance(Peripheral(i));
+            handle->Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+            handle->Init.Resolution = ADC_RESOLUTION_12B;
+            handle->Init.ScanConvMode = DISABLE;
+            handle->Init.ContinuousConvMode = DISABLE;
+            handle->Init.DiscontinuousConvMode = DISABLE;
+            handle->Init.NbrOfDiscConversion = 0;
+            handle->Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+            handle->Init.ExternalTrigConv = ADC_SOFTWARE_START;
+            handle->Init.DataAlign = ADC_DATAALIGN_RIGHT;
+            handle->Init.NbrOfConversion = 1;
+            handle->Init.DMAContinuousRequests = DISABLE;
+            handle->Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+            if (HAL_ADC_Init(handle) != HAL_OK)
                 return false;
         }
     }

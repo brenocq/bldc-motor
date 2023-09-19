@@ -22,9 +22,9 @@ void Motor::test() {
     Gpio::write(Gpio::MOTOR_UH_PIN, Gpio::HIGH);
     Gpio::write(Gpio::MOTOR_VH_PIN, Gpio::HIGH);
     Gpio::write(Gpio::MOTOR_WH_PIN, Gpio::HIGH);
-    Hardware::delay(0.1f);
-    Gpio::write(Gpio::MOTOR_UH_PIN, Gpio::LOW);
-    Gpio::write(Gpio::MOTOR_VH_PIN, Gpio::LOW);
-    Gpio::write(Gpio::MOTOR_WH_PIN, Gpio::LOW);
-    Hardware::delay(0.1f);
+    //Hardware::delay(0.1f);
+    //Gpio::write(Gpio::MOTOR_UH_PIN, Gpio::LOW);
+    //Gpio::write(Gpio::MOTOR_VH_PIN, Gpio::LOW);
+    //Gpio::write(Gpio::MOTOR_WH_PIN, Gpio::LOW);
+    //Hardware::delay(0.1f);
 }
