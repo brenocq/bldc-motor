@@ -18,13 +18,25 @@ bool Motor::init() {
     return true;
 }
 
+// clang-format off
+const bool stage[6][6] = {
+    {1,0,0,0,0,1},
+    {0,0,1,0,0,1},
+    {0,1,1,0,0,0},
+    {0,1,0,0,1,0},
+    {0,0,0,1,1,0},
+    {1,0,0,1,0,0},
+};
+// clang-format on
+
 void Motor::test() {
-    Gpio::write(Gpio::MOTOR_UH_PIN, Gpio::HIGH);
-    Gpio::write(Gpio::MOTOR_VH_PIN, Gpio::HIGH);
-    Gpio::write(Gpio::MOTOR_WH_PIN, Gpio::HIGH);
-    //Hardware::delay(0.1f);
-    //Gpio::write(Gpio::MOTOR_UH_PIN, Gpio::LOW);
-    //Gpio::write(Gpio::MOTOR_VH_PIN, Gpio::LOW);
-    //Gpio::write(Gpio::MOTOR_WH_PIN, Gpio::LOW);
-    //Hardware::delay(0.1f);
+    for (int i = 0; i < 6; i++) {
+        Gpio::write(Gpio::MOTOR_UH_PIN, stage[i][0]);
+        Gpio::write(Gpio::MOTOR_UL_PIN, stage[i][1]);
+        Gpio::write(Gpio::MOTOR_VH_PIN, stage[i][2]);
+        Gpio::write(Gpio::MOTOR_VL_PIN, stage[i][3]);
+        Gpio::write(Gpio::MOTOR_WH_PIN, stage[i][4]);
+        Gpio::write(Gpio::MOTOR_WL_PIN, stage[i][5]);
+        Hardware::delay(0.1f);
+    }
 }

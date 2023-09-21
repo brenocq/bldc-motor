@@ -34,19 +34,16 @@ int main() {
     if (!motor.init())
         Error::hardFault();
 
+    Gpio::write(Gpio::LED_PIN, true);
     while (true) {
         // float angle = encoder.readAngle();
-        float volt = voltage.read();
-        float currW = current.readW();
-        float currUV = current.readUV();
-        // Uart::transmit("Angle: " + std::to_string(angle) + "\n");
-        Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
-        Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
+        // float volt = voltage.read();
+        // float currW = current.readW();
+        // float currUV = current.readUV();
+        //// Uart::transmit("Angle: " + std::to_string(angle) + "\n");
+        // Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
+        // Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
 
-        Gpio::write(Gpio::LED_PIN, true);
-        Hardware::delay(0.5f);
-        Gpio::write(Gpio::LED_PIN, false);
-        Hardware::delay(0.5f);
         motor.test();
     }
     return 0;
