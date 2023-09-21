@@ -4,8 +4,8 @@
 // Date: 2023-09-08
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#include "USB_DEVICE/App/usb_device.h"
-#include "USB_DEVICE/App/usbd_cdc_if.h"
+#include "usb_device.h"
+#include "usbd_cdc_if.h"
 #include <drivers/usb/usb.h>
 #include <system/hal.h>
 
