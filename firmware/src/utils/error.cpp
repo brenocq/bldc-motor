@@ -7,8 +7,10 @@
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <utils/error.h>
+#include <utils/log.h>
 
-void Error::hardFault() {
+void Error::hardFault(const char* reason) {
+    Log::error("Error", "HardFault: $0", reason);
     while (true) {
         Gpio::write(Gpio::LED_PIN, true);
         Hardware::delay(0.1f);

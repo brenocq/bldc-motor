@@ -15,26 +15,28 @@
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
 #include <utils/error.h>
+#include <utils/log.h>
 
 int main() {
     HAL_Init();
     Clock::init();
     if (!Gpio::init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize GPIO driver");
     if (!Uart::init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize UART driver");
     if (!Adc::init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize ADC driver");
     if (!encoder.init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize encoder driver");
     if (!voltage.init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize voltage driver");
     if (!current.init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize current driver");
     if (!motor.init())
-        Error::hardFault();
+        Error::hardFault("Failed to initialize motor driver");
 
     Gpio::write(Gpio::LED_PIN, true);
+    Log::success("Main", "Initialized");
     while (true) {
         // float angle = encoder.readAngle();
         // float volt = voltage.read();

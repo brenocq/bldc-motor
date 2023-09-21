@@ -9,7 +9,7 @@
 
 namespace Error {
 
-void hardFault();
+void hardFault(const char* reason = nullptr);
 void memFault();
 void busFault();
 void usageFault();

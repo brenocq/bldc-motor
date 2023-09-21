@@ -17,6 +17,8 @@ enum class Peripheral : uint8_t { DEFAULT = 0, UART1, UART2, UART3, UART4, UART5
 
 bool init();
 
+bool isInitialized();
+
 void transmit(std::string data, Peripheral peripheral = Peripheral::DEFAULT);
 
 std::vector<uint8_t> receive(uint32_t maxChars, uint32_t timeout, Peripheral peripheral = Peripheral::DEFAULT);

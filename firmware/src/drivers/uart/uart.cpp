@@ -22,11 +22,14 @@ UART_HandleTypeDef _huart4;
 UART_HandleTypeDef _huart5;
 UART_HandleTypeDef _huart6;
 
+bool _initialized;
 Peripheral _default; ///< Peripheral to use if none is specified
 
 } // namespace Uart
 
 bool Uart::init() {
+    _initialized = false;
+
     // Get peripherals in use
     std::set<Peripheral> inUse;
     for (Gpio::GpioConfig conf : Gpio::gpioList) {
@@ -64,8 +67,10 @@ bool Uart::init() {
     if (!inUse.empty())
         _default = *inUse.begin();
 
-    return true;
+    return _initialized = true;
 }
+
+bool Uart::isInitialized() { return _initialized; }
 
 void Uart::transmit(std::string data, Peripheral peripheral) { HAL_UART_Transmit(getHandle(peripheral), (uint8_t*)&data[0], data.size(), 100); }
 
