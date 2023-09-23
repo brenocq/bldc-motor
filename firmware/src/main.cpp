@@ -14,8 +14,15 @@
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
+#include <utils/attaConnector.h>
 #include <utils/error.h>
 #include <utils/log.h>
+
+struct MyTest {
+    ATTA_CONNECTOR_CMD(MY_TEST_CMD);
+    float test0;
+    int test1;
+};
 
 int main() {
     HAL_Init();
@@ -34,10 +41,23 @@ int main() {
         Error::hardFault("Failed to initialize current driver");
     if (!motor.init())
         Error::hardFault("Failed to initialize motor driver");
+    if (!AttaConnector::init())
+        Error::hardFault("Failed to initialize atta connector");
 
     Gpio::write(Gpio::LED_PIN, true);
     Log::success("Main", "Initialized");
+
+
+    MyTest cmd;
+    cmd.test0 = 10.0f;
+    cmd.test1 = 20;
+    AttaConnector::transmit<MyTest>(cmd);
+
     while (true) {
+        AttaConnector::update();
+        if(AttaConnector::receive<MyTest>(&cmd))
+            Log::success("Main", "Received MyTest -> $0 $1", cmd.test0, cmd.test1);
+
         // float angle = encoder.readAngle();
         // float volt = voltage.read();
         // float currW = current.readW();

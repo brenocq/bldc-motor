@@ -1,0 +1,23 @@
+//--------------------------------------------------
+// BLDC Motor Controller
+// attaConnectorPlatform.h
+// Date: 2023-09-23
+// By Breno Cunha Queiroz
+//--------------------------------------------------
+#ifndef UTILS_ATTA_CONNECTOR_PLATFORM_H
+#define UTILS_ATTA_CONNECTOR_PLATFORM_H
+#include <cstdint>
+
+// List of command codes
+enum CommandCode : uint8_t {
+    MY_TEST_CMD = 0x00,
+};
+
+namespace AttaConnector {
+
+constexpr uint32_t RX_SIZE = 10 * 1024; // 10KB RX memory
+constexpr uint32_t TX_SIZE = 10 * 1024; // 10KB TX memory
+
+} // namespace AttaConnector
+
+#endif // UTILS_ATTA_CONNECTOR_PLATFORM_H
