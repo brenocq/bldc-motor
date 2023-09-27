@@ -44,7 +44,6 @@ int main() {
     if (!AttaConnector::init())
         Error::hardFault("Failed to initialize atta connector");
 
-    Gpio::write(Gpio::LED_PIN, true);
     Log::success("Main", "Initialized");
 
 
@@ -53,10 +52,11 @@ int main() {
     cmd.test1 = 20;
     AttaConnector::transmit<MyTest>(cmd);
 
+    bool b = true;
     while (true) {
-        AttaConnector::update();
-        if(AttaConnector::receive<MyTest>(&cmd))
-            Log::success("Main", "Received MyTest -> $0 $1", cmd.test0, cmd.test1);
+        //AttaConnector::update();
+        //if(AttaConnector::receive<MyTest>(&cmd))
+        //    Log::success("Main", "Received MyTest -> $0 $1", cmd.test0, cmd.test1);
 
         // float angle = encoder.readAngle();
         // float volt = voltage.read();
@@ -66,6 +66,8 @@ int main() {
         // Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
         // Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
 
+        Gpio::write(Gpio::LED_PIN, b);
+        b = !b;
         motor.test();
     }
     return 0;

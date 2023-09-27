@@ -30,7 +30,7 @@ const bool stage[6][6] = {
 // clang-format on
 
 void Motor::test() {
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 1; i++) {
         Gpio::write(Gpio::MOTOR_UH_PIN, stage[i][0]);
         Gpio::write(Gpio::MOTOR_UL_PIN, stage[i][1]);
         Gpio::write(Gpio::MOTOR_VH_PIN, stage[i][2]);
