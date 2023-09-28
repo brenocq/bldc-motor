@@ -6,6 +6,12 @@
 #include "projectScript.h"
 #include "imgui.h"
 #include "implot.h"
+#include <atta/component/interface.h>
+#include <atta/component/components/transform.h>
+
+namespace cmp = atta::component;
+
+cmp::Entity motorEntity(0);
 
 void ProjectScript::onStart() {
     _motorData = {};
@@ -33,7 +39,10 @@ void ProjectScript::onUpdateBefore(float dt) {
     // Update motor
     float V = 7.8f;  // Voltage
     float Tl = 0.1f; // Load torque
-    _motor.update({0.0f, V, 0.0f}, Tl, dt);
+    atta::vec3 Vs = {0.0f, 0.0f, 0.0f};
+    int t = int(time * 0.5f) % 3;
+    Vs[t] = V;
+    _motor.update(Vs, Tl, dt);
     _motorData.position.push_back(_motor.getPosition());
     _motorData.velocity.push_back(_motor.getVelocity());
     _motorData.motorTorque.push_back(_motor.getMotorTorque());
@@ -42,6 +51,7 @@ void ProjectScript::onUpdateBefore(float dt) {
     _motorData.current.push_back(_motor.getCurrent());
     _motorData.voltage.push_back(_motor.getVoltage());
     _motorData.emf.push_back(_motor.getEMF());
+    motorEntity.get<cmp::Transform>()->orientation.set2DAngle(_motorData.position.back());
 }
 
 void ProjectScript::onUIRender() {
