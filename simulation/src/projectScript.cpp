@@ -9,12 +9,14 @@
 
 void ProjectScript::onStart() {
     _motorData = {};
+    _time = {};
+    _time3 = {};
     float R = 3.6f; // Phase resistance
-    float L = 0.1f; // Phase inductance
-    float J = 1.0f; // Rotor inertia
-    float F = 0.0f; // Rotor friction
-    float P = 12;   // Number of poles
-    float l = 1.0f; // Flux linkage
+    float L = 0.1f; // Phase inductance (TODO)
+    float J = 0.1f; // Rotor inertia (TODO)
+    float F = 1.0f; // Rotor friction (TODO)
+    float P = 8;    // Number of poles
+    float l = 1.0f; // Flux linkage (TODO)
     _motor = Motor(R, L, J, F, P, l);
 }
 void ProjectScript::onStop() {}
@@ -30,8 +32,8 @@ void ProjectScript::onUpdateBefore(float dt) {
 
     // Update motor
     float V = 7.8f;  // Voltage
-    float Tl = 0.0f; // Load torque
-    _motor.update({V, 0.0f, 0.0f}, 0.0f, dt);
+    float Tl = 0.1f; // Load torque
+    _motor.update({0.0f, V, 0.0f}, Tl, dt);
     _motorData.position.push_back(_motor.getPosition());
     _motorData.velocity.push_back(_motor.getVelocity());
     _motorData.motorTorque.push_back(_motor.getMotorTorque());
@@ -54,41 +56,44 @@ void ProjectScript::onUIRender() {
     ImGui::SetNextWindowSize(ImVec2(800, 600), ImGuiCond_Once);
     ImGui::Begin("Plots");
     {
-        ImGui::Text("Input");
         if (ImPlot::BeginPlot("Phase voltages")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
             ImPlot::PlotLine("v_u", _time3.data(), &_motorData.voltage[0].x, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("v_v", _time3.data(), &_motorData.voltage[0].y, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("v_w", _time3.data(), &_motorData.voltage[0].z, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::EndPlot();
         }
 
-        if (ImPlot::BeginPlot("Torque")) {
-            ImPlot::PlotLine("Load torque", _time.data(), _motorData.loadTorque.data(), _time.size());
-            ImPlot::PlotLine("Electromagnetic torque", _time.data(), _motorData.electromagneticTorque.data(), _time.size());
-            ImPlot::PlotLine("Motor torque", _time.data(), _motorData.motorTorque.data(), _time.size());
-            ImPlot::EndPlot();
-        }
-
-        ImGui::Text("State");
         if (ImPlot::BeginPlot("Phase currents")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
             ImPlot::PlotLine("i_u", _time3.data(), &_motorData.current[0].x, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("i_v", _time3.data(), &_motorData.current[0].y, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("i_w", _time3.data(), &_motorData.current[0].z, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::EndPlot();
         }
 
+        if (ImPlot::BeginPlot("Torque")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("Load torque", _time.data(), _motorData.loadTorque.data(), _time.size());
+            ImPlot::PlotLine("Electromagnetic torque", _time.data(), _motorData.electromagneticTorque.data(), _time.size());
+            ImPlot::PlotLine("Motor torque", _time.data(), _motorData.motorTorque.data(), _time.size());
+            ImPlot::EndPlot();
+        }
+
         if (ImPlot::BeginPlot("Rotor velocity")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
             ImPlot::PlotLine("Angular velocity", _time.data(), _motorData.velocity.data(), _time.size());
             ImPlot::EndPlot();
         }
 
         if (ImPlot::BeginPlot("Rotor position")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
             ImPlot::PlotLine("Angular position", _time.data(), _motorData.position.data(), _time.size());
             ImPlot::EndPlot();
         }
 
-        ImGui::Text("Derived");
         if (ImPlot::BeginPlot("Back EMF")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
             ImPlot::PlotLine("e_u", _time3.data(), &_motorData.emf[0].x, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("e_v", _time3.data(), &_motorData.emf[0].y, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("e_w", _time3.data(), &_motorData.emf[0].z, _time.size(), 0, sizeof(atta::vec3));

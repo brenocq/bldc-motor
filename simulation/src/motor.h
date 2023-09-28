@@ -23,7 +23,10 @@ class Motor {
     atta::vec3 getEMF() const;
 
   private:
+    static constexpr int SUBSTEPS = 10;
+
     // Back EMF function
+    // This function can be estimated by rotating the rotor at a constant speed and measuring the voltage in each phase.
     float f(float theta, uint8_t phase);
 
     // Parameters
