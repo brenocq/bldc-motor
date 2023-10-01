@@ -20,8 +20,8 @@
 
 struct MyTest {
     ATTA_CONNECTOR_CMD(MY_TEST_CMD);
-    float test0;
-    int test1;
+    uint8_t test0;
+    uint8_t test1;
 };
 
 int main() {
@@ -46,17 +46,16 @@ int main() {
 
     Log::success("Main", "Initialized");
 
-
     MyTest cmd;
-    cmd.test0 = 10.0f;
-    cmd.test1 = 20;
+    cmd.test0 = 0b00001111;
+    cmd.test1 = 0x2D;
     AttaConnector::transmit<MyTest>(cmd);
 
     bool b = true;
     while (true) {
-        //AttaConnector::update();
-        //if(AttaConnector::receive<MyTest>(&cmd))
-        //    Log::success("Main", "Received MyTest -> $0 $1", cmd.test0, cmd.test1);
+        AttaConnector::update();
+        if (AttaConnector::receive<MyTest>(&cmd))
+            Log::success("Main", "Received MyTest -> $0 $1", cmd.test0, cmd.test1);
 
         // float angle = encoder.readAngle();
         // float volt = voltage.read();

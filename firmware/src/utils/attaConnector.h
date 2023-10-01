@@ -22,6 +22,8 @@ bool transmit(const T& cmd);
 template <typename T>
 bool receive(T* cmd);
 
+uint8_t crc(uint8_t* message, uint32_t size);
+
 } // namespace AttaConnector
 
 #include "attaConnector.inl"
