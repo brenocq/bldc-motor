@@ -48,7 +48,7 @@ int main() {
 
     MyTest cmd;
     cmd.test0 = 0b00001111;
-    cmd.test1 = 0x2D;
+    cmd.test1 = 0b00001111;
     AttaConnector::transmit<MyTest>(cmd);
 
     bool b = true;

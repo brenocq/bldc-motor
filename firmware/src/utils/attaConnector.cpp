@@ -16,10 +16,8 @@ __attribute__((weak)) bool receiveBytes(uint8_t* data, uint32_t len) { return fa
 uint8_t _tx[TX_SIZE];
 uint8_t _rx[RX_SIZE];
 
-uint32_t _txStart;
-uint32_t _txEnd;
-uint32_t _rxStart;
-uint32_t _rxEnd;
+uint32_t _txSize;
+uint32_t _rxSize;
 
 constexpr uint8_t _crcPoly = 0b00000111;
 
@@ -43,24 +41,62 @@ constexpr std::array<uint8_t, 256> generateCRCTable() {
 
 constexpr std::array<uint8_t, 256> _crcTable = generateCRCTable();
 
-uint8_t crc(uint8_t* message, uint32_t size) {
-    uint8_t remainder = 0;
-    for (uint8_t i = 0; i < size; i++)
-        remainder = _crcTable[message[i] ^ remainder];
-    return remainder;
-}
-
 } // namespace AttaConnector
 
 bool AttaConnector::init() {
-    _txStart = 0;
-    _txEnd = 0;
-    _rxStart = 0;
-    _rxEnd = 0;
+    _txSize = 0;
+    _rxSize = 0;
     return true;
 }
 
 void AttaConnector::update() {
     if (numAvailableBytes()) {
     }
+}
+
+uint32_t AttaConnector::getTxSize() { return _txSize; }
+
+uint32_t AttaConnector::getRxSize() { return _rxSize; }
+
+void AttaConnector::txPush(uint8_t data) {
+    if (_txSize < TX_SIZE)
+        _tx[_txSize++] = data;
+}
+
+uint8_t AttaConnector::rxPop() { return 0; }
+
+uint8_t AttaConnector::crc(uint8_t* message, uint32_t size) {
+    uint8_t remainder = 0;
+    for (uint8_t i = 0; i < size; i++)
+        remainder = _crcTable[message[i] ^ remainder];
+    return remainder;
+}
+
+void AttaConnector::cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize) {
+    uint8_t ei0 = 0; // Last index in encoded where 0 was found
+    uint32_t mi = 0;
+    uint32_t ei = 1;
+    while (mi < size) {
+        if (ei - ei0 == 0xFF && message[mi] != 0) {
+            // Handle zero pointer maximum value
+            encoded[ei0] = ei - ei0;
+            ei0 = ei;
+            ei++;
+        }
+
+        if (message[mi] == 0) {
+            // Encode zero
+            encoded[ei0] = ei - ei0;
+            ei0 = ei;
+            ei++;
+            mi++;
+        } else {
+            // Encode non-zero
+            encoded[ei++] = message[mi];
+            mi++;
+        }
+    }
+    encoded[ei0] = ei - ei0;
+    encoded[ei++] = 0;// COBS end delimiter
+    *encodedSize = ei;
 }

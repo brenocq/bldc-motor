@@ -9,8 +9,8 @@
 #include "attaConnectorPlatform.h"
 #include <cstdint>
 
-// Macro to define command code
-#define ATTA_CONNECTOR_CMD(x) static constexpr uint8_t CMD_CODE = x
+// Macro to define command id
+#define ATTA_CONNECTOR_CMD(x) static constexpr uint8_t CMD_ID = x
 
 namespace AttaConnector {
 
@@ -22,7 +22,14 @@ bool transmit(const T& cmd);
 template <typename T>
 bool receive(T* cmd);
 
+// Internal
+uint32_t getTxSize();
+uint32_t getRxSize();
+void txPush(uint8_t data);
+uint8_t rxPop();
+
 uint8_t crc(uint8_t* message, uint32_t size);
+void cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize);
 
 } // namespace AttaConnector
 
