@@ -22,15 +22,6 @@ bool transmit(const T& cmd);
 template <typename T>
 bool receive(T* cmd);
 
-// Internal
-uint32_t getTxSize();
-uint32_t getRxSize();
-void txPush(uint8_t data);
-uint8_t rxPop();
-
-uint8_t crc(uint8_t* message, uint32_t size);
-void cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize);
-
 } // namespace AttaConnector
 
 #include "attaConnector.inl"

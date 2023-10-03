@@ -17,6 +17,7 @@ namespace AttaConnector {
 
 constexpr uint32_t RX_SIZE = 10 * 1024; // 10KB RX memory
 constexpr uint32_t TX_SIZE = 10 * 1024; // 10KB TX memory
+constexpr uint32_t MAX_CMD_SIZE = 1024; // Maximum command size in byte
 
 } // namespace AttaConnector
 
