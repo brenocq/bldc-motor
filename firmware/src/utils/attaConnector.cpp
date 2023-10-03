@@ -46,10 +46,13 @@ constexpr std::array<uint8_t, 256> generateCRCTable();
 uint8_t crc(uint8_t pktId, uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
 //---------- COBS ----------//
 void cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize);
+void cobsDecode(uint8_t* encoded, uint32_t* decodedSize);
 constexpr uint32_t cobsMaxEncodedSize(uint32_t size) { return size + std::ceil(size / 254.0f) + 1; }
-std::array<uint8_t, cobsMaxEncodedSize(MAX_CMD_SIZE)> _encodedPacket;
+std::array<uint8_t, cobsMaxEncodedSize(MAX_CMD_SIZE)> _packetTx;
+std::array<uint8_t, cobsMaxEncodedSize(MAX_CMD_SIZE)> _packetRx;
+uint32_t _packetRxIdx;
 //---------- TX Packet Handler ----------//
-#define MAX_PACKET_ID 0b01111111
+#define MAX_PACKET_ID 0xFE
 class TxPacketHandler {
   public:
     TxPacketHandler();
@@ -78,9 +81,14 @@ class TxPacketHandler {
 };
 TxPacketHandler _txPacketHandler;
 
+//---------- RX Packet Handler ----------//
+
 } // namespace AttaConnector
 
-bool AttaConnector::init() { return true; }
+bool AttaConnector::init() {
+    _packetRxIdx = 0;
+    return true;
+}
 
 void AttaConnector::update() {
     // Transmit packets
@@ -89,14 +97,47 @@ void AttaConnector::update() {
     uint32_t pktSize;
     while (_txPacketHandler.getNextPacketToTransmit(&pktId, &pktStart, &pktSize)) {
         uint32_t encodedPacketSize = 0;
-        cobsEncode(&_txBuffer.data()[pktStart], pktSize, _encodedPacket.data(), &encodedPacketSize);
-        if (transmitBytes(_encodedPacket.data(), encodedPacketSize))
+        cobsEncode(&_txBuffer.data()[pktStart], pktSize, _packetTx.data(), &encodedPacketSize);
+        if (transmitBytes(_packetTx.data(), encodedPacketSize))
             _txPacketHandler.markTransmitted(pktId);
     }
 
-    // TODO Receive packets
-    // if (numAvailableBytes()) {
-    //}
+    bool fullPacketReceived = false;
+    uint8_t data;
+    while (numAvailableBytes()) {
+        fullPacketReceived = false;
+        // For now, receive bytes one by one
+        if (receiveBytes(&data, 1)) {
+            _packetRx[_packetRxIdx] = data;
+            _packetRxIdx++;
+            if (data == 0) {
+                fullPacketReceived = true;
+                _packetRxIdx = 0;
+            }
+        }
+
+        // Process received packet
+        if (fullPacketReceived) {
+            uint32_t packetSize = 0;
+            cobsDecode(_packetRx.data(), &packetSize);
+            uint8_t pktId = _packetRx[0];
+            uint8_t cmdId = _packetRx[1];
+            uint8_t* payload = &_packetRx[2];
+            uint8_t pktCRC = _packetRx[packetSize - 1];
+            uint8_t receivedCRC = crc(pktId, cmdId, payload, packetSize - 3);
+            if (pktCRC == receivedCRC) {
+                // TODO if pktId != lastPktId + 1 -> Transmit NACK PACKET LOST
+
+                // TODO if RX not big enough -> Transmit NACK RX FULL
+
+                // TODO Add cmd/payload to rx packet handler
+                //  - TODO Linked list <nextptr><payload>
+                //  - TODO Align min(payload size, pointer size)
+            }
+            LOG_DEBUG("AttaConnector", "CRC match: $0", pktCRC == receivedCRC);
+        }
+    }
+    // TODO Transmit ACK
 }
 
 //-------------------- Push Packet --------------------//
@@ -161,30 +202,53 @@ uint8_t AttaConnector::crc(uint8_t pktId, uint8_t cmdId, uint8_t* payload, uint3
 
 //-------------------- COBS --------------------//
 void AttaConnector::cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize) {
-    uint8_t ei0 = 0; // Last index in encoded where 0 was found
+    uint8_t* encodedStart = encoded;
+    uint8_t* zeroPos = encoded++; // Remember where the last length byte was written
+    uint32_t nonZeroCount = 0;
     uint32_t mi = 0;
-    uint32_t ei = 1;
+
     while (mi < size) {
-        if (ei - ei0 == 0xFF) {
-            // Handle zero pointer maximum value
-            encoded[ei0] = ei - ei0;
-            ei0 = ei;
-            ei++;
-        } else if (message[mi] == 0) {
-            // Encode zero
-            encoded[ei0] = ei - ei0;
-            ei0 = ei;
-            ei++;
+        if (message[mi] == 0) {
+            *zeroPos = nonZeroCount + 1;
+            zeroPos = encoded++;
+            nonZeroCount = 0;
             mi++;
         } else {
-            // Encode non-zero
-            encoded[ei++] = message[mi];
-            mi++;
+            *encoded++ = message[mi++];
+            if (++nonZeroCount == 0xFE) { // If we've copied 254 non-zero bytes
+                *zeroPos = 0xFF;
+                zeroPos = encoded++;
+                nonZeroCount = 0;
+            }
         }
     }
-    encoded[ei0] = ei - ei0; // Update last zero pointer
-    encoded[ei++] = 0;       // COBS end delimiter
-    *encodedSize = ei;
+
+    *zeroPos = nonZeroCount + 1;
+    *encoded++ = 0; // COBS end delimiter
+    *encodedSize = encoded - encodedStart;
+}
+
+void AttaConnector::cobsDecode(uint8_t* encoded, uint32_t* decodedSize) {
+    uint8_t* readPos = encoded;
+    uint8_t* writePos = encoded;
+
+    while (true) {
+        uint8_t length = *readPos++;
+        // COBS end delimiter
+        if (length == 0)
+            break;
+
+        // Copy encoded non-zero data
+        for (uint8_t i = 1; i < length; i++)
+            *writePos++ = *readPos++;
+
+        // Handle encoded zero data
+        if (length < 0xFF)
+            *writePos++ = 0;
+    }
+
+    // Set decodedSize to the length of the decoded data
+    *decodedSize = writePos - encoded;
 }
 
 //-------------------- TX/RX buffer --------------------//
