@@ -7,6 +7,7 @@
 #include "attaConnector.h"
 #include <array>
 #include <cmath>
+#include <utils/log.h>
 
 namespace AttaConnector {
 
@@ -20,15 +21,15 @@ template <uint32_t Size>
 class CircularBuffer {
   public:
     CircularBuffer();
-    uint32_t availableSpace() const;
     uint32_t size() const;
     uint8_t* data();
     bool full() const;
     bool empty() const;
+    bool makeContinuous(uint32_t len);
     void push(uint8_t value);
     void push(uint8_t* data, uint32_t len);
     void pop();
-    void pop(uint32_t len);
+    void pop(uint32_t index);
     uint32_t begin() const;
     uint32_t end() const;
 
@@ -45,7 +46,8 @@ constexpr std::array<uint8_t, 256> generateCRCTable();
 uint8_t crc(uint8_t pktId, uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
 //---------- COBS ----------//
 void cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize);
-uint32_t cobsMaxEncodeSize(uint32_t size);
+constexpr uint32_t cobsMaxEncodedSize(uint32_t size) { return size + std::ceil(size / 254.0f) + 1; }
+std::array<uint8_t, cobsMaxEncodedSize(MAX_CMD_SIZE)> _encodedPacket;
 //---------- TX Packet Handler ----------//
 #define MAX_PACKET_ID 0b01111111
 class TxPacketHandler {
@@ -55,7 +57,7 @@ class TxPacketHandler {
     bool canCreatePacket();
     uint8_t createPacket(uint32_t index, uint32_t size);
 
-    bool getNextPacketToTransmit(uint32_t* index, uint32_t* size);
+    bool getNextPacketToTransmit(uint8_t* pktId, uint32_t* index, uint32_t* size);
 
     void markTransmitted(uint8_t pktId);
     void markACK(uint8_t pktId);
@@ -81,11 +83,16 @@ TxPacketHandler _txPacketHandler;
 bool AttaConnector::init() { return true; }
 
 void AttaConnector::update() {
-    // TODO Transmit packets
-    // if (_txBuffer.) {
-    //    if (transmitBytes(_tx, _txSize))
-    //        _txSize = 0;
-    //}
+    // Transmit packets
+    uint8_t pktId;
+    uint32_t pktStart;
+    uint32_t pktSize;
+    while (_txPacketHandler.getNextPacketToTransmit(&pktId, &pktStart, &pktSize)) {
+        uint32_t encodedPacketSize = 0;
+        cobsEncode(&_txBuffer.data()[pktStart], pktSize, _encodedPacket.data(), &encodedPacketSize);
+        if (transmitBytes(_encodedPacket.data(), encodedPacketSize))
+            _txPacketHandler.markTransmitted(pktId);
+    }
 
     // TODO Receive packets
     // if (numAvailableBytes()) {
@@ -98,12 +105,12 @@ bool AttaConnector::pushPacket(uint8_t cmdId, uint8_t* payload, uint32_t payload
     uint8_t pktCRC = crc(pktId, cmdId, payload, payloadSize);
     uint32_t pktSize = sizeof(pktId) + sizeof(cmdId) + payloadSize + sizeof(pktCRC);
 
-    // Check if packet data fits in the TX buffer
-    if (_txBuffer.availableSpace() < pktSize)
-        return false;
-
     // Check if there are packet IDs available
     if (!_txPacketHandler.canCreatePacket())
+        return false;
+
+    // Check if packet data fits in the TX buffer continuously
+    if (!_txBuffer.makeContinuous(pktSize))
         return false;
 
     // Create packet
@@ -115,7 +122,7 @@ bool AttaConnector::pushPacket(uint8_t cmdId, uint8_t* payload, uint32_t payload
     _txBuffer.push(payload, payloadSize);
     _txBuffer.push(pktCRC);
 
-    return false;
+    return true;
 }
 
 //-------------------- Pop Packet --------------------//
@@ -180,15 +187,33 @@ void AttaConnector::cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded
     *encodedSize = ei;
 }
 
-uint32_t cobsMaxEncodedSize(uint32_t size) { return size + std::ceil(size / 254.0f) + 1; }
-
 //-------------------- TX/RX buffer --------------------//
 template <uint32_t Size>
 AttaConnector::CircularBuffer<Size>::CircularBuffer() : _begin(0), _end(0), _full(false) {}
 
 template <uint32_t Size>
-uint32_t AttaConnector::CircularBuffer<Size>::availableSpace() const {
-    return Size - size();
+bool AttaConnector::CircularBuffer<Size>::makeContinuous(uint32_t len) {
+    // Can't fit
+    if (Size - size() < len)
+        return false;
+
+    if (_begin < _end) {
+        if (Size - _end > len) {
+            // Can fit at the end
+            return true;
+        } else if (_begin > len) {
+            // Can fit at the beginning
+            _end = 0;
+            return true;
+        } else {
+            // Can't fit continuously
+            return false;
+        }
+    }
+
+    // If _end < _begin, can fit because available size >= len
+
+    return true;
 }
 
 template <uint32_t Size>
@@ -282,13 +307,14 @@ uint8_t AttaConnector::TxPacketHandler::createPacket(uint32_t index, uint32_t si
     return currentEnd;
 }
 
-bool AttaConnector::TxPacketHandler::getNextPacketToTransmit(uint32_t* index, uint32_t* size) {
+bool AttaConnector::TxPacketHandler::getNextPacketToTransmit(uint8_t* pktId, uint32_t* index, uint32_t* size) {
     // If all packets have been transmitted
     if ((_lastTransmitted + 1) % _packets.size() == _end)
         return false;
 
     // Set the last transmitted to the next packet in the range
     uint8_t nextToTransmit = (_lastTransmitted + 1) % _packets.size();
+    *pktId = nextToTransmit;
     *index = _packets[nextToTransmit].idx;
     *size = _packets[nextToTransmit].size;
 }
