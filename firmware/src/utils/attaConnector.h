@@ -22,6 +22,9 @@ bool transmit(const T& cmd);
 template <typename T>
 bool receive(T* cmd);
 
+bool transmit(uint8_t cmdId, uint8_t* data, uint32_t len);
+bool receive(uint8_t cmdId, uint8_t* data, uint32_t* len);
+
 } // namespace AttaConnector
 
 #include "attaConnector.inl"

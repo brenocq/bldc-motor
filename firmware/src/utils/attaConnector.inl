@@ -9,7 +9,7 @@
 namespace AttaConnector {
 // Internal
 bool pushPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
-bool popPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
+bool popPacket(uint8_t cmdId, uint8_t* payload, uint32_t* payloadSize);
 } // namespace AttaConnector
 
 template <typename T>
@@ -21,7 +21,8 @@ bool AttaConnector::transmit(const T& cmd) {
 
 template <typename T>
 bool AttaConnector::receive(T* cmd) {
-    if (popPacket(T::CMD_ID, (uint8_t*)&cmd, sizeof(cmd)))
+    uint32_t len = 0;
+    if (popPacket(T::CMD_ID, (uint8_t*)&cmd, &len) && sizeof(T) == len)
         return true;
     return false;
 }

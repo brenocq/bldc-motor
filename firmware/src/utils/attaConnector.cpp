@@ -140,6 +140,18 @@ void AttaConnector::update() {
     // TODO Transmit ACK
 }
 
+bool AttaConnector::transmit(uint8_t cmdId, uint8_t* data, uint32_t len) {
+    if (pushPacket(cmdId, data, len))
+        return true;
+    return false;
+}
+
+bool AttaConnector::receive(uint8_t cmdId, uint8_t* data, uint32_t* len) {
+    if (popPacket(cmdId, data, len))
+        return true;
+    return false;
+}
+
 //-------------------- Push Packet --------------------//
 bool AttaConnector::pushPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize) {
     uint8_t pktId = 0;
@@ -167,7 +179,11 @@ bool AttaConnector::pushPacket(uint8_t cmdId, uint8_t* payload, uint32_t payload
 }
 
 //-------------------- Pop Packet --------------------//
-bool AttaConnector::popPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize) { return false; }
+bool AttaConnector::popPacket(uint8_t cmdId, uint8_t* payload, uint32_t* payloadSize) {
+    *payload = 0;
+    *payloadSize = 0;
+    return false;
+}
 
 //-------------------- CRC --------------------//
 constexpr std::array<uint8_t, 256> AttaConnector::generateCRCTable() {
@@ -381,6 +397,7 @@ bool AttaConnector::TxPacketHandler::getNextPacketToTransmit(uint8_t* pktId, uin
     *pktId = nextToTransmit;
     *index = _packets[nextToTransmit].idx;
     *size = _packets[nextToTransmit].size;
+    return true;
 }
 
 void AttaConnector::TxPacketHandler::markTransmitted(uint8_t pktId) { _lastTransmitted = pktId; }
