@@ -10,7 +10,9 @@
 
 // List of command codes
 enum CommandCode : uint8_t {
-    MY_TEST_CMD = 0x00,
+    MY_TEST0_CMD = 0x00,
+    MY_TEST1_CMD = 0x01,
+    RESERVED_CMD = 0xFF, // CMD reserved for atta connector internal use
 };
 
 namespace AttaConnector {

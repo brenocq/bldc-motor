@@ -18,10 +18,16 @@
 #include <utils/error.h>
 #include <utils/log.h>
 
-struct MyTest {
-    ATTA_CONNECTOR_CMD(MY_TEST_CMD);
-    uint8_t test0;
-    uint8_t test1;
+struct MyTest0 {
+    ATTA_CONNECTOR_CMD(MY_TEST0_CMD);
+    uint8_t u0;
+    uint8_t u1;
+};
+
+struct MyTest1 {
+    ATTA_CONNECTOR_CMD(MY_TEST1_CMD);
+    float f;
+    uint8_t u;
 };
 
 int main() {
@@ -46,16 +52,25 @@ int main() {
 
     Log::success("Main", "Initialized");
 
-    MyTest cmd;
-    cmd.test0 = 0b00001111;
-    cmd.test1 = 0b00001111;
-    AttaConnector::transmit<MyTest>(cmd);
+    MyTest0 t0;
+    t0.u0 = 0b00001111;
+    t0.u1 = 0b00001111;
+
+    MyTest1 t1;
+    t1.f = 1.5f;
+    t1.u = 0b00001111;
+    AttaConnector::transmit(t0);
+    AttaConnector::transmit(t0);
+    AttaConnector::transmit(t1);
+    AttaConnector::transmit(t0);
 
     bool b = true;
     while (true) {
         AttaConnector::update();
-        if (AttaConnector::receive<MyTest>(&cmd))
-            Log::success("Main", "Received MyTest -> $0 $1", cmd.test0, cmd.test1);
+        while (AttaConnector::receive<MyTest0>(&t0))
+            Log::success("Main", "Received MyTest0 -> $x0 $x1", (int)t0.u0, (int)t0.u1);
+        while (AttaConnector::receive<MyTest1>(&t1))
+            Log::success("Main", "Received MyTest1 -> $0 $x1", t1.f, (int)t1.u);
 
         // float angle = encoder.readAngle();
         // float volt = voltage.read();
