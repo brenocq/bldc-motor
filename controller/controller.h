@@ -6,10 +6,13 @@
 #ifndef BLDC_CONTROLLER_H
 #define BLDC_CONTROLLER_H
 #include <array>
+#include <cstdint>
+#include <cmath>
 
 class Controller {
   public:
     Controller() = default;
+    virtual ~Controller() = default;
 
     // Plant state
     struct State {
@@ -28,17 +31,15 @@ class Controller {
     // Controller output
     struct Output {
         enum State { LOW = 0, HIGH = 1, Z = 2 };
-        Output(std::array<bool, 3> a) : al(!a[0]), ah(a[0]), bl(!a[1]), bh(a[1]), cl(!a[2]), ch(a[2]) {}
-        Output(std::array<State, 3> a) : al(a[0] == LOW), ah(a[0] == HIGH), bl(a[1] == LOW), bh(a[1] == HIGH), cl(a[2] == LOW), ch(a[2] == HIGH) {}
+        Output(State a, State b, State c) : al(a == LOW), ah(a == HIGH), bl(b == LOW), bh(b == HIGH), cl(c == LOW), ch(c == HIGH) {}
+
         bool al;
         bool ah;
         bool bl;
         bool bh;
         bool cl;
         bool ch;
-    }
-
-    using Output = std::array<bool, 3>; // Voltage on each phase (HIGH or LOW)
+    };
 
     virtual Output control(State s, Control c, float dt) = 0;
 

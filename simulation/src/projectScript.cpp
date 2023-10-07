@@ -6,8 +6,8 @@
 #include "projectScript.h"
 #include "imgui.h"
 #include "implot.h"
-#include <atta/component/interface.h>
 #include <atta/component/components/transform.h>
+#include <atta/component/interface.h>
 
 namespace cmp = atta::component;
 
@@ -24,6 +24,7 @@ void ProjectScript::onStart() {
     float P = 8;    // Number of poles
     float l = 1.0f; // Flux linkage (TODO)
     _motor = Motor(R, L, J, F, P, l);
+    _tController = TrapezoidalController();
 }
 void ProjectScript::onStop() {}
 
@@ -36,12 +37,21 @@ void ProjectScript::onUpdateBefore(float dt) {
     _time3.push_back(time);
     _time3.push_back(time);
 
+    // Update controller
+    Controller::Control u;
+    u.position = NAN;
+    u.velocity = NAN;
+    u.torque = NAN;
+    Controller::State x;
+    x.voltage = 7.8f;
+    x.currents = {_motor.getCurrent()[0], _motor.getCurrent()[1], _motor.getCurrent()[2]};
+    x.theta = _motor.getPosition();
+    Controller::Output output = _tController.control(x, u, dt);
+
     // Update motor
     float V = 7.8f;  // Voltage
     float Tl = 0.1f; // Load torque
-    atta::vec3 Vs = {0.0f, 0.0f, 0.0f};
-    int t = int(time * 0.5f) % 3;
-    Vs[t] = V;
+    atta::vec3 Vs = {output.ah * V, output.bh * V, output.ch * V};
     _motor.update(Vs, Tl, dt);
     _motorData.position.push_back(_motor.getPosition());
     _motorData.velocity.push_back(_motor.getVelocity());

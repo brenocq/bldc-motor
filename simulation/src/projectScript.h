@@ -6,6 +6,7 @@
 #ifndef BLDC_PROJECT_SCRIPT_H
 #define BLDC_PROJECT_SCRIPT_H
 #include "motor.h"
+#include "trapezoidalController.h"
 #include <atta/script/projectScript.h>
 
 namespace scr = atta::script;
@@ -36,6 +37,7 @@ class ProjectScript : public scr::ProjectScript {
     std::vector<float> _time3;
     Motor _motor;
     MotorData _motorData;
+    TrapezoidalController _tController;
 };
 
 ATTA_REGISTER_PROJECT_SCRIPT(ProjectScript)
