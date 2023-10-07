@@ -55,24 +55,29 @@ int main() {
     MyTest0 t0;
     t0.u0 = 0;
     t0.u1 = 0b00001111;
+    for (int i = 0; i < 90; i++) {
+        t0.u0 = i;
+        AttaConnector::transmit(t0);
+    }
 
     MyTest1 t1;
     t1.f = 1.5f;
     t1.u = 0b00001111;
-    AttaConnector::transmit(t0);
-    t0.u0 = 1;
-    AttaConnector::transmit(t0);
     AttaConnector::transmit(t1);
-    t0.u0 = 2;
-    AttaConnector::transmit(t0);
+    AttaConnector::transmit(t1);
 
     bool b = true;
     while (true) {
         AttaConnector::update();
         while (AttaConnector::receive(&t0))
             Log::success("Main", "Received MyTest0 -> $x0 $x1", (int)t0.u0, (int)t0.u1);
-        while (AttaConnector::receive(&t1))
+        while (AttaConnector::receive(&t1)) {
             Log::success("Main", "Received MyTest1 -> $0 $x1", t1.f, (int)t1.u);
+
+            t0.u0 = 42;
+            t0.u1 = 42;
+            AttaConnector::transmit(t0);
+        }
 
         // float angle = encoder.readAngle();
         // float volt = voltage.read();
