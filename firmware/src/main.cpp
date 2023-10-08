@@ -67,14 +67,20 @@ int main() {
         //}
 
         // float angle = encoder.readAngle();
-        // float volt = voltage.read();
+        // float volt = ;
         // float currW = current.readW();
         // float currUV = current.readUV();
         // Uart::transmit("Angle: " + std::to_string(angle) + "\n");
         // Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
         // Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
 
-        Hardware::delay(0.1f);
+        MotorState state;
+        state.batteryVoltage = voltage.read();
+        state.currentUV = current.readUV();
+        state.currentW = current.readW();
+        state.rotorPosition = encoder.readAngle();
+        AttaConnector::transmit(state);
+
         Gpio::write(Gpio::LED_PIN, b);
         b = !b;
         motor.test();

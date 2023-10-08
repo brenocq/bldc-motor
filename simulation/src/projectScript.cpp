@@ -32,6 +32,9 @@ void ProjectScript::onStart() {
     float l = 1.0f; // Flux linkage (TODO)
     _motor = Motor(R, L, J, F, P, l);
     _tController = TrapezoidalController();
+
+    _phyMotorTime = {};
+    _phyMotorData = {};
 }
 void ProjectScript::onStop() {}
 
@@ -85,7 +88,7 @@ void ProjectScript::onUIRender() {
     }
 
     ImGui::SetNextWindowSize(ImVec2(800, 600), ImGuiCond_Once);
-    ImGui::Begin("Plots");
+    ImGui::Begin("Simulation");
     {
         if (ImPlot::BeginPlot("Phase voltages")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
@@ -128,6 +131,29 @@ void ProjectScript::onUIRender() {
             ImPlot::PlotLine("e_u", _time3.data(), &_motorData.emf[0].x, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("e_v", _time3.data(), &_motorData.emf[0].y, _time.size(), 0, sizeof(atta::vec3));
             ImPlot::PlotLine("e_w", _time3.data(), &_motorData.emf[0].z, _time.size(), 0, sizeof(atta::vec3));
+            ImPlot::EndPlot();
+        }
+    }
+    ImGui::End();
+
+    ImGui::Begin("Motor State");
+    {
+        if (ImPlot::BeginPlot("Battery Voltage")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("Battery Voltage", _phyMotorTime.data(), _phyMotorData.batteryVoltage.data(), _phyMotorTime.size());
+            ImPlot::EndPlot();
+        }
+
+        if (ImPlot::BeginPlot("Currents")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("UV", _phyMotorTime.data(), _phyMotorData.currentUV.data(), _phyMotorTime.size());
+            ImPlot::PlotLine("W", _phyMotorTime.data(), _phyMotorData.currentW.data(), _phyMotorTime.size());
+            ImPlot::EndPlot();
+        }
+
+        if (ImPlot::BeginPlot("Rotor Position")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("Rotor Position", _phyMotorTime.data(), _phyMotorData.rotorPosition.data(), _phyMotorTime.size());
             ImPlot::EndPlot();
         }
     }
@@ -175,10 +201,23 @@ void ProjectScript::handleAttaConnector() {
         AttaConnector::update();
     MyTest0 t0;
     MyTest1 t1;
+    MotorState state;
     while (AttaConnector::receive<MyTest0>(&t0))
-        LOG_DEBUG("ProjectScript", "Received MyTest0 -> $0 $1", (int)t0.u0, (int)t0.u1);
+        LOG_DEBUG("ProjectScript", "[w]Received MyTest0 -> $0 $1", (int)t0.u0, (int)t0.u1);
     while (AttaConnector::receive<MyTest1>(&t1))
-        LOG_DEBUG("ProjectScript", "Received MyTest1 -> $0 $1", t1.f, (int)t1.u);
+        LOG_DEBUG("ProjectScript", "[w]Received MyTest1 -> $0 $1", t1.f, (int)t1.u);
+    while (AttaConnector::receive<MotorState>(&state)) {
+        _phyMotorTime.push_back(_phyMotorTime.empty() ? 0.0f : (_phyMotorTime.back() + 1.0f));
+        _phyMotorData.batteryVoltage.push_back(state.batteryVoltage);
+        _phyMotorData.currentUV.push_back(state.currentUV);
+        _phyMotorData.currentW.push_back(state.currentW);
+        _phyMotorData.rotorPosition.push_back(state.rotorPosition);
+        LOG_DEBUG("ProjectScript", "[*y]Received Motor State");
+        LOG_DEBUG("ProjectScript", "[w] - [*y]Battery voltage[y]: [w]$0", state.batteryVoltage);
+        LOG_DEBUG("ProjectScript", "[w] - [*y]Current UV[y]: [w]$0", state.currentUV);
+        LOG_DEBUG("ProjectScript", "[w] - [*y]Current W[y]: [w]$0", state.currentW);
+        LOG_DEBUG("ProjectScript", "[w] - [*y]Rotor position[y]: [w]$0", state.rotorPosition);
+    }
 }
 
 #include "attaConnectorPlatform.cpp"

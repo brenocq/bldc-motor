@@ -99,7 +99,7 @@ TxHandler _txHandler;
 //---------- RX Handler ----------//
 #define MAX_COMMAND_ID 0xFF
 struct AckCmd {
-    ATTA_CONNECTOR_CMD(RESERVED_CMD);
+    static constexpr uint8_t CMD_ID = RESERVED_CMD;
     enum Status {
         ACK = 0x00,       // Packet received
         NACK_CRC = 0x01,  // Packet corrupted (wrong CRC)

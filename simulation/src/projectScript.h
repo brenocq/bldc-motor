@@ -42,10 +42,19 @@ class ProjectScript : public scr::ProjectScript {
         std::vector<atta::vec3> emf;
     };
 
+    struct PhysicalMotorData {
+        std::vector<float> batteryVoltage;
+        std::vector<float> currentUV;
+        std::vector<float> currentW;
+        std::vector<float> rotorPosition;
+    };
+
     std::vector<float> _time;
     std::vector<float> _time3;
+    std::vector<float> _phyMotorTime;
     Motor _motor;
     MotorData _motorData;
+    PhysicalMotorData _phyMotorData;
     TrapezoidalController _tController;
     std::shared_ptr<atta::io::Serial> _serial;
 };
