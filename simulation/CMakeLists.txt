@@ -6,8 +6,11 @@ find_package(atta 0.4.0 REQUIRED EXACT)
 set(PROJECT_SOURCES
     src/projectScript.cpp
     src/motor.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../controller/controller.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../controller/trapezoidalController.cpp
+    ../controller/controller.cpp
+    ../controller/trapezoidalController.cpp
+    ../common/attaConnector.cpp
 )
 atta_add_target(project_script ${PROJECT_SOURCES})
-target_include_directories(project_script PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../controller)
+target_include_directories(project_script PUBLIC ../controller)
+target_include_directories(project_script PUBLIC ../common)
+target_include_directories(project_script PUBLIC src)

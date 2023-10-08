@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// BLDC Motor Controller
+// Atta Connector
 // attaConnector.cpp
 // Date: 2023-09-23
 // By Breno Cunha Queiroz
@@ -8,14 +8,12 @@
 #include <array>
 #include <cmath>
 #include <cstring>
-#include <utils/log.h>
 
 namespace AttaConnector {
 
 //---------- Platform specific ----------//
-__attribute__((weak)) bool transmitBytes(uint8_t* data, uint32_t len) { return false; }
-__attribute__((weak)) uint32_t numAvailableBytes() { return 0; }
-__attribute__((weak)) bool receiveBytes(uint8_t* data, uint32_t len) { return false; }
+__attribute__((weak)) bool transmitBytes(uint8_t* data, uint32_t size) { return false; }
+__attribute__((weak)) uint32_t receiveBytes(uint8_t* data, uint32_t size) { return false; }
 
 //---------- Buffer helpers ----------//
 template <uint32_t Size>
@@ -51,7 +49,7 @@ class StackBuffer {
     void reset();
     uint8_t* push(uint8_t* data, uint32_t len);
 
-    static constexpr uint32_t ALIGN = sizeof(uint8_t*);
+    static constexpr uint32_t ALIGN = 4; // XXX No double support
 
   private:
     std::array<uint8_t, Size> _buffer;
@@ -123,7 +121,7 @@ class RxHandler {
     void clear();
     bool canPush(uint32_t payloadSize);
     bool pushCommand(uint8_t cmdId, uint8_t* payload, uint32_t size);
-    bool getNextCommandSize(uint8_t cmdId, uint32_t* size);
+    uint32_t getNextCommandSize(uint8_t cmdId);
     bool popCommand(uint8_t cmdId, uint8_t* payload, uint32_t* size);
 
   private:
@@ -185,16 +183,14 @@ void AttaConnector::update() {
     // Receive packets
     bool fullPacketReceived = false;
     uint8_t data;
-    while (numAvailableBytes()) {
+    while (receiveBytes(&data, 1) == 1) {
         fullPacketReceived = false;
         // For now, receive bytes one by one
-        if (receiveBytes(&data, 1)) {
-            _packetRx[_packetRxIdx] = data;
-            _packetRxIdx++;
-            if (data == 0) {
-                fullPacketReceived = true;
-                _packetRxIdx = 0;
-            }
+        _packetRx[_packetRxIdx] = data;
+        _packetRxIdx++;
+        if (data == 0) {
+            fullPacketReceived = true;
+            _packetRxIdx = 0;
         }
 
         // Process received packet
@@ -207,7 +203,7 @@ void AttaConnector::update() {
             uint8_t pktCRC = _packetRx[packetSize - 1];
             uint8_t receivedCRC = crc(pktId, cmdId, payload, packetSize - 3 * sizeof(uint8_t));
             // LOG_VERBOSE("AttaConnector", "Received pktId $0 cmdId $1 payloadSize $2 crc $3", (int)pktId, (int)cmdId, packetSize - 3,
-            //          pktCRC == receivedCRC ? "OK" : "WRONG");
+            //             pktCRC == receivedCRC ? "OK" : "WRONG");
             if (pktCRC == receivedCRC) {
                 // Accept first packet with any ID
                 if (_firstPktId) {
@@ -268,14 +264,17 @@ void AttaConnector::update() {
                 _txHandler.markNACK(ack.pkt);
                 break;
             default:
-                LOG_WARN("AttaConnector", "Received unknown ACK status $0", (int)ack.status);
+                // LOG_WARN("AttaConnector", "Received unknown ACK status $0", (int)ack.status);
+                break;
         }
     }
 }
 
-bool AttaConnector::transmit(uint8_t cmdId, uint8_t* data, uint32_t len) { return _txHandler.createPacket(cmdId, data, len); }
+bool AttaConnector::transmit(uint8_t cmdId, uint8_t* data, uint32_t size) { return _txHandler.createPacket(cmdId, data, size); }
 
-bool AttaConnector::receive(uint8_t cmdId, uint8_t* data, uint32_t* len) { return _rxHandler.popCommand(cmdId, data, len); }
+uint32_t AttaConnector::receiveNextSize(uint8_t cmdId) { return _rxHandler.getNextCommandSize(cmdId); }
+
+bool AttaConnector::receive(uint8_t cmdId, uint8_t* data, uint32_t* size) { return _rxHandler.popCommand(cmdId, data, size); }
 
 //-------------------- CRC --------------------//
 constexpr std::array<uint8_t, 256> AttaConnector::generateCRCTable() {
@@ -508,7 +507,7 @@ AttaConnector::TxHandler::TxHandler() : _begin(0), _end(0), _full(false), _lastT
 bool AttaConnector::TxHandler::createPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize) {
     // Check if there are packet IDs available
     if (_full) {
-        LOG_WARN("AttaConnector", "TX buffer is full. Packet with cmdId $0 was not transmitted", (int)cmdId);
+        // LOG_WARN("AttaConnector", "TX buffer is full. Packet with cmdId $0 was not transmitted", (int)cmdId);
         return false;
     }
 
@@ -517,7 +516,7 @@ bool AttaConnector::TxHandler::createPacket(uint8_t cmdId, uint8_t* payload, uin
     uint8_t pktCRC = 0;
     uint32_t pktSize = sizeof(pktId) + sizeof(cmdId) + payloadSize + sizeof(pktCRC);
     if (!_txBuffer.makeContinuous(pktSize)) {
-        LOG_WARN("AttaConnector", "Could not add continuously to TX buffer. Packet with cmdId $0 was not transmitted", (int)cmdId);
+        // LOG_WARN("AttaConnector", "Could not add continuously to TX buffer. Packet with cmdId $0 was not transmitted", (int)cmdId);
         return false;
     }
 
@@ -599,7 +598,7 @@ bool AttaConnector::RxHandler::pushCommand(uint8_t cmdId, uint8_t* payload, uint
     if (!payloadLocation)
         return false;
 
-    // Update last payload pointer
+    // Update next pointer from last payload
     if (_rxCommands[cmdId].last != nullptr)
         *((uint32_t*)_rxCommands[cmdId].last) = startIdx;
 
@@ -613,13 +612,12 @@ bool AttaConnector::RxHandler::pushCommand(uint8_t cmdId, uint8_t* payload, uint
     return true;
 }
 
-bool AttaConnector::RxHandler::getNextCommandSize(uint8_t cmdId, uint32_t* size) {
+uint32_t AttaConnector::RxHandler::getNextCommandSize(uint8_t cmdId) {
     if (!_rxCommands[cmdId].first)
-        return false;
+        return 0;
 
     uint8_t* currentLocation = _rxCommands[cmdId].first;
-    *size = *reinterpret_cast<uint32_t*>(currentLocation + sizeof(uint32_t));
-    return true;
+    return *reinterpret_cast<uint32_t*>(currentLocation + sizeof(uint32_t));
 }
 
 bool AttaConnector::RxHandler::popCommand(uint8_t cmdId, uint8_t* payload, uint32_t* size) {

@@ -20,6 +20,6 @@ Controller::Output TrapezoidalController::control(State s, Control c, float dt) 
     float section = ((theta + M_PI) / sectionSize) + 0.5f; // Section where magnet north pole is
     if (section > 6.0f)
         section -= 6.0f;
-    LOG_DEBUG("TrapezoidalController", "Theta $0 section $1", theta, section);
+    // LOG_DEBUG("TrapezoidalController", "Theta $0 section $1", theta, section);
     return commutations[(int)section];
 }

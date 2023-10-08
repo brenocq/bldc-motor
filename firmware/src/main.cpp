@@ -4,6 +4,8 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include "attaConnector.h"
+#include "attaConnectorCmds.h"
 #include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
 #include <drivers/current/current.h>
@@ -14,21 +16,8 @@
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
-#include <utils/attaConnector.h>
 #include <utils/error.h>
 #include <utils/log.h>
-
-struct MyTest0 {
-    ATTA_CONNECTOR_CMD(MY_TEST0_CMD);
-    uint8_t u0;
-    uint8_t u1;
-};
-
-struct MyTest1 {
-    ATTA_CONNECTOR_CMD(MY_TEST1_CMD);
-    float f;
-    uint8_t u;
-};
 
 int main() {
     HAL_Init();
@@ -53,12 +42,10 @@ int main() {
     Log::success("Main", "Initialized");
 
     MyTest0 t0;
-    t0.u0 = 0;
+    t0.u0 = 1;
     t0.u1 = 0b00001111;
-    for (int i = 0; i < 90; i++) {
-        t0.u0 = i;
-        AttaConnector::transmit(t0);
-    }
+    AttaConnector::transmit(t0);
+    AttaConnector::transmit(t0);
 
     MyTest1 t1;
     t1.f = 1.5f;
@@ -69,24 +56,25 @@ int main() {
     bool b = true;
     while (true) {
         AttaConnector::update();
-        while (AttaConnector::receive(&t0))
-            Log::success("Main", "Received MyTest0 -> $x0 $x1", (int)t0.u0, (int)t0.u1);
-        while (AttaConnector::receive(&t1)) {
-            Log::success("Main", "Received MyTest1 -> $0 $x1", t1.f, (int)t1.u);
+        // while (AttaConnector::receive(&t0))
+        //     Log::success("Main", "Received MyTest0 -> $x0 $x1", (int)t0.u0, (int)t0.u1);
+        // while (AttaConnector::receive(&t1)) {
+        //     Log::success("Main", "Received MyTest1 -> $0 $x1", t1.f, (int)t1.u);
 
-            t0.u0 = 42;
-            t0.u1 = 42;
-            AttaConnector::transmit(t0);
-        }
+        //    t0.u0 = 42;
+        //    t0.u1 = 42;
+        //    AttaConnector::transmit(t0);
+        //}
 
         // float angle = encoder.readAngle();
         // float volt = voltage.read();
         // float currW = current.readW();
         // float currUV = current.readUV();
-        //// Uart::transmit("Angle: " + std::to_string(angle) + "\n");
+        // Uart::transmit("Angle: " + std::to_string(angle) + "\n");
         // Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
         // Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
 
+        Hardware::delay(0.1f);
         Gpio::write(Gpio::LED_PIN, b);
         b = !b;
         motor.test();

@@ -142,7 +142,7 @@ set(BLDC_SOURCES
     src/system/sysmem.c
     src/system/system_stm32f4xx.c
 
-    src/utils/attaConnector.cpp
+    ../common/attaConnector.cpp
     src/utils/attaConnectorPlatform.cpp
     src/utils/error.cpp
     src/utils/log.cpp
@@ -154,6 +154,8 @@ set(BLDC_SOURCES
 
 # Main target
 add_executable(bldc_motor_controller ${BLDC_SOURCES})
+target_include_directories(bldc_motor_controller PRIVATE ../common)
+target_include_directories(bldc_motor_controller PRIVATE src/utils)
 target_link_libraries(bldc_motor_controller PRIVATE stm32f4_hal stm32_usb)
 set_target_properties(bldc_motor_controller PROPERTIES OUTPUT_NAME "firmware.elf")
 add_custom_command(TARGET bldc_motor_controller POST_BUILD

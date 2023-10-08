@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// BLDC Motor Controller
+// Atta Connector
 // attaConnector.inl
 // Date: 2023-09-23
 // By Breno Cunha Queiroz

@@ -1,11 +1,11 @@
 //--------------------------------------------------
-// BLDC Motor Controller
+// BLDC Simulation
 // attaConnectorPlatform.h
-// Date: 2023-09-23
+// Date: 2023-10-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#ifndef UTILS_ATTA_CONNECTOR_PLATFORM_H
-#define UTILS_ATTA_CONNECTOR_PLATFORM_H
+#ifndef BLDC_ATTA_CONNECTOR_PLATFORM_H
+#define BLDC_ATTA_CONNECTOR_PLATFORM_H
 #include "attaConnectorCmds.h"
 #include <cstdint>
 
@@ -17,4 +17,4 @@ constexpr uint32_t MAX_CMD_SIZE = 1024; // Maximum command size in byte
 
 } // namespace AttaConnector
 
-#endif // UTILS_ATTA_CONNECTOR_PLATFORM_H
+#endif // BLDC_ATTA_CONNECTOR_PLATFORM_H

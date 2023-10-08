@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// BLDC Motor Controller
+// Atta Connector
 // attaConnector.cpp
 // Date: 2023-09-23
 // By Breno Cunha Queiroz
@@ -8,9 +8,6 @@
 #define ATTA_CONNECTOR_H
 #include "attaConnectorPlatform.h"
 #include <cstdint>
-
-// Macro to define command id
-#define ATTA_CONNECTOR_CMD(x) static constexpr uint8_t CMD_ID = x
 
 namespace AttaConnector {
 
@@ -22,8 +19,9 @@ bool transmit(const T& cmd);
 template <typename T>
 bool receive(T* cmd);
 
-bool transmit(uint8_t cmdId, uint8_t* data, uint32_t len);
-bool receive(uint8_t cmdId, uint8_t* data, uint32_t* len);
+bool transmit(uint8_t cmdId, uint8_t* data, uint32_t size);
+uint32_t receiveNextSize(uint8_t cmdId);
+bool receive(uint8_t cmdId, uint8_t* data, uint32_t* size);
 
 } // namespace AttaConnector
 

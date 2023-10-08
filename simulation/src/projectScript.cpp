@@ -4,6 +4,8 @@
 // Date: 2023-09-27
 //--------------------------------------------------
 #include "projectScript.h"
+#include "attaConnectorCmds.h"
+#include "attaConnectorPlatform.h"
 #include "imgui.h"
 #include "implot.h"
 #include <atta/component/components/transform.h>
@@ -12,6 +14,11 @@
 namespace cmp = atta::component;
 
 cmp::Entity motorEntity(0);
+
+void ProjectScript::onLoad() {
+    if (!AttaConnector::init())
+        LOG_WARN("ProjectScript", "Failed to initialize atta connector");
+}
 
 void ProjectScript::onStart() {
     _motorData = {};
@@ -29,6 +36,10 @@ void ProjectScript::onStart() {
 void ProjectScript::onStop() {}
 
 void ProjectScript::onUpdateBefore(float dt) {
+    // Handle motor serial connection
+    handleSerial();
+    handleAttaConnector();
+
     // Update time
     float lastTime = _time.empty() ? -dt : _time.back();
     float time = lastTime + dt;
@@ -122,3 +133,52 @@ void ProjectScript::onUIRender() {
     }
     ImGui::End();
 }
+
+std::weak_ptr<atta::io::Serial> _gSerial;
+
+void ProjectScript::handleSerial() {
+    std::vector<std::string> deviceNames = atta::io::Serial::getAvailableDeviceNames();
+    // Handle disconnect
+    if (_serial) {
+        bool found = false;
+        for (std::string deviceName : deviceNames)
+            if (_serial->getDeviceName() == deviceName) {
+                found = true;
+                break;
+            }
+        if (!found) {
+            LOG_DEBUG("ProjectScript", "Disconnect from [y]$0", _serial->getDeviceName());
+            _gSerial = _serial = nullptr;
+        }
+    }
+
+    // Try to connect to serial if not connected
+    if (!_serial) {
+        for (std::string deviceName : deviceNames) {
+            if (deviceName.find("STM32") != std::string::npos) {
+                atta::io::Serial::CreateInfo info{};
+                info.deviceName = deviceName;
+                info.baudRate = 115200;
+                info.timeout = 0.0f;
+                _gSerial = _serial = atta::io::create<atta::io::Serial>(info);
+                if (_serial)
+                    _serial->start();
+                LOG_DEBUG("ProjectScript", "Connected to [y]$0", deviceName);
+                break;
+            }
+        }
+    }
+}
+
+void ProjectScript::handleAttaConnector() {
+    if (_serial)
+        AttaConnector::update();
+    MyTest0 t0;
+    MyTest1 t1;
+    while (AttaConnector::receive<MyTest0>(&t0))
+        LOG_DEBUG("ProjectScript", "Received MyTest0 -> $0 $1", (int)t0.u0, (int)t0.u1);
+    while (AttaConnector::receive<MyTest1>(&t1))
+        LOG_DEBUG("ProjectScript", "Received MyTest1 -> $0 $1", t1.f, (int)t1.u);
+}
+
+#include "attaConnectorPlatform.cpp"

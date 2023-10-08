@@ -6,8 +6,8 @@
 //--------------------------------------------------
 #ifndef BLDC_DRIVERS_UART_UART_H
 #define BLDC_DRIVERS_UART_UART_H
-#include <system/hal.h>
 #include <string>
+#include <system/hal.h>
 #include <vector>
 
 namespace Uart {
@@ -19,9 +19,9 @@ bool init();
 
 bool isInitialized();
 
-void transmit(std::string data, Peripheral peripheral = Peripheral::DEFAULT);
+void transmit(uint8_t* data, uint32_t size, Peripheral peripheral = Peripheral::DEFAULT);
 
-std::vector<uint8_t> receive(uint32_t maxChars, uint32_t timeout, Peripheral peripheral = Peripheral::DEFAULT);
+uint32_t receive(uint8_t* data, uint32_t size, Peripheral peripheral = Peripheral::DEFAULT);
 
 } // namespace Uart
 

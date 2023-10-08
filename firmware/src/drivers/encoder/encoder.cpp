@@ -7,7 +7,7 @@
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
-#include <drivers/uart/uart.h>
+#include <utils/log.h>
 
 bool Encoder::init() {
     Gpio::write(Gpio::ENC_CSN_PIN, true);
@@ -80,13 +80,13 @@ float Encoder::readAngle() {
 
     // Check status
     if (status & STATUS_MAG_FIELD_TOO_STRONG)
-        Uart::transmit("Status: MAG_FIELD_TOO_STRONG\n");
+        Log::debug("Encoder", "Status: MAG_FIELD_TOO_STRONG\n");
     if (status & STATUS_MAG_FIELD_TOO_WEAK)
-        Uart::transmit("Status: MAG_FIELD_TOO_WEAK\n");
+        Log::debug("Encoder", "Status: MAG_FIELD_TOO_WEAK\n");
     if (status & STATUS_PUSH_BUTTON_DETECTED)
-        Uart::transmit("Status: PUSH_BUTTON_DETECTED\n");
+        Log::debug("Encoder", "Status: PUSH_BUTTON_DETECTED\n");
     if (status & STATUS_LOSS_OF_TRACK)
-        Uart::transmit("Status: LOSS_OF_TRACK\n");
+        Log::debug("Encoder", "Status: LOSS_OF_TRACK\n");
 
     // Check CRC
     uint8_t crcReceived = calculateCRC(uint32_t(data) << 4 | status);
@@ -94,6 +94,6 @@ float Encoder::readAngle() {
         return angle;
 
     // CRC error
-    Uart::transmit("CRC mismatch: " + std::to_string(crcReceived) + " instead of " + std::to_string(crc));
+    Log::warning("Encoder", "CRC mismatch: " + std::to_string(crcReceived) + " instead of " + std::to_string(crc));
     return -1.0f;
 }

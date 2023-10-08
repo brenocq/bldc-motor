@@ -72,12 +72,14 @@ bool Uart::init() {
 
 bool Uart::isInitialized() { return _initialized; }
 
-void Uart::transmit(std::string data, Peripheral peripheral) { HAL_UART_Transmit(getHandle(peripheral), (uint8_t*)&data[0], data.size(), 100); }
+void Uart::transmit(uint8_t* data, uint32_t size, Peripheral peripheral) { HAL_UART_Transmit(getHandle(peripheral), data, size, 100); }
 
-std::vector<uint8_t> Uart::receive(uint32_t maxChars, uint32_t timeout, Peripheral peripheral) {
-    std::vector<uint8_t> buf(maxChars, 0);
-    HAL_UART_Receive(getHandle(peripheral), &buf[0], maxChars, timeout);
-    return buf;
+uint32_t Uart::receive(uint8_t* data, uint32_t size, Peripheral peripheral) {
+    HAL_StatusTypeDef status = HAL_UART_Receive(getHandle(peripheral), data, size, 0);
+    if (status == HAL_OK)
+        return size;
+    else
+        return 0;
 }
 
 UART_HandleTypeDef* Uart::getHandle(Peripheral peripheral) {
