@@ -28,7 +28,7 @@ void ProjectScript::onStart() {
     float L = 0.1f; // Phase inductance (TODO)
     float J = 0.1f; // Rotor inertia (TODO)
     float F = 1.0f; // Rotor friction (TODO)
-    float P = 8;    // Number of poles
+    float P = 14;   // Number of poles
     float l = 1.0f; // Flux linkage (TODO)
     _motor = Motor(R, L, J, F, P, l);
     _tController = TrapezoidalController();
@@ -65,7 +65,15 @@ void ProjectScript::onUpdateBefore(float dt) {
     // Update motor
     float V = 7.8f;  // Voltage
     float Tl = 0.1f; // Load torque
-    atta::vec3 Vs = {output.ah * V, output.bh * V, output.ch * V};
+    auto calcV = [V](bool h, bool l) {
+        if (h && !l)
+            return V;
+        else if (!h && l)
+            return 0.0f;
+        else
+            return -1.0f;
+    };
+    atta::vec3 Vs = {calcV(output.ah, output.al), calcV(output.bh, output.bl), calcV(output.ch, output.cl)};
     _motor.update(Vs, Tl, dt);
     _motorData.position.push_back(_motor.getPosition());
     _motorData.velocity.push_back(_motor.getVelocity());

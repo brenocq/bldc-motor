@@ -10,7 +10,7 @@
 bool Current::init() {
     // Vdiff = 0.12Ohm * 0.1A * 100 = 1.2
     // Voltage is 1.65 when no current
-    _gainW = _gainUV = GAIN_100;
+    _gainW = _gainUV = GAIN_25;
     setupGain(_gainW, Gpio::CURR_W_G1_PIN, Gpio::CURR_W_G0_PIN);
     setupGain(_gainUV, Gpio::CURR_UV_G1_PIN, Gpio::CURR_UV_G0_PIN);
     return true;

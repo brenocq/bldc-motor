@@ -13,6 +13,10 @@ Motor::Motor(float R, float L, float J, float F, float P, float l) : _R(R), _L(L
 
 void Motor::update(atta::vec3 v, float Tl, float dt) {
     _v = v;
+    // Calculate voltage for floating phases
+    for (size_t i = 0; i < 3; i++)
+        if (_v[i] == -1.0f)
+            _v[i] = _e[i] - _i[i] * _R;
     _Tl = Tl;
 
     for (int i = 0; i < SUBSTEPS; i++) {
@@ -24,9 +28,9 @@ void Motor::update(atta::vec3 v, float Tl, float dt) {
         // A
         const float rl = _R / _L;
         atta::vec3 lf = {_l * f(_theta, 0), _l * f(_theta, 1), _l * f(_theta, 2)};
-        di[0] = -rl * _i[0] + _w * lf[0] / _J;
-        di[1] = -rl * _i[1] + _w * lf[1] / _J;
-        di[2] = -rl * _i[2] + _w * lf[2] / _J;
+        di[0] = -rl * _i[0] - _w * lf[0] / _L;
+        di[1] = -rl * _i[1] - _w * lf[1] / _L;
+        di[2] = -rl * _i[2] - _w * lf[2] / _L;
         dw = (_i[0] * lf[0] + _i[1] * lf[1] + _i[2] * lf[2] - _w * _F) / _J;
         dtheta = _w * _P / 2;
 
@@ -44,6 +48,9 @@ void Motor::update(atta::vec3 v, float Tl, float dt) {
         _Te = (_e[0] * _i[0] + _e[1] * _i[1] + _e[2] * _i[2]) / _w;
         _Tm = _Te - _Tl;
     }
+
+    // for (int i = 0; i < 3; i++)
+    //     LOG_DEBUG("Motor", "Phase $0: [w]$1", char('A' + i), _v[i] - _R * _i[i] - _e[i]);
 }
 
 float Motor::f(float theta, uint8_t phase) { return sin(theta - phase * (2 * M_PI / 3)); }

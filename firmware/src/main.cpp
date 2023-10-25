@@ -41,44 +41,15 @@ int main() {
 
     Log::success("Main", "Initialized");
 
-    MyTest0 t0;
-    t0.u0 = 1;
-    t0.u1 = 0b00001111;
-    AttaConnector::transmit(t0);
-    AttaConnector::transmit(t0);
-
-    MyTest1 t1;
-    t1.f = 1.5f;
-    t1.u = 0b00001111;
-    AttaConnector::transmit(t1);
-    AttaConnector::transmit(t1);
-
     bool b = true;
     while (true) {
         AttaConnector::update();
-        // while (AttaConnector::receive(&t0))
-        //     Log::success("Main", "Received MyTest0 -> $x0 $x1", (int)t0.u0, (int)t0.u1);
-        // while (AttaConnector::receive(&t1)) {
-        //     Log::success("Main", "Received MyTest1 -> $0 $x1", t1.f, (int)t1.u);
 
-        //    t0.u0 = 42;
-        //    t0.u1 = 42;
-        //    AttaConnector::transmit(t0);
-        //}
-
-        // float angle = encoder.readAngle();
-        // float volt = ;
-        // float currW = current.readW();
-        // float currUV = current.readUV();
-        // Uart::transmit("Angle: " + std::to_string(angle) + "\n");
-        // Uart::transmit("Voltage: " + std::to_string(volt) + "V\n");
-        // Uart::transmit("Currents: W(" + std::to_string(currW) + "A) UV(" + std::to_string(currUV) + "A)\n");
-
-        MotorState state;
+        MotorState state{};
         state.batteryVoltage = voltage.read();
         state.currentUV = current.readUV();
         state.currentW = current.readW();
-        state.rotorPosition = encoder.readAngle();
+        // state.rotorPosition = encoder.readAngle();
         AttaConnector::transmit(state);
 
         Gpio::write(Gpio::LED_PIN, b);
