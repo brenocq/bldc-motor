@@ -32,6 +32,7 @@ void ProjectScript::onStart() {
     float l = 1.0f; // Flux linkage (TODO)
     _motor = Motor(R, L, J, F, P, l);
     _tController = TrapezoidalController();
+    _focController = FocController();
 
     _phyMotorTime = {};
     _phyMotorData = {};
@@ -60,7 +61,8 @@ void ProjectScript::onUpdateBefore(float dt) {
     x.voltage = 7.8f;
     x.currents = {_motor.getCurrent()[0], _motor.getCurrent()[1], _motor.getCurrent()[2]};
     x.theta = _motor.getPosition();
-    Controller::Output output = _tController.control(x, u, dt);
+    //Controller::Output output = _tController.control(x, u, dt);
+    Controller::Output output = _focController.control(x, u, dt);
 
     // Update motor
     float V = 7.8f;  // Voltage

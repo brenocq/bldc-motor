@@ -8,6 +8,7 @@ set(PROJECT_SOURCES
     src/motor.cpp
     ../controller/controller.cpp
     ../controller/trapezoidalController.cpp
+    ../controller/focController.cpp
     ../common/attaConnector.cpp
 )
 atta_add_target(project_script ${PROJECT_SOURCES})

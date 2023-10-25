@@ -6,8 +6,8 @@
 #ifndef BLDC_CONTROLLER_H
 #define BLDC_CONTROLLER_H
 #include <array>
-#include <cstdint>
 #include <cmath>
+#include <cstdint>
 
 class Controller {
   public:
@@ -31,6 +31,7 @@ class Controller {
     // Controller output
     struct Output {
         enum State { LOW = 0, HIGH = 1, Z = 2 };
+        Output() : Output(Z, Z, Z) {}
         Output(State a, State b, State c) : al(a == LOW), ah(a == HIGH), bl(b == LOW), bh(b == HIGH), cl(c == LOW), ch(c == HIGH) {}
 
         bool al;

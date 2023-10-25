@@ -7,6 +7,7 @@
 #define BLDC_PROJECT_SCRIPT_H
 #include "motor.h"
 #include "trapezoidalController.h"
+#include "focController.h"
 #include "attaConnector.h"
 #include <atta/script/projectScript.h>
 #include <atta/io/interface.h>
@@ -56,6 +57,7 @@ class ProjectScript : public scr::ProjectScript {
     MotorData _motorData;
     PhysicalMotorData _phyMotorData;
     TrapezoidalController _tController;
+    FocController _focController;
     std::shared_ptr<atta::io::Serial> _serial;
 };
 
