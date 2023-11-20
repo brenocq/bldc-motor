@@ -49,7 +49,6 @@ list(APPEND COMPILER_FLAGS
     -fno-unwind-tables
     -ffunction-sections
     -fdata-sections
-    -ffreestanding
 )
 # Linker & assembler flags
 list(APPEND COMPILER_FLAGS
