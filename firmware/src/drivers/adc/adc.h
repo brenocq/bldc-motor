@@ -28,8 +28,6 @@ struct AdcConfig {
 
 inline const std::array adcList{
     AdcConfig{Gpio::VOLT_PIN, Peripheral::ADC1},
-    AdcConfig{Gpio::CURR_W_PIN, Peripheral::ADC3},
-    AdcConfig{Gpio::CURR_UV_PIN, Peripheral::ADC2},
 };
 
 } // namespace Adc

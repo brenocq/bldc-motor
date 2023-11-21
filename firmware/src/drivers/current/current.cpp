@@ -11,19 +11,21 @@ bool Current::init() {
     // Vdiff = 0.12Ohm * 0.1A * 100 = 1.2
     // Voltage is 1.65 when no current
     _gainW = _gainUV = GAIN_25;
-    setupGain(_gainW, Gpio::CURR_W_G1_PIN, Gpio::CURR_W_G0_PIN);
-    setupGain(_gainUV, Gpio::CURR_UV_G1_PIN, Gpio::CURR_UV_G0_PIN);
+    //setupGain(_gainW, Gpio::CURR_W_G1_PIN, Gpio::CURR_W_G0_PIN);
+    //setupGain(_gainUV, Gpio::CURR_UV_G1_PIN, Gpio::CURR_UV_G0_PIN);
     return true;
 }
 
 float Current::readW() {
-    float voltage = Adc::read(Gpio::CURR_W_PIN) / Adc::MAX_READ * 3.33f;
-    return calcCurrent(voltage, _gainW);
+    return 0.0f;
+    //float voltage = Adc::read(Gpio::CURR_W_PIN) / Adc::MAX_READ * 3.33f;
+    //return calcCurrent(voltage, _gainW);
 }
 
 float Current::readUV() {
-    float voltage = Adc::read(Gpio::CURR_UV_PIN) / Adc::MAX_READ * 3.33f;
-    return calcCurrent(voltage, _gainUV);
+    return 0.0f;
+    //float voltage = Adc::read(Gpio::CURR_UV_PIN) / Adc::MAX_READ * 3.33f;
+    //return calcCurrent(voltage, _gainUV);
 }
 
 void Current::setupGain(Gain gain, Gpio::Gpio g1, Gpio::Gpio g0) {

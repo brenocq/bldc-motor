@@ -25,33 +25,40 @@ constexpr Gpio SWO_PIN = PB3;
 constexpr Gpio SWDIO_PIN = PA13;
 constexpr Gpio SWCLK_PIN = PA14;
 
-constexpr Gpio LED_PIN = PA5;
+constexpr Gpio LED_DI_PIN = PB8;
 
-constexpr Gpio USB_DM_PIN = PA11; //< XXX Not connected in the NUCLEO board
-constexpr Gpio USB_DP_PIN = PA12; //< XXX Not connected in the NUCLEO board
+// constexpr Gpio USB_DM_PIN = PA11;
+// constexpr Gpio USB_DP_PIN = PA12;
 
-constexpr Gpio UART_TX_PIN = PA2;
-constexpr Gpio UART_RX_PIN = PA3;
+constexpr Gpio IMU_CS_PIN = PA3;    // IMU chip select
+constexpr Gpio IMU_CLK_PIN = PA9;   // IMU clock
+constexpr Gpio IMU_POCI_PIN = PB14; // IMU POCI
+constexpr Gpio IMU_PICO_PIN = PB15; // IMU PICO
+constexpr Gpio IMU_INT1_PIN = PB7;  // IMU interrupt 1
+constexpr Gpio IMU_INT2_PIN = PB6;  // IMU interrupt 2
 
-constexpr Gpio ENC_CSN_PIN = PC8; // Encoder chip select
-constexpr Gpio ENC_CLK_PIN = PC6; // Encoder clock
-constexpr Gpio ENC_DO_PIN = PC5;  // Encoder data output
+constexpr Gpio ENC_CSN_PIN = PA15; // Encoder chip select
+constexpr Gpio ENC_CLK_PIN = PC10; // Encoder clock
+constexpr Gpio ENC_DO_PIN = PC1;   // Encoder data output
 
 constexpr Gpio VOLT_PIN = PA0; // Motor input voltage
 
-constexpr Gpio CURR_W_G1_PIN = PA7;   // Current W gain 1
-constexpr Gpio CURR_W_G0_PIN = PB12;  // Current W gain 0
-constexpr Gpio CURR_UV_G1_PIN = PA6;  // Current UV gain 1
-constexpr Gpio CURR_UV_G0_PIN = PA11; // Current UV gain 0
-constexpr Gpio CURR_W_PIN = PA1;      // Current W
-constexpr Gpio CURR_UV_PIN = PA4;     // Current UV
+constexpr Gpio CURR_SCL_PIN = PA8; // Current SCL
+constexpr Gpio CURR_SDA_PIN = PB4; // Current SDA
 
-constexpr Gpio MOTOR_UH_PIN = PB10; // Motor U phase high side
-constexpr Gpio MOTOR_UL_PIN = PB15; // Motor U phase low side
-constexpr Gpio MOTOR_VH_PIN = PB4;  // Motor V phase high side
-constexpr Gpio MOTOR_VL_PIN = PB14; // Motor V phase low side
-constexpr Gpio MOTOR_WH_PIN = PB5;  // Motor W phase high side
-constexpr Gpio MOTOR_WL_PIN = PB13; // Motor W phase low side
+constexpr Gpio MOTOR_UH_PIN = PA1;   // Motor U phase high side
+constexpr Gpio MOTOR_UL_PIN = PA2;   // Motor U phase low side
+constexpr Gpio MOTOR_VH_PIN = PA6;   // Motor V phase high side
+constexpr Gpio MOTOR_VL_PIN = PA7;   // Motor V phase low side
+constexpr Gpio MOTOR_WH_PIN = PA5;   // Motor W phase high side
+constexpr Gpio MOTOR_WL_PIN = PA10;  // Motor W phase low side
+constexpr Gpio MOTOR_DIAG_PIN = PA4; // Motor diagnostics
+
+constexpr Gpio UART_TX_PIN = PC6; // UART TX
+constexpr Gpio UART_RX_PIN = PC7; // UART RX
+
+constexpr Gpio CAN_RX_PIN = PA11; // CAN RX
+constexpr Gpio CAN_TX_PIN = PA12; // CAN TX
 
 //---------- GPIO configs ----------//
 struct GpioConfig {
@@ -61,22 +68,15 @@ struct GpioConfig {
 
 // clang-format off
 inline const std::array gpioList{
-    GpioConfig{LED_PIN,     Mode::OUTPUT},
     GpioConfig{SWO_PIN,     Mode::SWO},
     GpioConfig{SWDIO_PIN,   Mode::SWDIO},
     GpioConfig{SWCLK_PIN,   Mode::SWCLK},
-    GpioConfig{UART_TX_PIN, Mode::USART2_TX},
-    GpioConfig{UART_RX_PIN, Mode::USART2_RX},
+    GpioConfig{UART_TX_PIN, Mode::USART6_TX},
+    GpioConfig{UART_RX_PIN, Mode::USART6_RX},
     GpioConfig{ENC_CSN_PIN, Mode::OUTPUT},
     GpioConfig{ENC_CLK_PIN, Mode::OUTPUT},
     GpioConfig{ENC_DO_PIN,  Mode::INPUT},
     GpioConfig{VOLT_PIN,    Mode::ANALOG},
-    GpioConfig{CURR_W_G1_PIN, Mode::OUTPUT},
-    GpioConfig{CURR_W_G0_PIN, Mode::OUTPUT},
-    GpioConfig{CURR_UV_G1_PIN, Mode::OUTPUT},
-    GpioConfig{CURR_UV_G0_PIN, Mode::OUTPUT},
-    GpioConfig{CURR_W_PIN, Mode::ANALOG},
-    GpioConfig{CURR_UV_PIN, Mode::ANALOG},
     GpioConfig{MOTOR_UH_PIN, Mode::OUTPUT},
     GpioConfig{MOTOR_UL_PIN, Mode::OUTPUT},
     GpioConfig{MOTOR_VH_PIN, Mode::OUTPUT},

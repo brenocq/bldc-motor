@@ -12,10 +12,10 @@
 void Error::hardFault(const char* reason) {
     Log::error("Error", "HardFault: $0", reason);
     while (true) {
-        Gpio::write(Gpio::LED_PIN, true);
-        Hardware::delay(0.1f);
-        Gpio::write(Gpio::LED_PIN, false);
-        Hardware::delay(0.1f);
+        //Gpio::write(Gpio::LED_PIN, true);
+        //Hardware::delay(0.1f);
+        //Gpio::write(Gpio::LED_PIN, false);
+        //Hardware::delay(0.1f);
     }
 }
 
