@@ -191,7 +191,7 @@ void ProjectScript::handleSerial() {
     // Try to connect to serial if not connected
     if (!_serial) {
         for (std::string deviceName : deviceNames) {
-            if (deviceName.find("STM32") != std::string::npos) {
+            if (deviceName.find("STMicroelectronics") != std::string::npos) {
                 atta::io::Serial::CreateInfo info{};
                 info.deviceName = deviceName;
                 info.baudRate = 115200;

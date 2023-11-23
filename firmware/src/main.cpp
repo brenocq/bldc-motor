@@ -36,20 +36,20 @@ int main() {
     //      Error::hardFault("Failed to initialize current driver");
     //  if (!motor.init())
     //      Error::hardFault("Failed to initialize motor driver");
-    //  if (!AttaConnector::init())
-    //     Error::hardFault("Failed to initialize atta connector");
+    if (!AttaConnector::init())
+        Error::hardFault("Failed to initialize atta connector");
 
     Log::success("Main", "Initialized");
 
     // bool b = true;
     int count = 0;
     while (true) {
-        // AttaConnector::update();
+        AttaConnector::update();
         Log::success("Main", "Test $0", count++);
-        // MyTest1 t1;
-        // t1.f = 4.5f;
-        // t1.u = 42;
-        // AttaConnector::transmit(t1);
+        MyTest1 t1;
+        t1.f = 4.5f;
+        t1.u = 42;
+        AttaConnector::transmit(t1);
         Hardware::delayMs(1000);
 
         // MotorState state{};
