@@ -24,8 +24,8 @@ int main() {
     Clock::init();
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
-    // if (!Uart::init())
-    //     Error::hardFault("Failed to initialize UART driver");
+    if (!Uart::init())
+        Error::hardFault("Failed to initialize UART driver");
     //  if (!Adc::init())
     //      Error::hardFault("Failed to initialize ADC driver");
     //  if (!encoder.init())
