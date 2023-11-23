@@ -15,41 +15,51 @@
 #include <drivers/motor/motor.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
+#include <stdio.h>
 #include <system/hal.h>
 #include <utils/error.h>
 #include <utils/log.h>
+
+int _write(int file, char* ptr, int len) {
+    int i = 0;
+    for (i = 0; i < len; i++)
+        ITM_SendChar((*ptr++));
+    return len;
+}
 
 int main() {
     HAL_Init();
     Clock::init();
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
-    if (!Uart::init())
-        Error::hardFault("Failed to initialize UART driver");
-    // if (!Adc::init())
-    //     Error::hardFault("Failed to initialize ADC driver");
-    // if (!encoder.init())
-    //     Error::hardFault("Failed to initialize encoder driver");
-    // if (!voltage.init())
-    //     Error::hardFault("Failed to initialize voltage driver");
-    // if (!current.init())
-    //     Error::hardFault("Failed to initialize current driver");
-    // if (!motor.init())
-    //     Error::hardFault("Failed to initialize motor driver");
-    if (!AttaConnector::init())
-        Error::hardFault("Failed to initialize atta connector");
+    // if (!Uart::init())
+    //     Error::hardFault("Failed to initialize UART driver");
+    //  if (!Adc::init())
+    //      Error::hardFault("Failed to initialize ADC driver");
+    //  if (!encoder.init())
+    //      Error::hardFault("Failed to initialize encoder driver");
+    //  if (!voltage.init())
+    //      Error::hardFault("Failed to initialize voltage driver");
+    //  if (!current.init())
+    //      Error::hardFault("Failed to initialize current driver");
+    //  if (!motor.init())
+    //      Error::hardFault("Failed to initialize motor driver");
+    //  if (!AttaConnector::init())
+    //     Error::hardFault("Failed to initialize atta connector");
 
     Log::success("Main", "Initialized");
 
     // bool b = true;
+    int count = 0;
     while (true) {
-        AttaConnector::update();
-        //Log::success("Main", "Test");
-        MyTest1 t1;
-        t1.f = 4.5f;
-        t1.u = 42;
-        AttaConnector::transmit(t1);
-        Hardware::delayMs(100);
+        // AttaConnector::update();
+        // Log::success("Main", "Test");
+        printf("Test ITM %d\n", count++);
+        // MyTest1 t1;
+        // t1.f = 4.5f;
+        // t1.u = 42;
+        // AttaConnector::transmit(t1);
+        Hardware::delayMs(1000);
 
         // MotorState state{};
         // state.batteryVoltage = voltage.read();

@@ -8,6 +8,6 @@
 #include <utils/log.h>
 
 void Log::transmit(std::string str) {
-    // if (Uart::isInitialized())
-    //     Uart::transmit(str);
+    if (Uart::isInitialized() && !str.empty())
+        Uart::transmit((uint8_t*)str.data(), str.size());
 }
