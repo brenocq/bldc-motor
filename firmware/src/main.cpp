@@ -15,17 +15,9 @@
 #include <drivers/motor/motor.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
-#include <stdio.h>
 #include <system/hal.h>
 #include <utils/error.h>
 #include <utils/log.h>
-
-int _write(int file, char* ptr, int len) {
-    int i = 0;
-    for (i = 0; i < len; i++)
-        ITM_SendChar((*ptr++));
-    return len;
-}
 
 int main() {
     HAL_Init();
@@ -53,8 +45,7 @@ int main() {
     int count = 0;
     while (true) {
         // AttaConnector::update();
-        // Log::success("Main", "Test");
-        printf("Test ITM %d\n", count++);
+        Log::success("Main", "Test $0", count++);
         // MyTest1 t1;
         // t1.f = 4.5f;
         // t1.u = 42;

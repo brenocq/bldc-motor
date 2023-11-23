@@ -6,6 +6,7 @@ enable_language(ASM)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_C_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-g++)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Folders
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/base/linker/STM32F4xx/STM32F446xE.ld)
@@ -55,6 +56,7 @@ list(APPEND COMPILER_FLAGS
     # Linker flags
     -Wl,-T${LINKER_SCRIPT}
     -Wl,--gc-sections
+    #-Wl,--verbose
     # Assembler flags
     -Wa,--defsym,CALL_ARM_SYSTEM_INIT=1
 )
