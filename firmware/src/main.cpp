@@ -26,26 +26,25 @@ int main() {
         Error::hardFault("Failed to initialize GPIO driver");
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
-    //  if (!Adc::init())
-    //      Error::hardFault("Failed to initialize ADC driver");
-    //  if (!encoder.init())
-    //      Error::hardFault("Failed to initialize encoder driver");
-    //  if (!voltage.init())
-    //      Error::hardFault("Failed to initialize voltage driver");
-    //  if (!current.init())
-    //      Error::hardFault("Failed to initialize current driver");
-    //  if (!motor.init())
-    //      Error::hardFault("Failed to initialize motor driver");
+    if (!Adc::init())
+        Error::hardFault("Failed to initialize ADC driver");
+    // if (!encoder.init())
+    //     Error::hardFault("Failed to initialize encoder driver");
+    if (!voltage.init())
+        Error::hardFault("Failed to initialize voltage driver");
+    // if (!current.init())
+    //     Error::hardFault("Failed to initialize current driver");
+    // if (!motor.init())
+    //     Error::hardFault("Failed to initialize motor driver");
     if (!AttaConnector::init())
         Error::hardFault("Failed to initialize atta connector");
 
     Log::success("Main", "Initialized");
 
     // bool b = true;
-    int count = 0;
     while (true) {
         AttaConnector::update();
-        Log::success("Main", "Test $0", count++);
+        Log::success("Main", "Voltage $0", voltage.read());
         MyTest1 t1;
         t1.f = 4.5f;
         t1.u = 42;
