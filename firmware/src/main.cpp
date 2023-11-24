@@ -12,6 +12,7 @@
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
+#include <drivers/led/led.h>
 #include <drivers/motor/motor.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
@@ -28,6 +29,8 @@ int main() {
         Error::hardFault("Failed to initialize UART driver");
     if (!Adc::init())
         Error::hardFault("Failed to initialize ADC driver");
+    if (!led.init())
+        Error::hardFault("Failed to initialize led driver");
     // if (!encoder.init())
     //     Error::hardFault("Failed to initialize encoder driver");
     if (!voltage.init())
