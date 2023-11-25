@@ -12,7 +12,7 @@ bool Led::init() {
     return true;
 }
 
-void Led::setColor(uint8_t i, uint8_t r, uint8_t g, uint8_t b, uint8_t i) {
+void Led::setColor(uint8_t i, uint8_t r, uint8_t g, uint8_t b) {
     if (i < NUM_LEDS) {
         _colors[i * 3 + 0] = g;
         _colors[i * 3 + 1] = r;
@@ -21,8 +21,11 @@ void Led::setColor(uint8_t i, uint8_t r, uint8_t g, uint8_t b, uint8_t i) {
 }
 
 void Led::setColorAll(uint8_t r, uint8_t g, uint8_t b) {
-    for (uint32_t i = 0; i < NUM_LEDS, i++)
-        setColor(r, g, b);
+    for (uint32_t i = 0; i < NUM_LEDS; i++)
+        setColor(i, r, g, b);
 }
 
-bool Led::show() {}
+bool Led::show() {
+    // TODO using PWM+DMA
+    return true;
+}

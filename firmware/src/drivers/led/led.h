@@ -12,19 +12,19 @@ class Led {
   public:
     bool init();
 
-    void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t i);
+    void setColor(uint8_t i, uint8_t r, uint8_t g, uint8_t b);
     void setColorAll(uint8_t r, uint8_t g, uint8_t b);
     bool show();
 
-    constexpr uint32_t NUM_LEDS = 2;
+    static constexpr uint32_t NUM_LEDS = 2;
 
   private:
-    constexpr float SYMBOL_PERIOD = 1.2f; // 1.2uF (800kHz)
-    constexpr float T0H = 0.3f;           // Symbol 0 -> high period (uF)
-    constexpr float T0L = 0.9f;           // Symbol 0 -> low period (uF)
-    constexpr float T1H = 0.6f;           // Symbol 1 -> high period (uF)
-    constexpr float T1L = 0.6f;           // Symbol 1 -> low period (uF)
-    constexpr float RST = 85.0f;          // Reset period (at least 80uF)
+    static constexpr float SYMBOL_PERIOD = 1.2f; // 1.2uF (800kHz)
+    static constexpr float T0H = 0.3f;           // Symbol 0 -> high period (uF)
+    static constexpr float T0L = 0.9f;           // Symbol 0 -> low period (uF)
+    static constexpr float T1H = 0.6f;           // Symbol 1 -> high period (uF)
+    static constexpr float T1L = 0.6f;           // Symbol 1 -> low period (uF)
+    static constexpr float RST = 85.0f;          // Reset period (at least 80uF)
     std::array<uint8_t, NUM_LEDS * 3> _colors;
 };
 

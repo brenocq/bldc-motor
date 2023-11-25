@@ -12,6 +12,7 @@
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
+#include <drivers/i2c/i2c.h>
 #include <drivers/led/led.h>
 #include <drivers/motor/motor.h>
 #include <drivers/uart/uart.h>
@@ -27,6 +28,8 @@ int main() {
         Error::hardFault("Failed to initialize GPIO driver");
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
+    if (!I2c::init())
+        Error::hardFault("Failed to initialize I2C driver");
     if (!Adc::init())
         Error::hardFault("Failed to initialize ADC driver");
     if (!led.init())

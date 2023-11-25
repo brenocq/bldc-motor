@@ -77,6 +77,8 @@ inline const std::array gpioList{
     // GpioConfig{ENC_CLK_PIN, Mode::OUTPUT},
     // GpioConfig{ENC_DO_PIN,  Mode::INPUT},
     GpioConfig{VOLT_PIN,    Mode::ANALOG},
+    GpioConfig{CURR_SDA_PIN, Mode::I2C3_SDA},
+    GpioConfig{CURR_SCL_PIN, Mode::I2C3_SCL},
     // GpioConfig{MOTOR_UH_PIN, Mode::OUTPUT},
     // GpioConfig{MOTOR_UL_PIN, Mode::OUTPUT},
     // GpioConfig{MOTOR_VH_PIN, Mode::OUTPUT},
