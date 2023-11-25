@@ -6,6 +6,8 @@
 //--------------------------------------------------
 #ifndef BLDC_DRIVERS_I2C_I2C_H
 #define BLDC_DRIVERS_I2C_I2C_H
+#include <array>
+#include <cstdint>
 
 namespace I2c {
 
@@ -73,6 +75,18 @@ bool receive(Peripheral peripheral, Address address, uint8_t* data, uint16_t len
 bool readRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t* val);
 
 /**
+ * @brief Read 16-bit register
+ *
+ * @param peripheral I2c peripheral
+ * @param address Slave address
+ * @param reg Register address
+ * @param val Register value
+ *
+ * @return True if read was successful
+ */
+bool readRegister(Peripheral peripheral, Address address, uint8_t reg, uint16_t* val);
+
+/**
  * @brief Write 8-bit register
  *
  * @param peripheral I2c peripheral
@@ -84,10 +98,22 @@ bool readRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t* 
  */
 bool writeRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t val);
 
+/**
+ * @brief Write 16-bit register
+ *
+ * @param peripheral I2c peripheral
+ * @param address Slave address
+ * @param reg Register address
+ * @param val Register value
+ *
+ * @return True if write was successful
+ */
+bool writeRegister(Peripheral peripheral, Address address, uint8_t reg, uint16_t val);
+
 //---------- I2C configs ----------//
-static constexpr Address CURR_U_ADDR = 0x40 << 1;
-static constexpr Address CURR_V_ADDR = 0x41 << 1;
-static constexpr Address CURR_W_ADDR = 0x44 << 1;
+static constexpr Address PHASE_U_ADDR = 0x40 << 1;
+static constexpr Address PHASE_V_ADDR = 0x41 << 1;
+static constexpr Address PHASE_W_ADDR = 0x44 << 1;
 
 struct I2cConfig {
     Peripheral peripheral;
@@ -95,9 +121,9 @@ struct I2cConfig {
 };
 
 inline const std::array i2cList{
-    I2cConfig{Peripheral::I2C3, CURR_U_ADDR},
-    I2cConfig{Peripheral::I2C3, CURR_V_ADDR},
-    I2cConfig{Peripheral::I2C3, CURR_W_ADDR},
+    I2cConfig{Peripheral::I2C3, PHASE_U_ADDR},
+    I2cConfig{Peripheral::I2C3, PHASE_V_ADDR},
+    I2cConfig{Peripheral::I2C3, PHASE_W_ADDR},
 };
 
 }; // namespace I2c

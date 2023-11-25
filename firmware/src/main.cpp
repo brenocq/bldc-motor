@@ -8,13 +8,13 @@
 #include "attaConnectorCmds.h"
 #include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
-#include <drivers/current/current.h>
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <drivers/i2c/i2c.h>
 #include <drivers/led/led.h>
 #include <drivers/motor/motor.h>
+#include <drivers/phase/phase.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
@@ -38,8 +38,12 @@ int main() {
     //     Error::hardFault("Failed to initialize encoder driver");
     if (!voltage.init())
         Error::hardFault("Failed to initialize voltage driver");
-    // if (!current.init())
-    //     Error::hardFault("Failed to initialize current driver");
+    if (!phaseU.init(Phase::U, I2c::Peripheral::I2C3, I2c::PHASE_U_ADDR))
+        Error::hardFault("Failed to initialize phase driver for phase U");
+    if (!phaseV.init(Phase::V, I2c::Peripheral::I2C3, I2c::PHASE_V_ADDR))
+        Error::hardFault("Failed to initialize phase driver for phase V");
+    if (!phaseW.init(Phase::W, I2c::Peripheral::I2C3, I2c::PHASE_W_ADDR))
+        Error::hardFault("Failed to initialize phase driver for phase W");
     // if (!motor.init())
     //     Error::hardFault("Failed to initialize motor driver");
     if (!AttaConnector::init())
@@ -50,7 +54,13 @@ int main() {
     // bool b = true;
     while (true) {
         AttaConnector::update();
-        Log::success("Main", "Voltage $0", voltage.read());
+        Log::success("Main", "Voltage Source $0", voltage.read());
+        Log::success("Main", "Voltage Phase U $0V", phaseU.readVoltage());
+        Log::success("Main", "Voltage Phase V $0V", phaseV.readVoltage());
+        Log::success("Main", "Voltage Phase W $0V", phaseW.readVoltage());
+        Log::success("Main", "Current Phase U $0A", phaseU.readCurrent());
+        Log::success("Main", "Current Phase V $0A", phaseV.readCurrent());
+        Log::success("Main", "Current Phase W $0A", phaseW.readCurrent());
         MyTest1 t1;
         t1.f = 4.5f;
         t1.u = 42;

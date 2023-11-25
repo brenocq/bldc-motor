@@ -128,7 +128,7 @@ target_link_libraries(stm32_usb PRIVATE stm32f4_hal)
 set(BLDC_SOURCES
     src/drivers/adc/adc.cpp
     src/drivers/clock/clock.cpp
-    src/drivers/current/current.cpp
+    src/drivers/phase/phase.cpp
     src/drivers/encoder/encoder.cpp
     src/drivers/gpio/gpio.cpp
     src/drivers/i2c/i2c.cpp
