@@ -15,6 +15,7 @@
 #include <drivers/led/led.h>
 #include <drivers/motor/motor.h>
 #include <drivers/phase/phase.h>
+#include <drivers/spi/spi.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
@@ -30,6 +31,8 @@ int main() {
         Error::hardFault("Failed to initialize UART driver");
     if (!I2c::init())
         Error::hardFault("Failed to initialize I2C driver");
+    if (!Spi::init())
+        Error::hardFault("Failed to initialize SPI driver");
     if (!Adc::init())
         Error::hardFault("Failed to initialize ADC driver");
     if (!led.init())

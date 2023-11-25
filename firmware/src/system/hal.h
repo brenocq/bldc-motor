@@ -11,6 +11,10 @@
 #undef I2C1
 #undef I2C2
 #undef I2C3
+#undef SPI1
+#undef SPI2
+#undef SPI3
+#undef SPI4
 #undef ADC1
 #undef ADC2
 #undef ADC3

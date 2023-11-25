@@ -12,7 +12,7 @@
 namespace I2c {
 
 using Address = uint16_t;
-enum class Peripheral : uint8_t { I2C1 = 0, I2C2, I2C3 };
+enum class Peripheral : uint8_t { I2C1 = 0, I2C2, I2C3, NUM };
 
 /**
  * @brief Initialize i2c driver
