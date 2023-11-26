@@ -52,7 +52,7 @@ bool Spi::init() {
         hspi->Init.CLKPolarity = SPI_POLARITY_LOW;
         hspi->Init.CLKPhase = SPI_PHASE_1EDGE;
         hspi->Init.NSS = SPI_NSS_SOFT;
-        hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+        hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32; // 5.625MHz
         hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
         hspi->Init.TIMode = SPI_TIMODE_DISABLE;
         hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -63,6 +63,7 @@ bool Spi::init() {
         }
     }
 
+    LOG_SUCCESS("Spi", "Initialized");
     return true;
 }
 

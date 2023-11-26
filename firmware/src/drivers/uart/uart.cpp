@@ -7,6 +7,7 @@
 #include <drivers/gpio/gpio.h>
 #include <drivers/uart/uart.h>
 #include <set>
+#include <utils/log.h>
 
 namespace Uart {
 
@@ -67,6 +68,7 @@ bool Uart::init() {
     if (!inUse.empty())
         _default = *inUse.begin();
 
+    LOG_SUCCESS("Uart", "Initialized");
     return _initialized = true;
 }
 

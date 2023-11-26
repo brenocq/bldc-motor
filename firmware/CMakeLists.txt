@@ -131,6 +131,7 @@ set(BLDC_SOURCES
     src/drivers/encoder/encoder.cpp
     src/drivers/gpio/gpio.cpp
     src/drivers/i2c/i2c.cpp
+    src/drivers/imu/imu.cpp
     src/drivers/led/led.cpp
     src/drivers/motor/motor.cpp
     src/drivers/phase/phase.cpp

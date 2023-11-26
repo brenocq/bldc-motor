@@ -7,8 +7,12 @@
 #include <drivers/adc/adc.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/voltage/voltage.h>
+#include <utils/log.h>
 
-bool Voltage::init() { return true; }
+bool Voltage::init() {
+    LOG_SUCCESS("Voltage", "Initialized");
+    return true;
+}
 
 float Voltage::read() {
     float Vin = 3.33f * (Adc::read(Gpio::VOLT_PIN) / float(Adc::MAX_READ));

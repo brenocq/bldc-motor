@@ -12,6 +12,7 @@
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <drivers/i2c/i2c.h>
+#include <drivers/imu/imu.h>
 #include <drivers/led/led.h>
 #include <drivers/motor/motor.h>
 #include <drivers/phase/phase.h>
@@ -47,6 +48,8 @@ int main() {
         Error::hardFault("Failed to initialize phase driver for phase V");
     if (!phaseW.init(Phase::W, I2c::Peripheral::I2C3, I2c::PHASE_W_ADDR))
         Error::hardFault("Failed to initialize phase driver for phase W");
+    if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
+        Error::hardFault("Failed to initialize IMU");
     // if (!motor.init())
     //     Error::hardFault("Failed to initialize motor driver");
     if (!AttaConnector::init())

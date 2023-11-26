@@ -38,6 +38,8 @@ bool Phase::init(PhaseId phase, I2c::Peripheral peripheral, I2c::Address address
         LOG_ERROR("Phase", "Could not configure phase $0", _phase);
         return false;
     }
+
+    LOG_SUCCESS("Phase", "$0 initialized", phase);
     return true;
 }
 
@@ -68,9 +70,13 @@ float Phase::readVoltage() {
 }
 
 uint16_t Phase::readReg(Reg reg) {
-    uint16_t data;
-    I2c::readRegister(_peripheral, _address, reg, &data);
-    return data;
+    I2c::transmit(_peripheral, _address, (uint8_t*)&reg, sizeof(uint8_t));
+    uint8_t rx[2];
+    I2c::receive(_peripheral, _address, rx, sizeof(rx));
+    return uint16_t(rx[0] << 8) | rx[1];
 }
 
-void Phase::writeReg(Reg reg, uint16_t data) { I2c::writeRegister(_peripheral, _address, reg, data); }
+void Phase::writeReg(Reg reg, uint16_t data) {
+    uint8_t tx[3] = {uint8_t(reg), uint8_t(data >> 8), uint8_t(data & 0xFF)};
+    I2c::transmit(_peripheral, _address, tx, sizeof(tx));
+}

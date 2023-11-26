@@ -62,54 +62,6 @@ bool transmit(Peripheral peripheral, Address address, uint8_t* data, uint16_t le
  */
 bool receive(Peripheral peripheral, Address address, uint8_t* data, uint16_t len);
 
-/**
- * @brief Read 8-bit register
- *
- * @param peripheral I2c peripheral
- * @param address Slave address
- * @param reg Register address
- * @param val Register value
- *
- * @return True if read was successful
- */
-bool readRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t* val);
-
-/**
- * @brief Read 16-bit register
- *
- * @param peripheral I2c peripheral
- * @param address Slave address
- * @param reg Register address
- * @param val Register value
- *
- * @return True if read was successful
- */
-bool readRegister(Peripheral peripheral, Address address, uint8_t reg, uint16_t* val);
-
-/**
- * @brief Write 8-bit register
- *
- * @param peripheral I2c peripheral
- * @param address Slave address
- * @param reg Register address
- * @param val Register value
- *
- * @return True if write was successful
- */
-bool writeRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t val);
-
-/**
- * @brief Write 16-bit register
- *
- * @param peripheral I2c peripheral
- * @param address Slave address
- * @param reg Register address
- * @param val Register value
- *
- * @return True if write was successful
- */
-bool writeRegister(Peripheral peripheral, Address address, uint8_t reg, uint16_t val);
-
 //---------- I2C configs ----------//
 static constexpr Address PHASE_U_ADDR = 0x40 << 1;
 static constexpr Address PHASE_V_ADDR = 0x41 << 1;

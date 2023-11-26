@@ -70,6 +70,8 @@ bool I2c::init() {
             return false;
         }
     }
+
+    LOG_SUCCESS("I2c", "Initialized");
     return true;
 }
 
@@ -97,41 +99,11 @@ bool I2c::transmit(Peripheral peripheral, Address address, uint8_t* data, uint16
 }
 
 bool I2c::receive(Peripheral peripheral, Address address, uint8_t* data, uint16_t len) {
-    if (HAL_I2C_Master_Receive(getHandle(peripheral), address, data, len, timeout) == HAL_OK) {
+    if (HAL_I2C_Master_Receive(getHandle(peripheral), address, data, len, timeout) != HAL_OK) {
         LOG_ERROR("I2c", "Failed to receive $0 bytes from slave $x1 (peripheral $2)", len, (int)address, (int)peripheral + 1);
         return false;
     }
     return true;
-}
-
-bool I2c::readRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t* val) {
-    if (!transmit(peripheral, address, &reg, sizeof(uint8_t)))
-        return false;
-    return receive(peripheral, address, val, sizeof(uint8_t));
-}
-
-bool I2c::readRegister(Peripheral peripheral, Address address, uint8_t reg, uint16_t* val) {
-    if (!transmit(peripheral, address, &reg, sizeof(uint16_t)))
-        return false;
-
-    // Read 2 bytes and fix endianness
-    uint8_t data[2];
-    if (!receive(peripheral, address, data, sizeof(uint16_t)))
-        return false;
-    *val = (data[0] << 8) | data[1];
-
-    return true;
-}
-
-bool I2c::writeRegister(Peripheral peripheral, Address address, uint8_t reg, uint8_t val) {
-    uint8_t data[2] = {reg, val};
-    return transmit(peripheral, address, data, 2 * sizeof(uint8_t));
-}
-
-bool I2c::writeRegister(Peripheral peripheral, Address address, uint8_t reg, uint16_t val) {
-    uint8_t data[3] = {reg, uint8_t(val >> 8), uint8_t(val & 0xFF)};
-    LOG_DEBUG("I2c", "Write reg 16bit $x0", val);
-    return transmit(peripheral, address, data, 3 * sizeof(uint8_t));
 }
 
 I2C_HandleTypeDef* I2c::getHandle(Peripheral peripheral) {

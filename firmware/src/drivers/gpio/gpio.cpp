@@ -6,6 +6,7 @@
 //--------------------------------------------------
 #include <drivers/gpio/gpio.h>
 #include <system/hal.h>
+#include <utils/log.h>
 
 namespace Gpio {
 
@@ -98,6 +99,7 @@ bool Gpio::init() {
             return false;
     }
 
+    LOG_SUCCESS("Gpio", "Initialized");
     return true;
 }
 

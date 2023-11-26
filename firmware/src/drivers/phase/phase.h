@@ -17,15 +17,16 @@ class Phase {
     float readVoltage();
 
   private:
-    /// Registers
+    // clang-format off
     enum Reg : uint8_t {
-        REG_CONFIG = 0x00,
+        REG_CONFIG        = 0x00,
         REG_SHUNT_VOLTAGE = 0x01,
-        REG_BUS_VOLTAGE = 0x02,
-        REG_POWER = 0x03,
-        REG_CURRENT = 0x04,
-        REG_CALIBRATION = 0x05,
+        REG_BUS_VOLTAGE   = 0x02,
+        REG_POWER         = 0x03,
+        REG_CURRENT       = 0x04,
+        REG_CALIBRATION   = 0x05,
     };
+    // clang-format on
 
     uint16_t readReg(Reg reg);
     void writeReg(Reg reg, uint16_t data);
