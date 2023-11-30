@@ -166,7 +166,7 @@ class Imu {
     uint8_t readReg(Reg reg);
     void writeReg(Reg reg, uint8_t data);
 
-    static constexpr uint8_t WHO_AM_I_DEFAULT = 0x6C;
+    static constexpr uint8_t WHO_AM_I_DEFAULT = 0x6B;
 
     Spi::Peripheral _peripheral; ///< SPI peripehral
     Gpio::Gpio _chipSelect;      ///< SPI chip select
