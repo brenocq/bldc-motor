@@ -24,6 +24,9 @@ printHelp()
    echo "-f or --flash"
    echo "        Flash firmware"
    echo
+   echo "-t or --trace"
+   echo "        Trace debugging. Print SWO output"
+   echo
    echo "-g or --gdb"
    echo "        Open OpenOCD and GDB to debug the firmware"
    exit
@@ -51,6 +54,12 @@ flash()
     exit
 }
 
+trace()
+{
+    st-trace --clock=180 --trace=2000000
+    exit
+}
+
 gdb()
 {
     cd $SCRIPT_PATH/base/openocd
@@ -73,6 +82,9 @@ while [[ $# -gt 0 ]]; do
       ;;
     -f|--flash)
       flash
+      ;;
+    -t|--trace)
+      trace
       ;;
     -g|--gdb)
       gdb
