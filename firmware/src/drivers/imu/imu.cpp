@@ -5,6 +5,7 @@
 // By Breno Cunha Queiroz
 //--------------------------------------------------
 #include <drivers/imu/imu.h>
+#include <limits>
 #include <utils/log.h>
 
 bool Imu::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
@@ -19,15 +20,62 @@ bool Imu::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
         return false;
     }
 
+    // Configure accelerometer
+    Ctrl1XL ctrl1;
+    ctrl1.odr = Ctrl1XL::ODR_416Hz;
+    ctrl1.fullScale = Ctrl1XL::FS_4G;
+    ctrl1.enableLPF2 = true;
+    writeReg(REG_CTRL1_XL, ctrl1);
+
+    // Configure gyroscope
+    Ctrl2G ctrl2;
+    ctrl2.odr = Ctrl2G::ODR_416Hz;
+    ctrl2.fullScale = Ctrl2G::FS_500DPS;
+    writeReg(REG_CTRL2_G, ctrl2);
+
     LOG_SUCCESS("Imu", "Initialized");
     return true;
 }
 
-void Imu::getGyroAccel(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az) {}
+void Imu::getGyrAcc(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az) {}
 
-void Imu::getAccel(int16_t* x, int16_t* y, int16_t* z) {}
+void Imu::getAcc(int16_t* x, int16_t* y, int16_t* z) {
+    // Read raw
+    uint8_t address = uint8_t(REG_OUTX_L_A);
+    address |= 0b10000000; // Read bit
+    std::array<int16_t, 3> accRaw;
+    Gpio::write(_chipSelect, false);
+    Spi::transmit(_peripheral, &address, sizeof(uint8_t));
+    Spi::receive(_peripheral, (uint8_t*)accRaw.data(), 3 * sizeof(int16_t));
+    Gpio::write(_chipSelect, true);
 
-void Imu::getGyro(int16_t* x, int16_t* y, int16_t* z) {}
+    // Convert to m/s^2
+    std::array<float, 3> acc;
+    const float k = (9.81f * 4.0f) / std::numeric_limits<int16_t>::max();
+    acc[0] = k * accRaw[0];
+    acc[1] = k * accRaw[1];
+    acc[2] = k * accRaw[2];
+    LOG_DEBUG("Imu", "Acc $0", acc);
+}
+
+void Imu::getGyr(int16_t* x, int16_t* y, int16_t* z) {
+    // Read raw
+    uint8_t address = uint8_t(REG_OUTX_L_G);
+    address |= 0b10000000; // Read bit
+    std::array<int16_t, 3> gyrRaw;
+    Gpio::write(_chipSelect, false);
+    Spi::transmit(_peripheral, &address, sizeof(uint8_t));
+    Spi::receive(_peripheral, (uint8_t*)gyrRaw.data(), 3 * sizeof(int16_t));
+    Gpio::write(_chipSelect, true);
+
+    // Convert to m/s^2
+    std::array<float, 3> gyr;
+    const float k = 500.0f / std::numeric_limits<int16_t>::max();
+    gyr[0] = k * gyrRaw[0];
+    gyr[1] = k * gyrRaw[1];
+    gyr[2] = k * gyrRaw[2];
+    LOG_DEBUG("Imu", "Gyr $0", gyr);
+}
 
 float Imu::getTemperature() { return 0; }
 

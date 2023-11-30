@@ -4,6 +4,7 @@
 // Date: 2023-09-21
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include <array>
 #include <bitset>
 #include <climits>
 #include <cstddef>
@@ -53,6 +54,19 @@ template <typename Tstream, typename T>
 std::ostream& operator<<(Tstream& s, const std::vector<T>& vec) {
     s << "{";
     for (typename std::vector<T>::const_iterator it = vec.begin(); it != vec.end(); it++) {
+        if (it != vec.begin())
+            s << ", ";
+        s << *it;
+    }
+    s << "}";
+    return s;
+}
+
+// std::array overload
+template <typename Tstream, typename T, size_t N>
+std::ostream& operator<<(Tstream& s, const std::array<T, N>& vec) {
+    s << "{";
+    for (typename std::array<T, N>::const_iterator it = vec.begin(); it != vec.end(); it++) {
         if (it != vec.begin())
             s << ", ";
         s << *it;

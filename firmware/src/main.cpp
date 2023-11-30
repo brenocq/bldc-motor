@@ -60,13 +60,15 @@ int main() {
     // bool b = true;
     while (true) {
         AttaConnector::update();
-        Log::success("Main", "Voltage Source $0", voltage.read());
-        Log::success("Main", "Voltage Phase U $0V", phaseU.readVoltage());
-        Log::success("Main", "Voltage Phase V $0V", phaseV.readVoltage());
-        Log::success("Main", "Voltage Phase W $0V", phaseW.readVoltage());
-        Log::success("Main", "Current Phase U $0A", phaseU.readCurrent());
-        Log::success("Main", "Current Phase V $0A", phaseV.readCurrent());
-        Log::success("Main", "Current Phase W $0A", phaseW.readCurrent());
+        Log::debug("Main", "Voltage Source $0", voltage.read());
+        Log::debug("Main", "Voltage Phase U $0V", phaseU.readVoltage());
+        Log::debug("Main", "Voltage Phase V $0V", phaseV.readVoltage());
+        Log::debug("Main", "Voltage Phase W $0V", phaseW.readVoltage());
+        Log::debug("Main", "Current Phase U $0A", phaseU.readCurrent());
+        Log::debug("Main", "Current Phase V $0A", phaseV.readCurrent());
+        Log::debug("Main", "Current Phase W $0A", phaseW.readCurrent());
+        imu.getAcc(nullptr, nullptr, nullptr);
+        imu.getGyr(nullptr, nullptr, nullptr);
         MyTest1 t1;
         t1.f = 4.5f;
         t1.u = 42;

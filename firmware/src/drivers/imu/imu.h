@@ -19,9 +19,9 @@ class Imu {
   public:
     bool init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect);
 
-    void getGyroAccel(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az);
-    void getAccel(int16_t* x, int16_t* y, int16_t* z);
-    void getGyro(int16_t* x, int16_t* y, int16_t* z);
+    void getGyrAcc(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az);
+    void getAcc(int16_t* x, int16_t* y, int16_t* z);
+    void getGyr(int16_t* x, int16_t* y, int16_t* z);
     float getTemperature();
 
   private:
