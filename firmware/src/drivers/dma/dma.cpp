@@ -9,7 +9,6 @@
 
 namespace Dma {
 
-DMA_HandleTypeDef* getHandle(Dma dma, Stream stream);
 DMA_Stream_TypeDef* getInstance(Dma dma, Stream stream);
 
 enum Source { PERIPHERAL = 0, MEMORY };
@@ -19,22 +18,22 @@ uint32_t convert(Increment increment, Source source);
 uint32_t convert(Alignment alignment, Source source);
 uint32_t convert(Priority priority);
 
-DMA_HandleTypeDef hdma1stream0;
-DMA_HandleTypeDef hdma1stream1;
-DMA_HandleTypeDef hdma1stream2;
-DMA_HandleTypeDef hdma1stream3;
-DMA_HandleTypeDef hdma1stream4;
-DMA_HandleTypeDef hdma1stream5;
-DMA_HandleTypeDef hdma1stream6;
-DMA_HandleTypeDef hdma1stream7;
-DMA_HandleTypeDef hdma2stream0;
-DMA_HandleTypeDef hdma2stream1;
-DMA_HandleTypeDef hdma2stream2;
-DMA_HandleTypeDef hdma2stream3;
-DMA_HandleTypeDef hdma2stream4;
-DMA_HandleTypeDef hdma2stream5;
-DMA_HandleTypeDef hdma2stream6;
-DMA_HandleTypeDef hdma2stream7;
+Handle hdma1stream0;
+Handle hdma1stream1;
+Handle hdma1stream2;
+Handle hdma1stream3;
+Handle hdma1stream4;
+Handle hdma1stream5;
+Handle hdma1stream6;
+Handle hdma1stream7;
+Handle hdma2stream0;
+Handle hdma2stream1;
+Handle hdma2stream2;
+Handle hdma2stream3;
+Handle hdma2stream4;
+Handle hdma2stream5;
+Handle hdma2stream6;
+Handle hdma2stream7;
 
 } // namespace Dma
 
@@ -101,7 +100,7 @@ bool Dma::deinit() {
     return true;
 }
 
-DMA_HandleTypeDef* Dma::getHandle(Dma dma, Stream stream) {
+Dma::Handle* Dma::getHandle(Dma dma, Stream stream) {
     if (dma == DMA1) {
         switch (stream) {
             case STREAM0:

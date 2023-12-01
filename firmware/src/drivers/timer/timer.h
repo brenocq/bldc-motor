@@ -7,6 +7,7 @@
 #ifndef BLDC_DRIVERS_TIMER_TIMER_H
 #define BLDC_DRIVERS_TIMER_TIMER_H
 #include <cstdint>
+#include <drivers/dma/dma.h>
 #include <system/hal.h>
 
 namespace Timer {
@@ -42,8 +43,18 @@ bool deinit();
  */
 void setPwm(Timer timer, float duty);
 
+/**
+ * @brief Link timer to DMA
+ *
+ * @param timer Timer
+ * @param channel Timer channel
+ * @param dmaHandle DMA Handle
+ */
+void linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle);
+
 //---------- Timers ----------//
-static constexpr Timer LED = Timer::TIM2;
+static constexpr Timer LED_TIM = Timer::TIM2;
+static constexpr Channel LED_CH = Channel::CH1;
 
 //---------- Timer configs ----------//
 struct TimerConfig {
@@ -52,7 +63,7 @@ struct TimerConfig {
 };
 
 inline const std::array timerList{
-    TimerConfig{LED, Mode::PWM},
+    TimerConfig{LED_TIM, Mode::PWM},
 };
 
 }; // namespace Timer

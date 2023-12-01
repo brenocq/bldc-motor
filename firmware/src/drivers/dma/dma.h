@@ -19,6 +19,7 @@ enum Channel : uint8_t { CH0 = 0, CH1, CH2, CH3, CH4, CH5, CH6, CH7 };
 enum Alignment : uint8_t { ALIGN_8BIT = 0, ALIGN_16BIT, ALIGN_32BIT };
 enum Priority : uint8_t { PRIORITY_LOW = 0, PRIORITY_MEDIUM, PRIORITY_HIGH, PRIORITY_VERY_HIGH };
 enum Increment : uint8_t { INC_NONE = 0, INC_PER, INC_MEM, INC_MEM_PER };
+using Handle = DMA_HandleTypeDef;
 
 /**
  * @brief Initialize DMA driver
@@ -34,6 +35,20 @@ bool init();
  */
 bool deinit();
 
+/**
+ * @brief Get DMA handle
+ *
+ * @param dma DMA peripheral
+ * @param stream DMA stream
+ *
+ * @return DMA handle
+ */
+Handle* getHandle(Dma dma, Stream stream);
+
+//---------- DMA streams ----------//
+static constexpr Dma LED_DMA = DMA1;
+static constexpr Stream LED_STREAM = STREAM5;
+
 //---------- DMA configs ----------//
 struct DmaConfig {
     Request request;
@@ -47,7 +62,7 @@ struct DmaConfig {
 };
 
 inline const std::array dmaList{
-    DmaConfig{TIM2_CH1, DMA1, STREAM5, CH3, MEM_TO_PER, ALIGN_16BIT, PRIORITY_LOW, INC_MEM},
+    DmaConfig{TIM2_CH1, LED_DMA, LED_STREAM, CH3, MEM_TO_PER, ALIGN_16BIT, PRIORITY_LOW, INC_MEM},
 };
 
 }; // namespace Dma

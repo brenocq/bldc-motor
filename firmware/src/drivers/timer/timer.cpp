@@ -91,8 +91,6 @@ bool Timer::deinit() {
     return true;
 }
 
-void Timer::setPwm(Timer timer, float pwm) { getInstance(timer)->CCR1 = pwm * 65535; }
-
 bool Timer::initPwm(Timer timer) {
     // Check if GPIO was initialized correctly
     Channel channel;
@@ -143,6 +141,36 @@ bool Timer::initPwm(Timer timer) {
         return false;
 
     return true;
+}
+
+void Timer::setPwm(Timer timer, float pwm) { getInstance(timer)->CCR1 = pwm * 65535; }
+
+// clang-format off
+#define LINK_DMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__) \
+    do {                                                         \
+        (__HANDLE__)->__PPP_DMA_FIELD__ = (__DMA_HANDLE__);     \
+        (__DMA_HANDLE__)->Parent = (__HANDLE__);                  \
+    } while (0U)
+// clang-format on
+
+void Timer::linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle) {
+    switch (channel) {
+        case Channel::CH1:
+            LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC1], dmaHandle);
+            return;
+        case Channel::CH2:
+            LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC2], dmaHandle);
+            return;
+        case Channel::CH3:
+            LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC3], dmaHandle);
+            return;
+        case Channel::CH4:
+            LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC4], dmaHandle);
+            return;
+        default:
+            break;
+    }
+    Log::error("Timer", "Could not link DMA to TIM$0", int(timer));
 }
 
 // clang-format off
