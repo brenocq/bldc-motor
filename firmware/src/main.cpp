@@ -17,6 +17,7 @@
 #include <drivers/motor/motor.h>
 #include <drivers/phase/phase.h>
 #include <drivers/spi/spi.h>
+#include <drivers/timer/timer.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
@@ -36,6 +37,8 @@ int main() {
         Error::hardFault("Failed to initialize SPI driver");
     if (!Adc::init())
         Error::hardFault("Failed to initialize ADC driver");
+    if (!Timer::init())
+        Error::hardFault("Failed to initialize TIMER driver");
     if (!led.init())
         Error::hardFault("Failed to initialize led driver");
     // if (!encoder.init())
@@ -73,6 +76,7 @@ int main() {
         t1.f = 4.5f;
         t1.u = 42;
         AttaConnector::transmit(t1);
+        led.setColor(0, 255, 255, 255);
         Hardware::delayMs(1000);
 
         // MotorState state{};

@@ -4,6 +4,7 @@
 // Date: 2023-11-24
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include <drivers/gpio/gpio.h>
 #include <drivers/led/led.h>
 
 bool Led::init() {
@@ -18,6 +19,10 @@ void Led::setColor(uint8_t i, uint8_t r, uint8_t g, uint8_t b) {
         _colors[i * 3 + 1] = r;
         _colors[i * 3 + 2] = b;
     }
+
+    //static bool v = true;
+    //Gpio::write(Gpio::LED_DI_PIN, v);
+    //v = !v;
 }
 
 void Led::setColorAll(uint8_t r, uint8_t g, uint8_t b) {

@@ -34,7 +34,7 @@ constexpr Gpio SDA_PIN = PB4; // SDA
 constexpr Gpio CAN_RX_PIN = PA11; // CAN RX
 constexpr Gpio CAN_TX_PIN = PA12; // CAN TX
 
-constexpr Gpio LED_DI_PIN = PB8;
+constexpr Gpio LED_DI_PIN = PB8; // Led
 
 constexpr Gpio IMU_CS_PIN = PA3;    // IMU chip select
 constexpr Gpio IMU_CLK_PIN = PA9;   // IMU clock
@@ -76,6 +76,7 @@ inline const std::array gpioList{
     GpioConfig{IMU_CLK_PIN , Mode::SPI2_SCK},
     GpioConfig{IMU_POCI_PIN, Mode::SPI2_MISO},
     GpioConfig{IMU_PICO_PIN, Mode::SPI2_MOSI},
+    GpioConfig{LED_DI_PIN, Mode::TIM2_CH1},
     // GpioConfig{ENC_CSN_PIN, Mode::OUTPUT},
     // GpioConfig{ENC_CLK_PIN, Mode::OUTPUT},
     // GpioConfig{ENC_DO_PIN,  Mode::INPUT},

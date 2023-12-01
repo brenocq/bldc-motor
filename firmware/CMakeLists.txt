@@ -136,6 +136,7 @@ set(BLDC_SOURCES
     src/drivers/motor/motor.cpp
     src/drivers/phase/phase.cpp
     src/drivers/spi/spi.cpp
+    src/drivers/timer/timer.cpp
     src/drivers/uart/uart.cpp
     src/drivers/usb/usb.cpp
     src/drivers/voltage/voltage.cpp
