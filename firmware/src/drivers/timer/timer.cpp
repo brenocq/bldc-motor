@@ -69,6 +69,7 @@ bool Timer::init() {
         }
     }
 
+    Log::success("Timer", "Initialized");
     return true;
 }
 

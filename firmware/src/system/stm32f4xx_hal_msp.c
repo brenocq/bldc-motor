@@ -5,7 +5,6 @@
 // By Breno Cunha Queiroz
 //--------------------------------------------------
 #include "stm32f4xx_hal.h"
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim);
 
 void HAL_MspInit(void) {
     __HAL_RCC_SYSCFG_CLK_ENABLE();

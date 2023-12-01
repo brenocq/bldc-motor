@@ -8,6 +8,7 @@
 #include "attaConnectorCmds.h"
 #include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
+#include <drivers/dma/dma.h>
 #include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
@@ -39,6 +40,8 @@ int main() {
         Error::hardFault("Failed to initialize ADC driver");
     if (!Timer::init())
         Error::hardFault("Failed to initialize TIMER driver");
+    if (!Dma::init())
+        Error::hardFault("Failed to initialize DMA driver");
     if (!led.init())
         Error::hardFault("Failed to initialize led driver");
     // if (!encoder.init())

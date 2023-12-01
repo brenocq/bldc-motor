@@ -8,6 +8,8 @@
 #define BLDC_SYSTEM_HAL_H
 #include "stm32f4xx_hal.h"
 
+#undef DMA1
+#undef DMA2
 #undef I2C1
 #undef I2C2
 #undef I2C3
