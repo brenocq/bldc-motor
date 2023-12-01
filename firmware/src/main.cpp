@@ -14,6 +14,7 @@
 #include <drivers/hardware.h>
 #include <drivers/i2c/i2c.h>
 #include <drivers/imu/imu.h>
+#include <drivers/interrupt/interrupt.h>
 #include <drivers/led/led.h>
 #include <drivers/motor/motor.h>
 #include <drivers/phase/phase.h>
@@ -42,10 +43,12 @@ int main() {
         Error::hardFault("Failed to initialize TIMER driver");
     if (!Dma::init())
         Error::hardFault("Failed to initialize DMA driver");
+    if (!Interrupt::init())
+        Error::hardFault("Failed to initialize Interrupt driver");
     if (!led.init())
         Error::hardFault("Failed to initialize led driver");
 
-    // Timer DMA
+    // Timer-DMA
     Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
 
     // if (!encoder.init())

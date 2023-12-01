@@ -21,7 +21,6 @@ namespace Timer {
  */
 bool initPwm(Timer timer);
 
-TIM_HandleTypeDef* getHandle(Timer timer);
 TIM_TypeDef* getInstance(Timer timer);
 void enableClock(Timer timer);
 void disableClock(Timer timer);
@@ -29,20 +28,20 @@ void disableClock(Timer timer);
 Timer gpioModeToTimer(Gpio::Mode mode);
 Channel gpioModeToChannel(Gpio::Mode mode);
 
-TIM_HandleTypeDef hTIM1;
-TIM_HandleTypeDef hTIM2;
-TIM_HandleTypeDef hTIM3;
-TIM_HandleTypeDef hTIM4;
-TIM_HandleTypeDef hTIM5;
-TIM_HandleTypeDef hTIM6;
-TIM_HandleTypeDef hTIM7;
-TIM_HandleTypeDef hTIM8;
-TIM_HandleTypeDef hTIM9;
-TIM_HandleTypeDef hTIM10;
-TIM_HandleTypeDef hTIM11;
-TIM_HandleTypeDef hTIM12;
-TIM_HandleTypeDef hTIM13;
-TIM_HandleTypeDef hTIM14;
+Handle hTIM1;
+Handle hTIM2;
+Handle hTIM3;
+Handle hTIM4;
+Handle hTIM5;
+Handle hTIM6;
+Handle hTIM7;
+Handle hTIM8;
+Handle hTIM9;
+Handle hTIM10;
+Handle hTIM11;
+Handle hTIM12;
+Handle hTIM13;
+Handle hTIM14;
 
 } // namespace Timer
 
@@ -74,19 +73,19 @@ bool Timer::init() {
 }
 
 bool Timer::deinit() {
-    disableClock(Timer::TIM2);
-    disableClock(Timer::TIM3);
-    disableClock(Timer::TIM4);
-    disableClock(Timer::TIM5);
-    disableClock(Timer::TIM6);
-    disableClock(Timer::TIM7);
-    disableClock(Timer::TIM8);
-    disableClock(Timer::TIM9);
-    disableClock(Timer::TIM10);
-    disableClock(Timer::TIM11);
-    disableClock(Timer::TIM12);
-    disableClock(Timer::TIM13);
-    disableClock(Timer::TIM14);
+    disableClock(TIM2);
+    disableClock(TIM3);
+    disableClock(TIM4);
+    disableClock(TIM5);
+    disableClock(TIM6);
+    disableClock(TIM7);
+    disableClock(TIM8);
+    disableClock(TIM9);
+    disableClock(TIM10);
+    disableClock(TIM11);
+    disableClock(TIM12);
+    disableClock(TIM13);
+    disableClock(TIM14);
 
     return true;
 }
@@ -102,7 +101,7 @@ bool Timer::initPwm(Timer timer) {
             break;
         }
     }
-    if (!found || channel == Channel::NONE)
+    if (!found || channel == CH_NONE)
         return false;
 
     // Enable clock
@@ -155,16 +154,16 @@ void Timer::setPwm(Timer timer, float pwm) { getInstance(timer)->CCR1 = pwm * 65
 
 void Timer::linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle) {
     switch (channel) {
-        case Channel::CH1:
+        case CH1:
             LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC1], dmaHandle);
             return;
-        case Channel::CH2:
+        case CH2:
             LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC2], dmaHandle);
             return;
-        case Channel::CH3:
+        case CH3:
             LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC3], dmaHandle);
             return;
-        case Channel::CH4:
+        case CH4:
             LINK_DMA(getHandle(timer), hdma[TIM_DMA_ID_CC4], dmaHandle);
             return;
         default:
@@ -175,24 +174,24 @@ void Timer::linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle) {
 
 // clang-format off
 #define CASE_GET_HANDLE(x) \
-    case Timer::x: \
+    case x: \
         return (TIM_HandleTypeDef*)&h##x; \
         break;
 #define CASE_GET_INSTANCE(x) \
-    case Timer::x: \
+    case x: \
         return (TIM_TypeDef*)x##_BASE; \
         break;
 #define CASE_ENABLE_CLK(x) \
-    case Timer::x: \
+    case x: \
         __HAL_RCC_##x##_CLK_ENABLE(); \
         break;
 #define CASE_DISABLE_CLK(x) \
-    case Timer::x: \
+    case x: \
         __HAL_RCC_##x##_CLK_DISABLE(); \
         break;
 // clang-format on
 
-TIM_HandleTypeDef* Timer::getHandle(Timer timer) {
+Timer::Handle* Timer::getHandle(Timer timer) {
     switch (timer) {
         CASE_GET_HANDLE(TIM1)
         CASE_GET_HANDLE(TIM2)
@@ -280,30 +279,30 @@ void Timer::disableClock(Timer timer) {
 
 Timer::Timer Timer::gpioModeToTimer(Gpio::Mode mode) {
     if (mode >= Gpio::TIM1_CH1 && mode < Gpio::TIM2_CH1)
-        return Timer::TIM1;
+        return TIM1;
     else if (mode >= Gpio::TIM2_CH1 && mode < Gpio::TIM3_CH1)
-        return Timer::TIM2;
+        return TIM2;
     else if (mode >= Gpio::TIM3_CH1 && mode < Gpio::TIM4_CH1)
-        return Timer::TIM3;
+        return TIM3;
     else if (mode >= Gpio::TIM4_CH1 && mode < Gpio::TIM5_CH1)
-        return Timer::TIM4;
+        return TIM4;
     else if (mode >= Gpio::TIM5_CH1 && mode < Gpio::TIM8_CH1)
-        return Timer::TIM5;
+        return TIM5;
     else if (mode >= Gpio::TIM8_CH1 && mode < Gpio::TIM9_CH1)
-        return Timer::TIM8;
+        return TIM8;
     else if (mode >= Gpio::TIM9_CH1 && mode < Gpio::TIM10_CH1)
-        return Timer::TIM9;
+        return TIM9;
     else if (mode >= Gpio::TIM10_CH1 && mode < Gpio::TIM11_CH1)
-        return Timer::TIM10;
+        return TIM10;
     else if (mode >= Gpio::TIM11_CH1 && mode < Gpio::TIM12_CH1)
-        return Timer::TIM11;
+        return TIM11;
     else if (mode >= Gpio::TIM12_CH1 && mode < Gpio::TIM13_CH1)
-        return Timer::TIM12;
+        return TIM12;
     else if (mode >= Gpio::TIM13_CH1 && mode < Gpio::TIM14_CH1)
-        return Timer::TIM13;
+        return TIM13;
     else if (mode == Gpio::TIM14_CH1)
-        return Timer::TIM14;
-    return Timer::NONE;
+        return TIM14;
+    return TIM_NONE;
 }
 
 Timer::Channel Timer::gpioModeToChannel(Gpio::Mode mode) {
@@ -322,7 +321,7 @@ Timer::Channel Timer::gpioModeToChannel(Gpio::Mode mode) {
         case Gpio::TIM12_CH1:
         case Gpio::TIM13_CH1:
         case Gpio::TIM14_CH1:
-            return Channel::CH1;
+            return CH1;
         case Gpio::TIM1_CH2:
         case Gpio::TIM1_CH2N:
         case Gpio::TIM2_CH2:
@@ -333,7 +332,7 @@ Timer::Channel Timer::gpioModeToChannel(Gpio::Mode mode) {
         case Gpio::TIM8_CH2N:
         case Gpio::TIM9_CH2:
         case Gpio::TIM12_CH2:
-            return Channel::CH2;
+            return CH2;
         case Gpio::TIM1_CH3:
         case Gpio::TIM1_CH3N:
         case Gpio::TIM2_CH3:
@@ -342,17 +341,17 @@ Timer::Channel Timer::gpioModeToChannel(Gpio::Mode mode) {
         case Gpio::TIM5_CH3:
         case Gpio::TIM8_CH3:
         case Gpio::TIM8_CH3N:
-            return Channel::CH3;
+            return CH3;
         case Gpio::TIM1_CH4:
         case Gpio::TIM2_CH4:
         case Gpio::TIM3_CH4:
         case Gpio::TIM4_CH4:
         case Gpio::TIM5_CH4:
         case Gpio::TIM8_CH4:
-            return Channel::CH4;
+            return CH4;
         default:
-            return Channel::NONE;
+            return CH_NONE;
     }
 
-    return Channel::NONE;
+    return CH_NONE;
 }

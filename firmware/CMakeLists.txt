@@ -133,6 +133,7 @@ set(BLDC_SOURCES
     src/drivers/gpio/gpio.cpp
     src/drivers/i2c/i2c.cpp
     src/drivers/imu/imu.cpp
+    src/drivers/interrupt/interrupt.cpp
     src/drivers/led/led.cpp
     src/drivers/motor/motor.cpp
     src/drivers/phase/phase.cpp
@@ -144,7 +145,6 @@ set(BLDC_SOURCES
     src/drivers/hardware.cpp
 
     src/system/stm32f4xx_hal_msp.c
-    src/system/stm32f4xx_it.c
     src/system/syscalls.c
     src/system/sysmem.c
     src/system/system_stm32f4xx.c
