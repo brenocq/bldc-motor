@@ -62,6 +62,24 @@ Handle* getHandle(Timer timer);
  */
 void linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle);
 
+/**
+ * @brief Start PWM
+ *
+ * @param timer Timer
+ * @param channel Timer channel
+ */
+void startPwm(Timer timer, Channel channel);
+
+/**
+ * @brief Start PWM with DMA transaction
+ *
+ * @param timer Timer
+ * @param channel Timer channel
+ * @param data Data to be copied to TIM peripheral
+ * @param size Number to transmit (byte/halfword/word depending on DMA configuration)
+ */
+void startPwmDma(Timer timer, Channel channel, uint32_t* data, uint16_t size);
+
 //---------- Timers ----------//
 static constexpr Timer LED_TIM = TIM2;
 static constexpr Channel LED_CH = CH1;

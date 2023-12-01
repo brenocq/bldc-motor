@@ -132,12 +132,8 @@ bool Timer::initPwm(Timer timer) {
     if (HAL_TIM_PWM_ConfigChannel(htim, &sConfigOC, (uint32_t)channel) != HAL_OK)
         return false;
 
-    // Set no pulse
+    // Reset PWM to no pulse
     setPwm(timer, 0.0f);
-
-    // Start PWM
-    if (HAL_TIM_PWM_Start(htim, (uint32_t)channel) != HAL_OK)
-        return false;
 
     return true;
 }
@@ -170,6 +166,16 @@ void Timer::linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle) {
             break;
     }
     Log::error("Timer", "Could not link DMA to TIM$0", int(timer));
+}
+
+void Timer::startPwm(Timer timer, Channel channel) {
+    if (HAL_TIM_PWM_Start(getHandle(timer), channel) != HAL_OK)
+        Log::error("Timer", "Failed to start TIM$0 PWM: $1", int(timer));
+}
+
+void Timer::startPwmDma(Timer timer, Channel channel, uint32_t* data, uint16_t size) {
+    if (HAL_TIM_PWM_Start_DMA(getHandle(timer), channel, data, size) != HAL_OK)
+        Log::error("Timer", "Failed to start TIM$0 PWM DMA: $1", int(timer));
 }
 
 // clang-format off

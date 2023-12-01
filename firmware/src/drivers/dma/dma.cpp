@@ -87,9 +87,6 @@ bool Dma::init() {
             return false;
     }
 
-    // TODO __HAL_LINKDMA
-    // TODO NVIC
-
     Log::success("Dma", "Initialized");
     return true;
 }

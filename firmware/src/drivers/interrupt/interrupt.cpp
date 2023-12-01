@@ -30,21 +30,13 @@ void NMI_Handler() {
     while (1) {
     }
 }
-
 void HardFault_Handler() { Error::hardFault(); }
-
 void MemManage_Handler() { Error::memFault(); }
-
 void BusFault_Handler() { Error::busFault(); }
-
 void UsageFault_Handler() { Error::usageFault(); }
-
 void SVC_Handler() {}
-
 void DebugMon_Handler() {}
-
 void PendSV_Handler() {}
-
 void SysTick_Handler() { HAL_IncTick(); }
 
 //----- Peripheral interrupts -----//

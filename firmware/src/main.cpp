@@ -45,12 +45,12 @@ int main() {
         Error::hardFault("Failed to initialize DMA driver");
     if (!Interrupt::init())
         Error::hardFault("Failed to initialize Interrupt driver");
-    if (!led.init())
-        Error::hardFault("Failed to initialize led driver");
 
     // Timer-DMA
     Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
 
+    if (!led.init())
+        Error::hardFault("Failed to initialize led driver");
     // if (!encoder.init())
     //     Error::hardFault("Failed to initialize encoder driver");
     if (!voltage.init())
