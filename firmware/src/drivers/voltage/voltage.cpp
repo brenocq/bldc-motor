@@ -10,7 +10,7 @@
 #include <utils/log.h>
 
 bool Voltage::init() {
-    LOG_SUCCESS("Voltage", "Initialized");
+    Log::success("Voltage", "Initialized");
     return true;
 }
 

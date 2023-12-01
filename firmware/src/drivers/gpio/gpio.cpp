@@ -99,7 +99,7 @@ bool Gpio::init() {
             return false;
     }
 
-    LOG_SUCCESS("Gpio", "Initialized");
+    Log::success("Gpio", "Initialized");
     return true;
 }
 

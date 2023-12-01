@@ -60,7 +60,6 @@ int main() {
 
     Log::success("Main", "Initialized");
 
-    // bool b = true;
     while (true) {
         AttaConnector::update();
         Log::debug("Main", "Voltage Source $0", voltage.read());
@@ -86,8 +85,6 @@ int main() {
         //// state.rotorPosition = encoder.readAngle();
         // AttaConnector::transmit(state);
 
-        // Gpio::write(Gpio::LED_PIN, b);
-        // b = !b;
         // motor.test();
     }
     return 0;

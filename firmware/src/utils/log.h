@@ -114,12 +114,5 @@ class Log final {
     static void transmit(std::string str);
 };
 
-#define LOG_VERBOSE(...) Log::verbose(__VA_ARGS__)
-#define LOG_DEBUG(...) Log::debug(__VA_ARGS__)
-#define LOG_SUCCESS(...) Log::success(__VA_ARGS__)
-#define LOG_INFO(...) Log::info(__VA_ARGS__)
-#define LOG_WARN(...) Log::warning(__VA_ARGS__)
-#define LOG_ERROR(...) Log::error(__VA_ARGS__)
-
 #include <utils/log.inl>
 #endif // BLDC_UTILS_LOG_H

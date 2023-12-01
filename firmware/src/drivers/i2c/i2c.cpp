@@ -54,7 +54,7 @@ bool I2c::init() {
         hi2c->Init.OwnAddress1 = 0;
         hi2c->Init.OwnAddress2 = 0;
         if (HAL_I2C_Init(hi2c) != HAL_OK) {
-            LOG_ERROR("I2c", "Failed to initialize peripheral $0", i + 1);
+            Log::error("I2c", "Failed to initialize peripheral $0", i + 1);
             return false;
         }
     }
@@ -62,16 +62,16 @@ bool I2c::init() {
     // Check slaves
     for (I2cConfig cfg : i2cList) {
         if (!inUse[int(cfg.peripheral)]) {
-            LOG_ERROR("I2c", "Slave $x1 in peripheral $0, but peripheal was not initialized", (int)cfg.peripheral + 1, (int)cfg.address);
+            Log::error("I2c", "Slave $x1 in peripheral $0, but peripheal was not initialized", (int)cfg.peripheral + 1, (int)cfg.address);
             return false;
         }
         if (!checkReady(cfg.peripheral, cfg.address)) {
-            LOG_ERROR("I2c", "Slave $x1 in peripheral $0 not responding", (int)cfg.peripheral + 1, (int)cfg.address);
+            Log::error("I2c", "Slave $x1 in peripheral $0 not responding", (int)cfg.peripheral + 1, (int)cfg.address);
             return false;
         }
     }
 
-    LOG_SUCCESS("I2c", "Initialized");
+    Log::success("I2c", "Initialized");
     return true;
 }
 
@@ -92,7 +92,7 @@ bool I2c::checkReady(Peripheral peripheral, Address address) {
 
 bool I2c::transmit(Peripheral peripheral, Address address, uint8_t* data, uint16_t len) {
     if (HAL_I2C_Master_Transmit(getHandle(peripheral), address, data, len, timeout) != HAL_OK) {
-        LOG_ERROR("I2c", "Failed to transmit $0 bytes to slave $x1 (peripheral $2)", len, (int)address, (int)peripheral + 1);
+        Log::error("I2c", "Failed to transmit $0 bytes to slave $x1 (peripheral $2)", len, (int)address, (int)peripheral + 1);
         return false;
     }
     return true;
@@ -100,7 +100,7 @@ bool I2c::transmit(Peripheral peripheral, Address address, uint8_t* data, uint16
 
 bool I2c::receive(Peripheral peripheral, Address address, uint8_t* data, uint16_t len) {
     if (HAL_I2C_Master_Receive(getHandle(peripheral), address, data, len, timeout) != HAL_OK) {
-        LOG_ERROR("I2c", "Failed to receive $0 bytes from slave $x1 (peripheral $2)", len, (int)address, (int)peripheral + 1);
+        Log::error("I2c", "Failed to receive $0 bytes from slave $x1 (peripheral $2)", len, (int)address, (int)peripheral + 1);
         return false;
     }
     return true;

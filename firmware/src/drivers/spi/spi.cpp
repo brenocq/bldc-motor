@@ -58,12 +58,12 @@ bool Spi::init() {
         hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
         hspi->Init.CRCPolynomial = 10;
         if (HAL_SPI_Init(hspi) != HAL_OK) {
-            LOG_ERROR("Spi", "Failed to initialize peripheral $0", i + 1);
+            Log::error("Spi", "Failed to initialize peripheral $0", i + 1);
             return false;
         }
     }
 
-    LOG_SUCCESS("Spi", "Initialized");
+    Log::success("Spi", "Initialized");
     return true;
 }
 
@@ -81,7 +81,7 @@ bool Spi::deinit() {
 
 bool Spi::transmit(Peripheral peripheral, uint8_t* data, uint16_t len) {
     if (HAL_SPI_Transmit(getHandle(peripheral), data, len, timeout) != HAL_OK) {
-        LOG_ERROR("Spi", "Failed to transmit $0 bytes", len);
+        Log::error("Spi", "Failed to transmit $0 bytes", len);
         return false;
     }
     return true;
@@ -89,7 +89,7 @@ bool Spi::transmit(Peripheral peripheral, uint8_t* data, uint16_t len) {
 
 bool Spi::receive(Peripheral peripheral, uint8_t* data, uint16_t len) {
     if (HAL_SPI_Receive(getHandle(peripheral), data, len, timeout) != HAL_OK) {
-        LOG_ERROR("Spi", "Failed to receive $0 bytes", len);
+        Log::error("Spi", "Failed to receive $0 bytes", len);
         return false;
     }
     return true;
@@ -97,7 +97,7 @@ bool Spi::receive(Peripheral peripheral, uint8_t* data, uint16_t len) {
 
 bool Spi::transmitReceive(Peripheral peripheral, uint8_t* txData, uint8_t* rxData, uint16_t len) {
     if (HAL_SPI_TransmitReceive(getHandle(peripheral), txData, rxData, len, timeout) != HAL_OK) {
-        LOG_ERROR("Spi", "Failed to transmit/receive $0 bytes", len);
+        Log::error("Spi", "Failed to transmit/receive $0 bytes", len);
         return false;
     }
     return true;

@@ -16,7 +16,7 @@ bool Imu::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
     // Check WHO_AM_I
     uint8_t whoAmI = readReg(REG_WHO_AM_I);
     if (whoAmI != WHO_AM_I_DEFAULT) {
-        LOG_ERROR("Imu", "WHO_AM_I mismatch! It is $x0 but it should be $x1", int(whoAmI), int(WHO_AM_I_DEFAULT));
+        Log::error("Imu", "WHO_AM_I mismatch! It is $x0 but it should be $x1", int(whoAmI), int(WHO_AM_I_DEFAULT));
         return false;
     }
 
@@ -33,7 +33,7 @@ bool Imu::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
     ctrl2.fullScale = Ctrl2G::FS_500DPS;
     writeReg(REG_CTRL2_G, ctrl2);
 
-    LOG_SUCCESS("Imu", "Initialized");
+    Log::success("Imu", "Initialized");
     return true;
 }
 
@@ -55,7 +55,7 @@ void Imu::getAcc(int16_t* x, int16_t* y, int16_t* z) {
     acc[0] = k * accRaw[0];
     acc[1] = k * accRaw[1];
     acc[2] = k * accRaw[2];
-    LOG_DEBUG("Imu", "Acc $0", acc);
+    Log::debug("Imu", "Acc $0", acc);
 }
 
 void Imu::getGyr(int16_t* x, int16_t* y, int16_t* z) {
@@ -74,7 +74,7 @@ void Imu::getGyr(int16_t* x, int16_t* y, int16_t* z) {
     gyr[0] = k * gyrRaw[0];
     gyr[1] = k * gyrRaw[1];
     gyr[2] = k * gyrRaw[2];
-    LOG_DEBUG("Imu", "Gyr $0", gyr);
+    Log::debug("Imu", "Gyr $0", gyr);
 }
 
 float Imu::getTemperature() { return 0; }

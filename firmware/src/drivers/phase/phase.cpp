@@ -20,7 +20,7 @@ bool Phase::init(PhaseId phase, I2c::Peripheral peripheral, I2c::Address address
     _peripheral = peripheral;
     _address = address;
     if (!I2c::checkReady(_peripheral, _address)) {
-        LOG_ERROR("Phase", "Could not find phase $0 in I2C", _phase);
+        Log::error("Phase", "Could not find phase $0 in I2C", _phase);
         return false;
     }
 
@@ -35,11 +35,11 @@ bool Phase::init(PhaseId phase, I2c::Peripheral peripheral, I2c::Address address
     writeReg(REG_CONFIG, config);
     _regConfigValue = readReg(REG_CONFIG);
     if (_regConfigValue != config) {
-        LOG_ERROR("Phase", "Could not configure phase $0", _phase);
+        Log::error("Phase", "Could not configure phase $0", _phase);
         return false;
     }
 
-    LOG_SUCCESS("Phase", "$0 initialized", phase);
+    Log::success("Phase", "$0 initialized", phase);
     return true;
 }
 

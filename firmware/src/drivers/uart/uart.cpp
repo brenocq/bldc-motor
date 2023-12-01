@@ -68,7 +68,7 @@ bool Uart::init() {
     if (!inUse.empty())
         _default = *inUse.begin();
 
-    LOG_SUCCESS("Uart", "Initialized");
+    Log::success("Uart", "Initialized");
     return _initialized = true;
 }
 
