@@ -51,8 +51,8 @@ int main() {
 
     if (!led.init())
         Error::hardFault("Failed to initialize led driver");
-    // if (!encoder.init())
-    //     Error::hardFault("Failed to initialize encoder driver");
+    if (!encoder.init())
+        Error::hardFault("Failed to initialize encoder driver");
     if (!voltage.init())
         Error::hardFault("Failed to initialize voltage driver");
     if (!phaseU.init(Phase::U, I2c::Peripheral::I2C3, I2c::PHASE_U_ADDR))
@@ -63,8 +63,8 @@ int main() {
         Error::hardFault("Failed to initialize phase driver for phase W");
     if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
         Error::hardFault("Failed to initialize IMU");
-    // if (!motor.init())
-    //     Error::hardFault("Failed to initialize motor driver");
+    if (!motor.init())
+        Error::hardFault("Failed to initialize motor driver");
     if (!AttaConnector::init())
         Error::hardFault("Failed to initialize atta connector");
 
@@ -79,20 +79,22 @@ int main() {
         Log::debug("Main", "Current Phase U $0A", phaseU.readCurrent());
         Log::debug("Main", "Current Phase V $0A", phaseV.readCurrent());
         Log::debug("Main", "Current Phase W $0A", phaseW.readCurrent());
-        imu.getAcc(nullptr, nullptr, nullptr);
-        imu.getGyr(nullptr, nullptr, nullptr);
-        MyTest1 t1;
-        t1.f = 4.5f;
-        t1.u = 42;
-        AttaConnector::transmit(t1);
-        led.setColor(0, 255, 255, 255);
-        Hardware::delayMs(1000);
+        // imu.getAcc(nullptr, nullptr, nullptr);
+        // imu.getGyr(nullptr, nullptr, nullptr);
+        Log::debug("Main", "Encoder: $0", encoder.readAngle());
+        Hardware::delay(0.5f);
+
+        // MyTest1 t1;
+        // t1.f = 4.5f;
+        // t1.u = 42;
+        // AttaConnector::transmit(t1);
+        // led.setColor(0, 255, 255, 255);
 
         // MotorState state{};
         // state.batteryVoltage = voltage.read();
-        // state.currentUV = current.readUV();
-        // state.currentW = current.readW();
-        //// state.rotorPosition = encoder.readAngle();
+        // state.currentUV = phaseU.readCurrent();
+        // state.currentW = phaseV.readCurrent();
+        // state.rotorPosition = encoder.readAngle();
         // AttaConnector::transmit(state);
 
         // motor.test();
