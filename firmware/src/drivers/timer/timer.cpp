@@ -5,6 +5,7 @@
 // By Breno Cunha Queiroz
 //--------------------------------------------------
 #include <drivers/gpio/gpio.h>
+#include <drivers/hardware.h>
 #include <drivers/timer/timer.h>
 #include <utils/log.h>
 
@@ -112,7 +113,7 @@ bool Timer::initPwm(Timer timer) {
     htim->Instance = getInstance(timer);
     htim->Init.CounterMode = TIM_COUNTERMODE_UP;
     htim->Init.Prescaler = 0;
-    htim->Init.Period = 65535;
+    htim->Init.Period = PERIOD;
     htim->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim->Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_PWM_Init(htim) != HAL_OK)
@@ -132,13 +133,13 @@ bool Timer::initPwm(Timer timer) {
     if (HAL_TIM_PWM_ConfigChannel(htim, &sConfigOC, (uint32_t)channel) != HAL_OK)
         return false;
 
-    // Reset PWM to no pulse
+    // Reset duty cycle to 0%
     setPwm(timer, 0.0f);
 
     return true;
 }
 
-void Timer::setPwm(Timer timer, float pwm) { getInstance(timer)->CCR1 = pwm * 65535; }
+void Timer::setPwm(Timer timer, float pwm) { getInstance(timer)->CCR1 = pwm * PERIOD; }
 
 // clang-format off
 #define LINK_DMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__) \

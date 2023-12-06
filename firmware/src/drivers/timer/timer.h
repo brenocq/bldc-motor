@@ -21,6 +21,7 @@ enum class Mode {
     INPUT_ENCODER, ///< **Not supported** Count number of interrupts
 };
 using Handle = TIM_HandleTypeDef;
+constexpr uint16_t PERIOD = 112;
 
 /**
  * @brief Initialize timer driver

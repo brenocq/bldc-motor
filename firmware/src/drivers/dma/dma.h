@@ -62,7 +62,7 @@ struct DmaConfig {
 };
 
 inline const std::array dmaList{
-    DmaConfig{TIM2_CH1, LED_DMA, LED_STREAM, CH3, MEM_TO_PER, ALIGN_16BIT, PRIORITY_LOW, INC_MEM},
+    DmaConfig{TIM2_CH1, LED_DMA, LED_STREAM, CH3, MEM_TO_PER, ALIGN_32BIT, PRIORITY_LOW, INC_MEM},
 };
 
 }; // namespace Dma

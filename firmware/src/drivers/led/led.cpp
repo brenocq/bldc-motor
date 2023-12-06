@@ -9,25 +9,17 @@
 #include <drivers/timer/timer.h>
 
 bool Led::init() {
-    setColorAll(0, 255, 0);
+    setColorAll(0, 0, 0);
     show();
     return true;
 }
 
-uint16_t pwmData[10];
 void Led::setColor(uint8_t i, uint8_t r, uint8_t g, uint8_t b) {
     if (i < NUM_LEDS) {
         _colors[i * 3 + 0] = g;
         _colors[i * 3 + 1] = r;
         _colors[i * 3 + 2] = b;
     }
-
-    for (int i = 0; i < 10; i++)
-        pwmData[i] = 65535 * i / 9.0f;
-    Timer::startPwmDma(Timer::LED_TIM, Timer::LED_CH, (uint32_t*)pwmData, 10);
-    // static bool v = true;
-    // Gpio::write(Gpio::LED_DI_PIN, v);
-    // v = !v;
 }
 
 void Led::setColorAll(uint8_t r, uint8_t g, uint8_t b) {
@@ -36,6 +28,18 @@ void Led::setColorAll(uint8_t r, uint8_t g, uint8_t b) {
 }
 
 bool Led::show() {
-    // TODO using PWM+DMA
+    // Write color bits
+    for (size_t i = 0; i < _colors.size(); i++) {
+        for (size_t b = 0; b < 8; b++) {
+            bool high = (_colors[i] & (1 << (7 - b))) > 0;
+            _pwm[i * 8 + b] = Timer::PERIOD * (high ? DUTY1 : DUTY0);
+        }
+    }
+
+    // Reset code
+    for (size_t i = NUM_LEDS * 24; i < _pwm.size(); i++)
+        _pwm[i] = 0;
+
+    Timer::startPwmDma(Timer::LED_TIM, Timer::LED_CH, _pwm.data(), _pwm.size());
     return true;
 }

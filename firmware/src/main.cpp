@@ -70,6 +70,10 @@ int main() {
 
     Log::success("Main", "Initialized");
 
+    led.setColor(0, 25, 0, 25);
+    led.setColor(1, 0, 25, 0);
+    led.show();
+
     while (true) {
         AttaConnector::update();
         Log::debug("Main", "Voltage Source $0", voltage.read());
@@ -88,7 +92,6 @@ int main() {
         // t1.f = 4.5f;
         // t1.u = 42;
         // AttaConnector::transmit(t1);
-        // led.setColor(0, 255, 255, 255);
 
         // MotorState state{};
         // state.batteryVoltage = voltage.read();
