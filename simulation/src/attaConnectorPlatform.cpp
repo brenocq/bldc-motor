@@ -23,4 +23,6 @@ uint32_t receiveBytes(uint8_t* data, uint32_t size) {
         return 0;
 }
 
+void log(const char* str) { LOG_INFO("AttaConnector", str); }
+
 } // namespace AttaConnector

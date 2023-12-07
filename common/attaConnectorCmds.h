@@ -7,13 +7,13 @@
 #ifndef BLDC_ATTA_CONNECTOR_CMDS_H
 #define BLDC_ATTA_CONNECTOR_CMDS_H
 #include <cstdint>
+#include <array>
 
 // List of command codes
 enum CommandCode : uint8_t {
     MY_TEST0_CMD = 0x00,
     MY_TEST1_CMD = 0x01,
-    MOTOR_STATE_CMD = 0x02,
-    RESERVED_CMD = 0xFF, // CMD reserved for atta connector internal use
+    MOTOR_STATE_CMD = 0x02
 };
 
 struct MyTest0 {
@@ -30,9 +30,9 @@ struct MyTest1 {
 
 struct MotorState {
     static constexpr uint8_t CMD_ID = MOTOR_STATE_CMD;
-    float batteryVoltage;
-    float currentUV;
-    float currentW;
+    float sourceVoltage;
+    std::array<float, 3> phaseCurrent;
+    std::array<float, 3> phaseVoltage;
     float rotorPosition;
 };
 

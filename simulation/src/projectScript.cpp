@@ -61,7 +61,7 @@ void ProjectScript::onUpdateBefore(float dt) {
     x.voltage = 7.8f;
     x.currents = {_motor.getCurrent()[0], _motor.getCurrent()[1], _motor.getCurrent()[2]};
     x.theta = _motor.getPosition();
-    //Controller::Output output = _tController.control(x, u, dt);
+    // Controller::Output output = _tController.control(x, u, dt);
     Controller::Output output = _focController.control(x, u, dt);
 
     // Update motor
@@ -148,16 +148,25 @@ void ProjectScript::onUIRender() {
 
     ImGui::Begin("Motor State");
     {
-        if (ImPlot::BeginPlot("Battery Voltage")) {
+        if (ImPlot::BeginPlot("Source Voltage")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("Battery Voltage", _phyMotorTime.data(), _phyMotorData.batteryVoltage.data(), _phyMotorTime.size());
+            ImPlot::PlotLine("Source Voltage", _phyMotorTime.data(), _phyMotorData.sourceVoltage.data(), _phyMotorTime.size());
             ImPlot::EndPlot();
         }
 
-        if (ImPlot::BeginPlot("Currents")) {
+        if (ImPlot::BeginPlot("Phase Voltages")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("UV", _phyMotorTime.data(), _phyMotorData.currentUV.data(), _phyMotorTime.size());
-            ImPlot::PlotLine("W", _phyMotorTime.data(), _phyMotorData.currentW.data(), _phyMotorTime.size());
+            ImPlot::PlotLine("U", _phyMotorTime.data(), _phyMotorData.phaseVoltage[0].data(), _phyMotorTime.size());
+            ImPlot::PlotLine("V", _phyMotorTime.data(), _phyMotorData.phaseVoltage[1].data(), _phyMotorTime.size());
+            ImPlot::PlotLine("W", _phyMotorTime.data(), _phyMotorData.phaseVoltage[2].data(), _phyMotorTime.size());
+            ImPlot::EndPlot();
+        }
+
+        if (ImPlot::BeginPlot("Phase Currents")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("U", _phyMotorTime.data(), _phyMotorData.phaseCurrent[0].data(), _phyMotorTime.size());
+            ImPlot::PlotLine("V", _phyMotorTime.data(), _phyMotorData.phaseCurrent[1].data(), _phyMotorTime.size());
+            ImPlot::PlotLine("W", _phyMotorTime.data(), _phyMotorData.phaseCurrent[2].data(), _phyMotorTime.size());
             ImPlot::EndPlot();
         }
 
@@ -209,24 +218,20 @@ void ProjectScript::handleSerial() {
 void ProjectScript::handleAttaConnector() {
     if (_serial)
         AttaConnector::update();
-    MyTest0 t0;
-    MyTest1 t1;
     MotorState state;
-    while (AttaConnector::receive<MyTest0>(&t0))
-        LOG_DEBUG("ProjectScript", "[w]Received MyTest0 -> $0 $1", (int)t0.u0, (int)t0.u1);
-    while (AttaConnector::receive<MyTest1>(&t1))
-        LOG_DEBUG("ProjectScript", "[w]Received MyTest1 -> $0 $1", t1.f, (int)t1.u);
     while (AttaConnector::receive<MotorState>(&state)) {
         _phyMotorTime.push_back(_phyMotorTime.empty() ? 0.0f : (_phyMotorTime.back() + 1.0f));
-        _phyMotorData.batteryVoltage.push_back(state.batteryVoltage);
-        _phyMotorData.currentUV.push_back(state.currentUV);
-        _phyMotorData.currentW.push_back(state.currentW);
+        _phyMotorData.sourceVoltage.push_back(state.sourceVoltage);
+        for (size_t i = 0; i < 3; i++) {
+            _phyMotorData.phaseCurrent[i].push_back(state.phaseCurrent[i]);
+            _phyMotorData.phaseVoltage[i].push_back(state.phaseVoltage[i]);
+        }
         _phyMotorData.rotorPosition.push_back(state.rotorPosition);
-        LOG_DEBUG("ProjectScript", "[*y]Received Motor State");
-        LOG_DEBUG("ProjectScript", "[w] - [*y]Battery voltage[y]: [w]$0", state.batteryVoltage);
-        LOG_DEBUG("ProjectScript", "[w] - [*y]Current UV[y]: [w]$0", state.currentUV);
-        LOG_DEBUG("ProjectScript", "[w] - [*y]Current W[y]: [w]$0", state.currentW);
-        LOG_DEBUG("ProjectScript", "[w] - [*y]Rotor position[y]: [w]$0", state.rotorPosition);
+        // LOG_DEBUG("ProjectScript", "[*y]Received Motor State");
+        // LOG_DEBUG("ProjectScript", "[w] - [*y]Battery voltage[y]: [w]$0", state.sourceVoltage);
+        // LOG_DEBUG("ProjectScript", "[w] - [*y]Current[y]: [w]$0 $1 $2", state.phaseCurrent[0], state.phaseCurrent[1], state.phaseCurrent[2]);
+        // LOG_DEBUG("ProjectScript", "[w] - [*y]Voltage[y]: [w]$0 $1 $2", state.phaseVoltage[0], state.phaseVoltage[1], state.phaseVoltage[2]);
+        // LOG_DEBUG("ProjectScript", "[w] - [*y]Rotor position[y]: [w]$0", state.rotorPosition);
     }
 }
 

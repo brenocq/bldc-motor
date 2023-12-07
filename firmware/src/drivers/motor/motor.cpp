@@ -30,13 +30,10 @@ const bool stage[6][6] = {
 // clang-format on
 
 void Motor::test() {
-    static int i = 0;
-    Gpio::write(Gpio::MOTOR_UH_PIN, stage[i][0]);
-    Gpio::write(Gpio::MOTOR_UL_PIN, stage[i][1]);
-    Gpio::write(Gpio::MOTOR_VH_PIN, stage[i][2]);
-    Gpio::write(Gpio::MOTOR_VL_PIN, stage[i][3]);
-    Gpio::write(Gpio::MOTOR_WH_PIN, stage[i][4]);
-    Gpio::write(Gpio::MOTOR_WL_PIN, stage[i][5]);
-    Hardware::delay(0.01f);
-    i = (i + 1) % 6;
+    Gpio::write(Gpio::MOTOR_UH_PIN, stage[0][0]);
+    Gpio::write(Gpio::MOTOR_UL_PIN, stage[0][1]);
+    Gpio::write(Gpio::MOTOR_VH_PIN, stage[0][2]);
+    Gpio::write(Gpio::MOTOR_VL_PIN, stage[0][3]);
+    Gpio::write(Gpio::MOTOR_WH_PIN, stage[0][4]);
+    Gpio::write(Gpio::MOTOR_WL_PIN, stage[0][5]);
 }

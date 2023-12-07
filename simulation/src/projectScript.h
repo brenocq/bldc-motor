@@ -44,9 +44,9 @@ class ProjectScript : public scr::ProjectScript {
     };
 
     struct PhysicalMotorData {
-        std::vector<float> batteryVoltage;
-        std::vector<float> currentUV;
-        std::vector<float> currentW;
+        std::vector<float> sourceVoltage;
+        std::array<std::vector<float>, 3> phaseCurrent;
+        std::array<std::vector<float>, 3> phaseVoltage;
         std::vector<float> rotorPosition;
     };
 

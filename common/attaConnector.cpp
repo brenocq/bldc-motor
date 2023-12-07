@@ -8,12 +8,14 @@
 #include <array>
 #include <cmath>
 #include <cstring>
+#include <string>
 
 namespace AttaConnector {
 
 //---------- Platform specific ----------//
 __attribute__((weak)) bool transmitBytes(uint8_t* data, uint32_t size) { return false; }
 __attribute__((weak)) uint32_t receiveBytes(uint8_t* data, uint32_t size) { return false; }
+__attribute__((weak)) void log(const char* str) {}
 
 //---------- Buffer helpers ----------//
 template <uint32_t Size>
@@ -28,7 +30,7 @@ class CircularBuffer {
     void push(uint8_t value);
     void push(uint8_t* data, uint32_t len);
     void pop();
-    void pop(uint32_t index);
+    void pop(uint32_t len);
     uint32_t begin() const;
     uint32_t end() const;
 
@@ -58,7 +60,7 @@ class StackBuffer {
 //---------- CRC ----------//
 constexpr uint8_t _crcPoly = 0b00000111;
 constexpr std::array<uint8_t, 256> generateCRCTable();
-uint8_t crc(uint8_t pktId, uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
+uint8_t crc(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
 //---------- COBS ----------//
 void cobsEncode(uint8_t* message, uint32_t size, uint8_t* encoded, uint32_t* encodedSize);
 void cobsDecode(uint8_t* encoded, uint32_t* decodedSize);
@@ -67,52 +69,31 @@ std::array<uint8_t, cobsMaxEncodedSize(MAX_CMD_SIZE)> _packetTx;
 std::array<uint8_t, cobsMaxEncodedSize(MAX_CMD_SIZE)> _packetRx;
 uint32_t _packetRxIdx;
 //---------- TX Handler ----------//
-#define MAX_PACKET_ID 0xFF
 class TxHandler {
   public:
+    static constexpr uint32_t MAX_PENDING_PACKETS = 1024;
     TxHandler();
 
     bool createPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
 
-    bool getNextPacketToTransmit(uint8_t* pktId, uint8_t** data, uint32_t* size);
-
-    void markTransmitted(uint8_t pktId);
-    void markACK(uint8_t pktId);
-    void markNACK(uint8_t pktId);
+    bool getNextPacketToTransmit(uint8_t** data, uint32_t* size);
 
   private:
     struct PacketInfo {
         uint32_t idx;
         uint32_t size;
-        bool transmitted = false;
     };
 
     CircularBuffer<TX_SIZE> _txBuffer;
-    std::array<PacketInfo, MAX_PACKET_ID + 1> _packets;
+    std::array<PacketInfo, MAX_PENDING_PACKETS> _packets;
     uint8_t _begin;
     uint8_t _end;
     uint8_t _full;
-    uint8_t _lastTransmitted;
 };
 TxHandler _txHandler;
 
 //---------- RX Handler ----------//
 #define MAX_COMMAND_ID 0xFF
-struct AckCmd {
-    static constexpr uint8_t CMD_ID = RESERVED_CMD;
-    enum Status {
-        ACK = 0x00,       // Packet received
-        NACK_CRC = 0x01,  // Packet corrupted (wrong CRC)
-        NACK_LOST = 0x02, // Packet lost
-        NACK_FULL = 0x03, // RX full, packet could not be received
-    };
-    uint8_t pkt;
-    Status status;
-};
-bool _firstPktId;
-uint8_t _lastRxPktId; // Packet ID of the last received packet
-bool _hasRxAckCmd;
-AckCmd _rxAckCmd; // Next ack command to be transmitted
 
 class RxHandler {
   public:
@@ -136,48 +117,20 @@ RxHandler _rxHandler;
 
 } // namespace AttaConnector
 
-bool AttaConnector::init() {
-    _firstPktId = true;
-    _lastRxPktId = 0;
-    _hasRxAckCmd = false;
-    _rxAckCmd = {};
-    return true;
-}
+bool AttaConnector::init() { return true; }
 
 void AttaConnector::update() {
     // Clear old received commands
     _rxHandler.clear();
 
-    // Transmit ACK
-    if (_hasRxAckCmd) {
-        // Create ACK packet
-        const int size = 3 * sizeof(uint8_t) + sizeof(AckCmd);
-        uint8_t data[size] = {};
-        uint8_t pktId = 0xFF;
-        uint8_t cmdId = RESERVED_CMD;
-        data[0] = pktId;
-        data[1] = cmdId;
-        for (uint32_t i = 0; i < sizeof(AckCmd); i++)
-            data[2 + i] = ((uint8_t*)&_rxAckCmd)[i];
-        data[size - 1] = crc(pktId, cmdId, (uint8_t*)&_rxAckCmd, sizeof(AckCmd));
-
-        // Send ACK packet
-        uint32_t encodedPacketSize = 0;
-        cobsEncode(&data[0], size, _packetTx.data(), &encodedPacketSize);
-        transmitBytes(_packetTx.data(), encodedPacketSize);
-        _hasRxAckCmd = false;
-        _rxAckCmd = {};
-    }
-
     // Transmit packets
-    uint8_t pktId;
     uint8_t* pktStart;
     uint32_t pktSize;
-    while (_txHandler.getNextPacketToTransmit(&pktId, &pktStart, &pktSize)) {
+    while (_txHandler.getNextPacketToTransmit(&pktStart, &pktSize)) {
         uint32_t encodedPacketSize = 0;
         cobsEncode(pktStart, pktSize, _packetTx.data(), &encodedPacketSize);
-        if (transmitBytes(_packetTx.data(), encodedPacketSize))
-            _txHandler.markTransmitted(pktId);
+        if (!transmitBytes(_packetTx.data(), encodedPacketSize))
+            log("Failed to transmit packet");
     }
 
     // Receive packets
@@ -197,75 +150,19 @@ void AttaConnector::update() {
         if (fullPacketReceived) {
             uint32_t packetSize = 0;
             cobsDecode(_packetRx.data(), &packetSize);
-            uint8_t pktId = _packetRx[0];
-            uint8_t cmdId = _packetRx[1];
-            uint8_t* payload = &_packetRx[2];
+            uint8_t cmdId = _packetRx[0];
+            uint8_t* payload = &_packetRx[1];
             uint8_t pktCRC = _packetRx[packetSize - 1];
-            uint8_t receivedCRC = crc(pktId, cmdId, payload, packetSize - 3 * sizeof(uint8_t));
-            // LOG_VERBOSE("AttaConnector", "Received pktId $0 cmdId $1 payloadSize $2 crc $3", (int)pktId, (int)cmdId, packetSize - 3,
-            //             pktCRC == receivedCRC ? "OK" : "WRONG");
+            uint32_t payloadSize = packetSize - sizeof(cmdId) - sizeof(pktCRC);
+            uint8_t receivedCRC = crc(cmdId, payload, payloadSize);
             if (pktCRC == receivedCRC) {
-                // Accept first packet with any ID
-                if (_firstPktId) {
-                    _lastRxPktId = pktId - 1;
-                    _firstPktId = false;
-                }
-
-                // Don't send acknowledge for reserved packet
-                if (cmdId != RESERVED_CMD) {
-                    // Check if some packet was lost (pktIds should be sequential)
-                    if (pktId != uint8_t(_lastRxPktId + 1)) {
-                        if (!_hasRxAckCmd || _rxAckCmd.status == AckCmd::ACK) {
-                            _rxAckCmd.pkt = _lastRxPktId + 1;
-                            _rxAckCmd.status = AckCmd::NACK_LOST;
-                            _hasRxAckCmd = true;
-                        }
-                        continue;
-                    }
-
-                    // Check if payload fits RX buffer
-                    if (!_rxHandler.canPush(packetSize)) {
-                        if (!_hasRxAckCmd || _rxAckCmd.status == AckCmd::ACK) {
-                            _rxAckCmd.pkt = _lastRxPktId + 1;
-                            _rxAckCmd.status = AckCmd::NACK_FULL;
-                            _hasRxAckCmd = true;
-                        }
-                        continue;
-                    }
-
-                    // ACK
-                    if (!_hasRxAckCmd || _rxAckCmd.status == AckCmd::ACK) {
-                        _rxAckCmd.pkt = pktId;
-                        _hasRxAckCmd = true;
-                    }
-
-                    _lastRxPktId = pktId;
-                }
-
-                _rxHandler.pushCommand(cmdId, payload, packetSize - sizeof(pktId) - sizeof(cmdId) - sizeof(pktCRC));
-            }
-        }
-    }
-
-    // Process received ACK command
-    AckCmd ack;
-    while (receive<AckCmd>(&ack)) {
-        switch (ack.status) {
-            case AckCmd::ACK:
-                _txHandler.markACK(ack.pkt);
-                break;
-            case AckCmd::NACK_CRC:
-                _txHandler.markNACK(ack.pkt);
-                break;
-            case AckCmd::NACK_LOST:
-                _txHandler.markNACK(ack.pkt);
-                break;
-            case AckCmd::NACK_FULL:
-                _txHandler.markNACK(ack.pkt);
-                break;
-            default:
-                // LOG_WARN("AttaConnector", "Received unknown ACK status $0", (int)ack.status);
-                break;
+                // Check if payload fits RX buffer
+                if (_rxHandler.canPush(packetSize))
+                    _rxHandler.pushCommand(cmdId, payload, payloadSize);
+                else
+                    log("Lost packet because RX buffer is full");
+            } else
+                log("Received corrupted packet, CRC does not match");
         }
     }
 }
@@ -298,9 +195,8 @@ namespace AttaConnector {
 constexpr std::array<uint8_t, 256> _crcTable = generateCRCTable();
 }
 
-uint8_t AttaConnector::crc(uint8_t pktId, uint8_t cmdId, uint8_t* payload, uint32_t payloadSize) {
+uint8_t AttaConnector::crc(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize) {
     uint8_t remainder = 0;
-    remainder = _crcTable[pktId ^ remainder];
     remainder = _crcTable[cmdId ^ remainder];
     for (uint8_t i = 0; i < payloadSize; i++)
         remainder = _crcTable[payload[i] ^ remainder];
@@ -441,7 +337,7 @@ template <uint32_t Size>
 void AttaConnector::CircularBuffer<Size>::pop(uint32_t len) {
     if (len > size())
         return;
-    _begin = (_begin + size) % Size;
+    _begin = (_begin + len) % Size;
     _full = false;
 }
 
@@ -502,37 +398,33 @@ uint8_t* AttaConnector::StackBuffer<Size>::push(uint8_t* data, uint32_t len) {
 }
 
 //-------------------- TX Handler --------------------//
-AttaConnector::TxHandler::TxHandler() : _begin(0), _end(0), _full(false), _lastTransmitted(MAX_PACKET_ID) {}
+AttaConnector::TxHandler::TxHandler() : _begin(0), _end(0), _full(false) {}
 
 bool AttaConnector::TxHandler::createPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize) {
     // Check if there are packet IDs available
     if (_full) {
-        // LOG_WARN("AttaConnector", "TX buffer is full. Packet with cmdId $0 was not transmitted", (int)cmdId);
+        log(("Maximum number of pending packets was reached. Packet with cmdId " + std::to_string(cmdId) + " was not transmitted").c_str());
         return false;
     }
 
     // Check if packet data fits in the TX buffer continuously
-    uint8_t pktId = 0;
     uint8_t pktCRC = 0;
-    uint32_t pktSize = sizeof(pktId) + sizeof(cmdId) + payloadSize + sizeof(pktCRC);
+    uint32_t pktSize = sizeof(cmdId) + payloadSize + sizeof(pktCRC);
     if (!_txBuffer.makeContinuous(pktSize)) {
-        // LOG_WARN("AttaConnector", "Could not add continuously to TX buffer. Packet with cmdId $0 was not transmitted", (int)cmdId);
+        log(("TX buffer is full. Packet with cmdId " + std::to_string(cmdId) + " was not transmitted").c_str());
         return false;
     }
 
     // Push packet info
     _packets[_end].idx = _txBuffer.end();
     _packets[_end].size = pktSize;
-    _packets[_end].transmitted = false;
+    pktCRC = crc(cmdId, payload, payloadSize);
 
-    pktId = _end;
-    pktCRC = crc(pktId, cmdId, payload, payloadSize);
     _end = (_end + 1) % _packets.size();
     if (_end == _begin)
         _full = true;
 
-    // Push packet data
-    _txBuffer.push(pktId);
+    // Push to TX buffer
     _txBuffer.push(cmdId);
     _txBuffer.push(payload, payloadSize);
     _txBuffer.push(pktCRC);
@@ -540,33 +432,23 @@ bool AttaConnector::TxHandler::createPacket(uint8_t cmdId, uint8_t* payload, uin
     return true;
 }
 
-bool AttaConnector::TxHandler::getNextPacketToTransmit(uint8_t* pktId, uint8_t** data, uint32_t* size) {
+bool AttaConnector::TxHandler::getNextPacketToTransmit(uint8_t** data, uint32_t* size) {
     // If all packets have been transmitted
-    if ((_lastTransmitted + 1) % _packets.size() == _end)
+    if (_begin == _end && !_full)
         return false;
 
-    // Set the last transmitted to the next packet in the range
-    uint8_t nextToTransmit = (_lastTransmitted + 1) % _packets.size();
-    *pktId = nextToTransmit;
-    *data = _txBuffer.data() + _packets[nextToTransmit].idx;
-    *size = _packets[nextToTransmit].size;
-    return true;
-}
+    // Get packet data
+    *data = _txBuffer.data() + _packets[_begin].idx;
+    *size = _packets[_begin].size;
 
-void AttaConnector::TxHandler::markTransmitted(uint8_t pktId) { _lastTransmitted = pktId; }
+    // Clean TX buffer
+    _txBuffer.pop(*size);
 
-void AttaConnector::TxHandler::markACK(uint8_t pktId) {
-    // Clear packets up to and including the acknowledged one
-    _begin = (pktId + 1) % _packets.size();
+    // Clean packet info
+    _begin = (_begin + 1) % _packets.size();
     _full = false;
-}
 
-void AttaConnector::TxHandler::markNACK(uint8_t pktId) {
-    // If the NACK is for a packet after the last transmitted packet, reset the last transmitted
-    _lastTransmitted = (pktId - 1 + _packets.size()) % _packets.size();
-    if (pktId != _begin)
-        _full = false;
-    _begin = pktId % _packets.size();
+    return true;
 }
 
 //-------------------- RX Handler --------------------//

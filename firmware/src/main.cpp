@@ -70,37 +70,29 @@ int main() {
 
     Log::success("Main", "Initialized");
 
+    // Test led
     led.setColor(0, 25, 0, 25);
     led.setColor(1, 0, 25, 0);
     led.show();
 
+    // Test motor
+    // motor.test();
+    // Hardware::delay(0.2f);
+
     while (true) {
         AttaConnector::update();
-        Log::debug("Main", "Voltage Source $0", voltage.read());
-        Log::debug("Main", "Voltage Phase U $0V", phaseU.readVoltage());
-        Log::debug("Main", "Voltage Phase V $0V", phaseV.readVoltage());
-        Log::debug("Main", "Voltage Phase W $0V", phaseW.readVoltage());
-        Log::debug("Main", "Current Phase U $0A", phaseU.readCurrent());
-        Log::debug("Main", "Current Phase V $0A", phaseV.readCurrent());
-        Log::debug("Main", "Current Phase W $0A", phaseW.readCurrent());
-        // imu.getAcc(nullptr, nullptr, nullptr);
-        // imu.getGyr(nullptr, nullptr, nullptr);
-        Log::debug("Main", "Encoder: $0", encoder.readAngle());
-        Hardware::delay(0.5f);
 
-        // MyTest1 t1;
-        // t1.f = 4.5f;
-        // t1.u = 42;
-        // AttaConnector::transmit(t1);
-
-        // MotorState state{};
-        // state.batteryVoltage = voltage.read();
-        // state.currentUV = phaseU.readCurrent();
-        // state.currentW = phaseV.readCurrent();
-        // state.rotorPosition = encoder.readAngle();
-        // AttaConnector::transmit(state);
-
-        // motor.test();
+        // Send motor state
+        MotorState state{};
+        state.sourceVoltage = voltage.read();
+        state.phaseVoltage[0] = phaseU.readVoltage();
+        state.phaseVoltage[1] = phaseV.readVoltage();
+        state.phaseVoltage[2] = phaseW.readVoltage();
+        state.phaseCurrent[0] = phaseU.readCurrent();
+        state.phaseCurrent[1] = phaseV.readCurrent();
+        state.phaseCurrent[2] = phaseW.readCurrent();
+        state.rotorPosition = encoder.readAngle();
+        AttaConnector::transmit(state);
     }
     return 0;
 }
