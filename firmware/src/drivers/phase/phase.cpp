@@ -28,8 +28,8 @@ bool Phase::init(PhaseId phase, I2c::Peripheral peripheral, I2c::Address address
     RegConfig config{};
     config.rst = 0;
     config.brng = RegConfig::BRNG_16V; // Phase voltage 16V full scale
-    config.badc = RegConfig::ADC_64_SAMPLES_34_MS;
-    config.sadc = RegConfig::ADC_64_SAMPLES_34_MS;
+    config.badc = RegConfig::ADC_9_BIT_84_US;
+    config.sadc = RegConfig::ADC_9_BIT_84_US;
     config.mode = RegConfig::MODE_SHUNT_BUS_CONT;
     config.pg = RegConfig::PG_80MV; // Shunt resistor 80mV full scale
     writeReg(REG_CONFIG, config);

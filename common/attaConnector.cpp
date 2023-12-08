@@ -71,7 +71,6 @@ uint32_t _packetRxIdx;
 //---------- TX Handler ----------//
 class TxHandler {
   public:
-    static constexpr uint32_t MAX_PENDING_PACKETS = 1024;
     TxHandler();
 
     bool createPacket(uint8_t cmdId, uint8_t* payload, uint32_t payloadSize);
@@ -86,9 +85,9 @@ class TxHandler {
 
     CircularBuffer<TX_SIZE> _txBuffer;
     std::array<PacketInfo, MAX_PENDING_PACKETS> _packets;
-    uint8_t _begin;
-    uint8_t _end;
-    uint8_t _full;
+    uint32_t _begin;
+    uint32_t _end;
+    bool _full;
 };
 TxHandler _txHandler;
 

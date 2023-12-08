@@ -45,7 +45,7 @@ bool I2c::init() {
 
         I2C_HandleTypeDef* hi2c = getHandle(peripheral);
         hi2c->Instance = getInstance(peripheral);
-        hi2c->Init.ClockSpeed = 100000;
+        hi2c->Init.ClockSpeed = 400000;
         hi2c->Init.DutyCycle = I2C_DUTYCYCLE_2;
         hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
         hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;

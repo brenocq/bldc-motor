@@ -6,12 +6,15 @@
 //--------------------------------------------------
 #ifndef BLDC_DRIVERS_HARDWARE_H
 #define BLDC_DRIVERS_HARDWARE_H
+#include <cstdint>
 
 namespace Hardware {
 
 void delay(float s);
 
-void delayMs(float ms);
+void delayMs(uint32_t ms);
+
+void delayUs(uint32_t us);
 
 } // namespace Hardware
 

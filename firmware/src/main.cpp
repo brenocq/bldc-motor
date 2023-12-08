@@ -75,10 +75,6 @@ int main() {
     led.setColor(1, 0, 25, 0);
     led.show();
 
-    // Test motor
-    // motor.test();
-    // Hardware::delay(0.2f);
-
     while (true) {
         AttaConnector::update();
 

@@ -29,11 +29,11 @@ const bool stage[6][6] = {
 };
 // clang-format on
 
-void Motor::test() {
-    Gpio::write(Gpio::MOTOR_UH_PIN, stage[0][0]);
-    Gpio::write(Gpio::MOTOR_UL_PIN, stage[0][1]);
-    Gpio::write(Gpio::MOTOR_VH_PIN, stage[0][2]);
-    Gpio::write(Gpio::MOTOR_VL_PIN, stage[0][3]);
-    Gpio::write(Gpio::MOTOR_WH_PIN, stage[0][4]);
-    Gpio::write(Gpio::MOTOR_WL_PIN, stage[0][5]);
+void Motor::set(Control control) {
+    Gpio::write(Gpio::MOTOR_UL_PIN, control.ul);
+    Gpio::write(Gpio::MOTOR_UH_PIN, control.uh);
+    Gpio::write(Gpio::MOTOR_VL_PIN, control.vl);
+    Gpio::write(Gpio::MOTOR_VH_PIN, control.vh);
+    Gpio::write(Gpio::MOTOR_WL_PIN, control.wl);
+    Gpio::write(Gpio::MOTOR_WH_PIN, control.wh);
 }
