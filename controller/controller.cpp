@@ -5,4 +5,4 @@
 //--------------------------------------------------
 #include "controller.h"
 
-Controller::Output Controller::control(State s, Control c, float dt) { return {Output::LOW, Output::LOW, Output::LOW}; }
+Controller::Output Controller::control(State s, Control c, float dt) { return {LOW, LOW, LOW}; }

@@ -29,7 +29,7 @@ const bool stage[6][6] = {
 };
 // clang-format on
 
-void Motor::set(Control control) {
+void Motor::set(Controller::Output control) {
     Gpio::write(Gpio::MOTOR_UL_PIN, control.ul);
     Gpio::write(Gpio::MOTOR_UH_PIN, control.uh);
     Gpio::write(Gpio::MOTOR_VL_PIN, control.vl);

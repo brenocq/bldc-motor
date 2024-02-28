@@ -6,7 +6,7 @@ enable_language(ASM)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_C_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-g++)
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Folders
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/base/linker/STM32F4xx/STM32F446xE.ld)
@@ -154,6 +154,10 @@ set(BLDC_SOURCES
     src/utils/error.cpp
     src/utils/log.cpp
 
+    ../controller/controller.cpp
+    ../controller/focController.cpp
+    ../controller/trapezoidalController.cpp
+
     src/main.cpp
 
     base/startup/STM32F4xx/STM32F446xx.s
@@ -161,7 +165,7 @@ set(BLDC_SOURCES
 
 # Main target
 add_executable(bldc_motor_controller ${BLDC_SOURCES})
-target_include_directories(bldc_motor_controller PRIVATE ../common)
+target_include_directories(bldc_motor_controller PRIVATE ..)# Include repository root
 target_include_directories(bldc_motor_controller PRIVATE src/utils)
 target_link_libraries(bldc_motor_controller PRIVATE stm32f4_hal stm32_usb)
 set_target_properties(bldc_motor_controller PROPERTIES OUTPUT_NAME "firmware.elf")

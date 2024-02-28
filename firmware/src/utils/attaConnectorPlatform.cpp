@@ -9,8 +9,6 @@
 #include <utils/attaConnectorPlatform.h>
 #include <utils/log.h>
 
-static std::queue<uint8_t> buffer;
-
 namespace AttaConnector {
 
 bool transmitBytes(uint8_t* data, uint32_t size) {

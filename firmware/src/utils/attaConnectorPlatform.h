@@ -6,7 +6,7 @@
 //--------------------------------------------------
 #ifndef UTILS_ATTA_CONNECTOR_PLATFORM_H
 #define UTILS_ATTA_CONNECTOR_PLATFORM_H
-#include "attaConnectorCmds.h"
+#include <common/attaConnectorCmds.h>
 #include <cstdint>
 
 namespace AttaConnector {

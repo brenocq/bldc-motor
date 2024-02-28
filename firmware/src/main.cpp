@@ -4,8 +4,9 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
-#include "attaConnector.h"
-#include "attaConnectorCmds.h"
+#include <common/attaConnector.h>
+#include <common/attaConnectorCmds.h>
+#include <controller/focController.h>
 #include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
 #include <drivers/dma/dma.h>
@@ -75,20 +76,28 @@ int main() {
     led.setColor(1, 0, 25, 0);
     led.show();
 
+    FocController foc;
     while (true) {
-        AttaConnector::update();
+        // AttaConnector::update();
 
-        // Send motor state
-        MotorState state{};
-        state.sourceVoltage = voltage.read();
-        state.phaseVoltage[0] = phaseU.readVoltage();
-        state.phaseVoltage[1] = phaseV.readVoltage();
-        state.phaseVoltage[2] = phaseW.readVoltage();
-        state.phaseCurrent[0] = phaseU.readCurrent();
-        state.phaseCurrent[1] = phaseV.readCurrent();
-        state.phaseCurrent[2] = phaseW.readCurrent();
-        state.rotorPosition = encoder.readAngle();
-        AttaConnector::transmit(state);
+        // Read motor state
+        // MotorState state{};
+        // state.sourceVoltage = voltage.read();
+        // state.phaseVoltage[0] = phaseU.readVoltage();
+        // state.phaseVoltage[1] = phaseV.readVoltage();
+        // state.phaseVoltage[2] = phaseW.readVoltage();
+        // state.phaseCurrent[0] = phaseU.readCurrent();
+        // state.phaseCurrent[1] = phaseV.readCurrent();
+        // state.phaseCurrent[2] = phaseW.readCurrent();
+        // state.rotorPosition = encoder.readAngle();
+        // AttaConnector::transmit(state);
+
+        // Execute controller
+        Controller::Output control = foc.control({}, {}, 0.00005);
+
+        // Update motor signals
+        // motor.set(control);
+        // Log::debug("Main", "Control: $0", control);
     }
     return 0;
 }

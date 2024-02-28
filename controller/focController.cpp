@@ -4,16 +4,16 @@
 // Date: 2023-10-25
 //--------------------------------------------------
 #include "focController.h"
+#include <utils/log.h>
 
-const std::array<Controller::Output, 8> FocController::_v = {
-    Output(Output::HIGH, Output::LOW, Output::LOW),  Output(Output::HIGH, Output::HIGH, Output::LOW), Output(Output::LOW, Output::HIGH, Output::LOW),
-    Output(Output::LOW, Output::HIGH, Output::HIGH), Output(Output::LOW, Output::LOW, Output::HIGH),  Output(Output::HIGH, Output::LOW, Output::HIGH),
-    Output(Output::LOW, Output::LOW, Output::LOW),   Output(Output::HIGH, Output::HIGH, Output::HIGH)};
+const std::array<Controller::Output, 8> FocController::_v = {Output(HIGH, LOW, LOW),  Output(HIGH, HIGH, LOW), Output(LOW, HIGH, LOW),
+                                                             Output(LOW, HIGH, HIGH), Output(LOW, LOW, HIGH),  Output(HIGH, LOW, HIGH),
+                                                             Output(LOW, LOW, LOW),   Output(HIGH, HIGH, HIGH)};
 
 Controller::Output FocController::spaceVectorPWM(float angle, float magnitude) {
     // Null vectors
     static Output n0 = _v[7];
-    static Output n1 = _v[8];
+    static Output n1 = _v[8]; // TODO use
 
     // Angle within bounds
     while (angle < 0.0f)
@@ -22,14 +22,14 @@ Controller::Output FocController::spaceVectorPWM(float angle, float magnitude) {
         angle -= 2 * M_PI;
 
     // Base vectors
+    const float sector = 2 * M_PI / 6; // Sector angle
     Output b0, b1;
-    unsigned idx = angle / (2 * M_PI);
+    unsigned idx = angle / sector;
     b0 = _v[idx];
     b1 = _v[(idx + 1) % 6];
 
     // Percentage of time each base vector should be selected
-    const float dist = 2 * M_PI / 6;
-    float at = (angle - dist * idx) / dist;
+    float at = (angle - sector * idx) / sector;
 
     // Percentage of time base vectors should be selected instead of null vector
     float mt = magnitude;
@@ -44,5 +44,7 @@ Controller::Output FocController::spaceVectorPWM(float angle, float magnitude) {
 Controller::Output FocController::control(State s, Control c, float dt) {
     static float a = 0.0f;
     a += 2 * M_PI * dt;
-    return spaceVectorPWM(a, 1.0f);
+    if (a >= 2 * M_PI)
+        a = 0;
+    return spaceVectorPWM(a, 0.2f);
 }
