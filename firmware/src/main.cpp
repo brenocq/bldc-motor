@@ -34,49 +34,49 @@ int main() {
         Error::hardFault("Failed to initialize GPIO driver");
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
-    if (!I2c::init())
-        Error::hardFault("Failed to initialize I2C driver");
-    if (!Spi::init())
-        Error::hardFault("Failed to initialize SPI driver");
-    if (!Adc::init())
-        Error::hardFault("Failed to initialize ADC driver");
-    if (!Timer::init())
-        Error::hardFault("Failed to initialize TIMER driver");
-    if (!Dma::init())
-        Error::hardFault("Failed to initialize DMA driver");
-    if (!Interrupt::init())
-        Error::hardFault("Failed to initialize Interrupt driver");
+    // if (!I2c::init())
+    //     Error::hardFault("Failed to initialize I2C driver");
+    // if (!Spi::init())
+    //     Error::hardFault("Failed to initialize SPI driver");
+    // if (!Adc::init())
+    //     Error::hardFault("Failed to initialize ADC driver");
+    // if (!Timer::init())
+    //     Error::hardFault("Failed to initialize TIMER driver");
+    // if (!Dma::init())
+    //     Error::hardFault("Failed to initialize DMA driver");
+    // if (!Interrupt::init())
+    //     Error::hardFault("Failed to initialize Interrupt driver");
 
-    // Timer-DMA
-    Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
+    //// Timer-DMA
+    // Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
 
-    if (!led.init())
-        Error::hardFault("Failed to initialize led driver");
-    if (!encoder.init())
-        Error::hardFault("Failed to initialize encoder driver");
-    if (!voltage.init())
-        Error::hardFault("Failed to initialize voltage driver");
-    if (!phaseU.init(Phase::U, I2c::Peripheral::I2C3, I2c::PHASE_U_ADDR))
-        Error::hardFault("Failed to initialize phase driver for phase U");
-    if (!phaseV.init(Phase::V, I2c::Peripheral::I2C3, I2c::PHASE_V_ADDR))
-        Error::hardFault("Failed to initialize phase driver for phase V");
-    if (!phaseW.init(Phase::W, I2c::Peripheral::I2C3, I2c::PHASE_W_ADDR))
-        Error::hardFault("Failed to initialize phase driver for phase W");
-    if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
-        Error::hardFault("Failed to initialize IMU");
-    if (!motor.init())
-        Error::hardFault("Failed to initialize motor driver");
-    if (!AttaConnector::init())
-        Error::hardFault("Failed to initialize atta connector");
+    // if (!led.init())
+    //     Error::hardFault("Failed to initialize led driver");
+    // if (!encoder.init())
+    //     Error::hardFault("Failed to initialize encoder driver");
+    // if (!voltage.init())
+    //     Error::hardFault("Failed to initialize voltage driver");
+    // if (!phaseU.init(Phase::U, I2c::Peripheral::I2C3, I2c::PHASE_U_ADDR))
+    //     Error::hardFault("Failed to initialize phase driver for phase U");
+    // if (!phaseV.init(Phase::V, I2c::Peripheral::I2C3, I2c::PHASE_V_ADDR))
+    //     Error::hardFault("Failed to initialize phase driver for phase V");
+    // if (!phaseW.init(Phase::W, I2c::Peripheral::I2C3, I2c::PHASE_W_ADDR))
+    //     Error::hardFault("Failed to initialize phase driver for phase W");
+    // if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
+    //     Error::hardFault("Failed to initialize IMU");
+    // if (!motor.init())
+    //     Error::hardFault("Failed to initialize motor driver");
+    // if (!AttaConnector::init())
+    //     Error::hardFault("Failed to initialize atta connector");
 
-    Log::success("Main", "Initialized");
+    // Log::success("Main", "Initialized");
 
-    // Test led
-    led.setColor(0, 25, 0, 25);
-    led.setColor(1, 0, 25, 0);
-    led.show();
+    //// Test led
+    // led.setColor(0, 25, 0, 25);
+    // led.setColor(1, 0, 25, 0);
+    // led.show();
 
-    FocController foc;
+    // FocController foc;
     while (true) {
         // AttaConnector::update();
 
@@ -93,7 +93,7 @@ int main() {
         // AttaConnector::transmit(state);
 
         // Execute controller
-        Controller::Output control = foc.control({}, {}, 0.00005);
+        // Controller::Output control = foc.control({}, {}, 0.00005);
 
         // Update motor signals
         // motor.set(control);

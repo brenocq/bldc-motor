@@ -10,7 +10,7 @@
 #include <utils/log.h>
 
 bool Encoder::init() {
-    Gpio::write(Gpio::ENC_CSN_PIN, true);
+    Gpio::write(Gpio::ENC_CS_PIN, true);
     Gpio::write(Gpio::ENC_CLK_PIN, true);
     Gpio::write(Gpio::ENC_DO_PIN, false);
 
@@ -45,7 +45,7 @@ float Encoder::readAngle() {
     uint8_t status = 0;
     uint8_t crc = 0;
 
-    Gpio::write(Gpio::ENC_CSN_PIN, false);
+    Gpio::write(Gpio::ENC_CS_PIN, false);
     Hardware::delayMs(1);
     Gpio::write(Gpio::ENC_CLK_PIN, false);
     Hardware::delayMs(1);
@@ -73,7 +73,7 @@ float Encoder::readAngle() {
         crc |= (Gpio::read(Gpio::ENC_DO_PIN) << i);
         Hardware::delayMs(1);
     }
-    Gpio::write(Gpio::ENC_CSN_PIN, true);
+    Gpio::write(Gpio::ENC_CS_PIN, true);
 
     // Calculate angle
     float angle = data / 16384.0f * 3.141592f * 2.0f; // Calculate angle in radians
