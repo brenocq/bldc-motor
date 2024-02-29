@@ -79,13 +79,13 @@ float Encoder::readAngle() {
     float angle = data / 16384.0f * 3.141592f * 2.0f; // Calculate angle in radians
 
     // Check status
-    //if (status & STATUS_MAG_FIELD_TOO_STRONG)
+    // if (status & STATUS_MAG_FIELD_TOO_STRONG)
     //    Log::debug("Encoder", "Status: MAG_FIELD_TOO_STRONG");
-    //if (status & STATUS_MAG_FIELD_TOO_WEAK)
+    // if (status & STATUS_MAG_FIELD_TOO_WEAK)
     //    Log::debug("Encoder", "Status: MAG_FIELD_TOO_WEAK");
-    //if (status & STATUS_PUSH_BUTTON_DETECTED)
+    // if (status & STATUS_PUSH_BUTTON_DETECTED)
     //    Log::debug("Encoder", "Status: PUSH_BUTTON_DETECTED");
-    //if (status & STATUS_LOSS_OF_TRACK)
+    // if (status & STATUS_LOSS_OF_TRACK)
     //    Log::debug("Encoder", "Status: LOSS_OF_TRACK");
 
     // Check CRC

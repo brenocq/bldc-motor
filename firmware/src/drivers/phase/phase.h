@@ -6,12 +6,21 @@
 //--------------------------------------------------
 #ifndef BLDC_DRIVERS_PHASE_PHASE_H
 #define BLDC_DRIVERS_PHASE_PHASE_H
-#include <drivers/i2c/i2c.h>
+#include <drivers/gpio/gpio.h>
+#include <drivers/spi/spi.h>
+
+// clang-format off
+// Used to cast register structs to uint16_t
+#define REG_CAST_16(T) \
+        T() = default; \
+        T(uint16_t d) { *((uint16_t*)this) = d; } \
+        operator uint16_t() const { return *((uint16_t*)this); }
+// clang-format on
 
 class Phase {
   public:
     enum PhaseId { U = 0, V, W };
-    bool init(PhaseId phase, I2c::Peripheral peripheral, I2c::Address address);
+    bool init(PhaseId phase, Spi::Peripheral peripheral, Gpio::Gpio chipSelect);
 
     float readCurrent();
     float readVoltage();
@@ -19,74 +28,148 @@ class Phase {
   private:
     // clang-format off
     enum Reg : uint8_t {
-        REG_CONFIG        = 0x00,
-        REG_SHUNT_VOLTAGE = 0x01,
-        REG_BUS_VOLTAGE   = 0x02,
-        REG_POWER         = 0x03,
-        REG_CURRENT       = 0x04,
-        REG_CALIBRATION   = 0x05,
+        REG_CONFIG          = 0x00,
+        REG_ADC_CONFIG      = 0x01,
+        REG_SHUNT_CAL       = 0x02,
+        REG_VSHUNT          = 0x04,
+        REG_VBUS            = 0x05,
+        REG_DIETEMP         = 0x06,
+        REG_CURRENT         = 0x07,
+        REG_POWER           = 0x08,
+        REG_DIAG_ALRT       = 0x0B,
+        REG_SOVL            = 0x0C,
+        REG_SUVL            = 0x0D,
+        REG_BOVL            = 0x0E,
+        REG_BUVL            = 0x0F,
+        REG_TEMP_LIMIT      = 0x10,
+        REG_PWR_LIMIT       = 0x11,
+        REG_MANUFACTURER_ID = 0x3E,
+        REG_DEVICE_ID       = 0x3F,
     };
     // clang-format on
 
     uint16_t readReg(Reg reg);
     void writeReg(Reg reg, uint16_t data);
 
-    /// Register config
+    /* @brief Register config
+     * Conversion delay can be used to have all phase sensors reading at approximately the same time. Keep in mind that there may be clock drift.
+     */
     struct RegConfig {
-        uint8_t mode : 3;     ///< Operating mode
-        uint8_t sadc : 4;     ///< Shunt ADC resolution/averaging
-        uint8_t badc : 4;     ///< Bus ADC resolution/averaging
-        uint8_t pg : 2;       ///< PGA gain and range
-        uint8_t brng : 1;     ///< Bus voltage range (0->16V 1->32V)
-        uint8_t reserved : 1; ///< Reserved bit
-        uint8_t rst : 1;      ///< Reset bit (set to 1 to reset)
+        uint8_t reserved0 : 4; ///< Reserved bits
+        uint8_t adcRange : 1;  ///< ADC range
+        uint8_t reserved1 : 1; ///< Reserved bit
+        uint8_t convDly : 8;   ///< Conversion delay (0x00->0s 0xFF->510ms)
+        uint8_t reserved2 : 1; ///< Reserved bit
+        uint8_t rst : 1;       ///< Reset bit (set to 1 to reset)
 
-        RegConfig() = default;
-        RegConfig(uint16_t d) { *((uint16_t*)this) = d; }
-        operator uint16_t() const { return *((uint16_t*)this); }
+        REG_CAST_16(RegConfig);
 
-        enum Brng : uint8_t {
-            BRNG_16V = 0b0,
-            BRNG_32V = 0b1,
-        };
-
-        enum Pg : uint8_t {
-            PG_40MV = 0b00,
-            PG_80MV = 0b01,
-            PG_160MV = 0b10,
-            PG_320MV = 0b11,
-        };
-
-        /// Values for the badc and sadc bits
-        enum Adc : uint8_t {
-            ADC_9_BIT_84_US = 0b0000,       // 9-bit | 0.084ms
-            ADC_10_BIT_148_US = 0b0001,     // 10-bit | 0.148ms
-            ADC_11_BIT_276_US = 0b0010,     // 11-bit | 0.276ms
-            ADC_12_BIT_532_US = 0b0011,     // 12-bit | 0.532ms
-            ADC_2_SAMPLES_1_MS = 0b1001,    // 12-bit | 2 samples | 1.06ms
-            ADC_4_SAMPLES_2_MS = 0b1010,    // 12-bit | 4 samples | 2.13ms
-            ADC_8_SAMPLES_4_MS = 0b1011,    // 12-bit | 8 samples | 4.26ms
-            ADC_16_SAMPLES_8_MS = 0b1100,   // 12-bit | 16 samples | 8.51ms
-            ADC_32_SAMPLES_17_MS = 0b1101,  // 12-bit | 32 samples | 17.02ms
-            ADC_64_SAMPLES_34_MS = 0b1110,  // 12-bit | 64 samples | 34.05ms
-            ADC_128_SAMPLES_68_MS = 0b1111, // 12-bit | 128 samples | 68.10ms
-        };
-
-        enum Mode : uint8_t {
-            MODE_POWER_DOWN = 0b000,
-            MODE_SHUNT_TRIG = 0b001,
-            MODE_BUS_TRIG = 0b010,
-            MODE_SHUNT_BUS_TRIG = 0b011,
-            MODE_ADC_OFF = 0b100,
-            MODE_SHUNT_CONT = 0b101,
-            MODE_BUS_CONT = 0b110,
-            MODE_SHUNT_BUS_CONT = 0b111,
+        enum AdcRange : uint8_t {
+            ADC_RANGE_163_84_V = 0b0,
+            ADC_RANGE_40_96_V = 0b1,
         };
     };
 
+    /// Register ADC config
+    struct AdcConfig {
+        uint8_t avg : 3;    ///< ADC averaging count
+        uint8_t vtct : 3;   ///< Temperature conversion time
+        uint8_t vshct : 3;  ///< Shunt voltage conversion time
+        uint8_t vbusct : 3; ///< Bus voltage conversion time
+        uint8_t mode : 4;   ///< Mode
+
+        REG_CAST_16(AdcConfig);
+
+        enum AveragingCount : uint8_t {
+            AVR_1 = 0,
+            AVR_4,
+            AVR_16,
+            AVR_64,
+            AVR_128,
+            AVR_256,
+            AVR_512,
+            AVR_1024,
+        };
+
+        enum ConversionTime : uint8_t {
+            CT_50_US = 0,
+            CT_84_US,
+            CT_150_US,
+            CT_280_US,
+            CT_540_US,
+            CT_1052_US,
+            CT_2074_US,
+            CT_4120_US,
+        };
+
+        /* @brief ADC mode
+         * When in trigger mode, the mode will go back to SHUTDOWN after one read.
+         */
+        enum Mode : uint8_t {
+            MODE_SHUTDOWN = 0x0,
+            MODE_TRIG_BUS = 0x1,
+            MODE_TRIG_SHUNT = 0x2,
+            MODE_TRIG_BUS_SHUNT = 0x3,
+            MODE_TRIG_TEMP = 0x4,
+            MODE_TRIG_BUS_TEMP = 0x5,
+            MODE_TRIG_SHUNT_TEMP = 0x6,
+            MODE_TRIG_BUS_SHUNT_TEMP = 0x7,
+            MODE_CONT_BUS = 0x9,
+            MODE_CONT_SHUNT = 0xA,
+            MODE_CONT_BUS_SHUNT = 0xB,
+            MODE_CONT_TEMP = 0xC,
+            MODE_CONT_BUS_TEMP = 0xD,
+            MODE_CONT_SHUNT_TEMP = 0xE,
+            MODE_CONT_BUS_SHUNT_TEMP = 0xF,
+        };
+    };
+
+    /// Register shunt calibration
+    struct ShuntCal {
+        uint16_t shuntCal : 15; ///< Shunt calibration
+        uint8_t reserved : 1;   ///< Reserved bit
+
+        REG_CAST_16(ShuntCal);
+
+        uint16_t calibrate(float maxCurrent, float shuntResistance) { return 819.2e6 * (maxCurrent / 32768) * shuntResistance; }
+    };
+
+    // Register diagnostic flags and alert
+    struct DiagAlrt {
+        uint8_t memStat : 1;   ///< Memory status (0=error 1=normal)
+        uint8_t cnvrf : 1;     ///< Conversion completed
+        uint8_t pol : 1;       ///< Power threshold limit
+        uint8_t busul : 1;     ///< Bus under-limit threshold
+        uint8_t busol : 1;     ///< Bus over-limit threshold
+        uint8_t shntul : 1;    ///< Shunt under-limit threshold
+        uint8_t shntol : 1;    ///< Shunt over-limit threshold
+        uint8_t tmpol : 1;     ///< Temperature over-limit threshold
+        uint8_t reserved0 : 1; ///< Reserved bit
+        uint8_t mathof : 1;    ///< Mathematical overflow
+        uint8_t reserved1 : 2; ///< Reserved bits
+        uint8_t apol : 1;      ///< Alert pin polarity
+        uint8_t slowAlert : 1; ///< Alert averaged values
+        uint8_t cnvr : 1;      ///< Alert pin on conversion ready
+        uint8_t alatch : 1;    ///< Alert pin active until read
+
+        REG_CAST_16(DiagAlrt);
+    };
+
+    // Register device identification
+    struct DeviceId {
+        uint8_t revId : 4;   ///< Device revision identification
+        uint16_t devId : 12; ///< Device identification
+
+        REG_CAST_16(DeviceId);
+    };
+
+    static constexpr uint16_t MANUFACTURER_ID_DEFAULT = 0x5449;
+    static constexpr uint16_t DEVICE_ID_DEFAULT = 0x0239;
+    static constexpr uint16_t REV_ID_DEFAULT = 0x001;
+
     PhaseId _phase;              ///< Motor phase
-    I2c::Peripheral _peripheral; ///< I2C peripehral
-    I2c::Address _address;       ///< I2C address
+    Spi::Peripheral _peripheral; ///< SPI peripehral
+    Gpio::Gpio _chipSelect;      ///< SPI chip select
 
     RegConfig _regConfigValue; ///< Register config value
 };
