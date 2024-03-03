@@ -5,15 +5,20 @@
 // By Breno Cunha Queiroz
 //--------------------------------------------------
 #include <drivers/encoder/encoder.h>
-#include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <utils/log.h>
 
-bool Encoder::init() {
-    Gpio::write(Gpio::ENC_CS_PIN, true);
-    Gpio::write(Gpio::ENC_CLK_PIN, true);
-    Gpio::write(Gpio::ENC_DO_PIN, false);
+bool Encoder::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
+    _peripheral = peripheral;
+    _chipSelect = chipSelect;
+    Gpio::write(_chipSelect, true);
 
+    if (readAngle() == -1.0f) {
+        Log::error("Encoder", "Failed to initialize encoder, communication not possible");
+        return false;
+    }
+
+    Log::success("Encoder", "Initialized");
     return true;
 }
 
@@ -40,40 +45,18 @@ static uint8_t calculateCRC(uint32_t data) {
 }
 
 float Encoder::readAngle() {
-    // TODO Use 4MHz SPI
     uint16_t data = 0;
     uint8_t status = 0;
     uint8_t crc = 0;
 
-    Gpio::write(Gpio::ENC_CS_PIN, false);
-    Hardware::delayMs(1);
-    Gpio::write(Gpio::ENC_CLK_PIN, false);
-    Hardware::delayMs(1);
-    // Read data
-    for (int i = 13; i >= 0; i--) {
-        Gpio::write(Gpio::ENC_CLK_PIN, true);
-        Hardware::delayMs(1);
-        Gpio::write(Gpio::ENC_CLK_PIN, false);
-        data |= (Gpio::read(Gpio::ENC_DO_PIN) << i);
-        Hardware::delayMs(1);
-    }
-    // Read status
-    for (int i = 3; i >= 0; i--) {
-        Gpio::write(Gpio::ENC_CLK_PIN, true);
-        Hardware::delayMs(1);
-        Gpio::write(Gpio::ENC_CLK_PIN, false);
-        status |= (Gpio::read(Gpio::ENC_DO_PIN) << i);
-        Hardware::delayMs(1);
-    }
-    // Read CRC
-    for (int i = 5; i >= 0; i--) {
-        Gpio::write(Gpio::ENC_CLK_PIN, true);
-        Hardware::delayMs(1);
-        Gpio::write(Gpio::ENC_CLK_PIN, false);
-        crc |= (Gpio::read(Gpio::ENC_DO_PIN) << i);
-        Hardware::delayMs(1);
-    }
-    Gpio::write(Gpio::ENC_CS_PIN, true);
+    // Read angle
+    uint8_t bits[3];
+    Gpio::write(_chipSelect, false);
+    Spi::receive(_peripheral, bits, 3 * sizeof(uint8_t));
+    Gpio::write(_chipSelect, true);
+    data = (bits[0] << 6) | (bits[1] >> 2);
+    status = ((bits[1] & 0b11) << 2) | (bits[2] >> 6);
+    crc = bits[2] & 0b111111;
 
     // Calculate angle
     float angle = data / 16384.0f * 3.141592f * 2.0f; // Calculate angle in radians

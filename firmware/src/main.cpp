@@ -32,6 +32,10 @@ int main() {
     Hardware::delayMs(2000); // XXX Delay to show in tracer after programming
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
+    Gpio::write(Gpio::PHASE_CS_U_PIN, true);
+    Gpio::write(Gpio::PHASE_CS_V_PIN, true);
+    Gpio::write(Gpio::PHASE_CS_W_PIN, true);
+
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
     if (!Spi::init())
@@ -51,13 +55,10 @@ int main() {
 
     if (!led.init())
         Error::hardFault("Failed to initialize led driver");
-    // if (!encoder.init())
-    //     Error::hardFault("Failed to initialize encoder driver");
+    if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
+        Error::hardFault("Failed to initialize encoder driver");
     if (!voltage.init())
         Error::hardFault("Failed to initialize voltage driver");
-    Gpio::write(Gpio::PHASE_CS_U_PIN, true);
-    Gpio::write(Gpio::PHASE_CS_V_PIN, true);
-    Gpio::write(Gpio::PHASE_CS_W_PIN, true);
     if (!phaseU.init(Phase::U, Spi::Peripheral::SPI1, Gpio::PHASE_CS_U_PIN))
         Error::hardFault("Failed to initialize phase driver for phase U");
     if (!phaseV.init(Phase::V, Spi::Peripheral::SPI1, Gpio::PHASE_CS_V_PIN))
@@ -91,7 +92,7 @@ int main() {
         state.phaseCurrent[0] = phaseU.readCurrent();
         state.phaseCurrent[1] = phaseV.readCurrent();
         state.phaseCurrent[2] = phaseW.readCurrent();
-        // state.rotorPosition = encoder.readAngle();
+        state.rotorPosition = encoder.readAngle();
         AttaConnector::transmit(state);
 
         // Read imu state

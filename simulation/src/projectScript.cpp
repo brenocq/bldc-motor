@@ -239,7 +239,6 @@ void ProjectScript::handleAttaConnector() {
     while (AttaConnector::receive<ImuState>(&imu)) {
         _imuData.acc.push_back(atta::vec3(imu.acc[0], imu.acc[1], imu.acc[2]));
         _imuData.gyr.push_back(atta::vec3(imu.gyr[0], imu.gyr[1], imu.gyr[2]));
-        LOG_DEBUG("ProjectScript", "Data: $0 $1", _imuData.acc.back(), _imuData.gyr.back());
     }
 }
 

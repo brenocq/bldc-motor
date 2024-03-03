@@ -24,6 +24,7 @@
 class Phase {
   public:
     enum PhaseId { U = 0, V, W };
+
     bool init(PhaseId phase, Spi::Peripheral peripheral, Gpio::Gpio chipSelect);
 
     float readCurrent();

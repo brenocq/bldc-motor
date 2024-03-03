@@ -6,6 +6,7 @@
 //--------------------------------------------------
 #ifndef BLDC_DRIVERS_SPI_SPI_H
 #define BLDC_DRIVERS_SPI_SPI_H
+#include <array>
 #include <cstdint>
 
 namespace Spi {
@@ -61,18 +62,19 @@ bool receive(Peripheral peripheral, uint8_t* data, uint16_t len);
 bool transmitReceive(Peripheral peripheral, uint8_t* txData, uint8_t* rxData, uint16_t len);
 
 //---------- SPI configs ----------//
-
 struct SpiConfig {
     enum Mode { MODE_0 = 0, MODE_1, MODE_2, MODE_3 };
+    enum CS { CS_SOFT = 0, CS_HARD };
 
     Peripheral peripheral;
     Mode mode;
+    CS cs;
 };
 
 inline const std::array spiList{
-    SpiConfig{Peripheral::SPI1, SpiConfig::MODE_1},
-    SpiConfig{Peripheral::SPI2, SpiConfig::MODE_0},
-    SpiConfig{Peripheral::SPI3, SpiConfig::MODE_0},
+    SpiConfig{Peripheral::SPI1, SpiConfig::MODE_1, SpiConfig::CS_SOFT},
+    SpiConfig{Peripheral::SPI2, SpiConfig::MODE_0, SpiConfig::CS_SOFT},
+    SpiConfig{Peripheral::SPI3, SpiConfig::MODE_1, SpiConfig::CS_SOFT},
 };
 
 }; // namespace Spi

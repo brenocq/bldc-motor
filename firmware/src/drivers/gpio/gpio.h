@@ -94,7 +94,7 @@ inline const std::array gpioList{
     GpioConfig{IMU_POCI_PIN,   Mode::SPI2_MISO},
     GpioConfig{IMU_PICO_PIN,   Mode::SPI2_MOSI},
     GpioConfig{LED_DI_PIN,     Mode::TIM2_CH1},
-    GpioConfig{ENC_CS_PIN,     Mode::SPI3_NSS},
+    GpioConfig{ENC_CS_PIN,     Mode::OUTPUT},
     GpioConfig{ENC_CLK_PIN,    Mode::SPI3_SCK},
     GpioConfig{ENC_DO_PIN,     Mode::SPI3_MISO},
     GpioConfig{VOLT_PIN,       Mode::ANALOG},

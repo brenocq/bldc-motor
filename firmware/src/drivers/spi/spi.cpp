@@ -64,8 +64,8 @@ bool Spi::init() {
         hspi->Init.DataSize = SPI_DATASIZE_8BIT;
         hspi->Init.CLKPolarity = (cfg.mode == SpiConfig::MODE_0 || cfg.mode == SpiConfig::MODE_1) ? SPI_POLARITY_LOW : SPI_POLARITY_HIGH;
         hspi->Init.CLKPhase = (cfg.mode == SpiConfig::MODE_0 || cfg.mode == SpiConfig::MODE_2) ? SPI_PHASE_1EDGE : SPI_PHASE_2EDGE;
-        hspi->Init.NSS = SPI_NSS_SOFT;
-        hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32; // 5.625MHz
+        hspi->Init.NSS = cfg.cs == SpiConfig::CS_SOFT ? SPI_NSS_SOFT : SPI_NSS_HARD_OUTPUT;
+        hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32; // 3MHz
         hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
         hspi->Init.TIMode = SPI_TIMODE_DISABLE;
         hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
