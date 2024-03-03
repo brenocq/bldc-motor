@@ -26,6 +26,41 @@
 #include <utils/error.h>
 #include <utils/log.h>
 
+struct Color {
+    float red;
+    float green;
+    float blue;
+};
+
+// const uint8_t h = 100;
+// const uint8_t l = 0;
+// const std::array<Color, 3> colors = {Color{h, l, l}, Color{l, h, l}, Color{l, l, h}};
+
+// Function to convert HSV to RGB
+Color hsvToRgb(float hue, float saturation, float value) {
+    int h = int(hue * 6);
+    float f = hue * 6 - h;
+    float p = value * (1 - saturation);
+    float q = value * (1 - f * saturation);
+    float t = value * (1 - (1 - f) * saturation);
+
+    switch (h % 6) {
+        case 0:
+            return Color{value, t, p};
+        case 1:
+            return Color{q, value, p};
+        case 2:
+            return Color{p, value, t};
+        case 3:
+            return Color{p, q, value};
+        case 4:
+            return Color{t, p, value};
+        case 5:
+            return Color{value, p, q};
+    }
+    return Color{0, 0, 0}; // Fallback to black
+}
+
 int main() {
     HAL_Init();
     Clock::init();
@@ -75,11 +110,13 @@ int main() {
     Log::success("Main", "Initialized");
 
     // Test led
-    led.setColor(0, 25, 0, 25);
-    led.setColor(1, 0, 25, 0);
+    led.setColor(0, 100, 0, 0);
+    led.setColor(1, 0, 100, 0);
     led.show();
 
     // FocController foc;
+    int ledDelay = 0;
+    int count1 = 0;
     while (true) {
         AttaConnector::update();
 
@@ -107,6 +144,25 @@ int main() {
         // Update motor signals
         // motor.set(control);
         // Log::debug("Main", "Control: $0", control);
+        Hardware::delayMs(1);
+
+        ledDelay++;
+        if (ledDelay == 5) {
+            // for (size_t i = 0; i < 3; i++) {
+            //     Color c = colors[(i + count1) % 3];
+            //     led.setColor(i, c.red, c.green, c.blue);
+            // }
+            for (size_t i = 0; i < 16; i++) {
+                // Calculate the hue value, adjusting it based on count1 to cycle through the rainbow
+                float hue = fmod((i * (360 / 16) + count1 * 10) / 360.0f, 1.0f);
+                Color c = hsvToRgb(hue, 1.0f, 1.0f);
+                Log::debug("Main", "Colors $0 -> $1 $2 $3", i, c.red * 100, c.green * 100, c.blue * 100);
+                led.setColor(i, c.red * 100, c.green * 100, c.blue * 100);
+            }
+            led.show();
+            ledDelay = 0;
+            count1++;
+        }
     }
     return 0;
 }
