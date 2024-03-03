@@ -64,8 +64,8 @@ int main() {
         Error::hardFault("Failed to initialize phase driver for phase V");
     if (!phaseW.init(Phase::W, Spi::Peripheral::SPI1, Gpio::PHASE_CS_W_PIN))
         Error::hardFault("Failed to initialize phase driver for phase W");
-    // if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
-    //    Error::hardFault("Failed to initialize IMU");
+    if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
+        Error::hardFault("Failed to initialize IMU");
     if (!motor.init())
         Error::hardFault("Failed to initialize motor driver");
     if (!AttaConnector::init())

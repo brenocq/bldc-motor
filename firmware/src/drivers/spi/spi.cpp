@@ -44,13 +44,26 @@ bool Spi::init() {
             continue;
         enableClock(peripheral);
 
+        SpiConfig cfg;
+        bool found = false;
+        for (SpiConfig spiConfig : spiList)
+            if (spiConfig.peripheral == peripheral) {
+                cfg = spiConfig;
+                found = true;
+                break;
+            }
+        if (!found) {
+            Log::error("Spi", "No SpiConfig found for peripheral $0. Peripheral will not be initilized", i + 1);
+            continue;
+        }
+
         SPI_HandleTypeDef* hspi = getHandle(peripheral);
         hspi->Instance = getInstance(peripheral);
         hspi->Init.Mode = SPI_MODE_MASTER;
         hspi->Init.Direction = SPI_DIRECTION_2LINES;
         hspi->Init.DataSize = SPI_DATASIZE_8BIT;
-        hspi->Init.CLKPolarity = SPI_POLARITY_LOW;
-        hspi->Init.CLKPhase = SPI_PHASE_2EDGE;
+        hspi->Init.CLKPolarity = (cfg.mode == SpiConfig::MODE_0 || cfg.mode == SpiConfig::MODE_1) ? SPI_POLARITY_LOW : SPI_POLARITY_HIGH;
+        hspi->Init.CLKPhase = (cfg.mode == SpiConfig::MODE_0 || cfg.mode == SpiConfig::MODE_2) ? SPI_PHASE_1EDGE : SPI_PHASE_2EDGE;
         hspi->Init.NSS = SPI_NSS_SOFT;
         hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32; // 5.625MHz
         hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;

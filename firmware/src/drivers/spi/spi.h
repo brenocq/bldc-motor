@@ -60,6 +60,21 @@ bool receive(Peripheral peripheral, uint8_t* data, uint16_t len);
  */
 bool transmitReceive(Peripheral peripheral, uint8_t* txData, uint8_t* rxData, uint16_t len);
 
+//---------- SPI configs ----------//
+
+struct SpiConfig {
+    enum Mode { MODE_0 = 0, MODE_1, MODE_2, MODE_3 };
+
+    Peripheral peripheral;
+    Mode mode;
+};
+
+inline const std::array spiList{
+    SpiConfig{Peripheral::SPI1, SpiConfig::MODE_1},
+    SpiConfig{Peripheral::SPI2, SpiConfig::MODE_3},
+    SpiConfig{Peripheral::SPI3, SpiConfig::MODE_0},
+};
+
 }; // namespace Spi
 
 #endif // BLDC_DRIVERS_SPI_SPI_H
