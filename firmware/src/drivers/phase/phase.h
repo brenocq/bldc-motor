@@ -17,6 +17,10 @@
         operator uint16_t() const { return *((uint16_t*)this); }
 // clang-format on
 
+/* @brief Phase sensor driver
+ *
+ * Driver for the INA239-Q1, it is possible to measure the phase voltage, current, and temperature.
+ */
 class Phase {
   public:
     enum PhaseId { U = 0, V, W };
@@ -24,6 +28,7 @@ class Phase {
 
     float readCurrent();
     float readVoltage();
+    float readTemperature();
 
   private:
     // clang-format off
@@ -54,15 +59,15 @@ class Phase {
     /* @brief Register config
      * Conversion delay can be used to have all phase sensors reading at approximately the same time. Keep in mind that there may be clock drift.
      */
-    struct RegConfig {
-        uint8_t reserved0 : 4; ///< Reserved bits
-        uint8_t adcRange : 1;  ///< ADC range
-        uint8_t reserved1 : 1; ///< Reserved bit
-        uint8_t convDly : 8;   ///< Conversion delay (0x00->0s 0xFF->510ms)
-        uint8_t reserved2 : 1; ///< Reserved bit
-        uint8_t rst : 1;       ///< Reset bit (set to 1 to reset)
+    struct Config {
+        uint16_t reserved0 : 4; ///< Reserved bits
+        uint16_t adcRange : 1;  ///< ADC range
+        uint16_t reserved1 : 1; ///< Reserved bit
+        uint16_t convDly : 8;   ///< Conversion delay (0x00->0s 0xFF->510ms)
+        uint16_t reserved2 : 1; ///< Reserved bit
+        uint16_t rst : 1;       ///< Reset bit (set to 1 to reset)
 
-        REG_CAST_16(RegConfig);
+        REG_CAST_16(Config);
 
         enum AdcRange : uint8_t {
             ADC_RANGE_163_84_V = 0b0,
@@ -72,11 +77,11 @@ class Phase {
 
     /// Register ADC config
     struct AdcConfig {
-        uint8_t avg : 3;    ///< ADC averaging count
-        uint8_t vtct : 3;   ///< Temperature conversion time
-        uint8_t vshct : 3;  ///< Shunt voltage conversion time
-        uint8_t vbusct : 3; ///< Bus voltage conversion time
-        uint8_t mode : 4;   ///< Mode
+        uint16_t avg : 3;    ///< ADC averaging count
+        uint16_t vtct : 3;   ///< Temperature conversion time
+        uint16_t vshct : 3;  ///< Shunt voltage conversion time
+        uint16_t vbusct : 3; ///< Bus voltage conversion time
+        uint16_t mode : 4;   ///< Mode
 
         REG_CAST_16(AdcConfig);
 
@@ -127,7 +132,7 @@ class Phase {
     /// Register shunt calibration
     struct ShuntCal {
         uint16_t shuntCal : 15; ///< Shunt calibration
-        uint8_t reserved : 1;   ///< Reserved bit
+        uint16_t reserved : 1;  ///< Reserved bit
 
         REG_CAST_16(ShuntCal);
 
@@ -136,28 +141,28 @@ class Phase {
 
     // Register diagnostic flags and alert
     struct DiagAlrt {
-        uint8_t memStat : 1;   ///< Memory status (0=error 1=normal)
-        uint8_t cnvrf : 1;     ///< Conversion completed
-        uint8_t pol : 1;       ///< Power threshold limit
-        uint8_t busul : 1;     ///< Bus under-limit threshold
-        uint8_t busol : 1;     ///< Bus over-limit threshold
-        uint8_t shntul : 1;    ///< Shunt under-limit threshold
-        uint8_t shntol : 1;    ///< Shunt over-limit threshold
-        uint8_t tmpol : 1;     ///< Temperature over-limit threshold
-        uint8_t reserved0 : 1; ///< Reserved bit
-        uint8_t mathof : 1;    ///< Mathematical overflow
-        uint8_t reserved1 : 2; ///< Reserved bits
-        uint8_t apol : 1;      ///< Alert pin polarity
-        uint8_t slowAlert : 1; ///< Alert averaged values
-        uint8_t cnvr : 1;      ///< Alert pin on conversion ready
-        uint8_t alatch : 1;    ///< Alert pin active until read
+        uint16_t memStat : 1;   ///< Memory status (0=error 1=normal)
+        uint16_t cnvrf : 1;     ///< Conversion completed
+        uint16_t pol : 1;       ///< Power threshold limit
+        uint16_t busul : 1;     ///< Bus under-limit threshold
+        uint16_t busol : 1;     ///< Bus over-limit threshold
+        uint16_t shntul : 1;    ///< Shunt under-limit threshold
+        uint16_t shntol : 1;    ///< Shunt over-limit threshold
+        uint16_t tmpol : 1;     ///< Temperature over-limit threshold
+        uint16_t reserved0 : 1; ///< Reserved bit
+        uint16_t mathof : 1;    ///< Mathematical overflow
+        uint16_t reserved1 : 2; ///< Reserved bits
+        uint16_t apol : 1;      ///< Alert pin polarity
+        uint16_t slowAlert : 1; ///< Alert averaged values
+        uint16_t cnvr : 1;      ///< Alert pin on conversion ready
+        uint16_t alatch : 1;    ///< Alert pin active until read
 
         REG_CAST_16(DiagAlrt);
     };
 
     // Register device identification
     struct DeviceId {
-        uint8_t revId : 4;   ///< Device revision identification
+        uint16_t revId : 4;  ///< Device revision identification
         uint16_t devId : 12; ///< Device identification
 
         REG_CAST_16(DeviceId);
@@ -171,7 +176,8 @@ class Phase {
     Spi::Peripheral _peripheral; ///< SPI peripehral
     Gpio::Gpio _chipSelect;      ///< SPI chip select
 
-    RegConfig _regConfigValue; ///< Register config value
+    Config _regConfigValue;       ///< Register config value
+    AdcConfig _regAdcConfigValue; ///< Register ADC config value
 };
 
 inline Phase phaseU;

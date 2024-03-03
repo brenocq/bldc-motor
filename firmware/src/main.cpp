@@ -29,6 +29,7 @@
 int main() {
     HAL_Init();
     Clock::init();
+    Hardware::delayMs(2000); // XXX Delay to show in tracer after programming
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
     if (!Uart::init())
@@ -84,12 +85,12 @@ int main() {
         // Read motor state
         MotorState state{};
         state.sourceVoltage = voltage.read();
-        // state.phaseVoltage[0] = phaseU.readVoltage();
-        // state.phaseVoltage[1] = phaseV.readVoltage();
-        // state.phaseVoltage[2] = phaseW.readVoltage();
-        // state.phaseCurrent[0] = phaseU.readCurrent();
-        // state.phaseCurrent[1] = phaseV.readCurrent();
-        // state.phaseCurrent[2] = phaseW.readCurrent();
+        state.phaseVoltage[0] = phaseU.readVoltage();
+        state.phaseVoltage[1] = phaseV.readVoltage();
+        state.phaseVoltage[2] = phaseW.readVoltage();
+        state.phaseCurrent[0] = phaseU.readCurrent();
+        state.phaseCurrent[1] = phaseV.readCurrent();
+        state.phaseCurrent[2] = phaseW.readCurrent();
         // state.rotorPosition = encoder.readAngle();
         AttaConnector::transmit(state);
 
