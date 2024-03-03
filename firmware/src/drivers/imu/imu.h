@@ -20,8 +20,8 @@ class Imu {
     bool init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect);
 
     void getGyrAcc(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az);
-    void getAcc(int16_t* x, int16_t* y, int16_t* z);
-    void getGyr(int16_t* x, int16_t* y, int16_t* z);
+    std::array<int16_t, 3> getAcc();
+    std::array<int16_t, 3> getGyr();
     float getTemperature();
 
   private:

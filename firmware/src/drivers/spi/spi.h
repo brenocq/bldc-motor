@@ -71,7 +71,7 @@ struct SpiConfig {
 
 inline const std::array spiList{
     SpiConfig{Peripheral::SPI1, SpiConfig::MODE_1},
-    SpiConfig{Peripheral::SPI2, SpiConfig::MODE_3},
+    SpiConfig{Peripheral::SPI2, SpiConfig::MODE_0},
     SpiConfig{Peripheral::SPI3, SpiConfig::MODE_0},
 };
 

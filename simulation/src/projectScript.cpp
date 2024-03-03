@@ -22,8 +22,6 @@ void ProjectScript::onLoad() {
 
 void ProjectScript::onStart() {
     _motorData = {};
-    _time = {};
-    _time3 = {};
     float R = 3.6f; // Phase resistance
     float L = 0.1f; // Phase inductance (TODO)
     float J = 0.1f; // Rotor inertia (TODO)
@@ -31,12 +29,13 @@ void ProjectScript::onStart() {
     float P = 14;   // Number of poles
     float l = 1.0f; // Flux linkage (TODO)
     _motor = Motor(R, L, J, F, P, l);
-    _tController = TrapezoidalController();
-    _focController = FocController();
+    //_tController = TrapezoidalController();
+    //_focController = FocController();
 
-    _phyMotorTime = {};
     _phyMotorData = {};
+    _imuData = {};
 }
+
 void ProjectScript::onStop() {}
 
 void ProjectScript::onUpdateBefore(float dt) {
@@ -44,135 +43,137 @@ void ProjectScript::onUpdateBefore(float dt) {
     handleSerial();
     handleAttaConnector();
 
-    // Update time
-    float lastTime = _time.empty() ? -dt : _time.back();
-    float time = lastTime + dt;
-    _time.push_back(time);
-    _time3.push_back(time);
-    _time3.push_back(time);
-    _time3.push_back(time);
-
     // Update controller
-    Controller::Control u;
-    u.position = NAN;
-    u.velocity = NAN;
-    u.torque = NAN;
-    Controller::State x;
-    x.voltage = 7.8f;
-    x.currents = {_motor.getCurrent()[0], _motor.getCurrent()[1], _motor.getCurrent()[2]};
-    x.theta = _motor.getPosition();
-    // Controller::Output output = _tController.control(x, u, dt);
-    Controller::Output output = _focController.control(x, u, dt);
+    // Controller::Control u;
+    // u.position = NAN;
+    // u.velocity = NAN;
+    // u.torque = NAN;
+    // Controller::State x;
+    // x.voltage = 7.8f;
+    // x.currents = {_motor.getCurrent()[0], _motor.getCurrent()[1], _motor.getCurrent()[2]};
+    // x.theta = _motor.getPosition();
+    //// Controller::Output output = _tController.control(x, u, dt);
+    // Controller::Output output = _focController.control(x, u, dt);
 
     // Update motor
-    float V = 7.8f;  // Voltage
-    float Tl = 0.1f; // Load torque
-    auto calcV = [V](bool h, bool l) {
-        if (h && !l)
-            return V;
-        else if (!h && l)
-            return 0.0f;
-        else
-            return -1.0f;
-    };
-    atta::vec3 Vs = {calcV(output.ah, output.al), calcV(output.bh, output.bl), calcV(output.ch, output.cl)};
-    _motor.update(Vs, Tl, dt);
-    _motorData.position.push_back(_motor.getPosition());
-    _motorData.velocity.push_back(_motor.getVelocity());
-    _motorData.motorTorque.push_back(_motor.getMotorTorque());
-    _motorData.loadTorque.push_back(_motor.getLoadTorque());
-    _motorData.electromagneticTorque.push_back(_motor.getElectromagneticTorque());
-    _motorData.current.push_back(_motor.getCurrent());
-    _motorData.voltage.push_back(_motor.getVoltage());
-    _motorData.emf.push_back(_motor.getEMF());
-    motorEntity.get<cmp::Transform>()->orientation.set2DAngle(_motorData.position.back());
+    // float V = 7.8f;  // Voltage
+    // float Tl = 0.1f; // Load torque
+    // auto calcV = [V](bool h, bool l) {
+    //    if (h && !l)
+    //        return V;
+    //    else if (!h && l)
+    //        return 0.0f;
+    //    else
+    //        return -1.0f;
+    //};
+    // atta::vec3 Vs = {calcV(output.uh, output.ul), calcV(output.vh, output.vl), calcV(output.wh, output.wl)};
+    //_motor.update(Vs, Tl, dt);
+    //_motorData.position.push_back(_motor.getPosition());
+    //_motorData.velocity.push_back(_motor.getVelocity());
+    //_motorData.motorTorque.push_back(_motor.getMotorTorque());
+    //_motorData.loadTorque.push_back(_motor.getLoadTorque());
+    //_motorData.electromagneticTorque.push_back(_motor.getElectromagneticTorque());
+    //_motorData.current.push_back(_motor.getCurrent());
+    //_motorData.voltage.push_back(_motor.getVoltage());
+    //_motorData.emf.push_back(_motor.getEMF());
+    // motorEntity.get<cmp::Transform>()->orientation.set2DAngle(_motorData.position.back());
 }
 
 void ProjectScript::onUIRender() {
-    // Setup static data
-    static float x_data[100];
-    static float y_data[100];
-    for (int i = 0; i < 100; i++) {
-        x_data[i] = i;
-        y_data[i] = sin(i * 0.1f);
-    }
+    // ImGui::Begin("Simulation");
+    //{
+    //     if (ImPlot::BeginPlot("Phase voltages")) {
+    //         ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+    //         ImPlot::PlotLine("v_u", (float*)_motorData.voltage.data(), _motorData.voltage.size(), 0, 1, 0 * sizeof(float), sizeof(atta::vec3));
+    //         ImPlot::PlotLine("v_v", (float*)_motorData.voltage.data(), _motorData.voltage.size(), 0, 1, 1 * sizeof(float), sizeof(atta::vec3));
+    //         ImPlot::PlotLine("v_w", (float*)_motorData.voltage.data(), _motorData.voltage.size(), 0, 1, 2 * sizeof(float), sizeof(atta::vec3));
+    //         ImPlot::EndPlot();
+    //     }
+
+    //    if (ImPlot::BeginPlot("Phase currents")) {
+    //        ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+    //        ImPlot::PlotLine("i_u", (float*)_motorData.current.data(), _motorData.current.size(), 0, 1, 0 * sizeof(float), sizeof(atta::vec3));
+    //        ImPlot::PlotLine("i_v", (float*)_motorData.current.data(), _motorData.current.size(), 0, 1, 1 * sizeof(float), sizeof(atta::vec3));
+    //        ImPlot::PlotLine("i_w", (float*)_motorData.current.data(), _motorData.current.size(), 0, 1, 2 * sizeof(float), sizeof(atta::vec3));
+    //        ImPlot::EndPlot();
+    //    }
+
+    //    if (ImPlot::BeginPlot("Torque")) {
+    //        ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+    //        ImPlot::PlotLine("Load torque", _time.data(), _motorData.loadTorque.data(), _time.size());
+    //        ImPlot::PlotLine("Electromagnetic torque", _time.data(), _motorData.electromagneticTorque.data(), _time.size());
+    //        ImPlot::PlotLine("Motor torque", _time.data(), _motorData.motorTorque.data(), _time.size());
+    //        ImPlot::EndPlot();
+    //    }
+
+    //    if (ImPlot::BeginPlot("Rotor velocity")) {
+    //        ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+    //        ImPlot::PlotLine("Angular velocity", _time.data(), _motorData.velocity.data(), _time.size());
+    //        ImPlot::EndPlot();
+    //    }
+
+    //    if (ImPlot::BeginPlot("Rotor position")) {
+    //        ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+    //        ImPlot::PlotLine("Angular position", _time.data(), _motorData.position.data(), _time.size());
+    //        ImPlot::EndPlot();
+    //    }
+
+    //    if (ImPlot::BeginPlot("Back EMF")) {
+    //        ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+    //        ImPlot::PlotLine("e_u", (float*)_motorData.emf.data(), _motorData.emf.size(), 0 * sizeof(float), sizeof(atta::vec3));
+    //        ImPlot::PlotLine("e_v", (float*)_motorData.emf.data(), _motorData.emf.size(), 1 * sizeof(float), sizeof(atta::vec3));
+    //        ImPlot::PlotLine("e_w", (float*)_motorData.emf.data(), _motorData.emf.size(), 2 * sizeof(float), sizeof(atta::vec3));
+    //        ImPlot::EndPlot();
+    //    }
+    //}
+    // ImGui::End();
 
     ImGui::SetNextWindowSize(ImVec2(800, 600), ImGuiCond_Once);
-    ImGui::Begin("Simulation");
-    {
-        if (ImPlot::BeginPlot("Phase voltages")) {
-            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("v_u", _time3.data(), &_motorData.voltage[0].x, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::PlotLine("v_v", _time3.data(), &_motorData.voltage[0].y, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::PlotLine("v_w", _time3.data(), &_motorData.voltage[0].z, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::EndPlot();
-        }
-
-        if (ImPlot::BeginPlot("Phase currents")) {
-            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("i_u", _time3.data(), &_motorData.current[0].x, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::PlotLine("i_v", _time3.data(), &_motorData.current[0].y, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::PlotLine("i_w", _time3.data(), &_motorData.current[0].z, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::EndPlot();
-        }
-
-        if (ImPlot::BeginPlot("Torque")) {
-            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("Load torque", _time.data(), _motorData.loadTorque.data(), _time.size());
-            ImPlot::PlotLine("Electromagnetic torque", _time.data(), _motorData.electromagneticTorque.data(), _time.size());
-            ImPlot::PlotLine("Motor torque", _time.data(), _motorData.motorTorque.data(), _time.size());
-            ImPlot::EndPlot();
-        }
-
-        if (ImPlot::BeginPlot("Rotor velocity")) {
-            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("Angular velocity", _time.data(), _motorData.velocity.data(), _time.size());
-            ImPlot::EndPlot();
-        }
-
-        if (ImPlot::BeginPlot("Rotor position")) {
-            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("Angular position", _time.data(), _motorData.position.data(), _time.size());
-            ImPlot::EndPlot();
-        }
-
-        if (ImPlot::BeginPlot("Back EMF")) {
-            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("e_u", _time3.data(), &_motorData.emf[0].x, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::PlotLine("e_v", _time3.data(), &_motorData.emf[0].y, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::PlotLine("e_w", _time3.data(), &_motorData.emf[0].z, _time.size(), 0, sizeof(atta::vec3));
-            ImPlot::EndPlot();
-        }
-    }
-    ImGui::End();
-
     ImGui::Begin("Motor State");
     {
         if (ImPlot::BeginPlot("Source Voltage")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("Source Voltage", _phyMotorTime.data(), _phyMotorData.sourceVoltage.data(), _phyMotorTime.size());
+            ImPlot::PlotLine("Source Voltage", _phyMotorData.sourceVoltage.data(), _phyMotorData.sourceVoltage.size());
             ImPlot::EndPlot();
         }
 
         if (ImPlot::BeginPlot("Phase Voltages")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("U", _phyMotorTime.data(), _phyMotorData.phaseVoltage[0].data(), _phyMotorTime.size());
-            ImPlot::PlotLine("V", _phyMotorTime.data(), _phyMotorData.phaseVoltage[1].data(), _phyMotorTime.size());
-            ImPlot::PlotLine("W", _phyMotorTime.data(), _phyMotorData.phaseVoltage[2].data(), _phyMotorTime.size());
+            size_t size = _phyMotorData.phaseVoltage[0].size();
+            ImPlot::PlotLine("U", (float*)_phyMotorData.phaseVoltage[0].data(), size);
+            ImPlot::PlotLine("V", (float*)_phyMotorData.phaseVoltage[1].data(), size);
+            ImPlot::PlotLine("W", (float*)_phyMotorData.phaseVoltage[2].data(), size);
             ImPlot::EndPlot();
         }
 
         if (ImPlot::BeginPlot("Phase Currents")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("U", _phyMotorTime.data(), _phyMotorData.phaseCurrent[0].data(), _phyMotorTime.size());
-            ImPlot::PlotLine("V", _phyMotorTime.data(), _phyMotorData.phaseCurrent[1].data(), _phyMotorTime.size());
-            ImPlot::PlotLine("W", _phyMotorTime.data(), _phyMotorData.phaseCurrent[2].data(), _phyMotorTime.size());
+            size_t size = _phyMotorData.phaseCurrent[0].size();
+            ImPlot::PlotLine("U", (float*)_phyMotorData.phaseCurrent[0].data(), size);
+            ImPlot::PlotLine("V", (float*)_phyMotorData.phaseCurrent[1].data(), size);
+            ImPlot::PlotLine("W", (float*)_phyMotorData.phaseCurrent[2].data(), size);
             ImPlot::EndPlot();
         }
 
         if (ImPlot::BeginPlot("Rotor Position")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
-            ImPlot::PlotLine("Rotor Position", _phyMotorTime.data(), _phyMotorData.rotorPosition.data(), _phyMotorTime.size());
+            ImPlot::PlotLine("Rotor Position", _phyMotorData.rotorPosition.data(), _phyMotorData.rotorPosition.size());
+            ImPlot::EndPlot();
+        }
+
+        if (ImPlot::BeginPlot("IMU accelerometer")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("X", &_imuData.acc[0][0], _imuData.acc.size(), 1, 0, 0, sizeof(atta::vec3));
+            ImPlot::PlotLine("Y", &_imuData.acc[0][1], _imuData.acc.size(), 1, 0, 0, sizeof(atta::vec3));
+            ImPlot::PlotLine("Z", &_imuData.acc[0][2], _imuData.acc.size(), 1, 0, 0, sizeof(atta::vec3));
+            ImPlot::EndPlot();
+        }
+
+        if (ImPlot::BeginPlot("IMU gyroscope")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("X", &_imuData.gyr[0][0], _imuData.gyr.size(), 1, 0, 0, sizeof(atta::vec3));
+            ImPlot::PlotLine("Y", &_imuData.gyr[0][1], _imuData.gyr.size(), 1, 0, 0, sizeof(atta::vec3));
+            ImPlot::PlotLine("Z", &_imuData.gyr[0][2], _imuData.gyr.size(), 1, 0, 0, sizeof(atta::vec3));
             ImPlot::EndPlot();
         }
     }
@@ -218,9 +219,9 @@ void ProjectScript::handleSerial() {
 void ProjectScript::handleAttaConnector() {
     if (_serial)
         AttaConnector::update();
+
     MotorState state;
     while (AttaConnector::receive<MotorState>(&state)) {
-        _phyMotorTime.push_back(_phyMotorTime.empty() ? 0.0f : (_phyMotorTime.back() + 1.0f));
         _phyMotorData.sourceVoltage.push_back(state.sourceVoltage);
         for (size_t i = 0; i < 3; i++) {
             _phyMotorData.phaseCurrent[i].push_back(state.phaseCurrent[i]);
@@ -232,6 +233,13 @@ void ProjectScript::handleAttaConnector() {
         // LOG_DEBUG("ProjectScript", "[w] - [*y]Current[y]: [w]$0 $1 $2", state.phaseCurrent[0], state.phaseCurrent[1], state.phaseCurrent[2]);
         // LOG_DEBUG("ProjectScript", "[w] - [*y]Voltage[y]: [w]$0 $1 $2", state.phaseVoltage[0], state.phaseVoltage[1], state.phaseVoltage[2]);
         // LOG_DEBUG("ProjectScript", "[w] - [*y]Rotor position[y]: [w]$0", state.rotorPosition);
+    }
+
+    ImuState imu;
+    while (AttaConnector::receive<ImuState>(&imu)) {
+        _imuData.acc.push_back(atta::vec3(imu.acc[0], imu.acc[1], imu.acc[2]));
+        _imuData.gyr.push_back(atta::vec3(imu.gyr[0], imu.gyr[1], imu.gyr[2]));
+        LOG_DEBUG("ProjectScript", "Data: $0 $1", _imuData.acc.back(), _imuData.gyr.back());
     }
 }
 

@@ -39,10 +39,9 @@ bool Imu::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
 
 void Imu::getGyrAcc(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az) {}
 
-void Imu::getAcc(int16_t* x, int16_t* y, int16_t* z) {
+std::array<int16_t, 3> Imu::getAcc() {
     // Read raw
-    uint8_t address = uint8_t(REG_OUTX_L_A);
-    address |= 0b10000000; // Read bit
+    uint8_t address = uint8_t(REG_OUTX_L_A) | 0b10000000; // Read bit
     std::array<int16_t, 3> accRaw;
     Gpio::write(_chipSelect, false);
     Spi::transmit(_peripheral, &address, sizeof(uint8_t));
@@ -50,18 +49,19 @@ void Imu::getAcc(int16_t* x, int16_t* y, int16_t* z) {
     Gpio::write(_chipSelect, true);
 
     // Convert to m/s^2
-    std::array<float, 3> acc;
-    const float k = (9.81f * 4.0f) / std::numeric_limits<int16_t>::max();
-    acc[0] = k * accRaw[0];
-    acc[1] = k * accRaw[1];
-    acc[2] = k * accRaw[2];
-    Log::debug("Imu", "Acc $0", acc);
+    // std::array<float, 3> acc;
+    // const float k = (9.81f * 4.0f) / std::numeric_limits<int16_t>::max();
+    // acc[0] = k * accRaw[0];
+    // acc[1] = k * accRaw[1];
+    // acc[2] = k * accRaw[2];
+    // Log::debug("Imu", "Acc $0", acc);
+
+    return accRaw;
 }
 
-void Imu::getGyr(int16_t* x, int16_t* y, int16_t* z) {
+std::array<int16_t, 3> Imu::getGyr() {
     // Read raw
-    uint8_t address = uint8_t(REG_OUTX_L_G);
-    address |= 0b10000000; // Read bit
+    uint8_t address = uint8_t(REG_OUTX_L_G) | 0b10000000; // Read bit
     std::array<int16_t, 3> gyrRaw;
     Gpio::write(_chipSelect, false);
     Spi::transmit(_peripheral, &address, sizeof(uint8_t));
@@ -69,19 +69,20 @@ void Imu::getGyr(int16_t* x, int16_t* y, int16_t* z) {
     Gpio::write(_chipSelect, true);
 
     // Convert to m/s^2
-    std::array<float, 3> gyr;
-    const float k = 500.0f / std::numeric_limits<int16_t>::max();
-    gyr[0] = k * gyrRaw[0];
-    gyr[1] = k * gyrRaw[1];
-    gyr[2] = k * gyrRaw[2];
-    Log::debug("Imu", "Gyr $0", gyr);
+    // std::array<float, 3> gyr;
+    // const float k = 500.0f / std::numeric_limits<int16_t>::max();
+    // gyr[0] = k * gyrRaw[0];
+    // gyr[1] = k * gyrRaw[1];
+    // gyr[2] = k * gyrRaw[2];
+    // Log::debug("Imu", "Gyr $0", gyr);
+
+    return gyrRaw;
 }
 
 float Imu::getTemperature() { return 0; }
 
 uint8_t Imu::readReg(Reg reg) {
-    uint8_t address = uint8_t(reg);
-    address |= 0b10000000; // Read bit
+    uint8_t address = uint8_t(reg) | 0b10000000; // Read bit
     uint8_t data;
     Gpio::write(_chipSelect, false);
     Spi::transmit(_peripheral, &address, sizeof(uint8_t));

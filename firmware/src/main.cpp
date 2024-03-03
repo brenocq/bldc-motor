@@ -94,6 +94,12 @@ int main() {
         // state.rotorPosition = encoder.readAngle();
         AttaConnector::transmit(state);
 
+        // Read imu state
+        ImuState imuState{};
+        imuState.acc = imu.getAcc();
+        imuState.gyr = imu.getGyr();
+        AttaConnector::transmit(imuState);
+
         // Execute controller
         // Controller::Output control = foc.control({}, {}, 0.00005);
 

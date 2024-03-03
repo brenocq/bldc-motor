@@ -6,14 +6,15 @@
 //--------------------------------------------------
 #ifndef BLDC_ATTA_CONNECTOR_CMDS_H
 #define BLDC_ATTA_CONNECTOR_CMDS_H
-#include <cstdint>
 #include <array>
+#include <cstdint>
 
 // List of command codes
 enum CommandCode : uint8_t {
     MY_TEST0_CMD = 0x00,
     MY_TEST1_CMD = 0x01,
-    MOTOR_STATE_CMD = 0x02
+    MOTOR_STATE_CMD = 0x02,
+    IMU_STATE_CMD = 0x03,
 };
 
 struct MyTest0 {
@@ -34,6 +35,12 @@ struct MotorState {
     std::array<float, 3> phaseCurrent;
     std::array<float, 3> phaseVoltage;
     float rotorPosition;
+};
+
+struct ImuState {
+    static constexpr uint8_t CMD_ID = IMU_STATE_CMD;
+    std::array<int16_t, 3> acc;
+    std::array<int16_t, 3> gyr;
 };
 
 #endif // BLDC_ATTA_CONNECTOR_PLATFORM_H

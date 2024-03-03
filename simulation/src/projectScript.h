@@ -6,11 +6,11 @@
 #ifndef BLDC_PROJECT_SCRIPT_H
 #define BLDC_PROJECT_SCRIPT_H
 #include "motor.h"
-#include "trapezoidalController.h"
-#include "focController.h"
+// #include "trapezoidalController.h"
+// #include "focController.h"
 #include "attaConnector.h"
-#include <atta/script/projectScript.h>
 #include <atta/io/interface.h>
+#include <atta/script/projectScript.h>
 
 namespace scr = atta::script;
 
@@ -50,14 +50,17 @@ class ProjectScript : public scr::ProjectScript {
         std::vector<float> rotorPosition;
     };
 
-    std::vector<float> _time;
-    std::vector<float> _time3;
-    std::vector<float> _phyMotorTime;
+    struct ImuData {
+        std::vector<atta::vec3> acc;
+        std::vector<atta::vec3> gyr;
+    };
+
     Motor _motor;
     MotorData _motorData;
     PhysicalMotorData _phyMotorData;
-    TrapezoidalController _tController;
-    FocController _focController;
+    ImuData _imuData;
+    // TrapezoidalController _tController;
+    // FocController _focController;
     std::shared_ptr<atta::io::Serial> _serial;
 };
 
