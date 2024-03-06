@@ -56,7 +56,7 @@ flash()
 
 trace()
 {
-    st-trace --clock=180 --trace=2000000
+    st-trace --clock=144 --trace=2000000
     exit
 }
 

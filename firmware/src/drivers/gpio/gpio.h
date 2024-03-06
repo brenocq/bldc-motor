@@ -28,8 +28,8 @@ constexpr Gpio SWCLK_PIN = PA14; // Serial wire clock
 constexpr Gpio UART_TX_PIN = PC6; // UART TX
 constexpr Gpio UART_RX_PIN = PC7; // UART RX
 
-constexpr Gpio USB_N_PIN = PA11; // USB Negative
-constexpr Gpio USB_P_PIN = PA12; // USB Positive
+constexpr Gpio USB_DM_PIN = PA11; // USB D-
+constexpr Gpio USB_DP_PIN = PA12; // USB D+
 
 constexpr Gpio PHASE_CLK_PIN = PA5;  // Phase sensor clock
 constexpr Gpio PHASE_CS_U_PIN = PC0; // Phase sensor U chip select
@@ -81,8 +81,8 @@ inline const std::array gpioList{
     GpioConfig{SWCLK_PIN,      Mode::SWCLK},
     GpioConfig{UART_TX_PIN,    Mode::USART6_TX},
     GpioConfig{UART_RX_PIN,    Mode::USART6_RX},
-    GpioConfig{USB_N_PIN,      Mode::OTG_FS_DM},
-    GpioConfig{USB_P_PIN,      Mode::OTG_FS_DP},
+    GpioConfig{USB_DM_PIN,     Mode::OTG_FS_DM},
+    GpioConfig{USB_DP_PIN,     Mode::OTG_FS_DP},
     GpioConfig{PHASE_CLK_PIN,  Mode::SPI1_SCK},
     GpioConfig{PHASE_CS_U_PIN, Mode::OUTPUT},
     GpioConfig{PHASE_CS_V_PIN, Mode::OUTPUT},
