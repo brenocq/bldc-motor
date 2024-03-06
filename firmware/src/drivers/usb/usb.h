@@ -10,7 +10,7 @@
 /**
  * @brief USB Driver
  *
- * @note not tested yet
+ * This driver uses the HAL PCD (peripheral-controller-driver) to implement USB FS 2.0
  */
 namespace Usb {
 

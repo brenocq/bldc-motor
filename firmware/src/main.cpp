@@ -21,6 +21,7 @@
 #include <drivers/spi/spi.h>
 #include <drivers/timer/timer.h>
 #include <drivers/uart/uart.h>
+#include <drivers/usb/usb.h>
 #include <drivers/voltage/voltage.h>
 #include <system/hal.h>
 #include <utils/error.h>
@@ -66,11 +67,12 @@ int main() {
     Gpio::write(Gpio::PHASE_CS_U_PIN, true);
     Gpio::write(Gpio::PHASE_CS_V_PIN, true);
     Gpio::write(Gpio::PHASE_CS_W_PIN, true);
-
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
     if (!Spi::init())
         Error::hardFault("Failed to initialize SPI driver");
+    if (!Usb::init())
+        Error::hardFault("Failed to initialize USB driver");
     if (!Adc::init())
         Error::hardFault("Failed to initialize ADC driver");
     if (!Timer::init())
@@ -104,11 +106,6 @@ int main() {
         Error::hardFault("Failed to initialize atta connector");
 
     Log::success("Main", "Initialized");
-
-    // Test led
-    led.setColor(0, 100, 0, 0);
-    led.setColor(1, 0, 100, 0);
-    led.show();
 
     // FocController foc;
     int ledDelay = 0;
