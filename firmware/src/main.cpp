@@ -32,10 +32,6 @@ struct Color {
     float blue;
 };
 
-// const uint8_t h = 100;
-// const uint8_t l = 0;
-// const std::array<Color, 3> colors = {Color{h, l, l}, Color{l, h, l}, Color{l, l, h}};
-
 // Function to convert HSV to RGB
 Color hsvToRgb(float hue, float saturation, float value) {
     int h = int(hue * 6);
@@ -144,20 +140,14 @@ int main() {
         // Update motor signals
         // motor.set(control);
         // Log::debug("Main", "Control: $0", control);
-        Hardware::delayMs(1);
 
         ledDelay++;
         if (ledDelay == 5) {
-            // for (size_t i = 0; i < 3; i++) {
-            //     Color c = colors[(i + count1) % 3];
-            //     led.setColor(i, c.red, c.green, c.blue);
-            // }
             for (size_t i = 0; i < 16; i++) {
                 // Calculate the hue value, adjusting it based on count1 to cycle through the rainbow
                 float hue = fmod((i * (360 / 16) + count1 * 10) / 360.0f, 1.0f);
                 Color c = hsvToRgb(hue, 1.0f, 1.0f);
-                Log::debug("Main", "Colors $0 -> $1 $2 $3", i, c.red * 100, c.green * 100, c.blue * 100);
-                led.setColor(i, c.red * 100, c.green * 100, c.blue * 100);
+                led.setColor(i, c.red * 10, c.green * 10, c.blue * 10);
             }
             led.show();
             ledDelay = 0;
