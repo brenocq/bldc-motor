@@ -10,8 +10,19 @@
 #include <system/hal.h>
 #include <utils/log.h>
 
+// clang-format off
+#define FIELD_CAST_16(T) \
+        T() = default; \
+        T(uint16_t d) { *((uint16_t*)this) = d; } \
+        operator uint16_t() const { return *((uint16_t*)this); }
+#define FIELD_CAST_8(T) \
+        T() = default; \
+        T(uint8_t d) { *((uint8_t*)this) = d; } \
+        operator uint8_t() const { return *((uint8_t*)this); }
+// clang-format on
+
 namespace Usb {
-void waitTransmit();
+
 bool enableClock();
 
 void setupStageCallback(PCD_HandleTypeDef* hpcd);
@@ -27,6 +38,101 @@ void connectCallback(PCD_HandleTypeDef* hpcd);
 void disconnectCallback(PCD_HandleTypeDef* hpcd);
 
 PCD_HandleTypeDef hpcd;
+
+enum class EPType { CONTROL = 0b00, ISOCHRONOUS, BULK, INTERRUPT };
+constexpr uint16_t EP0_MAX_PACKET_SIZE = 64;
+
+struct BmRequestType {
+    enum class Recipient : uint8_t { DEVICE = 0b00, INTERFACE, ENDPOINT, OTHER };
+    enum class Type : uint8_t { STANDARD = 0b00, CLASS, VENDOR };
+    enum class Direction : uint8_t { HOST_TO_DEVICE = 0b0, DEVICE_TO_HOST };
+
+    Recipient recipient : 5;
+    Type type : 2;
+    Direction direction : 1;
+
+    FIELD_CAST_8(BmRequestType);
+};
+
+enum class BRequest {
+    GET_STATUS = 0x00,
+    CLEAR_FEATURE = 0x01,
+    SET_FEATURE = 0x03,
+    SET_ADDRESS = 0x05,
+    GET_DESCRIPTOR = 0x06,
+    SET_DESCRIPTOR = 0x07,
+    GET_CONFIGURATION = 0x08,
+    SET_CONFIGURATION = 0x09,
+};
+
+struct DeviceDescriptor {
+    enum class DescriptorType : uint8_t {
+        DEVICE = 0x01,
+        CONFIGURATION = 0x02,
+        STRING = 0x03,
+        INTERFACE = 0x04,
+        ENDPOINT = 0x05,
+        QUALIFIER = 0x06,
+        OTHER = 0x07,
+        INTERFACE_POWER = 0x08,
+        OTG = 0x09,
+        DEBUG = 0x0A,
+    };
+
+    enum class BcdUSB : uint16_t {
+        USB_1_0 = 0x0100,
+        USB_1_1 = 0x0110,
+        USB_2_0 = 0x0200,
+        USB_3_0 = 0x0300,
+    };
+
+    enum class DeviceClass : uint8_t {
+        CLASS_PER_INTERFACE = 0x00,
+        AUDIO_DEVICE = 0x01,
+        CDC = 0x02,
+    };
+
+    enum class DeviceSubClass : uint8_t {
+        NONE = 0x00,
+    };
+
+    enum class DeviceProtocol : uint8_t {
+        NONE = 0x00,
+    };
+
+    uint8_t bLength;
+    DescriptorType bDescriptorType;
+    BcdUSB bcdUSB;
+    DeviceClass bDeviceClass;
+    DeviceSubClass bDeviceSubClass;
+    DeviceProtocol bDeviceProtocol;
+    uint8_t bMaxPacketSize0;
+    uint16_t idVendor;
+    uint16_t idProduct;
+    uint16_t bcdDevice;
+    uint8_t iManufacturer;
+    uint8_t iProduct;
+    uint8_t iSerialNumber;
+    uint8_t bNumConfigurations;
+};
+
+const DeviceDescriptor _deviceDescriptor = {
+    .bLength = sizeof(DeviceDescriptor),
+    .bDescriptorType = DeviceDescriptor::DescriptorType::DEVICE,
+    .bcdUSB = DeviceDescriptor::BcdUSB::USB_2_0,
+    .bDeviceClass = DeviceDescriptor::DeviceClass::CLASS_PER_INTERFACE,
+    .bDeviceSubClass = DeviceDescriptor::DeviceSubClass::NONE,
+    .bDeviceProtocol = DeviceDescriptor::DeviceProtocol::NONE,
+    .bMaxPacketSize0 = 64,
+    .idVendor = 0xBBBB,
+    .idProduct = 0xBABA,
+    .bcdDevice = 0xCAFE,
+    .iManufacturer = 0,
+    .iProduct = 0,
+    .iSerialNumber = 0,
+    .bNumConfigurations = 1,
+};
+
 } // namespace Usb
 
 bool Usb::init() {
@@ -52,7 +158,7 @@ bool Usb::init() {
         return false;
     }
 
-    // Register callBacks
+    // Register callbacks
     HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_SOF_CB_ID, SOFCallback);
     HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_SETUPSTAGE_CB_ID, setupStageCallback);
     HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_RESET_CB_ID, resetCallback);
@@ -65,10 +171,10 @@ bool Usb::init() {
     HAL_PCD_RegisterIsoOutIncpltCallback(&hpcd, ISOOUTIncompleteCallback);
     HAL_PCD_RegisterIsoInIncpltCallback(&hpcd, ISOINIncompleteCallback);
 
-    // Setup FIFOs
-    HAL_PCDEx_SetRxFiFo(&hpcd, 0x80);
-    HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x40);
-    HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x80);
+    // Setup FIFOs (1.25KB)
+    HAL_PCDEx_SetRxFiFo(&hpcd, 0x80);    // 512B
+    HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x40); // 256B
+    HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x80); // 512B
 
     // Start
     if (HAL_PCD_Start(&hpcd) != HAL_OK) {
@@ -82,24 +188,9 @@ bool Usb::init() {
 
 Usb::Handle* Usb::getHandle() { return &hpcd; }
 
-void Usb::waitTransmit() {
-    // USBD_CDC_HandleTypeDef* hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
-    // while (hUsbDeviceFS.pClassData == nullptr) {
-    // }
-    // while (hcdc->TxState != 0) {
-    // }
-}
+bool Usb::transmit(uint8_t* data, int32_t len, bool busyWait) { return false; }
 
-bool Usb::transmit(uint8_t* data, int32_t len, bool busyWait) {
-    // if (busyWait)
-    //     waitTransmit();
-    // return CDC_Transmit_FS(data, len) == USBD_OK;
-    return false;
-}
-
-void Usb::receiveCallbackCDC(uint8_t* data, uint32_t* len) {
-    // Called by base/cube/USB_DEVICE/App/usbd_cdc_if.c
-}
+bool Usb::receive(uint8_t* data, uint32_t* len) { return false; }
 
 bool Usb::enableClock() {
     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct{};
@@ -111,11 +202,44 @@ bool Usb::enableClock() {
     return true;
 }
 
-void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Setup"); }
+void Usb::resetCallback(PCD_HandleTypeDef* hpcd) {
+    Log::debug("Usb", "Reset");
+
+    // Configure EN0
+    HAL_PCD_EP_Open(hpcd, 0x00U, EP0_MAX_PACKET_SIZE, (uint8_t)EPType::CONTROL); // EP0 OUT
+    HAL_PCD_EP_Open(hpcd, 0x80U, EP0_MAX_PACKET_SIZE, (uint8_t)EPType::CONTROL); // EP0 IN
+
+    // Configure device address
+    HAL_PCD_SetAddress(hpcd, 0);
+}
+
+void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) {
+    uint8_t* setup = (uint8_t*)hpcd->Setup;
+    BmRequestType bmRequestType = setup[0];
+    BRequest bRequest = (BRequest)setup[1];
+    uint16_t wValue = setup[2] << 8 | setup[3];
+    uint16_t wIndex = setup[4] << 8 | setup[5];
+    uint16_t wLength = setup[6] << 8 | setup[7];
+    if (bmRequestType.recipient == BmRequestType::Recipient::DEVICE) {
+        switch (bRequest) {
+            case BRequest::SET_ADDRESS:
+                break;
+            case BRequest::GET_DESCRIPTOR:
+                break;
+            case BRequest::SET_CONFIGURATION:
+                break;
+            default:
+                break;
+        }
+    }
+    Log::debug("Usb", "Setup bmRequest $0 request $1 value $2 index $3 length $4", (int)bmRequestType, (int)bRequest, wValue, wIndex, wLength);
+    Log::debug("Usb", "Descriptor $0", sizeof(DeviceDescriptor));
+}
+
 void Usb::dataOutStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "OUT"); }
 void Usb::dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "IN"); }
 void Usb::SOFCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "SOF"); }
-void Usb::resetCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Reset"); }
+
 void Usb::suspendCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Suspend"); }
 void Usb::resumeCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Resume"); }
 void Usb::ISOOUTIncompleteCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "ISO OUT incomplete"); }

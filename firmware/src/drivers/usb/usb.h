@@ -23,9 +23,7 @@ void update();
 Handle* getHandle();
 
 bool transmit(uint8_t* data, int32_t len, bool busyWait = true);
-
-// Called by CDC code when one packet is received (up to 64 bytes)
-void receiveCallbackCDC(uint8_t* data, uint32_t* len);
+bool receive(uint8_t* data, uint32_t* len);
 
 }; // namespace Usb
 
