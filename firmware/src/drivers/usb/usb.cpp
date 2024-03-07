@@ -14,8 +14,19 @@ namespace Usb {
 void waitTransmit();
 bool enableClock();
 
-PCD_HandleTypeDef hpcd;
+void setupStageCallback(PCD_HandleTypeDef* hpcd);
+void dataOutStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum);
+void dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum);
+void SOFCallback(PCD_HandleTypeDef* hpcd);
+void resetCallback(PCD_HandleTypeDef* hpcd);
+void suspendCallback(PCD_HandleTypeDef* hpcd);
+void resumeCallback(PCD_HandleTypeDef* hpcd);
+void ISOOUTIncompleteCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum);
+void ISOINIncompleteCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum);
+void connectCallback(PCD_HandleTypeDef* hpcd);
+void disconnectCallback(PCD_HandleTypeDef* hpcd);
 
+PCD_HandleTypeDef hpcd;
 } // namespace Usb
 
 bool Usb::init() {
@@ -23,10 +34,6 @@ bool Usb::init() {
         Log::error("Usb", "Failed to enable clock");
         return false;
     }
-
-    // Interrupts?
-    HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 
     // Initialize PCD
     hpcd.pData = nullptr;
@@ -45,14 +52,35 @@ bool Usb::init() {
         return false;
     }
 
+    // Register callBacks
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_SOF_CB_ID, SOFCallback);
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_SETUPSTAGE_CB_ID, setupStageCallback);
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_RESET_CB_ID, resetCallback);
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_SUSPEND_CB_ID, suspendCallback);
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_RESUME_CB_ID, resumeCallback);
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_CONNECT_CB_ID, connectCallback);
+    HAL_PCD_RegisterCallback(&hpcd, HAL_PCD_DISCONNECT_CB_ID, disconnectCallback);
+    HAL_PCD_RegisterDataOutStageCallback(&hpcd, dataOutStageCallback);
+    HAL_PCD_RegisterDataInStageCallback(&hpcd, dataInStageCallback);
+    HAL_PCD_RegisterIsoOutIncpltCallback(&hpcd, ISOOUTIncompleteCallback);
+    HAL_PCD_RegisterIsoInIncpltCallback(&hpcd, ISOINIncompleteCallback);
+
     // Setup FIFOs
     HAL_PCDEx_SetRxFiFo(&hpcd, 0x80);
     HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x40);
     HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x80);
 
+    // Start
+    if (HAL_PCD_Start(&hpcd) != HAL_OK) {
+        Log::error("Usb", "Failed to start PCD");
+        return false;
+    }
+
     Log::success("Usb", "Initialized");
     return true;
 }
+
+Usb::Handle* Usb::getHandle() { return &hpcd; }
 
 void Usb::waitTransmit() {
     // USBD_CDC_HandleTypeDef* hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
@@ -82,3 +110,15 @@ bool Usb::enableClock() {
     __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     return true;
 }
+
+void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Setup"); }
+void Usb::dataOutStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "OUT"); }
+void Usb::dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "IN"); }
+void Usb::SOFCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "SOF"); }
+void Usb::resetCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Reset"); }
+void Usb::suspendCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Suspend"); }
+void Usb::resumeCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Resume"); }
+void Usb::ISOOUTIncompleteCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "ISO OUT incomplete"); }
+void Usb::ISOINIncompleteCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "ISO IN incomplete"); }
+void Usb::connectCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Connect"); }
+void Usb::disconnectCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Disconnect"); }

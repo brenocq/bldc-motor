@@ -14,9 +14,13 @@
  */
 namespace Usb {
 
+using Handle = PCD_HandleTypeDef;
+
 bool init();
 
 void update();
+
+Handle* getHandle();
 
 bool transmit(uint8_t* data, int32_t len, bool busyWait = true);
 

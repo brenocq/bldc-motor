@@ -7,6 +7,7 @@
 #include <drivers/dma/dma.h>
 #include <drivers/interrupt/interrupt.h>
 #include <drivers/timer/timer.h>
+#include <drivers/usb/usb.h>
 #include <system/hal.h>
 #include <utils/error.h>
 #include <utils/log.h>
@@ -19,6 +20,10 @@ bool Interrupt::init() {
     // DMA
     HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
+
+    // USB
+    HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 
     Log::success("Interrupt", "Initialized");
     return true;
@@ -42,4 +47,5 @@ void SysTick_Handler() { HAL_IncTick(); }
 //----- Peripheral interrupts -----//
 void TIM2_IRQHandler() { HAL_TIM_IRQHandler(Timer::getHandle(Timer::TIM2)); }
 void DMA1_Stream5_IRQHandler() { HAL_DMA_IRQHandler(Dma::getHandle(Dma::DMA1, Dma::STREAM5)); }
+void OTG_FS_IRQHandler() { HAL_PCD_IRQHandler(Usb::getHandle()); }
 }
