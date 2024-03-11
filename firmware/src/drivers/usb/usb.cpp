@@ -42,43 +42,52 @@ PCD_HandleTypeDef hpcd;
 enum class EPType { CONTROL = 0b00, ISOCHRONOUS, BULK, INTERRUPT };
 constexpr uint16_t EP0_MAX_PACKET_SIZE = 64;
 
-struct BmRequestType {
-    enum class Recipient : uint8_t { DEVICE = 0b00, INTERFACE, ENDPOINT, OTHER };
-    enum class Type : uint8_t { STANDARD = 0b00, CLASS, VENDOR };
-    enum class Direction : uint8_t { HOST_TO_DEVICE = 0b0, DEVICE_TO_HOST };
+struct SetupData {
+    struct BmRequestType {
+        enum class Recipient : uint8_t { DEVICE = 0b00, INTERFACE, ENDPOINT, OTHER };
+        enum class Type : uint8_t { STANDARD = 0b00, CLASS, VENDOR };
+        enum class Direction : uint8_t { HOST_TO_DEVICE = 0b0, DEVICE_TO_HOST };
 
-    Recipient recipient : 5;
-    Type type : 2;
-    Direction direction : 1;
+        Recipient recipient : 5;
+        Type type : 2;
+        Direction direction : 1;
 
-    FIELD_CAST_8(BmRequestType);
+        FIELD_CAST_8(BmRequestType);
+    };
+
+    enum class BRequest {
+        GET_STATUS = 0x00,
+        CLEAR_FEATURE = 0x01,
+        SET_FEATURE = 0x03,
+        SET_ADDRESS = 0x05,
+        GET_DESCRIPTOR = 0x06,
+        SET_DESCRIPTOR = 0x07,
+        GET_CONFIGURATION = 0x08,
+        SET_CONFIGURATION = 0x09,
+        GET_INTERFACE = 0x0A,
+        SET_INTERFACE = 0x0B,
+        SYNCH_FRAME = 0x0C,
+    };
+
+    BmRequestType bmRequestType;
+    BRequest bRequest;
+    uint16_t wValue;
+    uint16_t wIndex;
+    uint16_t wLength;
 };
 
-enum class BRequest {
-    GET_STATUS = 0x00,
-    CLEAR_FEATURE = 0x01,
-    SET_FEATURE = 0x03,
-    SET_ADDRESS = 0x05,
-    GET_DESCRIPTOR = 0x06,
-    SET_DESCRIPTOR = 0x07,
-    GET_CONFIGURATION = 0x08,
-    SET_CONFIGURATION = 0x09,
+enum class DescriptorType : uint8_t {
+    DEVICE = 0x01,
+    CONFIGURATION = 0x02,
+    STRING = 0x03,
+    INTERFACE = 0x04,
+    ENDPOINT = 0x05,
+    DEVICE_QUALIFIER = 0x06,
+    OTHER_SPEED_CONFIGURATION = 0x07,
+    INTERFACE_POWER = 0x08
 };
 
 struct DeviceDescriptor {
-    enum class DescriptorType : uint8_t {
-        DEVICE = 0x01,
-        CONFIGURATION = 0x02,
-        STRING = 0x03,
-        INTERFACE = 0x04,
-        ENDPOINT = 0x05,
-        QUALIFIER = 0x06,
-        OTHER = 0x07,
-        INTERFACE_POWER = 0x08,
-        OTG = 0x09,
-        DEBUG = 0x0A,
-    };
-
     enum class BcdUSB : uint16_t {
         USB_1_0 = 0x0100,
         USB_1_1 = 0x0110,
@@ -116,9 +125,20 @@ struct DeviceDescriptor {
     uint8_t bNumConfigurations;
 };
 
+struct ConfigurationDescriptor {
+    uint8_t bLength;
+    DescriptorType bDescriptorType;
+    uint16_t wTotalLength;
+    uint8_t bNumInterfaces;
+    uint8_t bConfigurationValue;
+    uint8_t iConfiguration;
+    uint8_t bmAttributes;
+    uint8_t bMaxPower;
+};
+
 const DeviceDescriptor _deviceDescriptor = {
     .bLength = sizeof(DeviceDescriptor),
-    .bDescriptorType = DeviceDescriptor::DescriptorType::DEVICE,
+    .bDescriptorType = DescriptorType::DEVICE,
     .bcdUSB = DeviceDescriptor::BcdUSB::USB_2_0,
     .bDeviceClass = DeviceDescriptor::DeviceClass::CLASS_PER_INTERFACE,
     .bDeviceSubClass = DeviceDescriptor::DeviceSubClass::NONE,
@@ -132,6 +152,20 @@ const DeviceDescriptor _deviceDescriptor = {
     .iSerialNumber = 0,
     .bNumConfigurations = 1,
 };
+
+const ConfigurationDescriptor _configurationDescriptor = {
+    .bLength = sizeof(ConfigurationDescriptor),
+    .bDescriptorType = DescriptorType::CONFIGURATION,
+    .wTotalLength = sizeof(ConfigurationDescriptor), // Size for the whole descriptor set
+    .bNumInterfaces = 0,
+    .bConfigurationValue = 0,
+    .iConfiguration = 0,
+    .bmAttributes = 0,
+    .bMaxPower = 0,
+};
+
+void deviceGetDescriptor(const SetupData& setupData);
+void deviceRequest(const SetupData& setupData);
 
 } // namespace Usb
 
@@ -213,31 +247,95 @@ void Usb::resetCallback(PCD_HandleTypeDef* hpcd) {
     HAL_PCD_SetAddress(hpcd, 0);
 }
 
-void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) {
-    uint8_t* setup = (uint8_t*)hpcd->Setup;
-    BmRequestType bmRequestType = setup[0];
-    BRequest bRequest = (BRequest)setup[1];
-    uint16_t wValue = setup[2] << 8 | setup[3];
-    uint16_t wIndex = setup[4] << 8 | setup[5];
-    uint16_t wLength = setup[6] << 8 | setup[7];
-    if (bmRequestType.recipient == BmRequestType::Recipient::DEVICE) {
-        switch (bRequest) {
-            case BRequest::SET_ADDRESS:
-                break;
-            case BRequest::GET_DESCRIPTOR:
-                break;
-            case BRequest::SET_CONFIGURATION:
-                break;
-            default:
-                break;
-        }
+void Usb::deviceGetDescriptor(const SetupData& setupData) {
+    uint8_t descriptorType = setupData.wValue >> 8;
+    uint8_t descriptorIndex = setupData.wValue & 0xFF;
+    switch (descriptorType) {
+        case (uint8_t)DescriptorType::DEVICE:
+            if (HAL_PCD_EP_Transmit(&hpcd, 0x00U, (uint8_t*)&_deviceDescriptor, sizeof(_deviceDescriptor)) != HAL_OK)
+                Log::error("Usb", "Failed to transmit device descriptor");
+            break;
+        case (uint8_t)DescriptorType::CONFIGURATION:
+            if (HAL_PCD_EP_Transmit(&hpcd, 0x00U, (uint8_t*)&_configurationDescriptor, sizeof(_configurationDescriptor)) != HAL_OK)
+                Log::error("Usb", "Failed to transmit device descriptor");
+            break;
+        case (uint8_t)DescriptorType::DEVICE_QUALIFIER:
+
+            break;
+        default:
+            Log::warning("Usb", "Could not handle deviceGetDescriptor with type $0", (int)descriptorType);
+            break;
     }
-    Log::debug("Usb", "Setup bmRequest $0 request $1 value $2 index $3 length $4", (int)bmRequestType, (int)bRequest, wValue, wIndex, wLength);
-    Log::debug("Usb", "Descriptor $0", sizeof(DeviceDescriptor));
 }
 
-void Usb::dataOutStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "OUT"); }
-void Usb::dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) { Log::debug("Usb", "IN"); }
+void Usb::deviceRequest(const SetupData& setupData) {
+    switch (setupData.bmRequestType.type) {
+        case SetupData::BmRequestType::Type::STANDARD: {
+            switch (setupData.bRequest) {
+                case SetupData::BRequest::SET_ADDRESS: {
+                    uint16_t address = setupData.wValue;
+                    if (address > 127 || setupData.wIndex > 0 || setupData.wLength > 0) {
+                        Log::error("Usb", "Wrong setupData for SET_ADDRESS");
+                        break;
+                    }
+                    HAL_PCD_SetAddress(&hpcd, address);
+                    HAL_PCD_EP_Transmit(&hpcd, 0, nullptr, 0);
+                    Log::debug("Usb", "Address set to $0", address);
+                } break;
+                case SetupData::BRequest::GET_DESCRIPTOR:
+                    deviceGetDescriptor(setupData);
+                    break;
+                case SetupData::BRequest::SET_CONFIGURATION:
+                    Log::debug("Usb", "Set configuration to $0", (int)setupData.wValue);
+                    break;
+                default:
+                    break;
+            }
+        }
+        case SetupData::BmRequestType::Type::VENDOR:
+        case SetupData::BmRequestType::Type::CLASS:
+            break;
+    }
+}
+
+void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) {
+    uint8_t* setup = (uint8_t*)hpcd->Setup;
+    SetupData setupData;
+    setupData.bmRequestType = setup[0];
+    setupData.bRequest = (SetupData::BRequest)setup[1];
+    setupData.wValue = (setup[3] << 8) | setup[2];
+    setupData.wIndex = (setup[5] << 8) | setup[4];
+    setupData.wLength = (setup[7] << 8) | setup[6];
+    switch (setupData.bmRequestType.recipient) {
+        case SetupData::BmRequestType::Recipient::DEVICE:
+            deviceRequest(setupData);
+            break;
+        default:
+            break;
+    }
+    Log::debug("Usb", "Setup bmRequest $0 bRequest $1 wValue $2 wIndex $3 wLength $4", (int)setupData.bmRequestType, (int)setupData.bRequest,
+               setupData.wValue, setupData.wIndex, setupData.wLength);
+}
+
+void Usb::dataOutStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) {
+    // Log::debug("Usb", "EP$0 OUT -> $1 $2", (int)epnum, (int)hpcd->OUT_ep[epnum].xfer_len, (int)hpcd->OUT_ep[epnum].xfer_count);
+    Log::debug("Usb", "EP$0 OUT", (int)epnum);
+    uint8_t* data = hpcd->OUT_ep[epnum].xfer_buff;
+}
+
+void Usb::dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) {
+    Log::debug("Usb", "EP$0 IN", (int)epnum);
+
+    // TODO if more packets to transmit, transmit
+
+    // TODO if transmitted all packets, send ZLP (zero-length packet) to indicate end to transmission
+    // HAL_PCD_EP_Transmit(hpcd, epnum, nullptr, 0);
+    if (epnum == 0x00) {
+        // Prepare to receive status OUT packet if control endpoint
+        HAL_PCD_EP_Receive(hpcd, epnum, nullptr, 0);
+    }
+}
+
 void Usb::SOFCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "SOF"); }
 
 void Usb::suspendCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "Suspend"); }
