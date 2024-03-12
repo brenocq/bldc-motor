@@ -111,6 +111,7 @@ int main() {
     int ledDelay = 0;
     int count1 = 0;
     while (true) {
+        Usb::update();
         AttaConnector::update();
 
         // Read motor state

@@ -7,6 +7,7 @@
 #include "usb_device.h"
 #include "usbd_cdc_if.h"
 #include <drivers/usb/usb.h>
+#include <drivers/usb/usbHid.h>
 #include <system/hal.h>
 #include <utils/log.h>
 
@@ -39,7 +40,26 @@ void disconnectCallback(PCD_HandleTypeDef* hpcd);
 
 PCD_HandleTypeDef hpcd;
 
-enum class EPType { CONTROL = 0b00, ISOCHRONOUS, BULK, INTERRUPT };
+enum class Endpoint : uint8_t {
+    OUT0 = 0x00,
+    OUT1 = 0x01,
+    OUT2 = 0x02,
+    OUT3 = 0x03,
+    OUT4 = 0x04,
+    OUT5 = 0x05,
+    OUT6 = 0x06,
+    OUT7 = 0x07,
+    IN0 = 0x80,
+    IN1 = 0x81,
+    IN2 = 0x82,
+    IN3 = 0x83,
+    IN4 = 0x84,
+    IN5 = 0x85,
+    IN6 = 0x86,
+    IN7 = 0x87,
+};
+
+enum class EPType : uint8_t { CONTROL = 0b00, ISOCHRONOUS, BULK, INTERRUPT };
 constexpr uint16_t EP0_MAX_PACKET_SIZE = 64;
 
 struct SetupData {
@@ -84,10 +104,26 @@ enum class DescriptorType : uint8_t {
     ENDPOINT = 0x05,
     DEVICE_QUALIFIER = 0x06,
     OTHER_SPEED_CONFIGURATION = 0x07,
-    INTERFACE_POWER = 0x08
+    INTERFACE_POWER = 0x08,
+    HID = 0x21,
 };
 
-struct DeviceDescriptor {
+enum class BaseClass : uint8_t {
+    CLASS_PER_INTERFACE = 0x00,
+    AUDIO_DEVICE = 0x01,
+    CDC = 0x02,
+    HID = 0x03,
+};
+
+enum class SubClass : uint8_t {
+    NONE = 0x00,
+};
+
+enum class Protocol : uint8_t {
+    NONE = 0x00,
+};
+
+struct __attribute__((__packed__)) DeviceDescriptor {
     enum class BcdUSB : uint16_t {
         USB_1_0 = 0x0100,
         USB_1_1 = 0x0110,
@@ -95,26 +131,12 @@ struct DeviceDescriptor {
         USB_3_0 = 0x0300,
     };
 
-    enum class DeviceClass : uint8_t {
-        CLASS_PER_INTERFACE = 0x00,
-        AUDIO_DEVICE = 0x01,
-        CDC = 0x02,
-    };
-
-    enum class DeviceSubClass : uint8_t {
-        NONE = 0x00,
-    };
-
-    enum class DeviceProtocol : uint8_t {
-        NONE = 0x00,
-    };
-
     uint8_t bLength;
     DescriptorType bDescriptorType;
     BcdUSB bcdUSB;
-    DeviceClass bDeviceClass;
-    DeviceSubClass bDeviceSubClass;
-    DeviceProtocol bDeviceProtocol;
+    BaseClass bDeviceClass;
+    SubClass bDeviceSubClass;
+    Protocol bDeviceProtocol;
     uint8_t bMaxPacketSize0;
     uint16_t idVendor;
     uint16_t idProduct;
@@ -125,7 +147,12 @@ struct DeviceDescriptor {
     uint8_t bNumConfigurations;
 };
 
-struct ConfigurationDescriptor {
+struct __attribute__((__packed__)) ConfigurationDescriptor {
+    using Attribute = uint8_t;
+    static constexpr uint8_t ATTRIB_DEFAULT = (1 << 7);
+    static constexpr uint8_t ATTRIB_REMOVE_WAKEUP = (1 << 5);
+    static constexpr uint8_t ATTRIB_SELF_POWERED = (1 << 6);
+
     uint8_t bLength;
     DescriptorType bDescriptorType;
     uint16_t wTotalLength;
@@ -136,13 +163,97 @@ struct ConfigurationDescriptor {
     uint8_t bMaxPower;
 };
 
+struct __attribute__((__packed__)) InterfaceDescriptor {
+    uint8_t bLength;
+    DescriptorType bDescriptorType;
+    uint8_t bInterfaceNumber;
+    uint8_t bAlternateSetting;
+    uint8_t bNumEndpoints;
+    BaseClass bInterfaceClass;
+    SubClass bInterfaceSubClass;
+    Protocol bInterfaceProtocol;
+    uint8_t iInterface;
+};
+
+struct __attribute__((__packed__)) EndpointDescriptor {
+    using Attribute = uint8_t;
+    static constexpr uint8_t ATTRIB_TYPE_CONTROL = 0b00;
+    static constexpr uint8_t ATTRIB_TYPE_ISOCHRONOUS = 0b01;
+    static constexpr uint8_t ATTRIB_TYPE_BULK = 0b10;
+    static constexpr uint8_t ATTRIB_TYPE_INTERRUPT = 0b11;
+
+    // Isochronous type configuration
+    static constexpr uint8_t ATTRIB_NO_SYNC = (0b00 << 2);
+    static constexpr uint8_t ATTRIB_ASYNC = (0b01 << 2);
+    static constexpr uint8_t ATTRIB_ADAPTIVE = (0b10 << 2);
+    static constexpr uint8_t ATTRIB_SYNC = (0b11 << 2);
+
+    static constexpr uint8_t ATTRIB_DATA_ENDPOINT = (0b00 << 4);
+    static constexpr uint8_t ATTRIB_FEEDBACK_ENDPOINT = (0b01 << 4);
+    static constexpr uint8_t ATTRIB_IMPLICIT_FEEDBACK_DATA_ENDPOINT = (0b10 << 4);
+
+    uint8_t bLength;
+    DescriptorType bDescriptorType;
+    Endpoint bEndpointAddress;
+    Attribute bmAttributes;
+    uint16_t wMaxPacketSize;
+    uint8_t bInterval;
+};
+
+struct __attribute__((__packed__)) HidDescriptor {
+    uint8_t bLength;
+    DescriptorType bDescriptorType;
+    uint16_t bcdHID;
+    uint8_t bCountryCode;
+    uint8_t bNumDescriptors;
+    uint8_t bDescriptorType0;
+    uint16_t wDescriptorLength0;
+};
+
+struct HidReport {
+    uint8_t x;
+    uint8_t y;
+    uint8_t buttons;
+};
+
+// clang-format off
+const uint8_t hidReportDescriptor[] = {
+    HID_USAGE_PAGE(HID_PAGE_DESKTOP),
+    HID_USAGE(HID_DESKTOP_MOUSE),
+    HID_COLLECTION(HID_APPLICATION_COLLECTION),
+        HID_USAGE(HID_DESKTOP_POINTER),
+        HID_COLLECTION(HID_PHYSICAL_COLLECTION),
+            HID_USAGE(HID_DESKTOP_X),
+            HID_USAGE(HID_DESKTOP_Y),
+            HID_LOGICAL_MINIMUM(-127),
+            HID_LOGICAL_MAXIMUM(127),
+            HID_REPORT_SIZE(8),
+            HID_REPORT_COUNT(2),
+            HID_INPUT(HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_RELATIVE),
+
+            HID_USAGE_PAGE(HID_PAGE_BUTTON),
+            HID_USAGE_MINIMUM(1),
+            HID_USAGE_MAXIMUM(3),
+            HID_LOGICAL_MINIMUM(0),
+            HID_LOGICAL_MAXIMUM(1),
+            HID_REPORT_SIZE(1),
+            HID_REPORT_COUNT(3),
+            HID_INPUT(HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+            HID_REPORT_SIZE(1),
+            HID_REPORT_COUNT(5),
+            HID_INPUT(HID_IOF_CONSTANT),
+        HID_END_COLLECTION,
+    HID_END_COLLECTION
+};
+// clang-format on
+
 const DeviceDescriptor _deviceDescriptor = {
     .bLength = sizeof(DeviceDescriptor),
     .bDescriptorType = DescriptorType::DEVICE,
     .bcdUSB = DeviceDescriptor::BcdUSB::USB_2_0,
-    .bDeviceClass = DeviceDescriptor::DeviceClass::CLASS_PER_INTERFACE,
-    .bDeviceSubClass = DeviceDescriptor::DeviceSubClass::NONE,
-    .bDeviceProtocol = DeviceDescriptor::DeviceProtocol::NONE,
+    .bDeviceClass = BaseClass::CLASS_PER_INTERFACE,
+    .bDeviceSubClass = SubClass::NONE,
+    .bDeviceProtocol = Protocol::NONE,
     .bMaxPacketSize0 = 64,
     .idVendor = 0xBBBB,
     .idProduct = 0xBABA,
@@ -153,19 +264,61 @@ const DeviceDescriptor _deviceDescriptor = {
     .bNumConfigurations = 1,
 };
 
-const ConfigurationDescriptor _configurationDescriptor = {
-    .bLength = sizeof(ConfigurationDescriptor),
-    .bDescriptorType = DescriptorType::CONFIGURATION,
-    .wTotalLength = sizeof(ConfigurationDescriptor), // Size for the whole descriptor set
-    .bNumInterfaces = 0,
-    .bConfigurationValue = 0,
-    .iConfiguration = 0,
-    .bmAttributes = 0,
-    .bMaxPower = 0,
+struct DescriptorSet {
+    ConfigurationDescriptor configurationDescriptor;
+    InterfaceDescriptor interfaceDescriptor;
+    HidDescriptor hidDescriptor;
+    EndpointDescriptor endpointDescriptor;
+};
+const DescriptorSet _descriptorSet = {
+    .configurationDescriptor =
+        {
+            .bLength = sizeof(ConfigurationDescriptor),
+            .bDescriptorType = DescriptorType::CONFIGURATION,
+            .wTotalLength = sizeof(DescriptorSet),
+            .bNumInterfaces = 1,
+            .bConfigurationValue = 1,
+            .iConfiguration = 0,
+            .bmAttributes = ConfigurationDescriptor::ATTRIB_DEFAULT | ConfigurationDescriptor::ATTRIB_SELF_POWERED,
+            .bMaxPower = 25, // 50mA
+        },
+    .interfaceDescriptor =
+        {
+            .bLength = sizeof(InterfaceDescriptor),
+            .bDescriptorType = DescriptorType::INTERFACE,
+            .bInterfaceNumber = 0,
+            .bAlternateSetting = 0,
+            .bNumEndpoints = 1,
+            .bInterfaceClass = BaseClass::HID,
+            .bInterfaceSubClass = SubClass::NONE,
+            .bInterfaceProtocol = Protocol::NONE,
+            .iInterface = 0,
+        },
+    .hidDescriptor =
+        {
+            .bLength = sizeof(HidDescriptor),
+            .bDescriptorType = DescriptorType::HID,
+            .bcdHID = 0x0100,
+            .bCountryCode = 0,
+            .bNumDescriptors = 1,
+            .bDescriptorType0 = 0x22,
+            .wDescriptorLength0 = sizeof(hidReportDescriptor),
+        },
+    .endpointDescriptor =
+        {
+            .bLength = sizeof(EndpointDescriptor),
+            .bDescriptorType = DescriptorType::ENDPOINT,
+            .bEndpointAddress = Endpoint::IN3,
+            .bmAttributes = EndpointDescriptor::ATTRIB_TYPE_INTERRUPT,
+            .wMaxPacketSize = 64,
+            .bInterval = 50,
+
+        },
 };
 
 void deviceGetDescriptor(const SetupData& setupData);
 void deviceRequest(const SetupData& setupData);
+void interfaceRequest(const SetupData& setupData);
 
 } // namespace Usb
 
@@ -220,6 +373,8 @@ bool Usb::init() {
     return true;
 }
 
+void Usb::update() {}
+
 Usb::Handle* Usb::getHandle() { return &hpcd; }
 
 bool Usb::transmit(uint8_t* data, int32_t len, bool busyWait) { return false; }
@@ -240,8 +395,8 @@ void Usb::resetCallback(PCD_HandleTypeDef* hpcd) {
     Log::debug("Usb", "Reset");
 
     // Configure EN0
-    HAL_PCD_EP_Open(hpcd, 0x00U, EP0_MAX_PACKET_SIZE, (uint8_t)EPType::CONTROL); // EP0 OUT
-    HAL_PCD_EP_Open(hpcd, 0x80U, EP0_MAX_PACKET_SIZE, (uint8_t)EPType::CONTROL); // EP0 IN
+    HAL_PCD_EP_Open(hpcd, (uint8_t)Endpoint::OUT0, EP0_MAX_PACKET_SIZE, (uint8_t)EPType::CONTROL); // EP0 OUT
+    HAL_PCD_EP_Open(hpcd, (uint8_t)Endpoint::IN0, EP0_MAX_PACKET_SIZE, (uint8_t)EPType::CONTROL);  // EP0 IN
 
     // Configure device address
     HAL_PCD_SetAddress(hpcd, 0);
@@ -249,15 +404,19 @@ void Usb::resetCallback(PCD_HandleTypeDef* hpcd) {
 
 void Usb::deviceGetDescriptor(const SetupData& setupData) {
     uint8_t descriptorType = setupData.wValue >> 8;
-    uint8_t descriptorIndex = setupData.wValue & 0xFF;
+    // uint8_t descriptorIndex = setupData.wValue & 0xFF;
     switch (descriptorType) {
         case (uint8_t)DescriptorType::DEVICE:
-            if (HAL_PCD_EP_Transmit(&hpcd, 0x00U, (uint8_t*)&_deviceDescriptor, sizeof(_deviceDescriptor)) != HAL_OK)
+            if (HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN0, (uint8_t*)&_deviceDescriptor,
+                                    std::min((uint16_t)sizeof(_deviceDescriptor), setupData.wLength)) != HAL_OK)
                 Log::error("Usb", "Failed to transmit device descriptor");
+            Log::debug("Usb", "DEVICE");
             break;
         case (uint8_t)DescriptorType::CONFIGURATION:
-            if (HAL_PCD_EP_Transmit(&hpcd, 0x00U, (uint8_t*)&_configurationDescriptor, sizeof(_configurationDescriptor)) != HAL_OK)
-                Log::error("Usb", "Failed to transmit device descriptor");
+            if (HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN0, (uint8_t*)&_descriptorSet,
+                                    std::min((uint16_t)sizeof(DescriptorSet), setupData.wLength)) != HAL_OK)
+                Log::error("Usb", "Failed to transmit descriptor set");
+            Log::debug("Usb", "CONFIGURATION");
             break;
         case (uint8_t)DescriptorType::DEVICE_QUALIFIER:
 
@@ -279,13 +438,16 @@ void Usb::deviceRequest(const SetupData& setupData) {
                         break;
                     }
                     HAL_PCD_SetAddress(&hpcd, address);
-                    HAL_PCD_EP_Transmit(&hpcd, 0, nullptr, 0);
+                    HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN0, nullptr, 0);
                     Log::debug("Usb", "Address set to $0", address);
                 } break;
                 case SetupData::BRequest::GET_DESCRIPTOR:
                     deviceGetDescriptor(setupData);
                     break;
                 case SetupData::BRequest::SET_CONFIGURATION:
+                    HAL_PCD_EP_Open(&hpcd, (uint8_t)Endpoint::IN3, 64, (uint8_t)EPType::INTERRUPT);
+                    HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN3, nullptr, 0);
+                    HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN0, nullptr, 0);
                     Log::debug("Usb", "Set configuration to $0", (int)setupData.wValue);
                     break;
                 default:
@@ -298,7 +460,28 @@ void Usb::deviceRequest(const SetupData& setupData) {
     }
 }
 
+void Usb::interfaceRequest(const SetupData& setupData) {
+    switch (setupData.bmRequestType.type) {
+        case SetupData::BmRequestType::Type::STANDARD: {
+            uint16_t request = setupData.wValue >> 8;
+            if (request == 0x22) { // HID REPORT
+                HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN0, (uint8_t*)hidReportDescriptor, sizeof(hidReportDescriptor));
+            }
+            break;
+        }
+        case SetupData::BmRequestType::Type::CLASS: {
+            if ((int)setupData.bRequest == 0x0A) { // HID SET IDLE
+                HAL_PCD_EP_Transmit(&hpcd, (uint8_t)Endpoint::IN0, nullptr, 0);
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) {
+    Log::debug("Usb", "SETUP");
     uint8_t* setup = (uint8_t*)hpcd->Setup;
     SetupData setupData;
     setupData.bmRequestType = setup[0];
@@ -310,17 +493,18 @@ void Usb::setupStageCallback(PCD_HandleTypeDef* hpcd) {
         case SetupData::BmRequestType::Recipient::DEVICE:
             deviceRequest(setupData);
             break;
+        case SetupData::BmRequestType::Recipient::INTERFACE:
+            interfaceRequest(setupData);
+            break;
         default:
             break;
     }
-    Log::debug("Usb", "Setup bmRequest $0 bRequest $1 wValue $2 wIndex $3 wLength $4", (int)setupData.bmRequestType, (int)setupData.bRequest,
-               setupData.wValue, setupData.wIndex, setupData.wLength);
 }
 
 void Usb::dataOutStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) {
     // Log::debug("Usb", "EP$0 OUT -> $1 $2", (int)epnum, (int)hpcd->OUT_ep[epnum].xfer_len, (int)hpcd->OUT_ep[epnum].xfer_count);
     Log::debug("Usb", "EP$0 OUT", (int)epnum);
-    uint8_t* data = hpcd->OUT_ep[epnum].xfer_buff;
+    // uint8_t* data = hpcd->OUT_ep[epnum].xfer_buff;
 }
 
 void Usb::dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) {
@@ -330,10 +514,18 @@ void Usb::dataInStageCallback(PCD_HandleTypeDef* hpcd, uint8_t epnum) {
 
     // TODO if transmitted all packets, send ZLP (zero-length packet) to indicate end to transmission
     // HAL_PCD_EP_Transmit(hpcd, epnum, nullptr, 0);
-    if (epnum == 0x00) {
-        // Prepare to receive status OUT packet if control endpoint
-        HAL_PCD_EP_Receive(hpcd, epnum, nullptr, 0);
+    // if (epnum == 0x00) {
+    //    // Prepare to receive status OUT packet if control endpoint
+    //}
+
+    if (epnum == 0x03) {
+        // HidReport hidReport = {.x = 5};
+        // HAL_PCD_EP_Transmit(hpcd, epnum, (uint8_t*)&hidReport, sizeof(HidReport));
+        HAL_PCD_EP_Transmit(hpcd, epnum, nullptr, 0);
+        Log::debug("Usb", "Transmit $0", (int)sizeof(HidReport));
     }
+    if (epnum == 0x00)
+        HAL_PCD_EP_Receive(hpcd, epnum, nullptr, 0);
 }
 
 void Usb::SOFCallback(PCD_HandleTypeDef* hpcd) { Log::debug("Usb", "SOF"); }
