@@ -20,6 +20,11 @@ enum class Mode {
     INPUT_CAPTURE, ///< **Not supported** Capture counter value when event happens
     INPUT_ENCODER, ///< **Not supported** Count number of interrupts
 };
+enum class CounterMode {
+    UP = 0, ///< Count up
+    DOWN,   ///< Count down
+    CENTER, ///< Count up/down (center aligned 3)
+};
 using Handle = TIM_HandleTypeDef;
 constexpr uint16_t PERIOD = 112;
 
@@ -41,9 +46,10 @@ bool deinit();
  * @brief Set PWM duty cycle
  *
  * @param timer Timer
- * @param duty Duty cycle from 0.0f to 1.0f
+ * @param channel Timer channel
+ * @param ccr Capture/compare register value
  */
-void setPwm(Timer timer, float duty);
+void setPwm(Timer timer, Channel channel, uint16_t ccr);
 
 /**
  * @brief Get timer handle
@@ -83,16 +89,26 @@ void startPwmDma(Timer timer, Channel channel, uint32_t* data, uint16_t size);
 
 //---------- Timers ----------//
 static constexpr Timer LED_TIM = TIM2;
+static constexpr uint16_t LED_PERIOD = 112;
 static constexpr Channel LED_CH = CH1;
+
+static constexpr Timer MOTOR_TIM = TIM1;
+static constexpr uint16_t MOTOR_PERIOD = 999;
+static constexpr Channel MOTOR_CH_U = CH1;
+static constexpr Channel MOTOR_CH_V = CH2;
+static constexpr Channel MOTOR_CH_W = CH3;
 
 //---------- Timer configs ----------//
 struct TimerConfig {
     Timer timer;
     Mode mode;
+    CounterMode counterMode;
+    uint16_t period;
 };
 
 inline const std::array timerList{
-    TimerConfig{LED_TIM, Mode::PWM},
+    TimerConfig{LED_TIM, Mode::PWM, CounterMode::UP, LED_PERIOD},
+    TimerConfig{MOTOR_TIM, Mode::PWM, CounterMode::CENTER, MOTOR_PERIOD},
 };
 
 }; // namespace Timer

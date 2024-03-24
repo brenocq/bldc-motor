@@ -71,8 +71,8 @@ int main() {
         Error::hardFault("Failed to initialize UART driver");
     if (!Spi::init())
         Error::hardFault("Failed to initialize SPI driver");
-    if (!Usb::init())
-        Error::hardFault("Failed to initialize USB driver");
+    // if (!Usb::init())
+    //     Error::hardFault("Failed to initialize USB driver");
     if (!Adc::init())
         Error::hardFault("Failed to initialize ADC driver");
     if (!Timer::init())
@@ -110,9 +110,16 @@ int main() {
     // FocController foc;
     int ledDelay = 0;
     int count1 = 0;
+
+    for (size_t i = 1; i < 16; i += 2)
+        led.setColor(i, 0, 1, 0);
+    led.show();
+
     while (true) {
-        Usb::update();
+        // Usb::update();
         AttaConnector::update();
+
+        motor.set(0.0f, 1.0f);
 
         // Read motor state
         MotorState state{};
@@ -139,18 +146,18 @@ int main() {
         // motor.set(control);
         // Log::debug("Main", "Control: $0", control);
 
-        ledDelay++;
-        if (ledDelay == 5) {
-            for (size_t i = 0; i < 16; i++) {
-                // Calculate the hue value, adjusting it based on count1 to cycle through the rainbow
-                float hue = fmod((i * (360 / 16) + count1 * 10) / 360.0f, 1.0f);
-                Color c = hsvToRgb(hue, 1.0f, 1.0f);
-                led.setColor(i, c.red * 10, c.green * 10, c.blue * 10);
-            }
-            led.show();
-            ledDelay = 0;
-            count1++;
-        }
+        // ledDelay++;
+        // if (ledDelay == 5) {
+        //     for (size_t i = 0; i < 16; i++) {
+        //         // Calculate the hue value, adjusting it based on count1 to cycle through the rainbow
+        //         float hue = fmod((i * (360 / 16) + count1 * 10) / 360.0f, 1.0f);
+        //         Color c = hsvToRgb(hue, 1.0f, 1.0f);
+        //         led.setColor(i, c.red * 1, c.green * 1, c.blue * 1);
+        //     }
+        //     led.show();
+        //     ledDelay = 0;
+        //     count1++;
+        // }
     }
     return 0;
 }

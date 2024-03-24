@@ -17,10 +17,11 @@ namespace Timer {
  * @warning For now the timer output can be set to only one GPIO
  *
  * @param timer Timer to configure
+ * @param cfg Timer configuration
  *
  * @return True if success
  */
-bool initPwm(Timer timer);
+bool initPwm(Timer timer, TimerConfig cfg);
 
 TIM_TypeDef* getInstance(Timer timer);
 void enableClock(Timer timer);
@@ -28,6 +29,8 @@ void disableClock(Timer timer);
 
 Timer gpioModeToTimer(Gpio::Mode mode);
 Channel gpioModeToChannel(Gpio::Mode mode);
+
+static constexpr uint16_t convert(CounterMode counterMode);
 
 Handle hTIM1;
 Handle hTIM2;
@@ -60,7 +63,7 @@ bool Timer::init() {
     for (TimerConfig cfg : timerList) {
         switch (cfg.mode) {
             case Mode::PWM:
-                if (!initPwm(cfg.timer))
+                if (!initPwm(cfg.timer, cfg))
                     return false;
                 break;
             default:
@@ -91,19 +94,24 @@ bool Timer::deinit() {
     return true;
 }
 
-bool Timer::initPwm(Timer timer) {
+bool Timer::initPwm(Timer timer, TimerConfig cfg) {
     // Check if GPIO was initialized correctly
-    Channel channel;
-    bool found = false;
+    std::vector<Channel> channels;
     for (Gpio::GpioConfig config : Gpio::gpioList) {
         if (gpioModeToTimer(config.mode) == timer) {
-            channel = gpioModeToChannel(config.mode);
-            found = true;
-            break;
+            Channel channel = gpioModeToChannel(config.mode);
+            bool newChannel = true;
+            for (size_t i = 0; i < channels.size(); i++)
+                if (channels[i] == channel)
+                    newChannel = false;
+            if (newChannel)
+                channels.push_back(channel);
         }
     }
-    if (!found || channel == CH_NONE)
+    if (channels.empty()) {
+        Log::error("Timer", "Trying to enable TIM$0 PWM, but no GPIO is using it", int(timer));
         return false;
+    }
 
     // Enable clock
     enableClock(timer);
@@ -111,9 +119,9 @@ bool Timer::initPwm(Timer timer) {
     // Initialize PWM
     TIM_HandleTypeDef* htim = getHandle(timer);
     htim->Instance = getInstance(timer);
-    htim->Init.CounterMode = TIM_COUNTERMODE_UP;
+    htim->Init.CounterMode = convert(cfg.counterMode);
     htim->Init.Prescaler = 0;
-    htim->Init.Period = PERIOD;
+    htim->Init.Period = cfg.period;
     htim->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim->Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_PWM_Init(htim) != HAL_OK)
@@ -130,16 +138,38 @@ bool Timer::initPwm(Timer timer) {
     sConfigOC.Pulse = 0;
     sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
     sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-    if (HAL_TIM_PWM_ConfigChannel(htim, &sConfigOC, (uint32_t)channel) != HAL_OK)
-        return false;
-
-    // Reset duty cycle to 0%
-    setPwm(timer, 0.0f);
+    sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+    if (timer == TIM1 || timer == TIM8) {
+        sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+        sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_SET;
+    }
+    for (size_t i = 0; i < channels.size(); i++) {
+        if (HAL_TIM_PWM_ConfigChannel(htim, &sConfigOC, (uint32_t)channels[i]) != HAL_OK)
+            return false;
+    }
 
     return true;
 }
 
-void Timer::setPwm(Timer timer, float pwm) { getInstance(timer)->CCR1 = pwm * PERIOD; }
+void Timer::setPwm(Timer timer, Channel channel, uint16_t ccr) {
+    switch (channel) {
+        case CH1:
+            getInstance(timer)->CCR1 = ccr;
+            return;
+        case CH2:
+            getInstance(timer)->CCR2 = ccr;
+            return;
+        case CH3:
+            getInstance(timer)->CCR3 = ccr;
+            return;
+        case CH4:
+            getInstance(timer)->CCR4 = ccr;
+            return;
+        default:
+            break;
+    }
+    Log::error("Timer", "Could not set TIM$0 PWM", int(timer));
+}
 
 // clang-format off
 #define LINK_DMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__) \
@@ -171,12 +201,16 @@ void Timer::linkDma(Timer timer, Channel channel, Dma::Handle* dmaHandle) {
 
 void Timer::startPwm(Timer timer, Channel channel) {
     if (HAL_TIM_PWM_Start(getHandle(timer), channel) != HAL_OK)
-        Log::error("Timer", "Failed to start TIM$0 PWM: $1", int(timer));
+        Log::error("Timer", "Failed to start TIM$0 PWM", int(timer));
+    if (timer == TIM1 || timer == TIM8) {
+        if (HAL_TIMEx_PWMN_Start(getHandle(timer), channel) != HAL_OK)
+            Log::error("Timer", "Failed to start TIM$0 PWMN", int(timer));
+    }
 }
 
 void Timer::startPwmDma(Timer timer, Channel channel, uint32_t* data, uint16_t size) {
     if (HAL_TIM_PWM_Start_DMA(getHandle(timer), channel, data, size) != HAL_OK)
-        Log::error("Timer", "Failed to start TIM$0 PWM DMA: $1", int(timer));
+        Log::error("Timer", "Failed to start TIM$0 PWM DMA", int(timer));
 }
 
 // clang-format off
@@ -361,4 +395,16 @@ Timer::Channel Timer::gpioModeToChannel(Gpio::Mode mode) {
     }
 
     return CH_NONE;
+}
+
+constexpr uint16_t Timer::convert(CounterMode counterMode) {
+    switch (counterMode) {
+        case CounterMode::UP:
+            return TIM_COUNTERMODE_UP;
+        case CounterMode::DOWN:
+            return TIM_COUNTERMODE_DOWN;
+        case CounterMode::CENTER:
+            return TIM_COUNTERMODE_CENTERALIGNED3;
+    }
+    return TIM_COUNTERMODE_UP;
 }

@@ -12,9 +12,8 @@ class Motor {
   public:
     bool init();
 
-    enum PhaseState { LOW = 0, HIGH = 1, Z = 2 };
-
-    void set(Controller::Output control);
+    // void set(Controller::Output control);
+    void set(float angle, float magnitude);
 };
 
 inline Motor motor;
