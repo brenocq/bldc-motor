@@ -115,11 +115,19 @@ int main() {
         led.setColor(i, 0, 1, 0);
     led.show();
 
+    float motorAngle = 0.0f;
+    bool sign = true;
     while (true) {
         // Usb::update();
         AttaConnector::update();
 
-        motor.set(0.0f, 1.0f);
+        // motorAngle += (sign ? 1 : -1) * 0.5f / 180 * M_PI;
+        // if (motorAngle >= M_PI / 3 || motorAngle <= 0.0f)
+        //     sign = !sign;
+        motorAngle += 0.5f / 180 * M_PI;
+        if (motorAngle >= 2 * M_PI)
+            motorAngle -= 2 * M_PI;
+        motor.set(motorAngle, 1.0f);
 
         // Read motor state
         MotorState state{};

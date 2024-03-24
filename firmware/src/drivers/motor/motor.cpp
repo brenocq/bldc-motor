@@ -7,37 +7,72 @@
 #include <drivers/hardware.h>
 #include <drivers/motor/motor.h>
 #include <drivers/timer/timer.h>
+#include <utils/log.h>
 
 bool Motor::init() {
-    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U, 100);
-    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V, 250);
-    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W, 500);
+    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U, 0);
+    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V, 0);
+    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W, 0);
     startPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U);
     startPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V);
     startPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W);
     return true;
 }
 
-//// clang-format off
-// const bool stage[6][6] = {
-//     {1,0,0,1,0,0},
-//     {1,0,0,0,0,1},
-//     {0,0,1,0,0,1},
-//     {0,1,1,0,0,0},
-//     {0,1,0,0,1,0},
-//     {0,0,0,1,1,0},
-// };
-//// clang-format on
-//
-// void Motor::set(Controller::Output control) {
-//    Gpio::write(Gpio::MOTOR_UL_PIN, control.ul);
-//    Gpio::write(Gpio::MOTOR_UH_PIN, control.uh);
-//    Gpio::write(Gpio::MOTOR_VL_PIN, control.vl);
-//    Gpio::write(Gpio::MOTOR_VH_PIN, control.vh);
-//    Gpio::write(Gpio::MOTOR_WL_PIN, control.wl);
-//    Gpio::write(Gpio::MOTOR_WH_PIN, control.wh);
-//}
-
 void Motor::set(float angle, float magnitude) {
-    // TODO Update timers
+    // Sector from the space vector diagram
+    int sector = static_cast<int>(angle / (M_PI / 3));
+
+    // Calculate ratios
+    float sectorAngle = angle - sector * (M_PI / 3);
+    float t1 = magnitude * std::sin(M_PI / 3 - sectorAngle); // Time ratio first vector from sector
+    float t2 = magnitude * std::sin(sectorAngle);            // Time ratio second vector from sector
+    float t0 = 1.0 - t1 - t2;                                // Time ratio null vector
+
+    // Calculate channel CCR for each phase
+    constexpr uint16_t maxPeriod = Timer::MOTOR_PERIOD;
+    uint16_t uPeriod = maxPeriod;
+    uint16_t vPeriod = maxPeriod;
+    uint16_t wPeriod = maxPeriod;
+
+    switch (sector) {
+        case 0:
+            uPeriod -= (t0 / 2) * maxPeriod;
+            vPeriod -= ((t0 / 2) + t1) * maxPeriod;
+            wPeriod -= ((t0 / 2) + t1 + t2) * maxPeriod;
+            break;
+        case 1:
+            uPeriod -= ((t0 / 2) + t2) * maxPeriod;
+            vPeriod -= (t0 / 2) * maxPeriod;
+            wPeriod -= ((t0 / 2) + t1 + t2) * maxPeriod;
+            break;
+        case 2:
+            uPeriod -= ((t0 / 2) + t1 + t2) * maxPeriod;
+            vPeriod -= (t0 / 2) * maxPeriod;
+            wPeriod -= ((t0 / 2) + t1) * maxPeriod;
+            break;
+        case 3:
+            uPeriod -= ((t0 / 2) + t1 + t2) * maxPeriod;
+            vPeriod -= ((t0 / 2) + t2) * maxPeriod;
+            wPeriod -= (t0 / 2) * maxPeriod;
+            break;
+        case 4:
+            uPeriod -= ((t0 / 2) + t1) * maxPeriod;
+            vPeriod -= ((t0 / 2) + t1 + t2) * maxPeriod;
+            wPeriod -= (t0 / 2) * maxPeriod;
+            break;
+        case 5:
+            uPeriod -= (t0 / 2) * maxPeriod;
+            vPeriod -= ((t0 / 2) + t1 + t2) * maxPeriod;
+            wPeriod -= ((t0 / 2) + t2) * maxPeriod;
+            break;
+        default:
+            Log::error("Motor", "Invalid section");
+            return;
+    }
+
+    Log::debug("Motor", "Angle $6 ($7)-> Periods $0 $1 $2 -> t0 $3 t1 $4 t2 $5", uPeriod, vPeriod, wPeriod, t0, t1, t2, angle / M_PI * 180, sector);
+    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U, uPeriod);
+    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V, vPeriod);
+    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W, wPeriod);
 }
