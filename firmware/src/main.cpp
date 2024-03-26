@@ -124,7 +124,7 @@ int main() {
         // motorAngle += (sign ? 1 : -1) * 0.5f / 180 * M_PI;
         // if (motorAngle >= M_PI / 3 || motorAngle <= 0.0f)
         //     sign = !sign;
-        motorAngle += 0.5f / 180 * M_PI;
+        motorAngle += 1.0f / 180 * M_PI;
         if (motorAngle >= 2 * M_PI)
             motorAngle -= 2 * M_PI;
         motor.set(motorAngle, 1.0f);

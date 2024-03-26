@@ -155,6 +155,46 @@ void ProjectScript::onUIRender() {
             ImPlot::EndPlot();
         }
 
+        std::vector<float> ia;
+        std::vector<float> ib;
+        for (size_t i = 0; i < _phyMotorData.phaseCurrent[0].size(); i++) {
+            float u = _phyMotorData.phaseCurrent[0][i];
+            float v = _phyMotorData.phaseCurrent[1][i];
+            float w = _phyMotorData.phaseCurrent[2][i];
+            ia.push_back(2 / 3.0f * (u - 0.5 * v - 0.5 * w));
+            ib.push_back(2 / 3.0f * (std::sqrt(3) * 0.5 * v - std::sqrt(3) * 0.5 * w));
+        }
+
+        if (ImPlot::BeginPlot("Phase Currents (Clarke)")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("Alpha", (float*)ia.data(), ia.size());
+            ImPlot::PlotLine("Beta", (float*)ib.data(), ib.size());
+            ImPlot::EndPlot();
+        }
+
+        std::vector<float> id;
+        std::vector<float> iq;
+        for (size_t i = 0; i < ia.size(); i++) {
+            // Convert from rotor angle to electrical angle
+            float angle = _phyMotorData.rotorPosition[i] - 0.222;
+            if (angle < 0.0f)
+                angle += 2 * M_PI;
+            while (angle >= 2 * M_PI / 7)
+                angle -= 2 * M_PI / 7;
+            angle *= 7;
+            LOG_DEBUG("ProjectScript", "Angle $0", angle / M_PI * 180);
+            // Calculate d/q
+            id.push_back(cos(angle) * ia[i] + sin(angle) * ib[i]);
+            iq.push_back(-sin(angle) * ia[i] + cos(angle) * ib[i]);
+        }
+
+        if (ImPlot::BeginPlot("Phase Currents (Park)")) {
+            ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
+            ImPlot::PlotLine("Direct", (float*)id.data(), id.size());
+            ImPlot::PlotLine("Quadrature", (float*)iq.data(), iq.size());
+            ImPlot::EndPlot();
+        }
+
         if (ImPlot::BeginPlot("Rotor Position")) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_AutoFit, ImPlotAxisFlags_AutoFit);
             ImPlot::PlotLine("Rotor Position", _phyMotorData.rotorPosition.data(), _phyMotorData.rotorPosition.size());

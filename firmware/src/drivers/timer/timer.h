@@ -93,7 +93,7 @@ static constexpr uint16_t LED_PERIOD = 112;
 static constexpr Channel LED_CH = CH1;
 
 static constexpr Timer MOTOR_TIM = TIM1;
-static constexpr uint16_t MOTOR_PERIOD = 10000 - 1;
+static constexpr uint16_t MOTOR_PERIOD = 3000 - 1;
 static constexpr Channel MOTOR_CH_U = CH1;
 static constexpr Channel MOTOR_CH_V = CH2;
 static constexpr Channel MOTOR_CH_W = CH3;

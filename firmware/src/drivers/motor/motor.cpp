@@ -71,7 +71,6 @@ void Motor::set(float angle, float magnitude) {
             return;
     }
 
-    Log::debug("Motor", "Angle $6 ($7)-> Periods $0 $1 $2 -> t0 $3 t1 $4 t2 $5", uPeriod, vPeriod, wPeriod, t0, t1, t2, angle / M_PI * 180, sector);
     setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U, uPeriod);
     setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V, vPeriod);
     setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W, wPeriod);
