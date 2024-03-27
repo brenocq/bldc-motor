@@ -58,6 +58,33 @@ Color hsvToRgb(float hue, float saturation, float value) {
     return Color{0, 0, 0}; // Fallback to black
 }
 
+void handleAttaConnector() {
+    // SVPWM Controls
+    SVPWMControl control;
+    while (AttaConnector::receive<SVPWMControl>(&control)) {
+        Log::debug("Main", "Received control");
+        motor.set(control.angle, control.magnitude);
+    }
+
+    // Read motor state
+    MotorState state{};
+    state.sourceVoltage = voltage.read();
+    state.phaseVoltage[0] = phaseU.readVoltage();
+    state.phaseVoltage[1] = phaseV.readVoltage();
+    state.phaseVoltage[2] = phaseW.readVoltage();
+    state.phaseCurrent[0] = phaseU.readCurrent();
+    state.phaseCurrent[1] = phaseV.readCurrent();
+    state.phaseCurrent[2] = phaseW.readCurrent();
+    state.rotorPosition = encoder.readAngle();
+    AttaConnector::transmit(state);
+
+    // Read imu state
+    ImuState imuState{};
+    imuState.acc = imu.getAcc();
+    imuState.gyr = imu.getGyr();
+    AttaConnector::transmit(imuState);
+}
+
 int main() {
     HAL_Init();
     Clock::init();
@@ -120,32 +147,12 @@ int main() {
     while (true) {
         // Usb::update();
         AttaConnector::update();
+        handleAttaConnector();
 
-        // motorAngle += (sign ? 1 : -1) * 0.5f / 180 * M_PI;
-        // if (motorAngle >= M_PI / 3 || motorAngle <= 0.0f)
-        //     sign = !sign;
         motorAngle += 1.0f / 180 * M_PI;
         if (motorAngle >= 2 * M_PI)
             motorAngle -= 2 * M_PI;
-        motor.set(motorAngle, 1.0f);
-
-        // Read motor state
-        MotorState state{};
-        state.sourceVoltage = voltage.read();
-        state.phaseVoltage[0] = phaseU.readVoltage();
-        state.phaseVoltage[1] = phaseV.readVoltage();
-        state.phaseVoltage[2] = phaseW.readVoltage();
-        state.phaseCurrent[0] = phaseU.readCurrent();
-        state.phaseCurrent[1] = phaseV.readCurrent();
-        state.phaseCurrent[2] = phaseW.readCurrent();
-        state.rotorPosition = encoder.readAngle();
-        AttaConnector::transmit(state);
-
-        // Read imu state
-        ImuState imuState{};
-        imuState.acc = imu.getAcc();
-        imuState.gyr = imu.getGyr();
-        AttaConnector::transmit(imuState);
+        // motor.set(motorAngle, 1.0f);
 
         // Execute controller
         // Controller::Output control = foc.control({}, {}, 0.00005);

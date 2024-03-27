@@ -129,6 +129,37 @@ void ProjectScript::onUIRender() {
     // ImGui::End();
 
     ImGui::SetNextWindowSize(ImVec2(800, 600), ImGuiCond_Once);
+    ImGui::Begin("Calibration");
+    {
+        std::array<float, 628> calibration; // Map between true angle and biased measurement
+        static size_t currAngle = 0;        // Current angle being calibrated [0, 628]
+        static size_t lastReceivedIdx = 0;  // Current angle being calibrated [0, 628]
+        static bool calibrating = false;
+        constexpr size_t NUM_SAMPLES_WAIT = 10;    // Number of samples to wait before reading
+        constexpr size_t NUM_SAMPLES_AVERAGE = 10; // Number of samples to average
+        if (!calibrating && ImGui::Button("Start")) {
+            calibrating = true;
+            currAngle = 0;
+            lastReceivedIdx = _phyMotorData.rotorPosition.size() - 1;
+        }
+        if (calibrating) {
+            if (ImGui::Button("Stop"))
+                calibrating = false;
+            static float angle = 0.0f;
+            static float magnitude = 1.0f;
+            ImGui::SliderFloat("Angle", &angle, 0.0f, 2.0f * M_PI, "Angle = %.3f");
+            ImGui::SliderFloat("Magnitude", &magnitude, 0.0f, 1.0f, "Magnitude = %.3f");
+            if (ImGui::Button("Send")) {
+                SVPWMControl control;
+                control.angle = angle;
+                control.magnitude = magnitude;
+                AttaConnector::transmit<SVPWMControl>(control);
+            }
+        }
+    }
+    ImGui::End();
+
+    ImGui::SetNextWindowSize(ImVec2(800, 600), ImGuiCond_Once);
     ImGui::Begin("Motor State");
     {
         if (ImPlot::BeginPlot("Source Voltage")) {
@@ -182,7 +213,6 @@ void ProjectScript::onUIRender() {
             while (angle >= 2 * M_PI / 7)
                 angle -= 2 * M_PI / 7;
             angle *= 7;
-            LOG_DEBUG("ProjectScript", "Angle $0", angle / M_PI * 180);
             // Calculate d/q
             id.push_back(cos(angle) * ia[i] + sin(angle) * ib[i]);
             iq.push_back(-sin(angle) * ia[i] + cos(angle) * ib[i]);

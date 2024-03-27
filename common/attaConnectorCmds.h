@@ -15,6 +15,7 @@ enum CommandCode : uint8_t {
     MY_TEST1_CMD = 0x01,
     MOTOR_STATE_CMD = 0x02,
     IMU_STATE_CMD = 0x03,
+    SVPWM_CONTROL_CMD = 0x04,
 };
 
 struct MyTest0 {
@@ -41,6 +42,12 @@ struct ImuState {
     static constexpr uint8_t CMD_ID = IMU_STATE_CMD;
     std::array<int16_t, 3> acc;
     std::array<int16_t, 3> gyr;
+};
+
+struct SVPWMControl {
+    static constexpr uint8_t CMD_ID = SVPWM_CONTROL_CMD;
+    float angle;
+    float magnitude;
 };
 
 #endif // BLDC_ATTA_CONNECTOR_PLATFORM_H

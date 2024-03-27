@@ -77,8 +77,7 @@ bool Uart::isInitialized() { return _initialized; }
 void Uart::transmit(uint8_t* data, uint32_t size, Peripheral peripheral) { HAL_UART_Transmit(getHandle(peripheral), data, size, 100); }
 
 uint32_t Uart::receive(uint8_t* data, uint32_t size, Peripheral peripheral) {
-    HAL_StatusTypeDef status = HAL_UART_Receive(getHandle(peripheral), data, size, 0);
-    if (status == HAL_OK)
+    if (HAL_UART_Receive(getHandle(peripheral), data, size, 100) == HAL_OK)
         return size;
     else
         return 0;
