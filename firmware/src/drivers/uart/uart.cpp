@@ -33,11 +33,11 @@ bool _txDmaBusy;
 bool _rxDmaBusy;
 
 uint8_t _txBuffer[TX_BUFFER_SIZE];
-size_t _txBufferWriteIdx;
-size_t _txBufferReadIdx;
+uint32_t _txBufferWriteIdx;
+uint32_t _txBufferReadIdx;
 
 uint8_t _rxBuffer[TX_BUFFER_SIZE];
-size_t _rxBufferReadIdx;
+uint32_t _rxBufferReadIdx;
 
 } // namespace Uart
 
@@ -99,6 +99,23 @@ bool Uart::isInitialized() { return _initialized; }
 
 void Uart::update() {
     // Transmit pending transactions
+    if (!_txDmaBusy) {
+        // Calculate transmission size
+        uint32_t transmitSize = 0;
+        if (_txBufferWriteIdx >= _txBufferReadIdx)
+            transmitSize = _txBufferWriteIdx - _txBufferReadIdx;
+        else
+            transmitSize = RX_BUFFER_SIZE - _txBufferReadIdx;
+
+        // DMA transmit
+        if (transmitSize > 0) {
+            if (HAL_UART_Transmit_DMA(getHandle(Peripheral::DEFAULT), &_txBuffer[_txBufferReadIdx], transmitSize) == HAL_OK) {
+                _txBufferReadIdx = (_txBufferReadIdx + transmitSize) % TX_BUFFER_SIZE;
+                _txDmaBusy = true;
+            } else
+                Log::error("Uart", "Failed to transmit, DMA error");
+        }
+    }
 
     // Start DMA circular receive
     if (!_rxDmaBusy)
@@ -109,18 +126,32 @@ void Uart::update() {
 }
 
 void Uart::transmit(uint8_t* data, uint32_t size) {
-    if (!_txDmaBusy) {
-        // Copy to tx buffer
-        std::memcpy(_txBuffer, data, size);
+    uint32_t availableSpace = 0;
+    uint32_t headToEnd = 0;
 
-        // DMA transmit
-        if (HAL_UART_Transmit_DMA(getHandle(Peripheral::DEFAULT), _txBuffer, size) == HAL_OK)
-            _txDmaBusy = true;
-        else
-            Log::error("Uart", "Failed to transmit, DMA error");
+    // Calculate available space in the buffer
+    if (_txBufferWriteIdx >= _txBufferReadIdx) {
+        availableSpace = TX_BUFFER_SIZE - _txBufferWriteIdx + _txBufferReadIdx - 1;
+        headToEnd = TX_BUFFER_SIZE - _txBufferWriteIdx;
     } else {
-        // Log::error("Uart", "Failed to transmit, DMA is busy");
+        availableSpace = _txBufferReadIdx - _txBufferWriteIdx - 1;
+        headToEnd = availableSpace;
     }
+
+    // Check if there is enough space
+    if (size <= availableSpace) {
+        // Copy data to buffer in two steps if needed (wrap-around case)
+        uint32_t firstCopySize = std::min(size, headToEnd);
+        std::memcpy(&_txBuffer[_txBufferWriteIdx], data, firstCopySize);
+        if (size > headToEnd)
+            std::memcpy(&_txBuffer[0], data + firstCopySize, size - firstCopySize);
+
+        // Update write index
+        _txBufferWriteIdx = (_txBufferWriteIdx + size) % TX_BUFFER_SIZE;
+
+        update();
+    } else
+        Log::error("Uart", "Failed to transmit, not enough buffer space");
 }
 
 uint32_t Uart::receive(uint8_t* data, uint32_t size) {
