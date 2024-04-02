@@ -4,6 +4,7 @@
 // Date: 2023-09-12
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include <cstring>
 #include <drivers/gpio/gpio.h>
 #include <drivers/uart/uart.h>
 #include <set>
@@ -11,10 +12,11 @@
 
 namespace Uart {
 
-UART_HandleTypeDef* getHandle(Peripheral peripheral);
 USART_TypeDef* getInstance(Peripheral peripheral);
 void enableClock(Peripheral peripheral);
 void disableClock(Peripheral peripheral);
+
+void transmitCompleteCallback(UART_HandleTypeDef* huart);
 
 UART_HandleTypeDef _huart1;
 UART_HandleTypeDef _huart2;
@@ -26,10 +28,28 @@ UART_HandleTypeDef _huart6;
 bool _initialized;
 Peripheral _default; ///< Peripheral to use if none is specified
 
+// Handle DMA transactions
+bool _txDmaBusy;
+bool _rxDmaBusy;
+
+uint8_t _txBuffer[TX_BUFFER_SIZE];
+size_t _txBufferWriteIdx;
+size_t _txBufferReadIdx;
+
+uint8_t _rxBuffer[TX_BUFFER_SIZE];
+size_t _rxBufferReadIdx;
+
 } // namespace Uart
 
 bool Uart::init() {
     _initialized = false;
+    _txDmaBusy = false;
+    _rxDmaBusy = false;
+
+    // Initialize circular buffer indices
+    _txBufferWriteIdx = 0;
+    _txBufferReadIdx = 0;
+    _rxBufferReadIdx = 0;
 
     // Get peripherals in use
     std::set<Peripheral> inUse;
@@ -62,6 +82,9 @@ bool Uart::init() {
         huart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
         huart->Init.OverSampling = UART_OVERSAMPLING_16;
         HAL_UART_Init(huart);
+
+        // Register TX callback
+        HAL_UART_RegisterCallback(huart, HAL_UART_TX_COMPLETE_CB_ID, transmitCompleteCallback);
     }
 
     // Set default peripheral
@@ -74,14 +97,58 @@ bool Uart::init() {
 
 bool Uart::isInitialized() { return _initialized; }
 
-void Uart::transmit(uint8_t* data, uint32_t size, Peripheral peripheral) { HAL_UART_Transmit(getHandle(peripheral), data, size, 100); }
+void Uart::update() {
+    // Transmit pending transactions
 
-uint32_t Uart::receive(uint8_t* data, uint32_t size, Peripheral peripheral) {
-    if (HAL_UART_Receive(getHandle(peripheral), data, size, 100) == HAL_OK)
-        return size;
-    else
-        return 0;
+    // Start DMA circular receive
+    if (!_rxDmaBusy)
+        if (HAL_UART_Receive_DMA(getHandle(Peripheral::DEFAULT), _rxBuffer, RX_BUFFER_SIZE) == HAL_OK)
+            _rxDmaBusy = true;
+        else
+            Log::error("Uart", "Failed to start DMA receive");
 }
+
+void Uart::transmit(uint8_t* data, uint32_t size) {
+    if (!_txDmaBusy) {
+        // Copy to tx buffer
+        std::memcpy(_txBuffer, data, size);
+
+        // DMA transmit
+        if (HAL_UART_Transmit_DMA(getHandle(Peripheral::DEFAULT), _txBuffer, size) == HAL_OK)
+            _txDmaBusy = true;
+        else
+            Log::error("Uart", "Failed to transmit, DMA error");
+    } else {
+        // Log::error("Uart", "Failed to transmit, DMA is busy");
+    }
+}
+
+uint32_t Uart::receive(uint8_t* data, uint32_t size) {
+    uint32_t rxBufferWriteIdx = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(getHandle(Peripheral::DEFAULT)->hdmarx);
+
+    uint32_t readSize = 0;
+    if (rxBufferWriteIdx >= _rxBufferReadIdx)
+        readSize = std::min(size, rxBufferWriteIdx - _rxBufferReadIdx);
+    else
+        readSize = std::min(size, RX_BUFFER_SIZE - _rxBufferReadIdx);
+    std::memcpy(data, &_rxBuffer[_rxBufferReadIdx], readSize);
+    _rxBufferReadIdx = (_rxBufferReadIdx + readSize) % RX_BUFFER_SIZE;
+
+    return readSize;
+}
+
+// clang-format off
+#define LINK_DMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__) \
+    do {                                                         \
+        (__HANDLE__)->__PPP_DMA_FIELD__ = (__DMA_HANDLE__);     \
+        (__DMA_HANDLE__)->Parent = (__HANDLE__);                  \
+    } while (0U)
+// clang-format on
+
+void Uart::linkDmaTx(Peripheral peripheral, Dma::Handle* dmaHandle) { LINK_DMA(getHandle(peripheral), hdmatx, dmaHandle); }
+void Uart::linkDmaRx(Peripheral peripheral, Dma::Handle* dmaHandle) { LINK_DMA(getHandle(peripheral), hdmarx, dmaHandle); }
+
+void Uart::transmitCompleteCallback(UART_HandleTypeDef* huart) { _txDmaBusy = false; }
 
 UART_HandleTypeDef* Uart::getHandle(Peripheral peripheral) {
     switch (peripheral) {

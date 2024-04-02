@@ -21,8 +21,6 @@ uint32_t receiveBytes(uint8_t* data, uint32_t size) {
     uint32_t numBytes = 0;
     if (Uart::isInitialized())
         numBytes = Uart::receive(data, size);
-    if (numBytes)
-        Log::info("AttaConnector", "Received $0 when asking $1", numBytes, size);
     return numBytes;
 }
 

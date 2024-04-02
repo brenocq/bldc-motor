@@ -59,12 +59,13 @@ Color hsvToRgb(float hue, float saturation, float value) {
 }
 
 void handleAttaConnector() {
+    // Receive/transmit
+    AttaConnector::update();
+
     // SVPWM Controls
     SVPWMControl control;
-    while (AttaConnector::receive<SVPWMControl>(&control)) {
-        Log::debug("Main", "Received control");
+    while (AttaConnector::receive<SVPWMControl>(&control))
         motor.set(control.angle, control.magnitude);
-    }
 
     // Read motor state
     MotorState state{};
@@ -111,6 +112,8 @@ int main() {
 
     // Timer-DMA
     Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
+    Uart::linkDmaTx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_TX_STREAM));
+    Uart::linkDmaRx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_RX_STREAM));
     Hardware::delayMs(1);
 
     if (!led.init())
@@ -146,7 +149,7 @@ int main() {
     bool sign = true;
     while (true) {
         // Usb::update();
-        AttaConnector::update();
+        Uart::update();
         handleAttaConnector();
 
         motorAngle += 1.0f / 180 * M_PI;

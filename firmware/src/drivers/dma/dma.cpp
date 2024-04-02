@@ -16,6 +16,7 @@ uint32_t convert(Channel channel);
 uint32_t convert(Direction direction);
 uint32_t convert(Increment increment, Source source);
 uint32_t convert(Alignment alignment, Source source);
+uint32_t convert(Mode mode);
 uint32_t convert(Priority priority);
 
 Handle hdma1stream0;
@@ -80,7 +81,7 @@ bool Dma::init() {
         hdma->Init.MemInc = convert(dmaList[i].increment, MEMORY);
         hdma->Init.PeriphDataAlignment = convert(dmaList[i].alignment, PERIPHERAL);
         hdma->Init.MemDataAlignment = convert(dmaList[i].alignment, MEMORY);
-        hdma->Init.Mode = DMA_NORMAL;
+        hdma->Init.Mode = convert(dmaList[i].mode);
         hdma->Init.Priority = convert(dmaList[i].priority);
         hdma->Init.FIFOMode = DMA_FIFOMODE_DISABLE;
         if (HAL_DMA_Init(hdma) != HAL_OK)
@@ -244,6 +245,16 @@ uint32_t Dma::convert(Alignment alignment, Source source) {
             case ALIGN_32BIT:
                 return DMA_MDATAALIGN_WORD;
         }
+    }
+    return 0;
+}
+
+uint32_t Dma::convert(Mode mode) {
+    switch (mode) {
+        case MODE_NORMAL:
+            return DMA_NORMAL;
+        case MODE_CIRCULAR:
+            return DMA_CIRCULAR;
     }
     return 0;
 }
