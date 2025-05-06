@@ -230,7 +230,20 @@
       "mfg": "",
       "mpn": ""
     },
-    "layer_pairs": [],
+    "layer_pairs": [
+      {
+        "bottomLayer": 2,
+        "enabled": true,
+        "name": "TopBottom",
+        "topLayer": 0
+      },
+      {
+        "bottomLayer": 6,
+        "enabled": false,
+        "name": "Internal",
+        "topLayer": 4
+      }
+    ],
     "layer_presets": [],
     "viewports": []
   },
