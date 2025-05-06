@@ -1,3 +1,12 @@
 # Files created by KiCad during editing
 *.lck
 fp-info-cache
+sym-lib-table
+report.txt
+
+# Project local preferences
+*.kicad_prl
+
+# KiCad backup files
+*-backups/
+*.kicad_sch-bak
