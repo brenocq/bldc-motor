@@ -10,3 +10,7 @@ report.txt
 # KiCad backup files
 *-backups/
 *.kicad_sch-bak
+
+# KiCad autosave
+_autosave-*
+*auto_saved_files*

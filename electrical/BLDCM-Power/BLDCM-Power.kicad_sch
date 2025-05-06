@@ -9,357 +9,6 @@
 		(rev "v3")
 	)
 	(lib_symbols
-		(symbol "BLDCM-Power-altium-import:3.3V_BAR"
-			(power)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "3.3V"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name '3.3V'"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "power-flag"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "3.3V_BAR_0_0"
-				(polyline
-					(pts
-						(xy -1.27 -2.54) (xy 1.27 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin power_in line
-					(at 0 0 0)
-					(length 0)
-					(hide yes)
-					(name "3.3V"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "BLDCM-Power-altium-import:GND_POWER_GROUND"
-			(power)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "GND"
-				(at 0 -6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name 'GND'"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "power-flag"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "GND_POWER_GROUND_0_0"
-				(polyline
-					(pts
-						(xy -2.54 -2.54) (xy 2.54 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 -3.302) (xy 1.778 -3.302)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.016 -4.064) (xy 1.016 -4.064)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.254 -4.826) (xy 0.254 -4.826)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin power_in line
-					(at 0 0 0)
-					(length 0)
-					(hide yes)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "BLDCM-Power-altium-import:VIN_BAR"
-			(power)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "VIN"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name 'VIN'"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "power-flag"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "VIN_BAR_0_0"
-				(polyline
-					(pts
-						(xy -1.27 -2.54) (xy 1.27 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0.254)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin power_in line
-					(at 0 0 0)
-					(length 0)
-					(hide yes)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "BrenoCQ:D_Schottky_B0520LW"
 			(pin_numbers
 				(hide yes)
@@ -824,6 +473,134 @@
 						)
 					)
 					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "BrenoCQ:GND"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Ground power symbol"
+				(at 0 -8.255 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts
+						(xy -0.635 -1.905) (xy 0.635 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.127 -2.54) (xy 0.127 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3522,6 +3299,122 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "BrenoCQ:VDD"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at -0.635 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VDD"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Source power symbol"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VDD_0_1"
+				(polyline
+					(pts
+						(xy -1.27 2.54) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 1.27 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VDD_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:C"
 			(pin_numbers
 				(hide yes)
@@ -3785,6 +3678,107 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:PWR_FLAG"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(rectangle
 		(start 13.97 13.97)
@@ -4029,7 +4023,7 @@
 	)
 	(text "Stack"
 		(exclude_from_sim no)
-		(at 14.605 144.145 0)
+		(at 14.605 143.6878 0)
 		(effects
 			(font
 				(size 2.286 2.286)
@@ -4177,6 +4171,12 @@
 		(uuid "0460612a-a6e1-4fce-8da6-f14af697911a")
 	)
 	(junction
+		(at 127 158.75)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "05c58c3a-d241-42ac-a154-670923976398")
+	)
+	(junction
 		(at 240.03 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4193,6 +4193,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1259e3db-14c3-4cb2-a151-2b181a0802de")
+	)
+	(junction
+		(at 256.54 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "15072dcd-9aeb-44df-b29c-1b3c6e44930f")
 	)
 	(junction
 		(at 172.72 35.56)
@@ -4219,10 +4225,16 @@
 		(uuid "1ee2f1a2-5fd9-4270-aa6a-f20f2654ce91")
 	)
 	(junction
-		(at 49.53 147.7772)
+		(at 49.53 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1f77930e-4ec9-4a51-8838-cdd4a83f51fb")
+	)
+	(junction
+		(at 77.47 30.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "26672d37-f8b6-47b3-8061-c128ab855a86")
 	)
 	(junction
 		(at 85.09 68.58)
@@ -4297,12 +4309,6 @@
 		(uuid "625be1e6-c62e-4a2a-b7b6-79677634eed4")
 	)
 	(junction
-		(at 127 158.75)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6cb1b054-bc2a-45d7-9add-c34978d4db6c")
-	)
-	(junction
 		(at 157.48 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4313,12 +4319,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6ffe8aa8-8959-456f-8214-546dc225b0c4")
-	)
-	(junction
-		(at 257.81 124.46)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "706b504f-9991-4a5c-863b-5e1bd436b984")
 	)
 	(junction
 		(at 157.48 27.94)
@@ -4351,7 +4351,7 @@
 		(uuid "94ad8f83-7cac-41f3-b333-0a9184aaa9a6")
 	)
 	(junction
-		(at 29.21 147.7772)
+		(at 29.21 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9589fb9d-6a56-4327-8711-3cab1bbb0ec3")
@@ -4447,16 +4447,10 @@
 		(uuid "eab9b2df-02f4-4348-ad3f-bfab0715a1de")
 	)
 	(junction
-		(at 49.53 152.8572)
+		(at 49.53 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "eb7e7d37-d2f7-44d5-9339-d17efece49e4")
-	)
-	(junction
-		(at 77.47 30.0228)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f0518cfe-9999-4625-92d2-0f03cfc7eff2")
 	)
 	(junction
 		(at 85.09 63.5)
@@ -4533,6 +4527,16 @@
 	(no_connect
 		(at 200.66 127)
 		(uuid "e6f0c92e-f72e-417c-8102-3c83530554b0")
+	)
+	(wire
+		(pts
+			(xy 127 158.75) (xy 134.62 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03651c96-5b24-4d54-b2db-abc367b4b80e")
 	)
 	(wire
 		(pts
@@ -4616,7 +4620,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 157.9372) (xy 46.99 157.9372)
+			(xy 59.69 157.48) (xy 46.99 157.48)
 		)
 		(stroke
 			(width 0)
@@ -4686,7 +4690,7 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 115.57) (xy 97.79 118.5672)
+			(xy 97.79 115.57) (xy 97.79 118.11)
 		)
 		(stroke
 			(width 0)
@@ -4703,16 +4707,6 @@
 			(type default)
 		)
 		(uuid "15611104-947e-4981-9f7a-8c36e22a9e12")
-	)
-	(wire
-		(pts
-			(xy 134.62 163.83) (xy 119.38 163.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "15cf8acf-7f25-4d7a-b4c6-48bdb5a1fadd")
 	)
 	(wire
 		(pts
@@ -4817,7 +4811,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 183.3372) (xy 46.99 183.3372)
+			(xy 59.69 182.88) (xy 46.99 182.88)
 		)
 		(stroke
 			(width 0)
@@ -4847,7 +4841,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 147.7772) (xy 31.75 147.7772)
+			(xy 29.21 147.32) (xy 31.75 147.32)
 		)
 		(stroke
 			(width 0)
@@ -4874,16 +4868,6 @@
 			(type default)
 		)
 		(uuid "316e0932-37be-4eb9-9e6b-4ef0d1360574")
-	)
-	(wire
-		(pts
-			(xy 77.47 27.94) (xy 77.47 30.0228)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "32517128-5dc7-421c-86af-732025651ba2")
 	)
 	(wire
 		(pts
@@ -4917,7 +4901,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 165.5572) (xy 59.69 165.5572)
+			(xy 46.99 165.1) (xy 59.69 165.1)
 		)
 		(stroke
 			(width 0)
@@ -4927,7 +4911,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 170.6372) (xy 59.69 170.6372)
+			(xy 46.99 170.18) (xy 59.69 170.18)
 		)
 		(stroke
 			(width 0)
@@ -4937,7 +4921,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 183.3372) (xy 19.05 183.3372)
+			(xy 31.75 182.88) (xy 19.05 182.88)
 		)
 		(stroke
 			(width 0)
@@ -4977,7 +4961,7 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 175.7172) (xy 31.75 175.7172)
+			(xy 19.05 175.26) (xy 31.75 175.26)
 		)
 		(stroke
 			(width 0)
@@ -5057,6 +5041,16 @@
 	)
 	(wire
 		(pts
+			(xy 21.59 26.67) (xy 21.59 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "45fcd688-557b-4514-b8a1-b116510b262b")
+	)
+	(wire
+		(pts
 			(xy 85.09 60.96) (xy 85.09 63.5)
 		)
 		(stroke
@@ -5097,7 +5091,17 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 170.6372) (xy 31.75 170.6372)
+			(xy 77.47 27.94) (xy 77.47 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4af9ce09-892e-49c6-80db-62cc7e3565f5")
+	)
+	(wire
+		(pts
+			(xy 19.05 170.18) (xy 31.75 170.18)
 		)
 		(stroke
 			(width 0)
@@ -5167,7 +5171,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 160.4772) (xy 46.99 160.4772)
+			(xy 59.69 160.02) (xy 46.99 160.02)
 		)
 		(stroke
 			(width 0)
@@ -5177,7 +5181,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 152.8572) (xy 19.05 152.8572)
+			(xy 31.75 152.4) (xy 19.05 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5227,13 +5231,23 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 150.3172) (xy 49.53 150.3172)
+			(xy 46.99 149.86) (xy 49.53 149.86)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "51f1d23d-b4f4-4e77-ba34-c371a08c7327")
+	)
+	(wire
+		(pts
+			(xy 57.15 26.67) (xy 57.15 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "54a4af06-c6e7-4717-a6d8-8eba69c7cd41")
 	)
 	(wire
 		(pts
@@ -5244,6 +5258,16 @@
 			(type default)
 		)
 		(uuid "55bc9e37-d814-40a8-b80d-267623830fab")
+	)
+	(wire
+		(pts
+			(xy 87.63 33.02) (xy 87.63 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57f96b9d-2257-444c-8422-af2ac89e2311")
 	)
 	(wire
 		(pts
@@ -5267,7 +5291,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 147.7772) (xy 29.21 150.3172)
+			(xy 29.21 147.32) (xy 29.21 149.86)
 		)
 		(stroke
 			(width 0)
@@ -5287,7 +5311,17 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 150.3172) (xy 31.75 150.3172)
+			(xy 271.78 153.67) (xy 271.78 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5a68a58f-ca5f-4431-818e-8d92701c1f5e")
+	)
+	(wire
+		(pts
+			(xy 29.21 149.86) (xy 31.75 149.86)
 		)
 		(stroke
 			(width 0)
@@ -5357,16 +5391,6 @@
 	)
 	(wire
 		(pts
-			(xy 21.59 29.21) (xy 21.59 26.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6493ef0b-edb7-446a-9285-0bcc02f74236")
-	)
-	(wire
-		(pts
 			(xy 240.03 101.6) (xy 242.57 101.6)
 		)
 		(stroke
@@ -5417,7 +5441,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 180.7972) (xy 59.69 180.7972)
+			(xy 46.99 180.34) (xy 59.69 180.34)
 		)
 		(stroke
 			(width 0)
@@ -5437,7 +5461,7 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 157.9372) (xy 31.75 157.9372)
+			(xy 19.05 157.48) (xy 31.75 157.48)
 		)
 		(stroke
 			(width 0)
@@ -5467,6 +5491,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 30.48) (xy 87.63 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ebb53fc-be2b-4f8a-b419-55c09489e222")
+	)
+	(wire
+		(pts
 			(xy 85.09 113.03) (xy 85.09 115.57)
 		)
 		(stroke
@@ -5484,6 +5518,16 @@
 			(type default)
 		)
 		(uuid "6f59b4e2-5ab3-4470-bfd1-3d140c5ff7bc")
+	)
+	(wire
+		(pts
+			(xy 119.38 163.83) (xy 134.62 163.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70eacb52-a002-437a-9d53-647d4eb435e4")
 	)
 	(wire
 		(pts
@@ -5577,7 +5621,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 155.3972) (xy 49.53 155.3972)
+			(xy 46.99 154.94) (xy 49.53 154.94)
 		)
 		(stroke
 			(width 0)
@@ -5597,7 +5641,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 178.2572) (xy 46.99 178.2572)
+			(xy 59.69 177.8) (xy 46.99 177.8)
 		)
 		(stroke
 			(width 0)
@@ -5607,7 +5651,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 152.8572) (xy 52.07 152.8572)
+			(xy 49.53 152.4) (xy 52.07 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5657,6 +5701,16 @@
 	)
 	(wire
 		(pts
+			(xy 251.46 153.67) (xy 251.46 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "854979fd-3d03-470f-b139-a5a726612293")
+	)
+	(wire
+		(pts
 			(xy 170.18 121.92) (xy 172.72 121.92)
 		)
 		(stroke
@@ -5684,6 +5738,16 @@
 			(type default)
 		)
 		(uuid "88ffc85c-1162-4cbf-aa65-03573f0f9f90")
+	)
+	(wire
+		(pts
+			(xy 261.62 153.67) (xy 261.62 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8bb2d0c8-957d-4e0e-8d75-a5400c3a9c21")
 	)
 	(wire
 		(pts
@@ -5747,13 +5811,23 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 180.7972) (xy 31.75 180.7972)
+			(xy 19.05 180.34) (xy 31.75 180.34)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "92cfa112-0da9-4772-877e-8686ad7469d0")
+	)
+	(wire
+		(pts
+			(xy 127 156.21) (xy 127 158.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96225d64-25ef-4140-82f9-6b9c208350d5")
 	)
 	(wire
 		(pts
@@ -5777,7 +5851,7 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 163.0172) (xy 31.75 163.0172)
+			(xy 19.05 162.56) (xy 31.75 162.56)
 		)
 		(stroke
 			(width 0)
@@ -5807,7 +5881,7 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 147.7772) (xy 29.21 147.7772)
+			(xy 26.67 147.32) (xy 29.21 147.32)
 		)
 		(stroke
 			(width 0)
@@ -5854,6 +5928,16 @@
 			(type default)
 		)
 		(uuid "9adda387-8485-4364-af2f-ea246f66ab3f")
+	)
+	(wire
+		(pts
+			(xy 256.54 124.46) (xy 276.86 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c1bb0c1-aebb-499c-9308-e1fd61574aca")
 	)
 	(wire
 		(pts
@@ -6007,7 +6091,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 168.0972) (xy 19.05 168.0972)
+			(xy 31.75 167.64) (xy 19.05 167.64)
 		)
 		(stroke
 			(width 0)
@@ -6027,17 +6111,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 158.75) (xy 134.62 158.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aeb6b551-743d-40ff-be35-d00a12cad921")
-	)
-	(wire
-		(pts
-			(xy 19.05 155.3972) (xy 31.75 155.3972)
+			(xy 19.05 154.94) (xy 31.75 154.94)
 		)
 		(stroke
 			(width 0)
@@ -6067,7 +6141,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 173.1772) (xy 19.05 173.1772)
+			(xy 31.75 172.72) (xy 19.05 172.72)
 		)
 		(stroke
 			(width 0)
@@ -6077,7 +6151,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 175.7172) (xy 59.69 175.7172)
+			(xy 46.99 175.26) (xy 59.69 175.26)
 		)
 		(stroke
 			(width 0)
@@ -6127,7 +6201,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 147.7772) (xy 46.99 147.7772)
+			(xy 49.53 147.32) (xy 46.99 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6197,7 +6271,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 155.3972) (xy 49.53 152.8572)
+			(xy 49.53 154.94) (xy 49.53 152.4)
 		)
 		(stroke
 			(width 0)
@@ -6227,7 +6301,7 @@
 	)
 	(wire
 		(pts
-			(xy 257.81 124.46) (xy 238.76 124.46)
+			(xy 238.76 124.46) (xy 256.54 124.46)
 		)
 		(stroke
 			(width 0)
@@ -6378,16 +6452,6 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 30.0228) (xy 87.63 30.0228)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cd12134e-2c34-4a8d-9f43-cc64dc663dc5")
-	)
-	(wire
-		(pts
 			(xy 170.18 121.92) (xy 170.18 124.46)
 		)
 		(stroke
@@ -6418,7 +6482,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 163.0172) (xy 46.99 163.0172)
+			(xy 59.69 162.56) (xy 46.99 162.56)
 		)
 		(stroke
 			(width 0)
@@ -6438,7 +6502,7 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 160.4772) (xy 31.75 160.4772)
+			(xy 19.05 160.02) (xy 31.75 160.02)
 		)
 		(stroke
 			(width 0)
@@ -6508,7 +6572,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 178.2572) (xy 19.05 178.2572)
+			(xy 31.75 177.8) (xy 19.05 177.8)
 		)
 		(stroke
 			(width 0)
@@ -6525,16 +6589,6 @@
 			(type default)
 		)
 		(uuid "d6246628-18d1-43d2-96dd-1033d199dda4")
-	)
-	(wire
-		(pts
-			(xy 276.86 124.46) (xy 257.81 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d6f00481-8296-43a0-9cb5-3b58af586fc8")
 	)
 	(wire
 		(pts
@@ -6588,16 +6642,6 @@
 	)
 	(wire
 		(pts
-			(xy 87.63 30.0228) (xy 87.63 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "daaa2a61-acf7-44f0-931f-bd26908f8bb9")
-	)
-	(wire
-		(pts
 			(xy 24.13 90.17) (xy 26.67 90.17)
 		)
 		(stroke
@@ -6638,17 +6682,7 @@
 	)
 	(wire
 		(pts
-			(xy 127 158.75) (xy 127 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ded306a7-883a-470e-a2cc-cabe6df4d22e")
-	)
-	(wire
-		(pts
-			(xy 46.99 152.8572) (xy 49.53 152.8572)
+			(xy 46.99 152.4) (xy 49.53 152.4)
 		)
 		(stroke
 			(width 0)
@@ -6658,7 +6692,7 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 168.0972) (xy 59.69 168.0972)
+			(xy 46.99 167.64) (xy 59.69 167.64)
 		)
 		(stroke
 			(width 0)
@@ -6668,7 +6702,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 173.1772) (xy 46.99 173.1772)
+			(xy 59.69 172.72) (xy 46.99 172.72)
 		)
 		(stroke
 			(width 0)
@@ -6678,7 +6712,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 150.3172) (xy 49.53 147.7772)
+			(xy 49.53 149.86) (xy 49.53 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6718,7 +6752,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 165.5572) (xy 19.05 165.5572)
+			(xy 31.75 165.1) (xy 19.05 165.1)
 		)
 		(stroke
 			(width 0)
@@ -6778,16 +6812,6 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 29.21) (xy 57.15 26.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e88c4db8-31d7-480a-9306-69983f9339d8")
-	)
-	(wire
-		(pts
 			(xy 167.64 25.4) (xy 173.99 25.4)
 		)
 		(stroke
@@ -6818,7 +6842,7 @@
 	)
 	(wire
 		(pts
-			(xy 49.53 147.7772) (xy 52.07 147.7772)
+			(xy 49.53 147.32) (xy 52.07 147.32)
 		)
 		(stroke
 			(width 0)
@@ -6905,16 +6929,6 @@
 			(type default)
 		)
 		(uuid "f346b0e0-1ad1-46da-8512-568a3ffc26e1")
-	)
-	(wire
-		(pts
-			(xy 77.47 30.0228) (xy 77.47 30.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4857bbe-9b6c-4b14-ad8d-9e21faab430f")
 	)
 	(wire
 		(pts
@@ -7137,7 +7151,7 @@
 		(uuid "231b0314-8405-4967-a339-6086b5c040e6")
 	)
 	(label "SWDIO"
-		(at 19.05 180.7972 0)
+		(at 19.05 180.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7157,7 +7171,7 @@
 		(uuid "27d25c04-afa7-4438-9843-6f2274fe388b")
 	)
 	(label "RST"
-		(at 19.05 173.1772 0)
+		(at 19.05 172.72 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7197,7 +7211,7 @@
 		(uuid "30828f52-206a-4abf-b4c1-04a096cfefda")
 	)
 	(label "TMC.UL"
-		(at 59.69 173.1772 180)
+		(at 59.69 172.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7237,7 +7251,7 @@
 		(uuid "3c4000a7-2763-4ec9-a576-1453de522348")
 	)
 	(label "CAN.TX"
-		(at 19.05 163.0172 0)
+		(at 19.05 162.56 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7247,7 +7261,7 @@
 		(uuid "3c4c68ee-f6dc-40ef-ae8b-22b06c898909")
 	)
 	(label "SWCLK"
-		(at 19.05 178.2572 0)
+		(at 19.05 177.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7267,7 +7281,7 @@
 		(uuid "45c66f44-45a0-4c89-b3d2-a234479cb448")
 	)
 	(label "INA.CS1"
-		(at 19.05 160.4772 0)
+		(at 19.05 160.02 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7287,7 +7301,7 @@
 		(uuid "4ec931e0-3348-4f67-a76c-df5be8b01863")
 	)
 	(label "TMC.WH"
-		(at 59.69 180.7972 180)
+		(at 59.69 180.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7297,7 +7311,7 @@
 		(uuid "5681a1f5-4ed0-42f3-bc73-d45e0db75137")
 	)
 	(label "TMC.WL"
-		(at 59.69 183.3372 180)
+		(at 59.69 182.88 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7307,7 +7321,7 @@
 		(uuid "5a5845c5-f184-4a7e-bcf9-5ebfb970d23f")
 	)
 	(label "INA.PICO"
-		(at 59.69 163.0172 180)
+		(at 59.69 162.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7327,7 +7341,7 @@
 		(uuid "654f9b29-9e78-43bc-8c34-424ee2444dad")
 	)
 	(label "TCM.DIAG"
-		(at 59.69 168.0972 180)
+		(at 59.69 167.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7367,7 +7381,7 @@
 		(uuid "7719ae7c-a13c-4c3b-bf46-4747eeb3b931")
 	)
 	(label "INA.CS0"
-		(at 19.05 157.9372 0)
+		(at 19.05 157.48 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7397,7 +7411,7 @@
 		(uuid "7eb5d76c-f8b6-4fed-bccb-f4da39c37caf")
 	)
 	(label "INA.POCI"
-		(at 59.69 165.5572 180)
+		(at 59.69 165.1 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7407,7 +7421,7 @@
 		(uuid "84ed97ed-8a22-4102-9862-e5e033488bf8")
 	)
 	(label "USB_N"
-		(at 19.05 155.3972 0)
+		(at 19.05 154.94 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7457,7 +7471,7 @@
 		(uuid "98525d6d-90ab-4068-a265-cc55c6713f86")
 	)
 	(label "INA.CLK"
-		(at 59.69 160.4772 180)
+		(at 59.69 160.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7517,7 +7531,7 @@
 		(uuid "b1904deb-ce01-4427-a71c-498464eaeab5")
 	)
 	(label "SWO"
-		(at 19.05 175.7172 0)
+		(at 19.05 175.26 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7537,7 +7551,7 @@
 		(uuid "b7534c86-fb85-4f7f-95a1-c0f7bb1b0f3c")
 	)
 	(label "INA.CS2"
-		(at 59.69 157.9372 180)
+		(at 59.69 157.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7587,7 +7601,7 @@
 		(uuid "bf5e2725-cef4-47d4-b491-7e3f0cef7f21")
 	)
 	(label "TMC.VL"
-		(at 59.69 178.2572 180)
+		(at 59.69 177.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7607,7 +7621,7 @@
 		(uuid "c5b11507-254f-4344-9568-ad57dd281651")
 	)
 	(label "CAN.RX"
-		(at 19.05 165.5572 0)
+		(at 19.05 165.1 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7627,7 +7641,7 @@
 		(uuid "c9dc28c5-ffe8-4998-9d34-3d2e63e71c88")
 	)
 	(label "TMC.UH"
-		(at 59.69 170.6372 180)
+		(at 59.69 170.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7637,7 +7651,7 @@
 		(uuid "ca0d0561-11ec-4429-88b2-4d01e04a39ba")
 	)
 	(label "VCP.RX"
-		(at 19.05 168.0972 0)
+		(at 19.05 167.64 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7667,7 +7681,7 @@
 		(uuid "d087a422-c65d-4634-8fa5-03550d9e6d06")
 	)
 	(label "VCP.TX"
-		(at 19.05 170.6372 0)
+		(at 19.05 170.18 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7697,7 +7711,7 @@
 		(uuid "d637fd63-ccbe-44da-899c-ebbcdcb867f7")
 	)
 	(label "TMC.VH"
-		(at 59.69 175.7172 180)
+		(at 59.69 175.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7787,7 +7801,7 @@
 		(uuid "f2ab074c-7fa1-42ba-858d-6daf72f5079c")
 	)
 	(label "VOLT"
-		(at 19.05 183.3372 0)
+		(at 19.05 182.88 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7807,7 +7821,7 @@
 		(uuid "f8c06da3-2b71-4332-8516-64cb0cb01fa1")
 	)
 	(label "USB_P"
-		(at 19.05 152.8572 0)
+		(at 19.05 152.4 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7985,8 +7999,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 135.89 59.69 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 135.89 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8016,6 +8030,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8024,17 +8039,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 135.89 59.69 0)
+		(property "Description" "Source power symbol"
+			(at 135.89 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "31d8e2c5-86b9-42eb-bafb-c714f7d630b0")
 		)
 		(instances
@@ -8116,7 +8133,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 162.56 121.92 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8134,7 +8151,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 161.29 127.635 0)
+			(at 161.29 125.73 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8148,6 +8165,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8156,17 +8174,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 162.56 121.92 0)
+		(property "Description" "Ground power symbol"
+			(at 162.56 130.175 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "a2b844ef-dac2-458d-bc7d-7ba2e9856806")
 		)
 		(instances
@@ -8179,7 +8199,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 123.19 114.3 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8197,7 +8217,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 123.19 120.65 0)
+			(at 123.19 118.745 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8210,6 +8230,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8218,17 +8239,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 123.19 114.3 0)
+		(property "Description" "Ground power symbol"
+			(at 123.19 122.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "3ea34803-550e-4415-8125-a7bd68ce2db8")
 		)
 		(instances
@@ -8334,7 +8357,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 39.37 46.99 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8352,7 +8375,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 39.37 53.34 0)
+			(at 39.37 51.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8365,6 +8388,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8373,17 +8397,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 39.37 46.99 0)
+		(property "Description" "Ground power symbol"
+			(at 39.37 55.245 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "cc8a6386-45d3-4147-90ee-31a0835f871e")
 		)
 		(instances
@@ -8465,7 +8491,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 251.46 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8483,7 +8509,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 251.46 72.39 0)
+			(at 251.46 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8496,6 +8522,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8504,17 +8531,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 251.46 66.04 0)
+		(property "Description" "Ground power symbol"
+			(at 251.46 74.295 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "0ae44de6-efe4-4d70-941a-1e34dd883cb4")
 		)
 		(instances
@@ -8527,132 +8556,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:VIN_BAR")
-		(at 21.59 26.67 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1cd07167-f3e5-47f5-96ef-4dadfbed1a89")
-		(property "Reference" "#PWR0115"
-			(at 21.59 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VIN"
-			(at 21.59 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 21.59 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 21.59 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 21.59 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin ""
-			(uuid "1959ead9-9b69-4df4-a82f-f3ce040d8d90")
-		)
-		(instances
-			(project ""
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "#PWR0115")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
-		(at 257.81 124.46 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1d0f50bc-d2a0-4646-8770-b8c9f12f3aa1")
-		(property "Reference" "#PWR0101"
-			(at 257.81 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 257.81 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 257.81 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 257.81 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 257.81 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin ""
-			(uuid "9c13a5fc-0ead-4bc7-a480-4fff55b16248")
-		)
-		(instances
-			(project ""
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "#PWR0101")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 52.07 72.39 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 52.07 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8682,6 +8587,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8690,17 +8596,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 52.07 72.39 0)
+		(property "Description" "Source power symbol"
+			(at 52.07 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "6fdd8010-dc3b-46bb-ba92-906f7a85ae74")
 		)
 		(instances
@@ -8713,8 +8621,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
-		(at 52.07 152.8572 90)
+		(lib_id "BrenoCQ:GND")
+		(at 52.07 152.4 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8722,7 +8630,7 @@
 		(dnp no)
 		(uuid "21521233-60df-4a66-b34f-096eb80d7a2b")
 		(property "Reference" "#PWR0125"
-			(at 52.07 152.8572 0)
+			(at 52.07 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8731,7 +8639,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 58.42 152.8572 90)
+			(at 55.88 152.5778 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8740,30 +8648,33 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 52.07 152.8572 0)
+			(at 52.07 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
-			(at 52.07 152.8572 0)
+			(at 52.07 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 52.07 152.8572 0)
+		(property "Description" "Ground power symbol"
+			(at 60.325 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "0d3f9efe-92d1-4d74-8d9a-7ae2a3d371f4")
 		)
 		(instances
@@ -8776,8 +8687,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 173.99 50.8 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 173.99 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8807,6 +8718,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8815,17 +8727,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 173.99 50.8 0)
+		(property "Description" "Source power symbol"
+			(at 173.99 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "b8315d06-99e0-4a14-b093-3bf325bfae4f")
 		)
 		(instances
@@ -8910,7 +8824,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 157.48 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8928,7 +8842,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 157.48 87.63 0)
+			(at 157.48 85.725 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8941,6 +8855,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -8949,17 +8864,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 157.48 81.28 0)
+		(property "Description" "Ground power symbol"
+			(at 157.48 89.535 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "3d944260-26f8-4655-a9b8-fd6e7d80c501")
 		)
 		(instances
@@ -8972,7 +8889,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 157.48 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8990,7 +8907,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 157.48 35.56 0)
+			(at 157.48 33.655 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8999,51 +8916,6 @@
 		)
 		(property "Footprint" ""
 			(at 157.48 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 157.48 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 157.48 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin ""
-			(uuid "f564cbb4-6ba5-40ee-9e06-77f6dd2018ae")
-		)
-		(instances
-			(project ""
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "#PWR0112")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 162.56 119.38 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "384dbdcf-1daa-4150-92b7-68c02ab0cd5b")
-		(property "Reference" "#PWR0107"
-			(at 162.56 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9051,46 +8923,31 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "3.3V"
-			(at 160.655 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" ""
-			(at 162.56 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
 		(property "Datasheet" ""
-			(at 162.56 119.38 0)
+			(at 157.48 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 162.56 119.38 0)
+		(property "Description" "Ground power symbol"
+			(at 157.48 37.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
-			(uuid "04282cde-ed72-4cbe-8dc6-773b7b43b20a")
+		(pin "1"
+			(uuid "f564cbb4-6ba5-40ee-9e06-77f6dd2018ae")
 		)
 		(instances
 			(project ""
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "#PWR0107")
+					(reference "#PWR0112")
 					(unit 1)
 				)
 			)
@@ -9166,8 +9023,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:VIN_BAR")
-		(at 123.19 101.6 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 123.19 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9184,7 +9041,7 @@
 			)
 		)
 		(property "Value" "VIN"
-			(at 123.19 97.3328 0)
+			(at 123.19 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9197,6 +9054,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -9205,23 +9063,90 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 123.19 101.6 0)
+		(property "Description" "Source power symbol"
+			(at 123.19 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "af2649bf-ba8b-4da6-b2cb-b5e937b1c035")
 		)
 		(instances
 			(project ""
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "#PWR0118")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:VDD")
+		(at 251.46 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4035cb13-676a-47be-8132-5c1004370b6f")
+		(property "Reference" "#PWR0134"
+			(at 251.46 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3.3V"
+			(at 251.46 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 251.46 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 251.46 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Source power symbol"
+			(at 251.46 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f1e7175a-bedb-47e6-a013-8594fdbb5aa2")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0134")
 					(unit 1)
 				)
 			)
@@ -9366,7 +9291,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 140.97 46.99 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9397,6 +9322,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -9405,17 +9331,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 140.97 46.99 0)
+		(property "Description" "Ground power symbol"
+			(at 140.97 55.245 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "b51ba957-36a5-4f47-a5ac-f1014c9031c7")
 		)
 		(instances
@@ -9428,8 +9356,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 24.13 72.39 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 24.13 72.39 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9459,6 +9387,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -9467,17 +9396,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 24.13 72.39 0)
+		(property "Description" "Source power symbol"
+			(at 24.13 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "9388477d-bd3a-4134-8a30-9e5c21ad394b")
 		)
 		(instances
@@ -9628,8 +9559,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
-		(at 97.79 118.5672 0)
+		(lib_id "BrenoCQ:GND")
+		(at 97.79 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9637,7 +9568,7 @@
 		(dnp no)
 		(uuid "502204f3-9d13-429c-bffc-ab9ff9fd095b")
 		(property "Reference" "#PWR0131"
-			(at 97.79 118.5672 0)
+			(at 97.79 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9646,7 +9577,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 97.79 124.9172 0)
+			(at 97.79 122.7328 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9654,30 +9585,33 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 97.79 118.5672 0)
+			(at 97.79 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
-			(at 97.79 118.5672 0)
+			(at 97.79 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 97.79 118.5672 0)
+		(property "Description" "Ground power symbol"
+			(at 97.79 126.365 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "ce0f180b-7586-4635-8a37-5177704643b2")
 		)
 		(instances
@@ -9690,16 +9624,16 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:VIN_BAR")
-		(at 241.3 40.64 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 21.59 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5536b6ab-8324-4a99-a70f-7ae5e5f34d9b")
-		(property "Reference" "#PWR0102"
-			(at 241.3 40.64 0)
+		(uuid "53077263-675a-4a9d-9aa1-82a94fc30805")
+		(property "Reference" "#PWR0137"
+			(at 21.59 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9708,44 +9642,48 @@
 			)
 		)
 		(property "Value" "VIN"
-			(at 241.3 36.83 0)
+			(at 23.495 23.0378 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 241.3 40.64 0)
+			(at 21.59 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
-			(at 241.3 40.64 0)
+			(at 21.59 26.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 241.3 40.64 0)
+		(property "Description" "Source power symbol"
+			(at 21.59 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
-			(uuid "eeb3f478-d5b2-4067-9230-4d0d2a285ff8")
+		(pin "1"
+			(uuid "0ed5a25a-3a99-4176-9dc1-5e452fe2cb91")
 		)
 		(instances
-			(project ""
+			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "#PWR0102")
+					(reference "#PWR0137")
 					(unit 1)
 				)
 			)
@@ -9963,8 +9901,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 57.15 26.67 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 57.15 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9994,6 +9932,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -10002,17 +9941,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 57.15 26.67 0)
+		(property "Description" "Source power symbol"
+			(at 57.15 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "2a97cd34-5636-44d2-91ac-07607899dc1b")
 		)
 		(instances
@@ -10025,8 +9966,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:VIN_BAR")
-		(at 52.07 147.7772 90)
+		(lib_id "BrenoCQ:VDD")
+		(at 52.07 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10034,7 +9975,7 @@
 		(dnp no)
 		(uuid "610819e6-dbf0-486b-bbac-124aeb342fd4")
 		(property "Reference" "#PWR0124"
-			(at 52.07 147.7772 0)
+			(at 52.07 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10043,7 +9984,7 @@
 			)
 		)
 		(property "Value" "VIN"
-			(at 55.88 147.7772 90)
+			(at 53.975 143.6878 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10052,30 +9993,33 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 52.07 147.7772 0)
+			(at 52.07 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
-			(at 52.07 147.7772 0)
+			(at 52.07 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 52.07 147.7772 0)
+		(property "Description" "Source power symbol"
+			(at 52.07 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "96ba1190-8587-4f84-bc7c-f6940b1926ec")
 		)
 		(instances
@@ -10103,6 +10047,7 @@
 					(size 1.27 1.27)
 				)
 				(justify left bottom)
+				(hide yes)
 			)
 		)
 		(property "Value" "100nF"
@@ -10157,7 +10102,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 241.3 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10175,7 +10120,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 241.3 72.39 0)
+			(at 241.3 70.485 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10188,6 +10133,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -10196,17 +10142,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 241.3 66.04 0)
+		(property "Description" "Ground power symbol"
+			(at 241.3 74.295 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "a1236419-cf34-402f-91f8-5cef7ad6893e")
 		)
 		(instances
@@ -10219,7 +10167,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 157.48 54.61 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10237,7 +10185,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 157.48 60.1472 0)
+			(at 157.48 58.2422 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10250,6 +10198,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -10258,17 +10207,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 157.48 54.61 0)
+		(property "Description" "Ground power symbol"
+			(at 157.48 62.865 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "5e11e2f2-6357-447a-92af-a2845f5dff95")
 		)
 		(instances
@@ -10281,7 +10232,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 85.09 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10299,7 +10250,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 85.09 77.47 0)
+			(at 85.09 75.565 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10312,6 +10263,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -10320,17 +10272,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 85.09 71.12 0)
+		(property "Description" "Ground power symbol"
+			(at 85.09 79.375 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "089ee480-b18e-4cb5-b1ee-a4dc6266ae81")
 		)
 		(instances
@@ -10830,6 +10784,71 @@
 		)
 	)
 	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 256.54 124.46 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7afc15f7-ada6-4cbf-9750-f5d62f588c08")
+		(property "Reference" "#PWR0105"
+			(at 256.54 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 256.54 128.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 256.54 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 256.54 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 256.54 132.715 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d7bdf2e4-a152-499c-bcba-8c0cefb30592")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0105")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "BrenoCQ:TMC6300-LA")
 		(at 105.41 48.26 0)
 		(unit 0)
@@ -10953,7 +10972,73 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "power:PWR_FLAG")
+		(at 261.62 156.21 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "86e36406-fe0a-4de0-ac16-98a5b8dd579e")
+		(property "Reference" "#FLG01"
+			(at 261.62 158.115 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 261.62 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 261.62 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 261.62 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 261.62 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a05eadb2-8377-46d9-9673-2aa4c319eed6")
+		)
+		(instances
+			(project ""
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
 		(at 52.07 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10971,7 +11056,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 52.07 99.06 0)
+			(at 52.07 97.155 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10984,6 +11069,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -10992,23 +11078,91 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 52.07 92.71 0)
+		(property "Description" "Ground power symbol"
+			(at 52.07 100.965 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "639ecfc7-f61b-4630-bc17-1cb9b84a98c5")
 		)
 		(instances
 			(project ""
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "#PWR0120")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:VDD")
+		(at 261.62 153.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "896ce149-7044-40ad-a1a0-97e9df693b60")
+		(property "Reference" "#PWR0138"
+			(at 261.62 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VIN"
+			(at 263.525 150.0378 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 261.62 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Source power symbol"
+			(at 261.62 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e8becaa0-891c-47a7-96d8-a02735ec0bf0")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0138")
 					(unit 1)
 				)
 			)
@@ -11084,8 +11238,73 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 173.99 25.4 180)
+		(lib_id "BrenoCQ:GND")
+		(at 271.78 153.67 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "90acf93c-bac7-4b07-bb46-7e85c4d13af3")
+		(property "Reference" "#PWR0107"
+			(at 271.78 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 271.78 149.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 271.78 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 271.78 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 271.78 145.415 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "64f55d35-c196-435c-9518-4852be488079")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:VDD")
+		(at 173.99 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11115,6 +11334,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -11123,17 +11343,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 173.99 25.4 0)
+		(property "Description" "Source power symbol"
+			(at 173.99 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "6d93532b-fe4e-4f81-a3dd-530f18d0d8c6")
 		)
 		(instances
@@ -11251,6 +11473,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 251.46 156.21 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "aa587429-9863-45bc-a8d1-c44b110935c6")
+		(property "Reference" "#FLG02"
+			(at 251.46 158.115 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 251.46 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 251.46 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 251.46 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 251.46 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c268c32a-611f-45b4-a441-b659e8e80935")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#FLG02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 129.54 68.58 90)
 		(unit 1)
@@ -11320,7 +11608,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 127 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11338,7 +11626,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 127 180.34 0)
+			(at 127 178.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11351,6 +11639,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -11359,17 +11648,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 127 173.99 0)
+		(property "Description" "Ground power symbol"
+			(at 127 182.245 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "214a0245-d1ea-4c28-b99a-187615b0cb43")
 		)
 		(instances
@@ -11382,8 +11673,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 26.67 147.7772 270)
+		(lib_id "BrenoCQ:VDD")
+		(at 26.67 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11391,7 +11682,7 @@
 		(dnp no)
 		(uuid "bd84df1d-70b5-431a-a033-9da204db6e4f")
 		(property "Reference" "#PWR0126"
-			(at 26.67 147.7772 0)
+			(at 26.67 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11400,7 +11691,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 22.86 147.7772 90)
+			(at 29.21 143.6878 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11409,30 +11700,33 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 26.67 147.7772 0)
+			(at 26.67 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
-			(at 26.67 147.7772 0)
+			(at 26.67 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 26.67 147.7772 0)
+		(property "Description" "Source power symbol"
+			(at 26.67 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "c8655aee-5b4f-4381-8983-f00b49334fe1")
 		)
 		(instances
@@ -11445,16 +11739,17 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 251.46 40.64 180)
+		(lib_id "power:PWR_FLAG")
+		(at 271.78 156.21 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bdd12824-5b91-410e-ae70-b46e24777a7c")
-		(property "Reference" "#PWR0105"
-			(at 251.46 40.64 0)
+		(fields_autoplaced yes)
+		(uuid "bec641de-7177-401f-96f3-4136cd4d08e6")
+		(property "Reference" "#FLG03"
+			(at 271.78 158.115 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11462,8 +11757,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "3.3V"
-			(at 251.46 36.83 0)
+		(property "Value" "PWR_FLAG"
+			(at 271.78 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11471,36 +11766,39 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 251.46 40.64 0)
+			(at 271.78 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 251.46 40.64 0)
+		(property "Datasheet" "~"
+			(at 271.78 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 251.46 40.64 0)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 271.78 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
-			(uuid "bb622448-a073-4218-b5f8-bec9c73cf2dc")
+		(pin "1"
+			(uuid "e7fe5c72-342c-4d2e-b3cf-5be46e3df655")
 		)
 		(instances
-			(project ""
+			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "#PWR0105")
+					(reference "#FLG03")
 					(unit 1)
 				)
 			)
@@ -11577,7 +11875,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:Molex_05MM-30P")
-		(at 39.37 157.9372 0)
+		(at 39.37 157.48 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11585,7 +11883,7 @@
 		(dnp no)
 		(uuid "c9341786-6e16-496c-9951-e7af70ac7ba7")
 		(property "Reference" "J1"
-			(at 34.29 144.78 0)
+			(at 34.29 144.3228 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11594,7 +11892,7 @@
 			)
 		)
 		(property "Value" "501920-3001"
-			(at 34.29 188.4172 0)
+			(at 34.29 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11603,7 +11901,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:501920-3001"
-			(at 40.005 193.4972 0)
+			(at 40.005 193.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11612,7 +11910,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail/5019203001?display=pdf"
-			(at 39.37 190.9572 0)
+			(at 39.37 190.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11621,7 +11919,7 @@
 			)
 		)
 		(property "Description" "Molex SlimStack 0.5mm pitch 30 pins"
-			(at 39.37 188.4172 0)
+			(at 39.37 187.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11960,6 +12258,72 @@
 		)
 	)
 	(symbol
+		(lib_id "BrenoCQ:VDD")
+		(at 251.46 153.67 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d0a8b17c-52f4-4347-8ac5-ad38e22d953e")
+		(property "Reference" "#PWR0139"
+			(at 251.46 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3.3V"
+			(at 254 150.0378 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 251.46 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 251.46 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Source power symbol"
+			(at 251.46 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "377afd1b-638d-4619-878a-aabe7ccd38a4")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0139")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 100.33 109.22 0)
 		(unit 1)
@@ -12029,7 +12393,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 24.13 92.71 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12047,7 +12411,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 24.13 99.06 0)
+			(at 24.13 97.155 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12060,6 +12424,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -12068,17 +12433,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 24.13 92.71 0)
+		(property "Description" "Ground power symbol"
+			(at 24.13 100.965 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "51cace15-3ea3-4364-8020-ed857c39dcc9")
 		)
 		(instances
@@ -12160,8 +12527,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:VIN_BAR")
-		(at 127 156.21 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 127 156.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12191,6 +12558,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -12199,17 +12567,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 127 156.21 0)
+		(property "Description" "Source power symbol"
+			(at 127 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "f2f717ed-089f-4d53-bff4-0dbdb8fe3373")
 		)
 		(instances
@@ -12222,8 +12592,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:3.3V_BAR")
-		(at 173.99 77.47 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 173.99 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12253,6 +12623,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -12261,17 +12632,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 173.99 77.47 0)
+		(property "Description" "Source power symbol"
+			(at 173.99 81.28 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "ee344eab-acd3-4ea3-b73d-069d377500f3")
 		)
 		(instances
@@ -12354,6 +12727,72 @@
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "J4")
 					(unit 0)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:VDD")
+		(at 162.56 119.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e5ee102c-922c-4457-ad28-38669f655fae")
+		(property "Reference" "#PWR0136"
+			(at 162.56 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3.3V"
+			(at 165.1 115.7478 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 162.56 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 162.56 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Source power symbol"
+			(at 162.56 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e88caa5c-203f-422f-8d31-67dd54a2c3b6")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0136")
+					(unit 1)
 				)
 			)
 		)
@@ -12449,6 +12888,72 @@
 		)
 	)
 	(symbol
+		(lib_id "BrenoCQ:VDD")
+		(at 241.3 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec76a240-799d-432e-8473-f711fc1d1052")
+		(property "Reference" "#PWR0135"
+			(at 241.3 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VIN"
+			(at 243.205 37.0078 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 241.3 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 241.3 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Source power symbol"
+			(at 241.3 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a1fcab24-be68-48ef-9004-5ebe68bde7e4")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "#PWR0135")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 135.89 64.77 0)
 		(unit 1)
@@ -12518,7 +13023,7 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:GND_POWER_GROUND")
+		(lib_id "BrenoCQ:GND")
 		(at 135.89 71.12 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12536,7 +13041,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 135.89 77.47 0)
+			(at 135.89 75.565 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12549,6 +13054,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -12557,17 +13063,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 135.89 71.12 0)
+		(property "Description" "Ground power symbol"
+			(at 135.89 79.375 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "98dab6a4-2233-452b-a45b-1113eb0699e3")
 		)
 		(instances
@@ -12661,8 +13169,8 @@
 		)
 	)
 	(symbol
-		(lib_id "BLDCM-Power-altium-import:VIN_BAR")
-		(at 77.47 27.94 180)
+		(lib_id "BrenoCQ:VDD")
+		(at 77.47 27.94 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12692,6 +13200,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -12700,17 +13209,19 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 77.47 27.94 0)
+		(property "Description" "Source power symbol"
+			(at 77.47 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(pin ""
+		(pin "1"
 			(uuid "a78f343a-84d8-4c28-918c-6a27f62702e0")
 		)
 		(instances
