@@ -3557,7 +3557,7 @@
 			(at 4.422281 -2.096536 90)
 			(size 2.1 3)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(uuid "d46ef5f7-67c6-423c-ad4a-d8ea3eaada5b")
+			(uuid "ae038cb9-1135-4cc1-8ae2-cc07de0da510")
 		)
 		(embedded_fonts no)
 		(model "${BRENOCQ_DIR}/BrenoCQ.3dshapes/53261-0471.step"
@@ -4203,11 +4203,11 @@
 	(footprint "BrenoCQ:R_0402"
 		(layer "F.Cu")
 		(uuid "6e40b69a-4c87-4a65-8edd-c71a24178cb4")
-		(at 167.4011 91.6036)
+		(at 154.3011 93.7036 90)
 		(descr "Resistor")
 		(tags "resistor")
 		(property "Reference" "R13"
-			(at 0 -1.5 0)
+			(at 0 -1.5 90)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "5b9d4d31-5e51-4f02-ac1b-d3354fe520d8")
@@ -4219,7 +4219,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 0 1.5 0)
+			(at 0 1.5 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "208ca719-bc43-44b6-9335-70cbee7fd828")
@@ -4231,7 +4231,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -4244,7 +4244,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -4282,26 +4282,6 @@
 			(uuid "1f02d6fc-850a-413e-a32c-c1d7c6ea29f0")
 		)
 		(fp_line
-			(start -1.11 -0.47)
-			(end 1.11 -0.47)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "d67152aa-dc3b-4d83-a82b-2d695c316fa7")
-		)
-		(fp_line
-			(start -1.11 0.47)
-			(end -1.11 -0.47)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "cd637ba0-62d9-4253-8ec8-492b7b7c7b78")
-		)
-		(fp_line
 			(start 1.11 -0.47)
 			(end 1.11 0.47)
 			(stroke
@@ -4310,6 +4290,16 @@
 			)
 			(layer "F.CrtYd")
 			(uuid "be110e53-db76-4496-80db-4b6d336a48b1")
+		)
+		(fp_line
+			(start -1.11 -0.47)
+			(end 1.11 -0.47)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "d67152aa-dc3b-4d83-a82b-2d695c316fa7")
 		)
 		(fp_line
 			(start 1.11 0.47)
@@ -4322,24 +4312,14 @@
 			(uuid "abe34589-b789-4856-989d-93b2b973cdb4")
 		)
 		(fp_line
-			(start -0.5 -0.25)
-			(end 0.5 -0.25)
+			(start -1.11 0.47)
+			(end -1.11 -0.47)
 			(stroke
-				(width 0.1)
+				(width 0.05)
 				(type solid)
 			)
-			(layer "F.Fab")
-			(uuid "fa31b2d2-2c1f-4dca-813a-60d298e74b72")
-		)
-		(fp_line
-			(start -0.5 0.25)
-			(end -0.5 -0.25)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "f5e797be-d6c5-4c8f-a8e8-6c073a56d3c4")
+			(layer "F.CrtYd")
+			(uuid "cd637ba0-62d9-4253-8ec8-492b7b7c7b78")
 		)
 		(fp_line
 			(start 0.5 -0.25)
@@ -4352,6 +4332,16 @@
 			(uuid "d1d56825-6fcb-4c3b-bd4d-9537983d3608")
 		)
 		(fp_line
+			(start -0.5 -0.25)
+			(end 0.5 -0.25)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "fa31b2d2-2c1f-4dca-813a-60d298e74b72")
+		)
+		(fp_line
 			(start 0.5 0.25)
 			(end -0.5 0.25)
 			(stroke
@@ -4361,8 +4351,18 @@
 			(layer "F.Fab")
 			(uuid "3920db94-bd4a-4ced-ae9d-b4b1ccfa8716")
 		)
+		(fp_line
+			(start -0.5 0.25)
+			(end -0.5 -0.25)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "f5e797be-d6c5-4c8f-a8e8-6c073a56d3c4")
+		)
 		(fp_text user "${REFERENCE}"
-			(at 0 3 0)
+			(at 0 3 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "468b0892-07ba-40f2-ac01-0ec7440992f8")
@@ -4374,7 +4374,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.5725 0)
+			(at -0.5725 0 90)
 			(size 0.765 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -4383,7 +4383,7 @@
 			(uuid "5f6ffacb-b62a-42b6-af33-9608afafc018")
 		)
 		(pad "2" smd roundrect
-			(at 0.5725 0)
+			(at 0.5725 0 90)
 			(size 0.765 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -8166,7 +8166,7 @@
 			(at 4.422281 -2.096536 270)
 			(size 2.1 3)
 			(layers "F.Cu" "F.Mask" "F.Paste")
-			(uuid "0d9cc746-9f79-412f-99e5-cb36977c4a16")
+			(uuid "d470f9f4-bed1-47a0-99c3-4d8b6c9efa72")
 		)
 		(embedded_fonts no)
 		(model "${BRENOCQ_DIR}/BrenoCQ.3dshapes/53261-0471.step"
