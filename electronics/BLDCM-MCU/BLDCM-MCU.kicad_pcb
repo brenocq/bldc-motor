@@ -13982,21 +13982,21 @@
 			(layers "F&B.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(thermal_bridge_angle 90)
-			(uuid "1c74d6d7-618e-4f47-9325-8e00c4d12842")
+			(uuid "f2d1f05f-0595-4a8d-a6b1-c03411f70bc1")
 		)
 		(pad "NC" smd circle
 			(at 0.310976 -1.888004 225)
 			(size 0.0254 0.0254)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(thermal_bridge_angle 90)
-			(uuid "1c74d6d7-618e-4f47-9325-8e00c4d12842")
+			(uuid "d1f47fa1-c903-4f69-a80b-2ea291e1cb63")
 		)
 		(pad "NC" smd circle
 			(at 0.31099 1.811988 225)
 			(size 0.0254 0.0254)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(thermal_bridge_angle 90)
-			(uuid "1c74d6d7-618e-4f47-9325-8e00c4d12842")
+			(uuid "5d243342-4869-4d70-8234-6f6cd694a84a")
 		)
 		(pad "NC" thru_hole circle
 			(at 0.327318 1.813608 225)
@@ -14005,7 +14005,7 @@
 			(layers "F&B.Cu" "*.Mask")
 			(remove_unused_layers no)
 			(thermal_bridge_angle 90)
-			(uuid "1c74d6d7-618e-4f47-9325-8e00c4d12842")
+			(uuid "a6b30a8f-9773-42df-8842-09744603fd12")
 		)
 		(pad "NC" smd custom
 			(at 0.610973 -1.187997)
@@ -14027,7 +14027,7 @@
 					(fill yes)
 				)
 			)
-			(uuid "1c74d6d7-618e-4f47-9325-8e00c4d12842")
+			(uuid "3bcd417a-fd31-4a1e-a8b1-b08bef2b1a9c")
 		)
 		(pad "NC" smd custom
 			(at 0.610994 1.111988)
@@ -14049,7 +14049,7 @@
 					(fill yes)
 				)
 			)
-			(uuid "1c74d6d7-618e-4f47-9325-8e00c4d12842")
+			(uuid "d4cab242-3cc3-4aec-a1d3-efe14c1c3712")
 		)
 		(embedded_fonts no)
 		(model "${BRENOCQ_DIR}/BrenoCQ.3dshapes/EVPAKE31A.step"

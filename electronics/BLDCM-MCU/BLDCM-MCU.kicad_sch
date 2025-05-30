@@ -3972,7 +3972,7 @@
 	)
 	(text "STM32"
 		(exclude_from_sim no)
-		(at 16.51 19.05 0)
+		(at 14.732 18.288 0)
 		(effects
 			(font
 				(size 2.286 2.286)
@@ -3994,7 +3994,7 @@
 	)
 	(text "LEDs"
 		(exclude_from_sim no)
-		(at 129.54 85.09 0)
+		(at 127.762 84.074 0)
 		(effects
 			(font
 				(size 2.286 2.286)
@@ -4005,7 +4005,7 @@
 	)
 	(text "Stack Connector"
 		(exclude_from_sim no)
-		(at 78.994 84.8868 0)
+		(at 78.232 84.074 0)
 		(effects
 			(font
 				(size 2.286 2.286)
@@ -4016,7 +4016,7 @@
 	)
 	(text "Encoder"
 		(exclude_from_sim no)
-		(at 16.51 149.86 0)
+		(at 14.732 149.098 0)
 		(effects
 			(font
 				(size 2.286 2.286)
@@ -4057,6 +4057,27 @@
 			(justify left bottom)
 		)
 		(uuid "f6eae34f-02b8-4e3f-9527-e071a1dfc1dc")
+	)
+	(text_box "VIN should be 3.7V~5.5V for the SK6805"
+		(exclude_from_sim no)
+		(at 128.27 102.87 0)
+		(size 19.685 7.62)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type color)
+			(color 255 255 150 1)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "38005400-0d01-4dd0-b10b-aae2953038d1")
 	)
 	(text_box "SPI1 -> INA | SPI2 -> IMU | SPI3 -> ENC | ADC1 - >VOLT | USB | CAN1 | TIM1 -> PWM | TIM2 -> LED"
 		(exclude_from_sim no)
