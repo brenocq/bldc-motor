@@ -465,7 +465,9 @@
   },
   "libraries": {
     "pinned_footprint_libs": [],
-    "pinned_symbol_libs": []
+    "pinned_symbol_libs": [
+      "BrenoCQ"
+    ]
   },
   "meta": {
     "filename": "BLDCM-Power.kicad_pro",
@@ -501,12 +503,51 @@
         "microvia_drill": 0.1,
         "name": "All Nets",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
+        "priority": 6,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "name": "CAN",
+        "pcb_color": "rgb(139, 120, 6)",
+        "priority": 2,
+        "schematic_color": "rgb(139, 120, 6)"
+      },
+      {
+        "name": "INA",
+        "pcb_color": "rgb(255, 127, 31)",
+        "priority": 4,
+        "schematic_color": "rgb(255, 127, 31)"
+      },
+      {
+        "name": "TMC",
+        "pcb_color": "rgb(123, 17, 163)",
+        "priority": 3,
+        "schematic_color": "rgb(123, 17, 163)"
+      },
+      {
+        "diff_pair_gap": 0.15,
+        "diff_pair_width": 0.15,
+        "line_style": 0,
+        "name": "USB",
+        "pcb_color": "rgb(120, 164, 255)",
+        "priority": 5,
+        "schematic_color": "rgb(120, 164, 255)"
+      },
+      {
+        "name": "VCP",
+        "pcb_color": "rgb(24, 186, 183)",
+        "priority": 0,
+        "schematic_color": "rgb(24, 186, 183)"
+      },
+      {
+        "name": "VOLT",
+        "pcb_color": "rgb(146, 185, 54)",
+        "priority": 1,
+        "schematic_color": "rgb(146, 185, 54)"
       }
     ],
     "meta": {
@@ -514,7 +555,32 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "USB",
+        "pattern": "/USB.*"
+      },
+      {
+        "netclass": "INA",
+        "pattern": "/INA.*"
+      },
+      {
+        "netclass": "TMC",
+        "pattern": "/TMC.*"
+      },
+      {
+        "netclass": "CAN",
+        "pattern": "/CAN.*"
+      },
+      {
+        "netclass": "VOLT",
+        "pattern": "/VOLT*"
+      },
+      {
+        "netclass": "VCP",
+        "pattern": "/VCP.*"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
