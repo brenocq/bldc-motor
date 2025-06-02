@@ -477,7 +477,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.1,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -488,14 +488,14 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2,
-        "via_diameter": 0.6,
-        "via_drill": 0.3,
+        "track_width": 0.1,
+        "via_diameter": 0.4,
+        "via_drill": 0.2,
         "wire_width": 6
       },
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.1,
         "diff_pair_gap": 0.25,
         "diff_pair_width": 0.2,
         "line_style": 0,
@@ -503,29 +503,39 @@
         "microvia_drill": 0.1,
         "name": "All Nets",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 6,
+        "priority": 8,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2,
-        "via_diameter": 0.6,
-        "via_drill": 0.3,
+        "track_width": 0.1,
+        "via_diameter": 0.4,
+        "via_drill": 0.2,
         "wire_width": 6
       },
       {
         "name": "CAN",
         "pcb_color": "rgb(139, 120, 6)",
-        "priority": 2,
+        "priority": 4,
         "schematic_color": "rgb(139, 120, 6)"
+      },
+      {
+        "clearance": 0.15,
+        "diff_pair_gap": 0.15,
+        "diff_pair_width": 0.1329,
+        "name": "CAN_120R",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1329
       },
       {
         "name": "INA",
         "pcb_color": "rgb(255, 127, 31)",
-        "priority": 4,
+        "priority": 6,
         "schematic_color": "rgb(255, 127, 31)"
       },
       {
         "name": "TMC",
         "pcb_color": "rgb(123, 17, 163)",
-        "priority": 3,
+        "priority": 5,
         "schematic_color": "rgb(123, 17, 163)"
       },
       {
@@ -534,19 +544,29 @@
         "line_style": 0,
         "name": "USB",
         "pcb_color": "rgb(120, 164, 255)",
-        "priority": 5,
+        "priority": 7,
         "schematic_color": "rgb(120, 164, 255)"
+      },
+      {
+        "clearance": 0.2,
+        "diff_pair_gap": 0.2,
+        "diff_pair_width": 0.2507,
+        "name": "USB_90R",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2507
       },
       {
         "name": "VCP",
         "pcb_color": "rgb(24, 186, 183)",
-        "priority": 0,
+        "priority": 2,
         "schematic_color": "rgb(24, 186, 183)"
       },
       {
         "name": "VOLT",
         "pcb_color": "rgb(146, 185, 54)",
-        "priority": 1,
+        "priority": 3,
         "schematic_color": "rgb(146, 185, 54)"
       }
     ],
@@ -579,6 +599,14 @@
       {
         "netclass": "VCP",
         "pattern": "/VCP.*"
+      },
+      {
+        "netclass": "USB_90R",
+        "pattern": "/USB.D*"
+      },
+      {
+        "netclass": "CAN_120R",
+        "pattern": "/CAN.D*"
       }
     ]
   },
