@@ -1207,7 +1207,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TPS2120")
-		(at 63.5 53.34 0)
+		(at 71.12 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1216,7 +1216,7 @@
 		(fields_autoplaced yes)
 		(uuid "192b4a72-8374-4138-9c1f-8087af63c36b")
 		(property "Reference" "U7"
-			(at 62.865 31.75 0)
+			(at 70.485 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1224,7 +1224,7 @@
 			)
 		)
 		(property "Value" "TPS2120"
-			(at 62.865 34.29 0)
+			(at 70.485 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1232,7 +1232,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 63.5 53.34 0)
+			(at 71.12 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1241,7 +1241,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2120.pdf?ts=1748897252786&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS2120"
-			(at 63.5 64.77 0)
+			(at 71.12 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1250,7 +1250,7 @@
 			)
 		)
 		(property "Description" "TPS2120 2.8-V to 22-V Priority Power MUX with Seamless Switchover"
-			(at 63.5 62.23 0)
+			(at 71.12 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
