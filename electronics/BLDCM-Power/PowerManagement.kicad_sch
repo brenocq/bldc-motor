@@ -274,37 +274,28 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "BrenoCQ:LDL212PV33R"
+		(symbol "BrenoCQ:LDO40LPU50RY"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U?"
-				(at -8.89 8.89 0)
+				(at -6.35 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "LDO40LPU50RY"
+				(at 4.445 6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "BrenoCQ:DFN-6-2x2"
-				(at 0.635 -16.51 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.st.com/resource/en/datasheet/ldl212.pdf"
-				(at 0 -13.97 0)
+			(property "Footprint" "BrenoCQ:DFN-6-3x3"
+				(at 0 -24.13 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -312,8 +303,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "LDO Voltage Regulator 1.2A 3.3V"
-				(at 0 -11.43 0)
+			(property "Datasheet" "https://www.st.com/resource/en/datasheet/ldo40l.pdf"
+				(at 0.635 -21.59 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -321,8 +312,8 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "*DFN-6-2x2*"
-				(at 0 0 0)
+			(property "Description" "LDO Voltage Regulators 400 mA 5 V output, 38 V input low-dropout regulator, 45 uA quiescent current"
+				(at 0.635 -19.05 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -330,10 +321,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "LDL212PV33R_1_0"
+			(symbol "LDO40LPU50RY_1_0"
 				(rectangle
-					(start -10.16 7.62)
-					(end 10.16 -2.54)
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
 					(stroke
 						(width 0.0254)
 						(type solid)
@@ -343,110 +334,10 @@
 						(type background)
 					)
 				)
-				(text "GND"
-					(at -2.54 -1.27 0)
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-						(justify left bottom)
-					)
-				)
-				(pin passive line
-					(at -12.7 5.08 0)
+				(pin power_in line
+					(at -10.16 2.54 0)
 					(length 2.54)
 					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -12.7 2.54 0)
-					(length 2.54)
-					(name "EN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at -12.7 0 0)
-					(length 2.54)
-					(hide yes)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-					(number "PAD"
-						(effects
-							(font
-								(size 0 0)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 12.7 5.08 180)
-					(length 2.54)
-					(name "VOUT"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -461,8 +352,81 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 12.7 2.54 180)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(hide yes)
+					(name "TAB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "TAB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 0 180)
 					(length 2.54)
 					(name "SENSE"
 						(effects
@@ -471,7 +435,26 @@
 							)
 						)
 					)
-					(number "2"
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -482,37 +465,28 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "BrenoCQ:TPS2120"
+		(symbol "BrenoCQ:TPS2115ADRB"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U?"
-				(at -10.16 17.78 0)
+				(at -6.35 8.255 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "TPS2120"
-				(at 6.35 17.78 0)
+			(property "Value" "TPS2115ADRB"
+				(at 3.175 8.255 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2120.pdf?ts=1748897252786&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS2120"
-				(at 0 -11.43 0)
+			(property "Footprint" "BrenoCQ:VSON-8"
+				(at 0 -25.4 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -520,8 +494,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "TPS2120 2.8-V to 22-V Priority Power MUX with Seamless Switchover"
-				(at 0 -8.89 0)
+			(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2115a.pdf?ts=1751099558073"
+				(at 0 -22.86 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -529,167 +503,20 @@
 					(hide yes)
 				)
 			)
-			(symbol "TPS2120_1_1"
-				(rectangle
-					(start -11.43 16.51)
-					(end 10.16 -6.35)
-					(stroke
-						(width 0)
-						(type solid)
+			(property "Description" "Two-Input, One-Output Power Multiplexer. Input 2.8 V to 5.5 V"
+				(at 0 -20.955 0)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
-					(fill
-						(type background)
-					)
+					(hide yes)
 				)
+			)
+			(symbol "TPS2115ADRB_1_0"
 				(pin power_in line
-					(at -13.97 13.97 0)
+					(at -10.16 5.08 0)
 					(length 2.54)
 					(name "IN1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -13.97 11.43 0)
-					(length 2.54)
-					(name "PRI"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -13.97 8.89 0)
-					(length 2.54)
-					(name "OV1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -13.97 5.08 0)
-					(length 2.54)
-					(name "IN2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -13.97 2.54 0)
-					(length 2.54)
-					(name "CP2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -13.97 0 0)
-					(length 2.54)
-					(name "OV2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -13.97 -3.81 0)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 12.7 13.97 180)
-					(length 2.54)
-					(name "OUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 12.7 13.97 180)
-					(length 2.54)
-					(hide yes)
-					(name "OUT"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -704,17 +531,17 @@
 						)
 					)
 				)
-				(pin input line
-					(at 12.7 7.62 180)
+				(pin power_in line
+					(at -10.16 2.54 0)
 					(length 2.54)
-					(name "ST"
+					(name "IN2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -723,16 +550,16 @@
 					)
 				)
 				(pin input line
-					(at 12.7 1.27 180)
+					(at -10.16 -2.54 0)
 					(length 2.54)
-					(name "SS"
+					(name "D0"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "11"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -741,49 +568,150 @@
 					)
 				)
 				(pin input line
-					(at 12.7 -3.81 180)
+					(at -10.16 -5.08 0)
 					(length 2.54)
-					(name "ILM"
+					(name "D1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "10"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(hide yes)
+					(name "PAD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "PAD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "STAT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(name "ILIM"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "TPS2115ADRB_1_1"
+				(rectangle
+					(start -7.62 6.985)
+					(end 7.62 -7.62)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type background)
 					)
 				)
 			)
 			(embedded_fonts no)
 		)
-		(symbol "BrenoCQ:VDD"
-			(power)
+		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
 			)
 			(pin_names
 				(offset 0)
-				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "#PWR"
-				(at -0.635 -1.905 0)
+			(property "Reference" "R"
+				(at 2.032 0 90)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(hide yes)
 				)
 			)
-			(property "Value" "VDD"
-				(at 0 3.556 0)
+			(property "Value" "R"
+				(at 0 0 90)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -791,6 +719,15 @@
 				)
 			)
 			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
 				(at 0 0 0)
 				(effects
 					(font
@@ -799,7 +736,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Description" "Resistor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -808,8 +745,8 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Source power symbol"
-				(at 0 -3.81 0)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -817,37 +754,21 @@
 					(hide yes)
 				)
 			)
-			(symbol "VDD_0_1"
-				(polyline
-					(pts
-						(xy -1.27 2.54) (xy 0 2.54)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
+					(hide yes)
 				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 1.27 2.54)
-					)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
 					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -855,10 +776,10 @@
 					)
 				)
 			)
-			(symbol "VDD_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
 					(name "~"
 						(effects
 							(font
@@ -874,13 +795,184 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "LDLN030G33R_1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U?"
+				(at -8.255 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LDLN030G33R"
+				(at -0.635 -19.05 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "BrenoCQ:TSOT-23-5"
+				(at 0 -24.765 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.st.com/resource/en/datasheet/ldln030.pdf"
+				(at 0 -22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "LDO Voltage Regulators 300mA 3.3V ultra-low noise LDO Power Good and Soft Start"
+				(at 0 -20.955 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LDLN030G33R_1_1_0"
+				(rectangle
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
+					(stroke
+						(width 0.0254)
+						(type solid)
+						(color 128 0 0 1)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin power_in line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "EN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "PG"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(embedded_fonts no)
 		)
 	)
 	(rectangle
-		(start 106.68 22.86)
-		(end 124.46 27.94)
+		(start 20.32 25.4)
+		(end 40.005 29.21)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -889,11 +981,11 @@
 		(fill
 			(type none)
 		)
-		(uuid 442db77d-738a-4ab0-b0ac-952ec55aa088)
+		(uuid 5406c24e-4775-42ab-8fb8-6fc953b36d6f)
 	)
 	(rectangle
-		(start 46.355 25.4)
-		(end 70.485 29.21)
+		(start 160.02 25.4)
+		(end 175.895 29.21)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -905,8 +997,8 @@
 		(uuid 9cebfbc2-535f-449c-9212-0d86b4fea10b)
 	)
 	(rectangle
-		(start 106.68 27.94)
-		(end 162.56 68.58)
+		(start 61.595 25.4)
+		(end 102.87 29.21)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -915,11 +1007,11 @@
 		(fill
 			(type none)
 		)
-		(uuid a00c3204-6a38-4fd9-a03b-c036b516fc9f)
+		(uuid b3c4c83c-92ae-4e88-9964-3361bbbbcb6f)
 	)
 	(rectangle
-		(start 46.355 29.21)
-		(end 101.6 69.85)
+		(start 160.02 29.21)
+		(end 215.265 69.85)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -930,100 +1022,370 @@
 		)
 		(uuid d33db1b6-9288-4c95-883a-30a7ebe2e23f)
 	)
-	(text "Power Selection"
+	(rectangle
+		(start 61.595 29.21)
+		(end 157.48 69.85)
+		(stroke
+			(width 0.254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid e1bf51ea-08f9-4331-ba37-6fa0281756ca)
+	)
+	(rectangle
+		(start 20.32 29.21)
+		(end 59.69 69.85)
+		(stroke
+			(width 0.254)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(fill
+			(type none)
+		)
+		(uuid e2541b73-591d-49a9-8928-dc8a8266033f)
+	)
+	(text "Input Power"
 		(exclude_from_sim no)
-		(at 58.42 27.94 0)
+		(at 20.955 27.94 0)
 		(effects
 			(font
 				(size 1.905 1.905)
 			)
+			(justify left)
+		)
+		(uuid "003514a1-cb61-4c9f-9d87-2499390fb526")
+	)
+	(text "3.3V LDO"
+		(exclude_from_sim no)
+		(at 161.29 27.94 0)
+		(effects
+			(font
+				(size 1.905 1.905)
+			)
+			(justify left)
 		)
 		(uuid "5a7ece9d-3d3b-4d92-a84d-55aa268c848f")
 	)
-	(text "LDO 3.3V"
+	(text "5V LDO & Power Selection"
 		(exclude_from_sim no)
-		(at 107.315 27.305 0)
+		(at 62.23 27.94 0)
 		(effects
 			(font
 				(size 1.905 1.905)
 			)
-			(justify left bottom)
+			(justify left)
 		)
-		(uuid "97aa68aa-a76f-4b71-8b03-5415e77c1741")
+		(uuid "67791ac0-88b4-41c5-90bc-a7534e0d7060")
+	)
+	(text_box "Limit current to 1A\n(I_L = 500/R_ILIM)"
+		(exclude_from_sim no)
+		(at 127 62.23 0)
+		(size 21.59 6.35)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "3377b6ac-c015-47f9-91e1-9ca84084fd11")
+	)
+	(text_box "If both VBUS and VIN are present, VIN is selected"
+		(exclude_from_sim no)
+		(at 63.5 59.69 0)
+		(size 21.59 7.62)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "e2c65713-6f51-4c42-a7a8-ad7486ad9b13")
 	)
 	(junction
-		(at 116.84 40.64)
+		(at 38.1 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "00be2789-d613-4b91-89fd-2497e0a34696")
+		(uuid "0f361e13-68a5-49c9-acdb-1f79e172e318")
 	)
 	(junction
+		(at 71.12 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "162ee6b4-0d10-40a5-8e31-395ac13a0072")
+	)
+	(junction
+		(at 71.12 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "35805ae6-b5ae-4f45-a081-dc06d08c2e65")
+	)
+	(junction
+		(at 205.74 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "38093177-b9a4-488b-a6d0-4167e69c2034")
+	)
+	(junction
+		(at 182.88 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "58169b65-b94d-4568-84ef-a35a4aadb2fe")
+	)
+	(junction
+		(at 40.64 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6096ac22-40b6-4e1e-9907-c7dd2ee41b0d")
+	)
+	(junction
+		(at 167.64 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "720117ac-ced0-4b8f-b55e-b90a94cc7e2d")
+	)
+	(junction
+		(at 96.52 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7445220c-4d2c-465f-9859-b1ae56208602")
+	)
+	(junction
+		(at 124.46 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "84105f6c-24a2-4ea3-b1f0-dfad4fcf3d99")
+	)
+	(junction
+		(at 116.84 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a0476bba-bc54-4170-8aca-02c28d4e8907")
+	)
+	(junction
+		(at 119.38 38.1)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a5851ac3-9cc0-4ef5-aeab-8c3f6a34b903")
+	)
+	(junction
+		(at 83.82 49.53)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a7ba654f-ec09-4c7d-8e70-f3f30f497124")
+	)
+	(junction
+		(at 203.2 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ab17f998-d7a1-4e39-af8c-4c58692853b6")
+	)
+	(junction
+		(at 104.14 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b2ed7f79-36ce-406e-8903-04a39aa55caf")
+	)
+	(junction
+		(at 43.18 41.91)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc1b306f-68ff-486b-bb7f-55133c34a6e5")
+	)
+	(junction
+		(at 139.7 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e508bcec-7de9-4126-9773-0b0ea7c86e7e")
+	)
+	(junction
+		(at 114.3 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee99a5f3-8c8a-4a0c-87fb-d4ef44ec4f73")
+	)
+	(junction
+		(at 170.18 43.18)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f3c40070-0795-4a0d-a846-1f0850b3a3f8")
+	)
+	(no_connect
 		(at 149.86 43.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "536b8561-76c3-4b2c-9e21-a622eff528c3")
-	)
-	(junction
-		(at 134.62 55.88)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "809d4479-53af-48dc-b535-7b8f0e336c8c")
-	)
-	(junction
-		(at 119.38 43.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b6df8ecd-e091-40ba-a078-3b0ab16fd412")
-	)
-	(junction
-		(at 152.4 40.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ba0c5cc2-26fe-454e-8d37-9ac5c2b46528")
+		(uuid "36462e8b-c703-4caf-96fc-5af29d353e93")
 	)
 	(wire
 		(pts
-			(xy 149.86 53.34) (xy 149.86 55.88)
+			(xy 116.84 54.61) (xy 116.84 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "10f4bf59-ac13-4b6d-9c59-49b40df35ef2")
+		(uuid "048f0c71-effd-4ea9-88b8-704c866a45ae")
 	)
 	(wire
 		(pts
-			(xy 152.4 43.18) (xy 152.4 40.64)
+			(xy 205.74 43.18) (xy 205.74 46.99)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "124b3e37-89e0-4e82-a868-33da6cfb4650")
+		(uuid "073d433d-f15b-471a-ae74-a5cd1ca32474")
 	)
 	(wire
 		(pts
-			(xy 119.38 53.34) (xy 119.38 55.88)
+			(xy 71.12 38.1) (xy 73.66 38.1)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "20e8822e-9c81-474b-bc75-3faa9385860f")
+		(uuid "09a8e278-8d38-49cd-bc8d-6fa66c6e6982")
 	)
 	(wire
 		(pts
-			(xy 152.4 38.1) (xy 152.4 40.64)
+			(xy 139.7 54.61) (xy 139.7 55.88)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "2d1370d8-62c6-418c-adf5-2d36da358726")
+		(uuid "0da6027c-8f59-44f4-942b-c23e2dff60aa")
 	)
 	(wire
 		(pts
-			(xy 134.62 50.8) (xy 134.62 55.88)
+			(xy 128.27 54.61) (xy 139.7 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0f5c92cb-23ec-483d-a459-bac9683257b3")
+	)
+	(wire
+		(pts
+			(xy 93.98 38.1) (xy 96.52 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2218008f-5b2c-4a6a-9f4c-c33a1e3f1e72")
+	)
+	(wire
+		(pts
+			(xy 152.4 48.26) (xy 152.4 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26dba752-eb21-4674-a5b3-849ed90ae5f2")
+	)
+	(wire
+		(pts
+			(xy 43.18 54.61) (xy 40.64 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2768d364-e5ee-43bd-9733-5de3ccab9210")
+	)
+	(wire
+		(pts
+			(xy 114.3 40.64) (xy 129.54 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28bc55b5-9b66-4608-8efb-fdd19a873e04")
+	)
+	(wire
+		(pts
+			(xy 43.18 53.34) (xy 43.18 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a20448a-8fc9-4e0e-b77e-4c75b78f543a")
+	)
+	(wire
+		(pts
+			(xy 116.84 54.61) (xy 114.3 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ab57c4e-5cdc-41f4-a4e5-068ee4892b16")
+	)
+	(wire
+		(pts
+			(xy 83.82 49.53) (xy 96.52 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e619a83-26d3-4bd4-ba2c-e191984b0c43")
+	)
+	(wire
+		(pts
+			(xy 203.2 43.18) (xy 203.2 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ecbe880-7aa9-453e-90fe-b515e064dcf6")
+	)
+	(wire
+		(pts
+			(xy 149.86 38.1) (xy 152.4 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3300cfa3-c13b-451a-a8ee-6de9985f3dfa")
+	)
+	(wire
+		(pts
+			(xy 170.18 43.18) (xy 167.64 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "405a6736-d47c-4f0c-a87a-451a92c5f20c")
+	)
+	(wire
+		(pts
+			(xy 182.88 53.34) (xy 182.88 54.61)
 		)
 		(stroke
 			(width 0)
@@ -1033,17 +1395,137 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 55.88) (xy 134.62 55.88)
+			(xy 66.04 38.1) (xy 71.12 38.1)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "69b4c3a8-6558-4798-aaee-c9d39c98a34f")
+		(uuid "4fc8a0fa-fe14-4ea2-b753-827ad6e21da1")
 	)
 	(wire
 		(pts
-			(xy 116.84 38.1) (xy 116.84 40.64)
+			(xy 172.72 45.72) (xy 170.18 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50a641eb-85fe-4d3b-82ed-dcfedc0dd6a9")
+	)
+	(wire
+		(pts
+			(xy 111.76 38.1) (xy 119.38 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57b7ae13-0698-4c27-8363-def75b940443")
+	)
+	(wire
+		(pts
+			(xy 40.64 54.61) (xy 38.1 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5cdac88c-a9a1-4ccf-9885-e57d3a503157")
+	)
+	(wire
+		(pts
+			(xy 38.1 36.83) (xy 38.1 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5df6dc21-3f83-409d-850f-f48b34c065b4")
+	)
+	(wire
+		(pts
+			(xy 71.12 40.64) (xy 73.66 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "677b0779-9bc2-4700-8a0f-55931132f009")
+	)
+	(wire
+		(pts
+			(xy 119.38 38.1) (xy 119.38 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6951982e-fb89-4971-b63e-103b497c4606")
+	)
+	(wire
+		(pts
+			(xy 71.12 49.53) (xy 83.82 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "70860fd9-dd28-4bae-b3b7-8083afca1c78")
+	)
+	(wire
+		(pts
+			(xy 128.27 48.26) (xy 128.27 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "717c1367-85b7-49a5-963e-aebce136c0a7")
+	)
+	(wire
+		(pts
+			(xy 43.18 41.91) (xy 43.18 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "71984303-7f69-43bc-a45c-cd82f8d3ec07")
+	)
+	(wire
+		(pts
+			(xy 152.4 59.69) (xy 152.4 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "741f940f-b5af-4353-8920-fd00ca1b31c8")
+	)
+	(wire
+		(pts
+			(xy 71.12 38.1) (xy 71.12 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "74c64132-512e-4155-bb00-dc7378a1d22b")
+	)
+	(wire
+		(pts
+			(xy 129.54 48.26) (xy 128.27 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75b3072e-4506-4efb-8036-18fdf98409f9")
+	)
+	(wire
+		(pts
+			(xy 167.64 40.64) (xy 167.64 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1053,27 +1535,137 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 43.18) (xy 119.38 45.72)
+			(xy 83.82 50.8) (xy 83.82 49.53)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8816dd96-7cc5-431a-b894-fd576b1419d8")
+		(uuid "8175ae96-3a7d-4e3d-8f03-3a2cd2e007e4")
 	)
 	(wire
 		(pts
-			(xy 134.62 55.88) (xy 134.62 58.42)
+			(xy 201.93 48.26) (xy 203.2 48.26)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9affcdb3-145a-4b61-960b-6216ff86adc9")
+		(uuid "8199fced-eae9-45ec-90a0-1dacb3d1d650")
 	)
 	(wire
 		(pts
-			(xy 119.38 55.88) (xy 134.62 55.88)
+			(xy 205.74 43.18) (xy 208.28 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "872f8887-a1c0-4140-a7c9-45a1efa0448e")
+	)
+	(wire
+		(pts
+			(xy 33.02 41.91) (xy 43.18 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "872f9b41-90d2-44ff-b5bc-bcffa14ad7ec")
+	)
+	(wire
+		(pts
+			(xy 43.18 41.91) (xy 50.8 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "879a66cf-b514-4c57-8b9d-83a3268e4741")
+	)
+	(wire
+		(pts
+			(xy 182.88 54.61) (xy 182.88 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "88a2d39d-7dcf-4122-b7ce-03b0d9bd5415")
+	)
+	(wire
+		(pts
+			(xy 96.52 40.64) (xy 96.52 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8aa82e77-83e8-4d60-a075-4b2b4780a917")
+	)
+	(wire
+		(pts
+			(xy 38.1 36.83) (xy 50.8 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8cfd39e0-783d-4a0d-8174-0164f4814ea5")
+	)
+	(wire
+		(pts
+			(xy 203.2 43.18) (xy 205.74 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e91d430-df4c-418c-bcfd-f28577e02d93")
+	)
+	(wire
+		(pts
+			(xy 129.54 45.72) (xy 124.46 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "92f99ead-2f1c-4129-ba56-386f23e7fa6f")
+	)
+	(wire
+		(pts
+			(xy 71.12 40.64) (xy 71.12 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99257e2c-3751-4330-95c3-86cd609db0b8")
+	)
+	(wire
+		(pts
+			(xy 104.14 57.15) (xy 104.14 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aeecc49c-f180-4245-8ff7-aaf77fac075d")
+	)
+	(wire
+		(pts
+			(xy 193.04 43.18) (xy 203.2 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0a11730-6d70-4679-b666-bae822991ff6")
+	)
+	(wire
+		(pts
+			(xy 167.64 54.61) (xy 182.88 54.61)
 		)
 		(stroke
 			(width 0)
@@ -1083,37 +1675,77 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 43.18) (xy 152.4 43.18)
+			(xy 38.1 53.34) (xy 38.1 54.61)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bc0ea3ae-c0e1-4b8a-9882-85d0d0e4be86")
+		(uuid "b8706df7-2881-45a7-a91f-374f4de051a5")
 	)
 	(wire
 		(pts
-			(xy 116.84 43.18) (xy 116.84 40.64)
+			(xy 170.18 43.18) (xy 170.18 45.72)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c8787997-f9d9-4615-9c0d-305593dbc1b2")
+		(uuid "ba55158c-8c56-48be-a687-217cb85adacf")
 	)
 	(wire
 		(pts
-			(xy 121.92 43.18) (xy 119.38 43.18)
+			(xy 33.02 36.83) (xy 38.1 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "c9c1a13e-020d-4d22-880d-bb0eef7fb31d")
+		(uuid "bcd5e8ae-0e1a-467f-a15f-027038ba046c")
 	)
 	(wire
 		(pts
-			(xy 121.92 40.64) (xy 116.84 40.64)
+			(xy 104.14 40.64) (xy 114.3 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "be0b77ac-8c12-4961-a5a5-c0e0cf4abbef")
+	)
+	(wire
+		(pts
+			(xy 104.14 40.64) (xy 104.14 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c870f64c-dff1-49d7-ad56-38fa8925aad2")
+	)
+	(wire
+		(pts
+			(xy 83.82 48.26) (xy 83.82 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc8d23c6-6b23-4f9f-89a8-78edbac109dc")
+	)
+	(wire
+		(pts
+			(xy 167.64 43.18) (xy 167.64 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd6b0b8b-c896-4884-88f0-bd5b2ec354fe")
+	)
+	(wire
+		(pts
+			(xy 172.72 43.18) (xy 170.18 43.18)
 		)
 		(stroke
 			(width 0)
@@ -1123,69 +1755,178 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 40.64) (xy 152.4 40.64)
+			(xy 124.46 38.1) (xy 124.46 45.72)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "cf7240c3-bf54-4564-9116-2b9b766bccbf")
+		(uuid "cffea84e-846b-46b1-ba6f-c9409c7b75f0")
 	)
 	(wire
 		(pts
-			(xy 149.86 43.18) (xy 149.86 45.72)
+			(xy 93.98 40.64) (xy 96.52 40.64)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e5aeda72-ac71-498b-a153-0aea7ebbee2c")
+		(uuid "d29c5816-7fb5-4673-aaee-a7d79c28bd11")
 	)
 	(wire
 		(pts
-			(xy 119.38 43.18) (xy 116.84 43.18)
+			(xy 114.3 40.64) (xy 114.3 46.99)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e7dc32a7-a532-4574-86bd-c7e1679ff1ac")
+		(uuid "d5aada9d-d046-496c-bbee-37b7e7d7b81d")
 	)
 	(wire
 		(pts
-			(xy 147.32 43.18) (xy 149.86 43.18)
+			(xy 182.88 54.61) (xy 205.74 54.61)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "ef3acc8e-4ec7-4152-89a5-ec950891ed0a")
+		(uuid "dd4a900f-fc1c-4bfb-aae2-2a2e0913a710")
+	)
+	(wire
+		(pts
+			(xy 193.04 48.26) (xy 194.31 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1790bb1-9368-47fc-bd14-1533f222484e")
+	)
+	(wire
+		(pts
+			(xy 139.7 54.61) (xy 139.7 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e3671d64-4f91-45fc-ba0d-76f1763227a4")
+	)
+	(wire
+		(pts
+			(xy 116.84 54.61) (xy 119.38 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5d082af-3159-45be-ac31-76c000032d51")
+	)
+	(wire
+		(pts
+			(xy 149.86 48.26) (xy 152.4 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8798f48-f33b-42c6-ba70-45b8567f7984")
+	)
+	(wire
+		(pts
+			(xy 96.52 40.64) (xy 104.14 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ead08524-88ee-42d4-b884-146052206601")
+	)
+	(wire
+		(pts
+			(xy 119.38 38.1) (xy 124.46 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ec25b8df-5b11-4e05-9a81-7473aa36cdfa")
+	)
+	(wire
+		(pts
+			(xy 96.52 38.1) (xy 96.52 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f1066696-de8a-4db6-90c4-cc469c2cee87")
+	)
+	(wire
+		(pts
+			(xy 124.46 38.1) (xy 129.54 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f21b759f-56fe-487b-9d8a-0eb77e94449b")
+	)
+	(label "VIN"
+		(at 66.04 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "68f382f5-e47a-4b1d-8ea9-aae2609b4bb3")
+	)
+	(label "VBUS"
+		(at 111.76 38.1 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a155c851-d88f-40ba-bd3d-0eafd66cbb9a")
+	)
+	(label "VIN"
+		(at 50.8 36.83 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d200e9b4-e7b3-470e-a9aa-e173e5895fcb")
+	)
+	(label "VBUS"
+		(at 50.8 41.91 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d6031525-cc21-422f-89a7-4dcad2d6200c")
 	)
 	(hierarchical_label "5V"
 		(shape output)
-		(at 228.6 45.72 180)
+		(at 152.4 38.1 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "552aa5d1-0c02-4bee-80b1-4e22e6ae836a")
-	)
-	(hierarchical_label "3.3V"
-		(shape output)
-		(at 228.6 43.18 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "5963b270-2455-4557-ad10-ff1856793985")
+		(uuid "8d09e0bd-1460-4e9e-9d10-4923f8c9e58a")
 	)
 	(hierarchical_label "VIN"
 		(shape input)
-		(at 38.1 40.64 180)
+		(at 33.02 36.83 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1194,9 +1935,31 @@
 		)
 		(uuid "9ac3d182-726d-4b96-95d1-824b331a11dd")
 	)
+	(hierarchical_label "3.3V"
+		(shape output)
+		(at 208.28 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ba02b725-5398-4e25-81b6-19dc204e0b7f")
+	)
+	(hierarchical_label "5V"
+		(shape output)
+		(at 167.64 40.64 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "cae4bf40-d06f-4d2a-b719-fad12ed31ee4")
+	)
 	(hierarchical_label "VBUS"
 		(shape input)
-		(at 38.1 45.72 180)
+		(at 33.02 41.91 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1206,131 +1969,34 @@
 		(uuid "f4e822e0-77ee-49ef-86eb-143d58bae314")
 	)
 	(symbol
-		(lib_id "BrenoCQ:TPS2120")
-		(at 71.12 53.34 0)
+		(lib_id "Device:R")
+		(at 43.18 49.53 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "192b4a72-8374-4138-9c1f-8087af63c36b")
-		(property "Reference" "U7"
-			(at 70.485 31.75 0)
+		(uuid "00cee73b-6280-4149-ae7b-f74998c92895")
+		(property "Reference" "R17"
+			(at 48.895 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
-		(property "Value" "TPS2120"
-			(at 70.485 34.29 0)
+		(property "Value" "100K"
+			(at 45.085 51.435 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
-		(property "Footprint" ""
-			(at 71.12 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2120.pdf?ts=1748897252786&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS2120"
-			(at 71.12 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "TPS2120 2.8-V to 22-V Priority Power MUX with Seamless Switchover"
-			(at 71.12 62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "12"
-			(uuid "05a74000-dc6d-4b4f-8751-78ebec878518")
-		)
-		(pin "7"
-			(uuid "a75fae41-b5f1-4fa1-8dd4-3cc664d91c60")
-		)
-		(pin "4"
-			(uuid "be580270-0472-400a-b5fa-71ff392cb13f")
-		)
-		(pin "3"
-			(uuid "e1d729d7-c77e-4ea4-bb44-a7c4c69312c9")
-		)
-		(pin "2"
-			(uuid "c8f8ecc1-3f2e-4edb-a5cd-82805c57d715")
-		)
-		(pin "5"
-			(uuid "b03e2b92-82f1-4ec9-b9e7-8601d6e336b6")
-		)
-		(pin "6"
-			(uuid "73033420-bd17-4fa0-90b3-bf949fe59240")
-		)
-		(pin "9"
-			(uuid "06cc13dd-63d5-48be-84eb-40a267300293")
-		)
-		(pin "8"
-			(uuid "bb27ca02-f536-49e3-a598-12910d22e981")
-		)
-		(pin "11"
-			(uuid "9009c15e-5374-4488-8a44-21b28d599f93")
-		)
-		(pin "1"
-			(uuid "90302b7d-8474-45a3-8b4a-0ca6023b2f0a")
-		)
-		(pin "10"
-			(uuid "ab239cc7-0ec2-4840-ab43-122ab12236f2")
-		)
-		(instances
-			(project ""
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
-					(reference "U7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BrenoCQ:GND")
-		(at 134.62 58.42 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1b4fb22c-fbdc-4e65-8bf8-20bda7c4e27f")
-		(property "Reference" "#PWR0116"
-			(at 134.62 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 134.62 62.865 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 134.62 58.42 0)
+		(property "Footprint" "BrenoCQ:R_0402"
+			(at 44.958 49.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1339,7 +2005,213 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 134.62 58.42 0)
+			(at 43.18 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 43.18 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8b046d4f-39ad-43f2-acea-9fad5efc0eab")
+		)
+		(pin "1"
+			(uuid "f12814e4-a46d-4a11-a760-3abc96bd3398")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "R17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:C")
+		(at 71.12 45.72 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "02627e0a-2c4c-4214-820e-24272410072f")
+		(property "Reference" "C11"
+			(at 70.612 42.926 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "1uF"
+			(at 70.612 47.244 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "BrenoCQ:C_0402"
+			(at 76.2 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 74.295 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1c33b652-95c4-4c00-a6fe-0c60e5595c89")
+		)
+		(pin "2"
+			(uuid "ee485bb1-5183-4ab4-be0c-1664a1a1eeb2")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 38.1 49.53 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "02c65bf5-2a68-4e53-bcb6-fd222ea4e650")
+		(property "Reference" "R16"
+			(at 36.195 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100K"
+			(at 36.195 51.435 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "BrenoCQ:R_0402"
+			(at 39.878 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 38.1 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 38.1 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "6bcf3d03-e118-405f-930f-6dbe9c5f5a18")
+		)
+		(pin "1"
+			(uuid "1fbfac73-aaf0-4149-9401-18259a89c2bf")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 182.88 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1b4fb22c-fbdc-4e65-8bf8-20bda7c4e27f")
+		(property "Reference" "#PWR0116"
+			(at 182.88 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 182.88 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 182.88 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 182.88 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1348,7 +2220,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 134.62 66.675 0)
+			(at 182.88 64.135 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1369,34 +2241,34 @@
 		)
 	)
 	(symbol
-		(lib_id "BrenoCQ:VDD")
-		(at 116.84 38.1 0)
+		(lib_id "Device:R")
+		(at 152.4 55.88 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "53077263-675a-4a9d-9aa1-82a94fc30805")
-		(property "Reference" "#PWR0137"
-			(at 116.84 38.1 0)
+		(uuid "215dffea-6666-4655-b267-8c73fa1999b4")
+		(property "Reference" "R15"
+			(at 150.495 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(hide yes)
+				(justify left)
 			)
 		)
-		(property "Value" "VIN"
-			(at 118.745 34.4678 0)
+		(property "Value" "500"
+			(at 150.495 57.785 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 116.84 38.1 0)
+		(property "Footprint" "BrenoCQ:R_0402"
+			(at 154.178 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1405,7 +2277,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 116.84 38.1 0)
+			(at 152.4 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1413,87 +2285,25 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Source power symbol"
-			(at 116.84 41.91 0)
+		(property "Description" "Resistor"
+			(at 152.4 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
+		)
+		(pin "2"
+			(uuid "28af427c-d4ca-4158-9def-000a1356a5fe")
 		)
 		(pin "1"
-			(uuid "0ed5a25a-3a99-4176-9dc1-5e452fe2cb91")
+			(uuid "73a695b0-7006-49b0-80b8-99a9c97c5920")
 		)
 		(instances
 			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
-					(reference "#PWR0137")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BrenoCQ:VDD")
-		(at 152.4 38.1 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "60c8ee5f-f7bd-4131-964f-f424b5f5f86c")
-		(property "Reference" "#PWR0114"
-			(at 152.4 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "3.3V"
-			(at 152.4 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 152.4 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 152.4 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Source power symbol"
-			(at 152.4 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2a97cd34-5636-44d2-91ac-07607899dc1b")
-		)
-		(instances
-			(project "BLDCM-Power"
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
-					(reference "#PWR0114")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -1501,15 +2311,15 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 119.38 49.53 90)
+		(at 119.38 50.8 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c6fddc31-ba0f-4a4b-99b5-7fd13d0628fd")
-		(property "Reference" "C3"
-			(at 118.872 46.736 90)
+		(uuid "27b59dcf-683c-4861-8536-c41c80f95b51")
+		(property "Reference" "C14"
+			(at 120.015 49.53 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1517,17 +2327,17 @@
 				(justify left bottom)
 			)
 		)
-		(property "Value" "1uF"
-			(at 118.872 51.054 90)
+		(property "Value" "100nF"
+			(at 125.73 53.975 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify right bottom)
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 124.46 49.53 0)
+			(at 114.3 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1536,7 +2346,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 119.38 49.53 0)
+			(at 119.38 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1545,7 +2355,644 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 122.555 49.53 0)
+			(at 116.205 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a155c08d-657c-491e-b591-fa368202e3a5")
+		)
+		(pin "2"
+			(uuid "030cc707-a758-4844-9f22-13ce1c3729c7")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 104.14 53.34 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2b49cc92-0e69-489f-9856-16b58b1f47b1")
+		(property "Reference" "R18"
+			(at 102.235 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100K"
+			(at 102.235 55.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "BrenoCQ:R_0402"
+			(at 105.918 53.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 104.14 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 104.14 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a9f6ff69-f3de-494f-b51e-d0a4fc1bdb52")
+		)
+		(pin "1"
+			(uuid "c6074a3d-0854-4934-a1d5-38add4469643")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "R18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 139.7 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50773b70-8983-4e48-a3ba-79a3c29365c5")
+		(property "Reference" "#PWR09"
+			(at 139.7 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 139.7 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 139.7 64.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5b6c548e-2115-47fc-8853-d2d53154f15b")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "#PWR09")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:LDO40LPU50RY")
+		(at 83.82 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5abb7929-4a28-4a60-89af-9e9e0dc532a8")
+		(property "Reference" "U8"
+			(at 77.47 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LDO40LPU50RY"
+			(at 87.63 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "BrenoCQ:DFN-6-3x3"
+			(at 83.82 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/ldo40l.pdf"
+			(at 84.455 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "LDO Voltage Regulators 400 mA 5 V output, 38 V input low-dropout regulator, 45 uA quiescent current"
+			(at 84.455 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "372903db-140d-49de-94ed-2af8e345e6ab")
+		)
+		(pin "1"
+			(uuid "4d9cc028-afe9-421b-9736-5d55b73ca0ce")
+		)
+		(pin "6"
+			(uuid "99db6233-d014-4bba-8cc8-5839a92b0901")
+		)
+		(pin "TAB"
+			(uuid "5f6e879b-e948-482f-be4d-cef21a3649df")
+		)
+		(pin "4"
+			(uuid "87cc9297-0094-4409-a946-819c809107c9")
+		)
+		(pin "3"
+			(uuid "7eb13be4-d507-4db4-9b85-7110443e75ba")
+		)
+		(pin "5"
+			(uuid "0cedf8f6-fb60-435f-bb2b-2b7993bb3f80")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "U8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:TPS2115ADRB")
+		(at 139.7 43.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5ecaf3b2-aee6-455f-b170-9587754e5e6f")
+		(property "Reference" "U9"
+			(at 133.35 34.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "TPS2115ADRB"
+			(at 142.875 34.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "BrenoCQ:VSON-8"
+			(at 139.7 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps2115a.pdf?ts=1751099558073"
+			(at 139.7 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Two-Input, One-Output Power Multiplexer. Input 2.8 V to 5.5 V"
+			(at 139.7 64.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "PAD"
+			(uuid "ce902764-d136-46ad-a123-a3dfb567f0db")
+		)
+		(pin "8"
+			(uuid "45ba0955-8430-495d-a479-5bd01eab1ceb")
+		)
+		(pin "5"
+			(uuid "80aa1dd4-3bbe-414e-b963-626cd2c8a2b8")
+		)
+		(pin "6"
+			(uuid "d569fec5-c6f7-4157-a1e2-4d4e3b17f37a")
+		)
+		(pin "2"
+			(uuid "6f4dc471-56f6-4cec-b94d-c0d595b1a950")
+		)
+		(pin "3"
+			(uuid "d7f63e7e-a661-491b-aa2b-bfc7628fb6bb")
+		)
+		(pin "7"
+			(uuid "e10f56cc-986e-49dc-99dc-5f871017079e")
+		)
+		(pin "4"
+			(uuid "7368f0c6-5ca3-49f5-9d1f-c7f01d0d4a1f")
+		)
+		(pin "1"
+			(uuid "14992984-6722-47dc-aa6f-34f9c0e29e89")
+		)
+		(instances
+			(project ""
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "U9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 152.4 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6ee23949-32a1-43f3-a7fd-e4e55708613f")
+		(property "Reference" "#PWR010"
+			(at 152.4 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 152.4 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 152.4 69.215 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "15f5ea25-0bd2-423c-a437-54419d60e334")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:C")
+		(at 114.3 50.8 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "74b53488-5914-4056-9d94-6c2fa66cd29c")
+		(property "Reference" "C13"
+			(at 109.855 49.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "100nF"
+			(at 113.665 53.975 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "BrenoCQ:C_0402"
+			(at 109.22 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 111.125 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2fd2a8de-0dbd-47f3-8cda-fad51d4ebb1a")
+		)
+		(pin "2"
+			(uuid "42679a18-956e-4aea-bcfb-252663366d94")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "C13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 104.14 58.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "75265eac-bb9d-4029-9273-530cc2bfc8be")
+		(property "Reference" "#PWR012"
+			(at 104.14 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 104.14 62.865 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 104.14 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 104.14 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 104.14 66.675 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0a0c51de-2ff6-49e5-b91c-9e5a8a354598")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "#PWR012")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 83.82 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f9adb8f-47a6-4075-8af5-90bde8992c09")
+		(property "Reference" "#PWR08"
+			(at 83.82 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 83.82 55.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 83.82 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 83.82 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 83.82 59.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "6f4b049c-21d4-4cb3-bfc6-adcf598be227")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:C")
+		(at 167.64 50.8 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c6fddc31-ba0f-4a4b-99b5-7fd13d0628fd")
+		(property "Reference" "C3"
+			(at 167.132 48.006 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "1uF"
+			(at 167.132 52.324 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "BrenoCQ:C_0402"
+			(at 172.72 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 167.64 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 170.815 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1570,7 +3017,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 149.86 49.53 90)
+		(at 205.74 50.8 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1578,7 +3025,7 @@
 		(dnp no)
 		(uuid "cb1b0826-3f2d-4c18-86e4-5c2f2f61257b")
 		(property "Reference" "C4"
-			(at 152.654 46.736 90)
+			(at 208.534 48.006 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1586,8 +3033,8 @@
 				(justify left bottom)
 			)
 		)
-		(property "Value" "4.7uF"
-			(at 155.702 51.054 90)
+		(property "Value" "1uF"
+			(at 210.185 52.705 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1596,7 +3043,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 154.94 49.53 0)
+			(at 210.82 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1605,7 +3052,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 149.86 49.53 0)
+			(at 205.74 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1614,7 +3061,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 153.035 49.53 0)
+			(at 208.915 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1638,43 +3085,34 @@
 		)
 	)
 	(symbol
-		(lib_id "BrenoCQ:LDL212PV33R")
-		(at 134.62 45.72 0)
+		(lib_id "Device:R")
+		(at 198.12 48.26 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f381a8fd-ce86-4466-8075-04064c7e9653")
-		(property "Reference" "U2"
-			(at 124.46 37.465 0)
+		(uuid "db1576d5-f19a-4bef-82e9-e533e755f302")
+		(property "Reference" "R14"
+			(at 198.755 45.72 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Value" "LDL212PV33R"
-			(at 131.445 37.465 0)
+		(property "Value" "100K"
+			(at 198.755 50.8 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left bottom)
+				(justify left)
 			)
 		)
-		(property "Footprint" "BrenoCQ:DFN-6-2x2"
-			(at 135.255 62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.st.com/resource/en/datasheet/ldl212.pdf"
-			(at 134.62 59.69 0)
+		(property "Footprint" "BrenoCQ:R_0402"
+			(at 198.12 50.038 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1682,8 +3120,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "LDO Voltage Regulator 1.2A 3.3V"
-			(at 134.62 57.15 0)
+		(property "Datasheet" ""
+			(at 198.12 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1691,31 +3129,301 @@
 				(hide yes)
 			)
 		)
-		(pin "3"
-			(uuid "44778978-e5fa-4ea8-a3f9-f96bbf29d1aa")
+		(property "Description" "Resistor"
+			(at 198.12 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(pin "2"
-			(uuid "17f0cfc5-3112-47f2-b0ca-60bf7a7ad6d6")
-		)
-		(pin "6"
-			(uuid "ec8c6aa7-d3d2-4525-9e8a-9da316e0cf6d")
-		)
-		(pin "PAD"
-			(uuid "6d45e67a-a8b5-4a30-b411-314b4ca65579")
-		)
-		(pin "4"
-			(uuid "af531133-0772-44bd-9365-6adc10ec2e88")
+			(uuid "534c29da-2d09-4769-9ac9-5f2cd07a3ffd")
 		)
 		(pin "1"
-			(uuid "f6eeeb6f-3729-4717-986a-e49ad00b4448")
-		)
-		(pin "5"
-			(uuid "a1a3d93e-db0b-4387-b930-81f35b9cdd25")
+			(uuid "87d84ef1-00d3-4f77-9919-629c153be237")
 		)
 		(instances
 			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "R14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_name "LDLN030G33R_1")
+		(lib_id "BrenoCQ:LDLN030G33R")
+		(at 182.88 45.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e6081251-fa37-4d98-a294-7b0c4cd39a0d")
+		(property "Reference" "U2"
+			(at 176.53 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LDLN030G33R"
+			(at 186.69 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "BrenoCQ:TSOT-23-5"
+			(at 182.88 70.485 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/ldln030.pdf"
+			(at 182.88 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "LDO Voltage Regulators 300mA 3.3V ultra-low noise LDO Power Good and Soft Start"
+			(at 182.88 66.675 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3d85bf46-0c1a-4652-ae68-cff4b21a96ca")
+		)
+		(pin "3"
+			(uuid "55ec9ee1-d137-4bb1-8688-09da6cd64bc8")
+		)
+		(pin "4"
+			(uuid "9cce2cfa-3be8-4445-983c-ec1041bffc6d")
+		)
+		(pin "5"
+			(uuid "9aa466dc-b3b1-4f44-a3b2-ecaa5da948a7")
+		)
+		(pin "2"
+			(uuid "d10ce96d-3673-4fbb-9802-3815d20be138")
+		)
+		(instances
+			(project ""
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
 					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:C")
+		(at 96.52 45.72 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ef248048-2f06-462d-8e34-514b433e398b")
+		(property "Reference" "C12"
+			(at 100.965 43.18 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "1uF"
+			(at 100.965 47.625 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Footprint" "BrenoCQ:C_0402"
+			(at 101.6 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 96.52 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 99.695 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d8cf5f1b-ba41-445c-b075-14e466f5bf09")
+		)
+		(pin "2"
+			(uuid "1f008f95-59f4-4cbe-b53a-c2d7d658434e")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 40.64 54.61 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ef93d4d2-f6ec-4718-8526-a38d7626fb56")
+		(property "Reference" "#PWR011"
+			(at 40.64 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 40.64 59.055 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 40.64 62.865 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c629b47b-cfe3-47bc-a9f1-b415d8f80391")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "#PWR011")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:GND")
+		(at 116.84 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fb551766-1ef3-40fb-8cfd-871a08374ce8")
+		(property "Reference" "#PWR07"
+			(at 116.84 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 116.84 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 116.84 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.84 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Ground power symbol"
+			(at 116.84 64.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a500b4ba-9918-4035-8ba3-cf4a9f6c0fdc")
+		)
+		(instances
+			(project "BLDCM-Power"
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e/95c566bf-d95c-4f31-9703-10c59f781fab"
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
