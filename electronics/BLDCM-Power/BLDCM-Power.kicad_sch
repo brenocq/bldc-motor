@@ -9,6 +9,285 @@
 		(rev "v3")
 	)
 	(lib_symbols
+		(symbol "BrenoCQ:BAT54S"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U?"
+				(at -3.81 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "BAT54S"
+				(at 5.08 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "BrenoCQ:SOT-23"
+				(at 0 -15.24 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://diotec.com/request/datasheet/bat54.pdf"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "SMD Small Signal Schottky Diodes"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "BAT54S_1_0"
+				(polyline
+					(pts
+						(xy -4.445 2.223) (xy -2.54 2.223)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -4.445 2.223) (xy -4.445 2.858) (xy -3.81 2.858)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -4.445 0) (xy -0.635 0) (xy -2.54 2.223) (xy -4.445 0)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 2.194) (xy -2.54 5.08)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 2.223) (xy -2.54 2.223)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 2.223) (xy -0.635 1.588) (xy -1.27 1.588)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.635 0.317) (xy 2.54 0.317)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.635 0.317) (xy 0.635 0.952) (xy 1.27 0.952)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 5.08) (xy -2.54 5.08)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 5.08)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 0.346) (xy 2.54 -0.924)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 2.54) (xy 0.635 2.54) (xy 2.54 0.317) (xy 4.445 2.54)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 0.317) (xy 2.54 0.317)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 0.317) (xy 4.445 -0.318) (xy 3.81 -0.318)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -2.54 -2.54 90)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -2.54 90)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "BrenoCQ:C"
 			(pin_numbers
 				(hide yes)
@@ -140,180 +419,6 @@
 						)
 					)
 					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "BrenoCQ:D_Schottky_B0520LW"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D?"
-				(at -2.54 3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "BrenoCQ:SOD-123"
-				(at 1.27 -17.78 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://nl.mouser.com/datasheet/2/115/DIOD_S_A0011119854_1-2512890.pdf"
-				(at 1.905 -15.24 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Schottky Diode"
-				(at 0 -12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*SOD-123*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "D_Schottky_B0520LW_1_0"
-				(polyline
-					(pts
-						(xy -1.905 0.953) (xy 0 0.953)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.905 0.953) (xy -1.905 1.588) (xy -1.27 1.588)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.905 -1.27) (xy 1.905 -1.27) (xy 0 0.953) (xy -1.905 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0.924) (xy 0 2.194)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.905 0.953) (xy 0 0.953)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.905 0.953) (xy 1.905 0.318) (xy 1.27 0.318)
-					)
-					(stroke
-						(width 0)
-						(type solid)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at 0 3.81 270)
-					(length 2.54)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 2.54)
-					(name "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3666,7 +3771,7 @@
 	)
 	(rectangle
 		(start 69.85 19.05)
-		(end 151.13 134.62)
+		(end 151.13 133.35)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -3859,7 +3964,7 @@
 		)
 		(uuid f711a834-9a22-4b41-a031-d70babe52f08)
 	)
-	(text "J-Link"
+	(text "ST-Link"
 		(exclude_from_sim no)
 		(at 154.94 106.045 0)
 		(effects
@@ -3924,17 +4029,6 @@
 			(justify left bottom)
 		)
 		(uuid "406d9d5a-a92f-4b41-aa76-dc07e08f93a8")
-	)
-	(text "ST-LINK"
-		(exclude_from_sim no)
-		(at 155.575 111.76 0)
-		(effects
-			(font
-				(size 2.286 2.286)
-			)
-			(justify left bottom)
-		)
-		(uuid "7636a570-6e32-43d5-8435-914e0f9d0248")
 	)
 	(text "VIN*(R2/(R1+R2)) = 10V*(10/(20+10)) = 3.33V"
 		(exclude_from_sim no)
@@ -4178,12 +4272,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "78ff66c7-1a6f-4282-9301-c68a4adda4df")
-	)
-	(junction
-		(at 256.54 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7ac4db5d-b591-4fc2-81d8-0315d4ba2637")
 	)
 	(junction
 		(at 171.45 87.63)
@@ -4585,6 +4673,16 @@
 			(type default)
 		)
 		(uuid "247b828a-fff9-4eef-b534-2bfd06707803")
+	)
+	(wire
+		(pts
+			(xy 246.38 50.8) (xy 246.38 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2be5f24e-382c-420a-9dc3-ab58a66277be")
 	)
 	(wire
 		(pts
@@ -4998,16 +5096,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 46.99) (xy 256.54 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5cc2e9f4-fac2-45df-b4c9-bfc0b4b31373")
-	)
-	(wire
-		(pts
 			(xy 20.32 152.4) (xy 33.02 152.4)
 		)
 		(stroke
@@ -5088,16 +5176,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 39.37) (xy 256.54 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "67a50842-f706-4d5a-b174-9b26fd6ab64e")
-	)
-	(wire
-		(pts
 			(xy 196.85 50.8) (xy 207.01 50.8)
 		)
 		(stroke
@@ -5105,16 +5183,6 @@
 			(type default)
 		)
 		(uuid "688d567c-1ec2-46ba-bc38-78e3c6dd2e12")
-	)
-	(wire
-		(pts
-			(xy 256.54 50.8) (xy 256.54 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6942810b-d699-4422-ba3e-3926483fe29a")
 	)
 	(wire
 		(pts
@@ -5185,16 +5253,6 @@
 			(type default)
 		)
 		(uuid "6d0c991f-1166-4211-b798-4982a782b79d")
-	)
-	(wire
-		(pts
-			(xy 246.38 50.8) (xy 246.38 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6ddb1f7e-7e7b-436c-8335-02c1eff37493")
 	)
 	(wire
 		(pts
@@ -5348,16 +5406,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 50.8) (xy 264.16 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7a36bb8b-a47b-4f13-96ce-f331208c6b8b")
-	)
-	(wire
-		(pts
 			(xy 48.26 154.94) (xy 50.8 154.94)
 		)
 		(stroke
@@ -5435,6 +5483,16 @@
 			(type default)
 		)
 		(uuid "8359eadb-da5f-4132-802a-05dca1c73d29")
+	)
+	(wire
+		(pts
+			(xy 246.38 50.8) (xy 256.54 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8417dd4c-2d24-405c-9c2d-241af3659908")
 	)
 	(wire
 		(pts
@@ -5755,6 +5813,16 @@
 			(type default)
 		)
 		(uuid "adb7c6e7-b506-44c5-a03c-fae83cfd3f0d")
+	)
+	(wire
+		(pts
+			(xy 256.54 50.8) (xy 256.54 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af798043-daf3-4990-b773-08d814ae8452")
 	)
 	(wire
 		(pts
@@ -6389,16 +6457,6 @@
 	)
 	(wire
 		(pts
-			(xy 256.54 60.96) (xy 256.54 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e798d390-3a7c-4d49-98eb-e6d951407082")
-	)
-	(wire
-		(pts
 			(xy 45.72 109.22) (xy 49.53 109.22)
 		)
 		(stroke
@@ -6906,16 +6964,6 @@
 			(justify right bottom)
 		)
 		(uuid "654f9b29-9e78-43bc-8c34-424ee2444dad")
-	)
-	(label "VOLT"
-		(at 264.16 50.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "66a6d9b6-a168-4ffa-9bf6-a8d1c88e1230")
 	)
 	(label "CAN.TX"
 		(at 20.32 152.4 0)
@@ -8073,7 +8121,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 256.54 63.5 0)
+		(at 254 63.5 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8081,7 +8129,7 @@
 		(dnp no)
 		(uuid "1b73fc07-170c-4c0c-b5e1-f4f1f45530e0")
 		(property "Reference" "#PWR0104"
-			(at 256.54 63.5 0)
+			(at 254 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8090,7 +8138,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 256.54 67.945 0)
+			(at 254 67.945 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8098,7 +8146,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 256.54 63.5 0)
+			(at 254 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8107,7 +8155,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 256.54 63.5 0)
+			(at 254 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8116,7 +8164,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 256.54 71.755 0)
+			(at 254 71.755 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8128,7 +8176,7 @@
 			(uuid "0ae44de6-efe4-4d70-941a-1e34dd883cb4")
 		)
 		(instances
-			(project ""
+			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "#PWR0104")
 					(unit 1)
@@ -8670,7 +8718,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 256.54 38.1 0)
+		(at 259.08 63.5 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8678,7 +8726,7 @@
 		(dnp no)
 		(uuid "4035cb13-676a-47be-8132-5c1004370b6f")
 		(property "Reference" "#PWR0134"
-			(at 256.54 38.1 0)
+			(at 259.08 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8687,7 +8735,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 256.54 34.29 0)
+			(at 259.08 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8695,7 +8743,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 256.54 38.1 0)
+			(at 259.08 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8704,7 +8752,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 256.54 38.1 0)
+			(at 259.08 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8713,7 +8761,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 256.54 41.91 0)
+			(at 259.08 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11821,75 +11869,6 @@
 		)
 	)
 	(symbol
-		(lib_id "BrenoCQ:D_Schottky_B0520LW")
-		(at 256.54 57.15 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "cbf95e15-1ca8-4ec5-8917-3f7c4a1255fb")
-		(property "Reference" "D2"
-			(at 258.699 56.896 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "B0520LW"
-			(at 258.699 59.436 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "BrenoCQ:SOD-123"
-			(at 257.81 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://nl.mouser.com/datasheet/2/115/DIOD_S_A0011119854_1-2512890.pdf"
-			(at 258.445 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Schottky Diode"
-			(at 256.54 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "95f71b61-b425-4aea-81e6-fd4cc9d75054")
-		)
-		(pin "1"
-			(uuid "abe5934a-6e57-434a-b5d4-617b356cde7f")
-		)
-		(instances
-			(project "BLDCM-Power"
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "D2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "BrenoCQ:INA239-Q1")
 		(at 185.42 30.48 0)
 		(unit 0)
@@ -12118,6 +12097,78 @@
 		)
 	)
 	(symbol
+		(lib_id "BrenoCQ:BAT54S")
+		(at 256.54 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d49f767d-e03a-4e0d-9e22-359c5bc526a2")
+		(property "Reference" "U7"
+			(at 252.73 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BAT54S"
+			(at 257.81 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "BrenoCQ:SOT-23"
+			(at 256.54 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://diotec.com/request/datasheet/bat54.pdf"
+			(at 256.54 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "SMD Small Signal Schottky Diodes"
+			(at 256.54 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "693e2877-436c-48a0-bf7b-caa875bd5c26")
+		)
+		(pin "3"
+			(uuid "d91417de-a40e-4529-9a69-ff5e5c633e1b")
+		)
+		(pin "2"
+			(uuid "4c7a8d0c-73bb-44d8-adfe-4e2ff29763cf")
+		)
+		(instances
+			(project ""
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "U7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "BrenoCQ:GND")
 		(at 27.94 96.52 0)
 		(unit 1)
@@ -12243,75 +12294,6 @@
 			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "#PWR01")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BrenoCQ:D_Schottky_B0520LW")
-		(at 256.54 43.18 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d98e25cd-6dfa-431a-a116-e8b277f469c3")
-		(property "Reference" "D1"
-			(at 258.699 42.926 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "B0520LW"
-			(at 258.699 45.466 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "BrenoCQ:SOD-123"
-			(at 257.81 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://nl.mouser.com/datasheet/2/115/DIOD_S_A0011119854_1-2512890.pdf"
-			(at 258.445 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Schottky Diode"
-			(at 256.54 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "f7b1702e-6673-4172-8d39-7fb679bbf877")
-		)
-		(pin "1"
-			(uuid "695ce02a-a06d-4a21-970c-d6704271e74d")
-		)
-		(instances
-			(project ""
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "D1")
 					(unit 1)
 				)
 			)

@@ -392,14 +392,14 @@
 					(at 0 -7.62 90)
 					(length 2.54)
 					(hide yes)
-					(name "TAB"
+					(name "PAD"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "TAB"
+					(number "PAD"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2573,7 +2573,7 @@
 		(pin "6"
 			(uuid "99db6233-d014-4bba-8cc8-5839a92b0901")
 		)
-		(pin "TAB"
+		(pin "PAD"
 			(uuid "5f6e879b-e948-482f-be4d-cef21a3649df")
 		)
 		(pin "4"
