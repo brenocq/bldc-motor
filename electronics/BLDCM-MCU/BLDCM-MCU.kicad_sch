@@ -3930,8 +3930,8 @@
 		(uuid 3a39e3c2-a8f3-423c-a215-1ad0e07d0c21)
 	)
 	(rectangle
-		(start 77.47 85.09)
-		(end 124.46 142.24)
+		(start 78.74 85.09)
+		(end 124.46 143.51)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -3995,7 +3995,7 @@
 		(uuid ac070b51-0c93-4693-bd3c-033f250b0372)
 	)
 	(rectangle
-		(start 77.47 80.01)
+		(start 78.74 79.756)
 		(end 111.76 85.09)
 		(stroke
 			(width 0.254)
@@ -4035,7 +4035,7 @@
 	)
 	(rectangle
 		(start 13.97 83.82)
-		(end 74.93 143.0528)
+		(end 76.2 143.0528)
 		(stroke
 			(width 0.254)
 			(type solid)
@@ -4081,7 +4081,7 @@
 	)
 	(text "Stack Connector"
 		(exclude_from_sim no)
-		(at 78.232 84.074 0)
+		(at 80.01 83.82 0)
 		(effects
 			(font
 				(size 2.286 2.286)
@@ -4125,7 +4125,7 @@
 	)
 	(text "PWR"
 		(exclude_from_sim no)
-		(at 121.92 24.13 0)
+		(at 146.05 24.13 0)
 		(effects
 			(font
 				(size 1.778 1.778)
@@ -4134,31 +4134,10 @@
 		)
 		(uuid "f6eae34f-02b8-4e3f-9527-e071a1dfc1dc")
 	)
-	(text_box "VIN should be 3.7V~5.5V for the SK6805"
+	(text_box "SPI2 -> IMU\nSPI3 -> ENC\nADC1 -> VOLT (source+phases)\nADC2 -> CURR (phases)\nTIM1 -> PWM\nTIM2 -> LED\nUSB FS\nCAN1"
 		(exclude_from_sim no)
-		(at 128.27 102.87 0)
-		(size 19.685 7.62)
-		(margins 0.9525 0.9525 0.9525 0.9525)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(type color)
-			(color 255 255 150 1)
-		)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left top)
-		)
-		(uuid "38005400-0d01-4dd0-b10b-aae2953038d1")
-	)
-	(text_box "SPI1 -> INA | SPI2 -> IMU | SPI3 -> ENC | ADC1 - >VOLT | USB | CAN1 | TIM1 -> PWM | TIM2 -> LED"
-		(exclude_from_sim no)
-		(at 24.13 20.32 0)
-		(size 92.71 3.81)
+		(at 114.3 21.59 0)
+		(size 27.94 16.51)
 		(margins 0.9525 0.9525 0.9525 0.9525)
 		(stroke
 			(width 0)
@@ -4178,7 +4157,7 @@
 		(uuid "f329574f-5761-4b13-8f67-b0192495f641")
 	)
 	(junction
-		(at 92.71 93.98)
+		(at 92.71 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "009cb1fa-cd76-4ddc-b216-52907ff253fd")
@@ -4196,7 +4175,7 @@
 		(uuid "024712d8-e935-4e35-b850-7f0cbfabbc12")
 	)
 	(junction
-		(at 29.21 111.76)
+		(at 27.94 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "08a15d93-a378-45e1-a664-d7c17ece2a31")
@@ -4226,7 +4205,7 @@
 		(uuid "0d7aa61d-d6e5-4d22-9486-fa7582a95961")
 	)
 	(junction
-		(at 111.76 99.06)
+		(at 111.76 101.6)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0fb942a5-5d72-46cd-9f62-d39ab75f13be")
@@ -4244,19 +4223,19 @@
 		(uuid "135c8ff8-35f7-4c72-a839-4a946bc71bfb")
 	)
 	(junction
-		(at 124.46 52.07)
+		(at 175.26 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "13fa4614-dd12-4c82-a354-c986dce92aac")
 	)
 	(junction
-		(at 203.2 49.53)
+		(at 203.2 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2113b6e5-2058-4e4c-93ae-6ef71467248e")
 	)
 	(junction
-		(at 132.08 39.37)
+		(at 182.88 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "22837f9d-d8da-4cd2-89da-9cf228cd36d3")
@@ -4268,7 +4247,7 @@
 		(uuid "25fdae05-a0ee-4d00-9328-2fd8dd973d5a")
 	)
 	(junction
-		(at 139.7 52.07)
+		(at 190.5 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "27dc970f-8b43-44fa-9a34-d832352a2006")
@@ -4298,7 +4277,7 @@
 		(uuid "2e2f9281-509a-47e9-8e92-c50dad0bc5c1")
 	)
 	(junction
-		(at 165.1 36.83)
+		(at 165.1 27.94)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2f562990-f5b0-475f-aa88-f4f8c64481ce")
@@ -4334,7 +4313,7 @@
 		(uuid "38689fbf-aaf4-4eb0-9836-1c9caf0ec8cd")
 	)
 	(junction
-		(at 62.23 111.76)
+		(at 60.96 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "39e4453c-bc59-4952-bac9-d0e2f7eb1e08")
@@ -4358,7 +4337,7 @@
 		(uuid "405de30c-a605-4729-821a-87f949bbf092")
 	)
 	(junction
-		(at 165.1 44.45)
+		(at 165.1 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "42fd2870-3dec-4690-af79-78e528ffd5d1")
@@ -4394,7 +4373,7 @@
 		(uuid "4ff3cbd9-f624-467f-b29a-1e6c89ab456e")
 	)
 	(junction
-		(at 203.2 44.45)
+		(at 203.2 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "509ed2bc-a459-4f95-a165-4b057340dd65")
@@ -4418,7 +4397,7 @@
 		(uuid "55731f81-6466-44e4-9b71-ebcc0e22bc09")
 	)
 	(junction
-		(at 124.46 39.37)
+		(at 175.26 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "57351ea7-781b-41b2-a2cb-0e88ce10d109")
@@ -4454,7 +4433,7 @@
 		(uuid "61b70c1c-864a-49c1-b526-b9738055ccd4")
 	)
 	(junction
-		(at 165.1 46.99)
+		(at 165.1 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6207d2c6-a614-4c80-a659-89b51db59684")
@@ -4556,7 +4535,7 @@
 		(uuid "9c2ee8f6-8484-4b7b-969b-e3694a8452a6")
 	)
 	(junction
-		(at 110.49 93.98)
+		(at 110.49 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9c6cc408-73cd-4195-b923-91bace4d211b")
@@ -4574,19 +4553,19 @@
 		(uuid "9fabb126-bf5b-49a2-8c0d-ed5226d05495")
 	)
 	(junction
-		(at 203.2 46.99)
+		(at 203.2 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a1508a01-6472-41cb-9d0f-6e2356ae8a5c")
 	)
 	(junction
-		(at 165.1 41.91)
+		(at 165.1 33.02)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "af4af46d-cd33-43fb-83fc-4e98af677390")
 	)
 	(junction
-		(at 160.02 36.83)
+		(at 160.02 27.94)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b6730b3e-5820-4596-aca1-c7ef03b29746")
@@ -4622,13 +4601,13 @@
 		(uuid "ca596127-3574-4116-a8c1-9650b19e0a55")
 	)
 	(junction
-		(at 44.45 132.08)
+		(at 43.18 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cac86e3a-4cad-4375-b2f9-9fb049e42575")
 	)
 	(junction
-		(at 24.13 93.98)
+		(at 22.86 93.98)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cb1329db-6868-4648-89f4-35bcfa3b0db0")
@@ -4652,7 +4631,7 @@
 		(uuid "d981f423-8f8e-42bd-8e98-de8cb5169c78")
 	)
 	(junction
-		(at 139.7 39.37)
+		(at 190.5 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e0a76c49-c32a-492b-a38e-3916ebb59431")
@@ -4688,13 +4667,13 @@
 		(uuid "ebee0930-d33c-487e-b356-3e789d91d75d")
 	)
 	(junction
-		(at 44.45 124.46)
+		(at 43.18 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f0e3d01e-35f7-404a-90e0-6f9addd31e2f")
 	)
 	(junction
-		(at 132.08 52.07)
+		(at 182.88 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f9c19460-aec8-44c7-a142-c6916ec2fcf8")
@@ -4712,11 +4691,7 @@
 		(uuid "fda905d0-9b86-431f-802f-ca049f2ef655")
 	)
 	(no_connect
-		(at 92.71 36.83)
-		(uuid "01fc9c37-8717-4c88-a0ce-061260d6ac7d")
-	)
-	(no_connect
-		(at 92.71 52.07)
+		(at 93.98 50.8)
 		(uuid "04f6daa4-64d4-4f81-a7ba-a3934eb266e3")
 	)
 	(no_connect
@@ -4724,7 +4699,11 @@
 		(uuid "074c225c-8474-4401-add9-846a9edb949f")
 	)
 	(no_connect
-		(at 60.96 54.61)
+		(at 60.96 40.64)
+		(uuid "18f9ecf0-f0b2-41bf-9a6e-2882641711a5")
+	)
+	(no_connect
+		(at 60.96 55.88)
 		(uuid "1bc11f3c-c458-4516-b15f-8a80d9ceccb1")
 	)
 	(no_connect
@@ -4736,40 +4715,40 @@
 		(uuid "36aa3122-65a5-4fb7-8061-3cd245c56616")
 	)
 	(no_connect
-		(at 92.71 49.53)
+		(at 93.98 48.26)
 		(uuid "37f22113-0b3c-48fa-8b80-ecb203577396")
 	)
 	(no_connect
-		(at 60.96 57.15)
+		(at 27.94 43.18)
+		(uuid "4734388d-5464-499d-8812-8303da12701a")
+	)
+	(no_connect
+		(at 60.96 58.42)
 		(uuid "4eda4751-f2bc-485d-83b8-89366650aef1")
 	)
 	(no_connect
-		(at 92.71 39.37)
-		(uuid "53c64712-5deb-46a1-a044-7cd001d65eea")
-	)
-	(no_connect
-		(at 60.96 34.29)
+		(at 60.96 35.56)
 		(uuid "78126459-9dac-4838-b4da-0ea27731fe77")
 	)
 	(no_connect
-		(at 27.94 34.29)
+		(at 27.94 35.56)
 		(uuid "82c476cc-5b1e-4e6f-b500-c68cd0c5f994")
 	)
 	(no_connect
-		(at 92.71 41.91)
-		(uuid "888d2b3f-8975-47da-8a15-8d6f66b7ccf4")
-	)
-	(no_connect
-		(at 92.71 69.85)
+		(at 93.98 68.58)
 		(uuid "9f1b941e-477e-43e1-a082-3f9a0b3b7ff3")
 	)
 	(no_connect
-		(at 92.71 59.69)
+		(at 93.98 58.42)
 		(uuid "afc76e71-7ad7-43b3-b2cb-4ae0d0f1e66e")
 	)
 	(no_connect
-		(at 27.94 31.75)
+		(at 27.94 33.02)
 		(uuid "c4d33791-bccf-456a-81d1-1c9d19b6add7")
+	)
+	(no_connect
+		(at 60.96 43.18)
+		(uuid "e0e0323f-1dcf-4e1e-9389-08a08a546303")
 	)
 	(no_connect
 		(at 31.75 170.18)
@@ -4784,16 +4763,6 @@
 			(type default)
 		)
 		(uuid "003fb731-d755-45e7-baf3-425c5ea809ad")
-	)
-	(wire
-		(pts
-			(xy 81.28 104.14) (xy 93.98 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "027ba3bd-d1eb-4139-814f-f286ecf3a7f4")
 	)
 	(wire
 		(pts
@@ -4827,7 +4796,7 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 36.83) (xy 198.12 34.29)
+			(xy 198.12 27.94) (xy 198.12 25.4)
 		)
 		(stroke
 			(width 0)
@@ -4837,7 +4806,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 99.06) (xy 114.3 99.06)
+			(xy 111.76 101.6) (xy 114.3 101.6)
 		)
 		(stroke
 			(width 0)
@@ -4847,7 +4816,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 31.75) (xy 60.96 31.75)
+			(xy 73.66 33.02) (xy 60.96 33.02)
 		)
 		(stroke
 			(width 0)
@@ -4867,7 +4836,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 109.22) (xy 93.98 109.22)
+			(xy 81.28 111.76) (xy 93.98 111.76)
 		)
 		(stroke
 			(width 0)
@@ -4937,7 +4906,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 93.98) (xy 91.44 92.71)
+			(xy 91.44 96.52) (xy 91.44 95.25)
 		)
 		(stroke
 			(width 0)
@@ -4947,7 +4916,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 127) (xy 93.98 127)
+			(xy 81.28 129.54) (xy 93.98 129.54)
 		)
 		(stroke
 			(width 0)
@@ -5017,7 +4986,7 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 124.46) (xy 44.45 124.46)
+			(xy 40.64 124.46) (xy 43.18 124.46)
 		)
 		(stroke
 			(width 0)
@@ -5027,7 +4996,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 99.06) (xy 109.22 99.06)
+			(xy 111.76 101.6) (xy 109.22 101.6)
 		)
 		(stroke
 			(width 0)
@@ -5037,7 +5006,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 44.45) (xy 73.66 44.45)
+			(xy 60.96 45.72) (xy 73.66 45.72)
 		)
 		(stroke
 			(width 0)
@@ -5047,7 +5016,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 39.37) (xy 124.46 39.37)
+			(xy 182.88 59.69) (xy 175.26 59.69)
 		)
 		(stroke
 			(width 0)
@@ -5077,7 +5046,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 54.61) (xy 195.58 54.61)
+			(xy 193.04 45.72) (xy 195.58 45.72)
 		)
 		(stroke
 			(width 0)
@@ -5097,7 +5066,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 99.06) (xy 72.39 99.06)
+			(xy 58.42 99.06) (xy 71.12 99.06)
 		)
 		(stroke
 			(width 0)
@@ -5127,7 +5096,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 46.99) (xy 165.1 44.45)
+			(xy 165.1 38.1) (xy 165.1 35.56)
 		)
 		(stroke
 			(width 0)
@@ -5137,7 +5106,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 29.21) (xy 73.66 29.21)
+			(xy 60.96 30.48) (xy 73.66 30.48)
 		)
 		(stroke
 			(width 0)
@@ -5147,23 +5116,13 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 59.69) (xy 40.64 59.69)
+			(xy 27.94 60.96) (xy 40.64 60.96)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "22dc65c5-0c5b-4334-a12b-f50b6db6fa39")
-	)
-	(wire
-		(pts
-			(xy 40.64 41.91) (xy 27.94 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "236a46de-d4b3-4cff-9d07-f1981ab5fcd0")
 	)
 	(wire
 		(pts
@@ -5197,7 +5156,7 @@
 	)
 	(wire
 		(pts
-			(xy 195.58 54.61) (xy 195.58 57.15)
+			(xy 195.58 45.72) (xy 195.58 48.26)
 		)
 		(stroke
 			(width 0)
@@ -5207,7 +5166,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 41.91) (xy 203.2 41.91)
+			(xy 193.04 33.02) (xy 203.2 33.02)
 		)
 		(stroke
 			(width 0)
@@ -5217,7 +5176,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 93.98) (xy 92.71 96.52)
+			(xy 92.71 96.52) (xy 92.71 99.06)
 		)
 		(stroke
 			(width 0)
@@ -5227,7 +5186,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 54.61) (xy 27.94 54.61)
+			(xy 40.64 55.88) (xy 27.94 55.88)
 		)
 		(stroke
 			(width 0)
@@ -5267,7 +5226,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 96.52) (xy 31.75 96.52)
+			(xy 22.86 96.52) (xy 30.48 96.52)
 		)
 		(stroke
 			(width 0)
@@ -5297,7 +5256,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 62.23) (xy 73.66 62.23)
+			(xy 60.96 63.5) (xy 73.66 63.5)
 		)
 		(stroke
 			(width 0)
@@ -5307,7 +5266,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 39.37) (xy 139.7 39.37)
+			(xy 182.88 59.69) (xy 190.5 59.69)
 		)
 		(stroke
 			(width 0)
@@ -5317,7 +5276,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 46.99) (xy 165.1 46.99)
+			(xy 167.64 38.1) (xy 165.1 38.1)
 		)
 		(stroke
 			(width 0)
@@ -5327,7 +5286,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 99.06) (xy 81.28 99.06)
+			(xy 93.98 101.6) (xy 81.28 101.6)
 		)
 		(stroke
 			(width 0)
@@ -5357,7 +5316,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 129.54) (xy 81.28 129.54)
+			(xy 93.98 132.08) (xy 81.28 132.08)
 		)
 		(stroke
 			(width 0)
@@ -5377,7 +5336,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 62.23) (xy 105.41 62.23)
+			(xy 93.98 60.96) (xy 106.68 60.96)
 		)
 		(stroke
 			(width 0)
@@ -5387,7 +5346,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 36.83) (xy 73.66 36.83)
+			(xy 60.96 38.1) (xy 73.66 38.1)
 		)
 		(stroke
 			(width 0)
@@ -5407,7 +5366,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 49.53) (xy 165.1 46.99)
+			(xy 165.1 40.64) (xy 165.1 38.1)
 		)
 		(stroke
 			(width 0)
@@ -5417,7 +5376,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 39.37) (xy 124.46 41.91)
+			(xy 175.26 59.69) (xy 175.26 60.96)
 		)
 		(stroke
 			(width 0)
@@ -5437,7 +5396,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 101.6) (xy 93.98 101.6)
+			(xy 81.28 104.14) (xy 93.98 104.14)
 		)
 		(stroke
 			(width 0)
@@ -5447,7 +5406,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 52.07) (xy 139.7 52.07)
+			(xy 182.88 69.85) (xy 190.5 69.85)
 		)
 		(stroke
 			(width 0)
@@ -5457,7 +5416,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 96.52) (xy 93.98 96.52)
+			(xy 92.71 99.06) (xy 93.98 99.06)
 		)
 		(stroke
 			(width 0)
@@ -5467,7 +5426,7 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 41.91) (xy 203.2 44.45)
+			(xy 203.2 33.02) (xy 203.2 35.56)
 		)
 		(stroke
 			(width 0)
@@ -5497,7 +5456,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 111.76) (xy 31.75 111.76)
+			(xy 27.94 111.76) (xy 30.48 111.76)
 		)
 		(stroke
 			(width 0)
@@ -5507,7 +5466,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 62.23) (xy 40.64 62.23)
+			(xy 27.94 63.5) (xy 40.64 63.5)
 		)
 		(stroke
 			(width 0)
@@ -5527,7 +5486,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 116.84) (xy 93.98 116.84)
+			(xy 81.28 119.38) (xy 93.98 119.38)
 		)
 		(stroke
 			(width 0)
@@ -5577,7 +5536,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 111.76) (xy 62.23 109.22)
+			(xy 60.96 111.76) (xy 60.96 109.22)
 		)
 		(stroke
 			(width 0)
@@ -5597,17 +5556,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 54.61) (xy 124.46 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3ede51df-160b-4178-acad-b0ebcaa8106e")
-	)
-	(wire
-		(pts
-			(xy 31.75 93.98) (xy 24.13 93.98)
+			(xy 30.48 93.98) (xy 22.86 93.98)
 		)
 		(stroke
 			(width 0)
@@ -5637,7 +5586,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 119.38) (xy 109.22 119.38)
+			(xy 121.92 121.92) (xy 109.22 121.92)
 		)
 		(stroke
 			(width 0)
@@ -5647,7 +5596,7 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 132.08) (xy 44.45 132.08)
+			(xy 40.64 132.08) (xy 43.18 132.08)
 		)
 		(stroke
 			(width 0)
@@ -5677,7 +5626,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 52.07) (xy 139.7 52.07)
+			(xy 198.12 69.85) (xy 190.5 69.85)
 		)
 		(stroke
 			(width 0)
@@ -5687,7 +5636,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 36.83) (xy 154.94 36.83)
+			(xy 160.02 27.94) (xy 154.94 27.94)
 		)
 		(stroke
 			(width 0)
@@ -5707,7 +5656,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 54.61) (xy 105.41 54.61)
+			(xy 93.98 53.34) (xy 106.68 53.34)
 		)
 		(stroke
 			(width 0)
@@ -5717,7 +5666,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 96.52) (xy 110.49 96.52)
+			(xy 109.22 99.06) (xy 110.49 99.06)
 		)
 		(stroke
 			(width 0)
@@ -5767,7 +5716,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 54.61) (xy 165.1 54.61)
+			(xy 167.64 45.72) (xy 165.1 45.72)
 		)
 		(stroke
 			(width 0)
@@ -5787,7 +5736,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 52.07) (xy 73.66 52.07)
+			(xy 60.96 53.34) (xy 73.66 53.34)
 		)
 		(stroke
 			(width 0)
@@ -5807,7 +5756,7 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 44.45) (xy 203.2 46.99)
+			(xy 203.2 35.56) (xy 203.2 38.1)
 		)
 		(stroke
 			(width 0)
@@ -5817,7 +5766,17 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 104.14) (xy 121.92 104.14)
+			(xy 93.98 38.1) (xy 106.68 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "525b2e98-d440-4813-b367-75300c23312c")
+	)
+	(wire
+		(pts
+			(xy 109.22 106.68) (xy 121.92 106.68)
 		)
 		(stroke
 			(width 0)
@@ -5837,7 +5796,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 41.91) (xy 165.1 36.83)
+			(xy 165.1 33.02) (xy 165.1 27.94)
 		)
 		(stroke
 			(width 0)
@@ -5847,7 +5806,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 49.53) (xy 132.08 52.07)
+			(xy 182.88 68.58) (xy 182.88 69.85)
 		)
 		(stroke
 			(width 0)
@@ -5857,7 +5816,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 39.37) (xy 40.64 39.37)
+			(xy 27.94 40.64) (xy 40.64 40.64)
 		)
 		(stroke
 			(width 0)
@@ -5867,7 +5826,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 101.6) (xy 19.05 101.6)
+			(xy 30.48 101.6) (xy 17.78 101.6)
 		)
 		(stroke
 			(width 0)
@@ -5877,7 +5836,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 49.53) (xy 40.64 49.53)
+			(xy 27.94 50.8) (xy 40.64 50.8)
 		)
 		(stroke
 			(width 0)
@@ -5907,7 +5866,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 111.76) (xy 62.23 114.3)
+			(xy 60.96 111.76) (xy 60.96 114.3)
 		)
 		(stroke
 			(width 0)
@@ -5937,7 +5896,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 34.29) (xy 160.02 36.83)
+			(xy 160.02 25.4) (xy 160.02 27.94)
 		)
 		(stroke
 			(width 0)
@@ -5947,7 +5906,7 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 111.76) (xy 29.21 114.3)
+			(xy 27.94 111.76) (xy 27.94 114.3)
 		)
 		(stroke
 			(width 0)
@@ -5957,7 +5916,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 49.53) (xy 147.32 52.07)
+			(xy 198.12 68.58) (xy 198.12 69.85)
 		)
 		(stroke
 			(width 0)
@@ -5967,7 +5926,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 101.6) (xy 111.76 99.06)
+			(xy 111.76 104.14) (xy 111.76 101.6)
 		)
 		(stroke
 			(width 0)
@@ -5987,7 +5946,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 34.29) (xy 92.71 34.29)
+			(xy 106.68 33.02) (xy 93.98 33.02)
 		)
 		(stroke
 			(width 0)
@@ -6007,7 +5966,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 111.76) (xy 81.28 111.76)
+			(xy 93.98 114.3) (xy 81.28 114.3)
 		)
 		(stroke
 			(width 0)
@@ -6027,7 +5986,7 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 49.53) (xy 203.2 57.15)
+			(xy 203.2 40.64) (xy 203.2 48.26)
 		)
 		(stroke
 			(width 0)
@@ -6047,7 +6006,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 114.3) (xy 121.92 114.3)
+			(xy 109.22 116.84) (xy 121.92 116.84)
 		)
 		(stroke
 			(width 0)
@@ -6057,7 +6016,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 64.77) (xy 165.1 62.23)
+			(xy 165.1 55.88) (xy 165.1 53.34)
 		)
 		(stroke
 			(width 0)
@@ -6067,7 +6026,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 31.75) (xy 105.41 31.75)
+			(xy 93.98 30.48) (xy 106.68 30.48)
 		)
 		(stroke
 			(width 0)
@@ -6077,7 +6036,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 93.98) (xy 72.39 93.98)
+			(xy 58.42 93.98) (xy 71.12 93.98)
 		)
 		(stroke
 			(width 0)
@@ -6097,7 +6056,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 57.15) (xy 105.41 57.15)
+			(xy 93.98 55.88) (xy 106.68 55.88)
 		)
 		(stroke
 			(width 0)
@@ -6107,17 +6066,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 41.91) (xy 73.66 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "700c7204-8a8b-4f79-83ce-a1b557d282c8")
-	)
-	(wire
-		(pts
-			(xy 121.92 129.54) (xy 109.22 129.54)
+			(xy 121.92 132.08) (xy 109.22 132.08)
 		)
 		(stroke
 			(width 0)
@@ -6137,7 +6086,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 121.92) (xy 121.92 121.92)
+			(xy 109.22 124.46) (xy 121.92 124.46)
 		)
 		(stroke
 			(width 0)
@@ -6157,7 +6106,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 44.45) (xy 165.1 44.45)
+			(xy 167.64 35.56) (xy 165.1 35.56)
 		)
 		(stroke
 			(width 0)
@@ -6167,7 +6116,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 67.31) (xy 40.64 67.31)
+			(xy 27.94 68.58) (xy 40.64 68.58)
 		)
 		(stroke
 			(width 0)
@@ -6177,7 +6126,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 93.98) (xy 109.22 93.98)
+			(xy 110.49 96.52) (xy 109.22 96.52)
 		)
 		(stroke
 			(width 0)
@@ -6197,7 +6146,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 36.83) (xy 154.94 39.37)
+			(xy 154.94 27.94) (xy 154.94 30.48)
 		)
 		(stroke
 			(width 0)
@@ -6207,7 +6156,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 44.45) (xy 40.64 44.45)
+			(xy 27.94 45.72) (xy 40.64 45.72)
 		)
 		(stroke
 			(width 0)
@@ -6227,7 +6176,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 109.22) (xy 59.69 109.22)
+			(xy 60.96 109.22) (xy 58.42 109.22)
 		)
 		(stroke
 			(width 0)
@@ -6278,16 +6227,6 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 106.68) (xy 93.98 106.68)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7bc8faa3-286f-4516-8ca0-42a313adbcc4")
-	)
-	(wire
-		(pts
 			(xy 179.07 160.02) (xy 186.69 160.02)
 		)
 		(stroke
@@ -6298,7 +6237,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 44.45) (xy 203.2 44.45)
+			(xy 193.04 35.56) (xy 203.2 35.56)
 		)
 		(stroke
 			(width 0)
@@ -6308,7 +6247,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 132.08) (xy 46.99 132.08)
+			(xy 43.18 132.08) (xy 45.72 132.08)
 		)
 		(stroke
 			(width 0)
@@ -6318,7 +6257,7 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 41.91) (xy 139.7 39.37)
+			(xy 190.5 60.96) (xy 190.5 59.69)
 		)
 		(stroke
 			(width 0)
@@ -6328,7 +6267,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 46.99) (xy 105.41 46.99)
+			(xy 93.98 45.72) (xy 106.68 45.72)
 		)
 		(stroke
 			(width 0)
@@ -6338,7 +6277,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 93.98) (xy 110.49 93.98)
+			(xy 111.76 96.52) (xy 110.49 96.52)
 		)
 		(stroke
 			(width 0)
@@ -6358,7 +6297,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 106.68) (xy 109.22 106.68)
+			(xy 121.92 109.22) (xy 109.22 109.22)
 		)
 		(stroke
 			(width 0)
@@ -6388,7 +6327,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 93.98) (xy 93.98 93.98)
+			(xy 92.71 96.52) (xy 93.98 96.52)
 		)
 		(stroke
 			(width 0)
@@ -6398,7 +6337,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 64.77) (xy 40.64 64.77)
+			(xy 27.94 66.04) (xy 40.64 66.04)
 		)
 		(stroke
 			(width 0)
@@ -6408,7 +6347,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 49.53) (xy 203.2 49.53)
+			(xy 193.04 40.64) (xy 203.2 40.64)
 		)
 		(stroke
 			(width 0)
@@ -6418,7 +6357,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 36.83) (xy 167.64 36.83)
+			(xy 165.1 27.94) (xy 167.64 27.94)
 		)
 		(stroke
 			(width 0)
@@ -6428,7 +6367,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 64.77) (xy 92.71 64.77)
+			(xy 106.68 63.5) (xy 93.98 63.5)
 		)
 		(stroke
 			(width 0)
@@ -6438,7 +6377,7 @@
 	)
 	(wire
 		(pts
-			(xy 19.05 104.14) (xy 31.75 104.14)
+			(xy 17.78 104.14) (xy 30.48 104.14)
 		)
 		(stroke
 			(width 0)
@@ -6478,7 +6417,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 93.98) (xy 92.71 93.98)
+			(xy 91.44 96.52) (xy 92.71 96.52)
 		)
 		(stroke
 			(width 0)
@@ -6498,7 +6437,17 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 124.46) (xy 46.99 124.46)
+			(xy 81.28 106.68) (xy 93.98 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8df85c6a-9a1c-4a2e-bd2d-9c683dbf4323")
+	)
+	(wire
+		(pts
+			(xy 43.18 124.46) (xy 45.72 124.46)
 		)
 		(stroke
 			(width 0)
@@ -6528,7 +6477,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 36.83) (xy 160.02 36.83)
+			(xy 165.1 27.94) (xy 160.02 27.94)
 		)
 		(stroke
 			(width 0)
@@ -6578,7 +6527,7 @@
 	)
 	(wire
 		(pts
-			(xy 31.75 109.22) (xy 29.21 109.22)
+			(xy 30.48 109.22) (xy 27.94 109.22)
 		)
 		(stroke
 			(width 0)
@@ -6588,7 +6537,27 @@
 	)
 	(wire
 		(pts
-			(xy 29.21 109.22) (xy 29.21 111.76)
+			(xy 106.68 40.64) (xy 93.98 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "983335fe-e98a-48ba-aa20-0fa532e08663")
+	)
+	(wire
+		(pts
+			(xy 109.22 114.3) (xy 121.92 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9841aa74-064c-477f-8587-415eb41dea69")
+	)
+	(wire
+		(pts
+			(xy 27.94 109.22) (xy 27.94 111.76)
 		)
 		(stroke
 			(width 0)
@@ -6598,7 +6567,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 52.07) (xy 40.64 52.07)
+			(xy 27.94 53.34) (xy 40.64 53.34)
 		)
 		(stroke
 			(width 0)
@@ -6618,7 +6587,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 101.6) (xy 72.39 101.6)
+			(xy 58.42 101.6) (xy 71.12 101.6)
 		)
 		(stroke
 			(width 0)
@@ -6638,7 +6607,7 @@
 	)
 	(polyline
 		(pts
-			(xy 119.38 19.05) (xy 119.38 77.47)
+			(xy 144.78 19.05) (xy 144.78 77.47)
 		)
 		(stroke
 			(width 0.254)
@@ -6659,7 +6628,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 52.07) (xy 124.46 49.53)
+			(xy 175.26 69.85) (xy 175.26 68.58)
 		)
 		(stroke
 			(width 0)
@@ -6699,7 +6668,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 29.21) (xy 92.71 29.21)
+			(xy 106.68 27.94) (xy 93.98 27.94)
 		)
 		(stroke
 			(width 0)
@@ -6729,7 +6698,7 @@
 	)
 	(wire
 		(pts
-			(xy 165.1 44.45) (xy 165.1 41.91)
+			(xy 165.1 35.56) (xy 165.1 33.02)
 		)
 		(stroke
 			(width 0)
@@ -6749,7 +6718,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 49.53) (xy 154.94 46.99)
+			(xy 154.94 40.64) (xy 154.94 38.1)
 		)
 		(stroke
 			(width 0)
@@ -6769,7 +6738,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 96.52) (xy 72.39 96.52)
+			(xy 58.42 96.52) (xy 71.12 96.52)
 		)
 		(stroke
 			(width 0)
@@ -6809,7 +6778,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 114.3) (xy 81.28 114.3)
+			(xy 93.98 116.84) (xy 81.28 116.84)
 		)
 		(stroke
 			(width 0)
@@ -6829,7 +6798,7 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 93.98) (xy 110.49 96.52)
+			(xy 110.49 96.52) (xy 110.49 99.06)
 		)
 		(stroke
 			(width 0)
@@ -6959,7 +6928,7 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 44.45) (xy 92.71 44.45)
+			(xy 106.68 43.18) (xy 93.98 43.18)
 		)
 		(stroke
 			(width 0)
@@ -6979,7 +6948,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 57.15) (xy 40.64 57.15)
+			(xy 27.94 58.42) (xy 40.64 58.42)
 		)
 		(stroke
 			(width 0)
@@ -7009,7 +6978,17 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 46.99) (xy 203.2 46.99)
+			(xy 106.68 35.56) (xy 93.98 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3d34222-2b53-405b-b025-e02dc6d1437f")
+	)
+	(wire
+		(pts
+			(xy 193.04 38.1) (xy 203.2 38.1)
 		)
 		(stroke
 			(width 0)
@@ -7019,17 +6998,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 39.37) (xy 60.96 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c7da5369-46c0-43fb-88a5-77846070d7af")
-	)
-	(wire
-		(pts
-			(xy 73.66 49.53) (xy 60.96 49.53)
+			(xy 73.66 50.8) (xy 60.96 50.8)
 		)
 		(stroke
 			(width 0)
@@ -7039,7 +7008,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 109.22) (xy 121.92 109.22)
+			(xy 109.22 111.76) (xy 121.92 111.76)
 		)
 		(stroke
 			(width 0)
@@ -7059,17 +7028,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 111.76) (xy 121.92 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cbe8ff24-7b5a-49c5-a63b-0070a7b01be7")
-	)
-	(wire
-		(pts
-			(xy 139.7 52.07) (xy 139.7 49.53)
+			(xy 190.5 69.85) (xy 190.5 68.58)
 		)
 		(stroke
 			(width 0)
@@ -7079,7 +7038,7 @@
 	)
 	(wire
 		(pts
-			(xy 203.2 46.99) (xy 203.2 49.53)
+			(xy 203.2 38.1) (xy 203.2 40.64)
 		)
 		(stroke
 			(width 0)
@@ -7089,7 +7048,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 49.53) (xy 165.1 49.53)
+			(xy 167.64 40.64) (xy 165.1 40.64)
 		)
 		(stroke
 			(width 0)
@@ -7189,16 +7148,6 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 39.37) (xy 124.46 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d89a86c1-31aa-4e0a-989d-3cc94d5db862")
-	)
-	(wire
-		(pts
 			(xy 157.48 101.6) (xy 157.48 102.87)
 		)
 		(stroke
@@ -7239,7 +7188,7 @@
 	)
 	(wire
 		(pts
-			(xy 121.92 124.46) (xy 109.22 124.46)
+			(xy 121.92 127) (xy 109.22 127)
 		)
 		(stroke
 			(width 0)
@@ -7249,7 +7198,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 101.6) (xy 111.76 101.6)
+			(xy 109.22 104.14) (xy 111.76 104.14)
 		)
 		(stroke
 			(width 0)
@@ -7259,7 +7208,7 @@
 	)
 	(wire
 		(pts
-			(xy 193.04 36.83) (xy 198.12 36.83)
+			(xy 193.04 27.94) (xy 198.12 27.94)
 		)
 		(stroke
 			(width 0)
@@ -7269,7 +7218,7 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 46.99) (xy 27.94 46.99)
+			(xy 40.64 48.26) (xy 27.94 48.26)
 		)
 		(stroke
 			(width 0)
@@ -7289,7 +7238,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 46.99) (xy 60.96 46.99)
+			(xy 73.66 48.26) (xy 60.96 48.26)
 		)
 		(stroke
 			(width 0)
@@ -7329,7 +7278,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 59.69) (xy 73.66 59.69)
+			(xy 60.96 60.96) (xy 73.66 60.96)
 		)
 		(stroke
 			(width 0)
@@ -7379,7 +7328,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 41.91) (xy 147.32 39.37)
+			(xy 198.12 60.96) (xy 198.12 59.69)
 		)
 		(stroke
 			(width 0)
@@ -7399,7 +7348,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 121.92) (xy 93.98 121.92)
+			(xy 81.28 124.46) (xy 93.98 124.46)
 		)
 		(stroke
 			(width 0)
@@ -7409,7 +7358,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 124.46) (xy 81.28 124.46)
+			(xy 93.98 127) (xy 81.28 127)
 		)
 		(stroke
 			(width 0)
@@ -7419,7 +7368,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 64.77) (xy 73.66 64.77)
+			(xy 60.96 66.04) (xy 73.66 66.04)
 		)
 		(stroke
 			(width 0)
@@ -7439,7 +7388,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 127) (xy 121.92 127)
+			(xy 109.22 129.54) (xy 121.92 129.54)
 		)
 		(stroke
 			(width 0)
@@ -7449,7 +7398,7 @@
 	)
 	(wire
 		(pts
-			(xy 167.64 41.91) (xy 165.1 41.91)
+			(xy 167.64 33.02) (xy 165.1 33.02)
 		)
 		(stroke
 			(width 0)
@@ -7459,7 +7408,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 67.31) (xy 105.41 67.31)
+			(xy 93.98 66.04) (xy 106.68 66.04)
 		)
 		(stroke
 			(width 0)
@@ -7469,7 +7418,7 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 41.91) (xy 132.08 39.37)
+			(xy 182.88 60.96) (xy 182.88 59.69)
 		)
 		(stroke
 			(width 0)
@@ -7509,7 +7458,7 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 119.38) (xy 81.28 119.38)
+			(xy 93.98 121.92) (xy 81.28 121.92)
 		)
 		(stroke
 			(width 0)
@@ -7519,7 +7468,7 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 29.21) (xy 40.64 29.21)
+			(xy 27.94 30.48) (xy 40.64 30.48)
 		)
 		(stroke
 			(width 0)
@@ -7619,7 +7568,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.46 52.07) (xy 132.08 52.07)
+			(xy 175.26 69.85) (xy 182.88 69.85)
 		)
 		(stroke
 			(width 0)
@@ -7629,7 +7578,7 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 93.98) (xy 111.76 92.71)
+			(xy 111.76 96.52) (xy 111.76 95.25)
 		)
 		(stroke
 			(width 0)
@@ -7649,7 +7598,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 91.44) (xy 24.13 93.98)
+			(xy 22.86 91.44) (xy 22.86 93.98)
 		)
 		(stroke
 			(width 0)
@@ -7669,7 +7618,7 @@
 	)
 	(wire
 		(pts
-			(xy 24.13 93.98) (xy 24.13 96.52)
+			(xy 22.86 93.98) (xy 22.86 96.52)
 		)
 		(stroke
 			(width 0)
@@ -7679,7 +7628,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 39.37) (xy 139.7 39.37)
+			(xy 198.12 59.69) (xy 190.5 59.69)
 		)
 		(stroke
 			(width 0)
@@ -7689,7 +7638,7 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 116.84) (xy 121.92 116.84)
+			(xy 109.22 119.38) (xy 121.92 119.38)
 		)
 		(stroke
 			(width 0)
@@ -7709,7 +7658,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 111.76) (xy 62.23 111.76)
+			(xy 58.42 111.76) (xy 60.96 111.76)
 		)
 		(stroke
 			(width 0)
@@ -7729,7 +7678,17 @@
 	)
 	(wire
 		(pts
-			(xy 27.94 36.83) (xy 40.64 36.83)
+			(xy 81.28 109.22) (xy 93.98 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe5688f7-5981-4bec-a446-d8ada903f484")
+	)
+	(wire
+		(pts
+			(xy 27.94 38.1) (xy 40.64 38.1)
 		)
 		(stroke
 			(width 0)
@@ -7758,7 +7717,7 @@
 		(uuid "fed4402d-9f3c-4e94-be04-a5654431b568")
 	)
 	(label "IMU.INT1"
-		(at 19.05 104.14 0)
+		(at 17.78 104.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7778,7 +7737,7 @@
 		(uuid "03836410-9532-4372-a03a-62b51a733440")
 	)
 	(label "USB_N"
-		(at 81.28 101.6 0)
+		(at 81.28 104.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7788,7 +7747,7 @@
 		(uuid "044e12b4-5bb7-4d04-8265-8bd8d71f56cf")
 	)
 	(label "USB_P"
-		(at 40.64 59.69 180)
+		(at 40.64 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7808,7 +7767,7 @@
 		(uuid "057e7002-5843-41aa-848b-d59c0c1934c5")
 	)
 	(label "SWO"
-		(at 81.28 121.92 0)
+		(at 81.28 124.46 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7817,8 +7776,8 @@
 		)
 		(uuid "0d3c16b3-e4fa-4af8-9d0c-a503a5554aca")
 	)
-	(label "INA.CS0"
-		(at 105.41 29.21 180)
+	(label "CURR.U"
+		(at 106.68 27.94 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7828,7 +7787,7 @@
 		(uuid "10376a29-73b2-4cae-8778-9bd8f9b31025")
 	)
 	(label "TMC.VH"
-		(at 40.64 52.07 180)
+		(at 40.64 53.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7837,8 +7796,8 @@
 		)
 		(uuid "120c3684-ee5d-48f5-aba9-11a8e7519aad")
 	)
-	(label "INA.CS2"
-		(at 121.92 104.14 180)
+	(label "INA.U"
+		(at 121.92 106.68 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7847,18 +7806,8 @@
 		)
 		(uuid "138335d5-5549-47f4-b2a5-2c874df17ce8")
 	)
-	(label "INA.POCI"
-		(at 121.92 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "13fa31a7-5fb6-4f0e-b320-d4b994bada61")
-	)
 	(label "SWDIO"
-		(at 81.28 127 0)
+		(at 81.28 129.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7868,7 +7817,7 @@
 		(uuid "1909359e-ca20-435f-b773-2982a9a85ce8")
 	)
 	(label "ENC.POCI"
-		(at 105.41 57.15 180)
+		(at 106.68 55.88 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7888,7 +7837,7 @@
 		(uuid "2194bff0-3f60-4f77-9cd1-eda266c34197")
 	)
 	(label "CAN.RX"
-		(at 73.66 49.53 180)
+		(at 73.66 50.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7898,7 +7847,7 @@
 		(uuid "2331c7e3-72ad-466f-9385-4fcac8b0b13a")
 	)
 	(label "TMC.VL"
-		(at 73.66 29.21 180)
+		(at 73.66 30.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7908,7 +7857,7 @@
 		(uuid "24378b64-d34b-414b-9222-a169acb40de3")
 	)
 	(label "IMU.PICO"
-		(at 73.66 64.77 180)
+		(at 73.66 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7918,7 +7867,7 @@
 		(uuid "26dc8107-c633-4313-9a97-25fefac25f60")
 	)
 	(label "TMC.UH"
-		(at 40.64 49.53 180)
+		(at 40.64 50.8 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7928,7 +7877,7 @@
 		(uuid "2bce3b88-a233-4535-86b5-3ca8ca03b316")
 	)
 	(label "VCP.TX"
-		(at 105.41 44.45 180)
+		(at 106.68 43.18 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7938,7 +7887,7 @@
 		(uuid "2d6399fc-3813-4ced-b4a3-e84ec652ee90")
 	)
 	(label "IMU.CLK"
-		(at 72.39 96.52 180)
+		(at 71.12 96.52 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7948,7 +7897,7 @@
 		(uuid "3326d8ff-11ba-425f-834d-ce0e409dc2e9")
 	)
 	(label "TMC.VL"
-		(at 121.92 124.46 180)
+		(at 121.92 127 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7958,7 +7907,7 @@
 		(uuid "379982d4-3814-4fed-bdda-63e95079937c")
 	)
 	(label "TMC.VH"
-		(at 121.92 121.92 180)
+		(at 121.92 124.46 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7968,7 +7917,7 @@
 		(uuid "38497df7-b34b-4e6e-9407-a9cdf1c8609f")
 	)
 	(label "SWDIO"
-		(at 40.64 62.23 180)
+		(at 40.64 63.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7977,8 +7926,18 @@
 		)
 		(uuid "393b8d22-039f-49b0-8db9-7500588faaef")
 	)
+	(label "VOLT.V"
+		(at 106.68 38.1 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "39e83a1d-80c4-4c6f-a3c8-a39ef468f096")
+	)
 	(label "SWO"
-		(at 73.66 36.83 180)
+		(at 73.66 38.1 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7988,7 +7947,7 @@
 		(uuid "3e3ac4b2-41ef-4067-90ec-2887e0a5fd9b")
 	)
 	(label "IMU.POCI"
-		(at 72.39 101.6 180)
+		(at 71.12 101.6 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7998,7 +7957,7 @@
 		(uuid "44350702-a420-4ece-9d40-99eebf4d12a3")
 	)
 	(label "IMU.PICO"
-		(at 72.39 99.06 180)
+		(at 71.12 99.06 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8018,7 +7977,7 @@
 		(uuid "4dc92207-a108-4e7b-912d-52bffc9cda1a")
 	)
 	(label "TMC.WL"
-		(at 73.66 31.75 180)
+		(at 73.66 33.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8027,8 +7986,18 @@
 		)
 		(uuid "50f04507-7b67-446e-8812-869ad5ab6605")
 	)
+	(label "VOLT.W"
+		(at 81.28 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "563ed5f6-1524-446a-8f4a-58c675aa6dc5")
+	)
 	(label "TMC.UL"
-		(at 40.64 46.99 180)
+		(at 40.64 48.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8037,8 +8006,8 @@
 		)
 		(uuid "58a26bfc-76cb-4f5a-9a36-0315c565afac")
 	)
-	(label "INA.CS2"
-		(at 105.41 34.29 180)
+	(label "CURR.W"
+		(at 106.68 33.02 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8048,7 +8017,7 @@
 		(uuid "594fbb92-4f43-4035-b787-750182d98d9e")
 	)
 	(label "IMU.INT1"
-		(at 73.66 46.99 180)
+		(at 73.66 48.26 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8068,7 +8037,7 @@
 		(uuid "623e686b-516e-4859-8d43-c9ae964d1a9b")
 	)
 	(label "TCM.DIAG"
-		(at 121.92 114.3 180)
+		(at 121.92 116.84 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8078,7 +8047,7 @@
 		(uuid "638e0eb5-9682-4294-a988-1c47519bbc74")
 	)
 	(label "IMU.INT2"
-		(at 19.05 101.6 0)
+		(at 17.78 101.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8087,8 +8056,18 @@
 		)
 		(uuid "6ded95d2-e925-4256-9aa4-aceede71b680")
 	)
+	(label "VOLT.W"
+		(at 106.68 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "71d62d04-a0fe-4d9e-82c0-5c357caa4647")
+	)
 	(label "IMU.CS"
-		(at 40.64 36.83 180)
+		(at 40.64 38.1 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8098,7 +8077,7 @@
 		(uuid "71f94605-5ebc-4ba0-a6b4-5281199c84e6")
 	)
 	(label "TMC.WH"
-		(at 40.64 54.61 180)
+		(at 40.64 55.88 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8107,8 +8086,8 @@
 		)
 		(uuid "72058cdd-d5b1-43d5-8996-ba0da3fecbfd")
 	)
-	(label "INA.CS1"
-		(at 105.41 31.75 180)
+	(label "CURR.V"
+		(at 106.68 30.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8128,7 +8107,7 @@
 		(uuid "87c1253e-0787-4bab-9931-fc129030e6e4")
 	)
 	(label "CAN.TX"
-		(at 81.28 109.22 0)
+		(at 81.28 111.76 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8138,7 +8117,7 @@
 		(uuid "88603cde-423e-4ba9-9d0c-bb42bd01c894")
 	)
 	(label "LED.DI"
-		(at 40.64 29.21 180)
+		(at 40.64 30.48 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8148,7 +8127,7 @@
 		(uuid "8ab25cde-7ca8-403c-b04e-1fbdc1b535de")
 	)
 	(label "CAN.RX"
-		(at 81.28 111.76 0)
+		(at 81.28 114.3 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8158,7 +8137,7 @@
 		(uuid "8ae0878b-6524-4191-b5f0-34a1eed36bb6")
 	)
 	(label "IMU.POCI"
-		(at 73.66 62.23 180)
+		(at 73.66 63.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8168,7 +8147,7 @@
 		(uuid "8b0558e5-c87a-4ab6-bf0c-9b7df42d17b4")
 	)
 	(label "VCP.TX"
-		(at 81.28 116.84 0)
+		(at 81.28 119.38 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8178,7 +8157,7 @@
 		(uuid "8d9dab1a-305d-4aae-b36f-2db5bc1f6177")
 	)
 	(label "TMC.UH"
-		(at 121.92 116.84 180)
+		(at 121.92 119.38 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8187,8 +8166,8 @@
 		)
 		(uuid "900498d5-506b-40c1-93da-96726ceac5a2")
 	)
-	(label "VOLT"
-		(at 40.64 44.45 180)
+	(label "VOLT.SRC"
+		(at 40.64 45.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8198,7 +8177,7 @@
 		(uuid "90502052-bcb7-4d0d-9b8e-ce982f477bcd")
 	)
 	(label "SWCLK"
-		(at 40.64 64.77 180)
+		(at 40.64 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8208,7 +8187,7 @@
 		(uuid "90f12c10-6ce5-48e6-9246-88609158bff0")
 	)
 	(label "SWCLK"
-		(at 81.28 124.46 0)
+		(at 81.28 127 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8217,8 +8196,18 @@
 		)
 		(uuid "91102810-bdb4-48d2-987f-6bba8a05f88c")
 	)
+	(label "VOLT.V"
+		(at 81.28 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "932948b7-faad-41ca-8f38-41cecac10564")
+	)
 	(label "IMU.CS"
-		(at 72.39 93.98 180)
+		(at 71.12 93.98 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8228,7 +8217,7 @@
 		(uuid "95763dd3-a116-4276-ba2a-ad1693177e19")
 	)
 	(label "USB_P"
-		(at 81.28 99.06 0)
+		(at 81.28 101.6 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8238,7 +8227,7 @@
 		(uuid "98529fd2-585b-4c96-abf1-c9ccce86de6e")
 	)
 	(label "TCM.DIAG"
-		(at 40.64 39.37 180)
+		(at 40.64 40.64 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8248,7 +8237,7 @@
 		(uuid "9ecdd1dd-bbb5-433b-8608-612b67fda13a")
 	)
 	(label "DEBUG0"
-		(at 105.41 62.23 180)
+		(at 106.68 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8258,7 +8247,7 @@
 		(uuid "9f6d82c3-b9a3-435c-8fbe-3b2c040145bd")
 	)
 	(label "TMC.UL"
-		(at 121.92 119.38 180)
+		(at 121.92 121.92 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8267,8 +8256,8 @@
 		)
 		(uuid "a0d69b6a-a593-4245-abf9-b378e91da516")
 	)
-	(label "INA.PICO"
-		(at 121.92 109.22 180)
+	(label "INA.W"
+		(at 121.92 111.76 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8278,7 +8267,7 @@
 		(uuid "a2a85670-7a95-46ff-bfe5-42fac846e940")
 	)
 	(label "RST"
-		(at 81.28 119.38 0)
+		(at 81.28 121.92 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8298,7 +8287,7 @@
 		(uuid "a74a8f8c-fddc-4b21-91dc-557952a88cb8")
 	)
 	(label "VCP.RX"
-		(at 81.28 114.3 0)
+		(at 81.28 116.84 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8306,16 +8295,6 @@
 			(justify left bottom)
 		)
 		(uuid "a9c94ef5-2427-45db-8256-ab913994feff")
-	)
-	(label "INA.CLK"
-		(at 40.64 41.91 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b0a7142a-4bf8-4417-8628-7e54521ce469")
 	)
 	(label "RST"
 		(at 251.46 34.29 180)
@@ -8327,8 +8306,18 @@
 		)
 		(uuid "b124cda5-56bd-4bc0-8ea7-6d9980f1bd32")
 	)
-	(label "VOLT"
-		(at 81.28 129.54 0)
+	(label "VOLT.U"
+		(at 121.92 114.3 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ba19d059-0b08-4c77-ae82-141616077600")
+	)
+	(label "VOLT.SRC"
+		(at 81.28 132.08 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8338,7 +8327,7 @@
 		(uuid "bd22ad84-e94e-4d34-ae88-ab679f6efe29")
 	)
 	(label "DEBUG2"
-		(at 105.41 67.31 180)
+		(at 106.68 66.04 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8348,7 +8337,7 @@
 		(uuid "bd430648-5da0-43c5-88f5-93fe6cb3a97e")
 	)
 	(label "TMC.WL"
-		(at 121.92 129.54 180)
+		(at 121.92 132.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8358,7 +8347,7 @@
 		(uuid "be81080c-cdec-46bf-a301-a0308b1cb2a0")
 	)
 	(label "USB_N"
-		(at 40.64 57.15 180)
+		(at 40.64 58.42 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8368,7 +8357,7 @@
 		(uuid "c436c2c9-b7c4-4ce9-b99f-8ccfe658eabe")
 	)
 	(label "ENC.CLK"
-		(at 105.41 54.61 180)
+		(at 106.68 53.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8377,18 +8366,18 @@
 		)
 		(uuid "c61031d3-7658-4679-950d-1705201c9bb4")
 	)
-	(label "INA.CS0"
-		(at 81.28 104.14 0)
+	(label "VOLT.U"
+		(at 106.68 35.56 180)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left bottom)
+			(justify right bottom)
 		)
-		(uuid "cf5ee219-520a-4f77-a23f-e43868baba92")
+		(uuid "cb060584-c75f-443e-9636-738d17e4f8d5")
 	)
 	(label "DEBUG1"
-		(at 105.41 64.77 180)
+		(at 106.68 63.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8398,7 +8387,7 @@
 		(uuid "d080c6b2-f95d-4072-b224-df2e717861ca")
 	)
 	(label "IMU.INT2"
-		(at 73.66 44.45 180)
+		(at 73.66 45.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8408,7 +8397,7 @@
 		(uuid "d4a2089b-6efe-461c-811d-8c52fad54592")
 	)
 	(label "CAN.TX"
-		(at 73.66 52.07 180)
+		(at 73.66 53.34 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8428,7 +8417,7 @@
 		(uuid "de2f133f-8d8a-4c2f-95b1-0ad089ad0aa1")
 	)
 	(label "ENC.CS"
-		(at 40.64 67.31 180)
+		(at 40.64 68.58 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8437,28 +8426,8 @@
 		)
 		(uuid "e12f7da3-75dc-4e85-bd8e-2e10686a51de")
 	)
-	(label "INA.PICO"
-		(at 73.66 41.91 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e3296135-5308-4962-a34b-6d446c608600")
-	)
-	(label "INA.POCI"
-		(at 73.66 39.37 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "e581ecc3-67b4-4302-a865-28d2562810e8")
-	)
 	(label "IMU.CLK"
-		(at 73.66 59.69 180)
+		(at 73.66 60.96 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8467,8 +8436,8 @@
 		)
 		(uuid "eb0a13fe-76c6-407d-a3bb-3dec900604bc")
 	)
-	(label "INA.CLK"
-		(at 121.92 106.68 180)
+	(label "INA.V"
+		(at 121.92 109.22 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8488,7 +8457,7 @@
 		(uuid "f141323c-2ff8-40bb-886a-2e979333e012")
 	)
 	(label "VCP.RX"
-		(at 105.41 46.99 180)
+		(at 106.68 45.72 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8498,7 +8467,7 @@
 		(uuid "f6aac896-30e4-4bdd-9aee-58691ae29bbf")
 	)
 	(label "TMC.WH"
-		(at 121.92 127 180)
+		(at 121.92 129.54 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -8507,19 +8476,9 @@
 		)
 		(uuid "f7007bf3-9b09-4748-a0b9-1c31380fe20f")
 	)
-	(label "INA.CS1"
-		(at 81.28 106.68 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fc11bf50-d789-4799-ae59-f4bd950a701a")
-	)
 	(symbol
 		(lib_id "BrenoCQ:STM32F446RE")
-		(at 20.32 49.53 0)
+		(at 20.32 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8527,7 +8486,7 @@
 		(dnp no)
 		(uuid "003df555-8a98-4d80-9823-8d64ca0c7b97")
 		(property "Reference" "U1"
-			(at 16.51 26.67 0)
+			(at 16.51 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8536,7 +8495,7 @@
 			)
 		)
 		(property "Value" "STM32F446RE"
-			(at 16.51 72.39 0)
+			(at 16.51 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8545,7 +8504,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:LQFP64"
-			(at 20.32 77.47 0)
+			(at 20.32 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8554,7 +8513,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stm32f446re.pdf"
-			(at 20.32 74.93 0)
+			(at 20.32 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8563,7 +8522,7 @@
 			)
 		)
 		(property "Description" "STM32F446RE"
-			(at 20.32 72.39 0)
+			(at 20.32 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8774,7 +8733,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 31.75 0)
+		(at 106.68 30.48 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8782,7 +8741,7 @@
 		(dnp no)
 		(uuid "025dcd02-382b-4f87-9f65-7d95a7ea426c")
 		(property "Reference" "TP5"
-			(at 107.442 32.512 0)
+			(at 108.712 31.242 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8791,7 +8750,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 30.988 0)
+			(at 106.172 29.718 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8801,7 +8760,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 36.83 0)
+			(at 106.68 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8810,7 +8769,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 31.75 0)
+			(at 106.68 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8819,7 +8778,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 34.29 0)
+			(at 106.68 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8841,7 +8800,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 62.23 0)
+		(at 73.66 63.5 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8849,7 +8808,7 @@
 		(dnp no)
 		(uuid "041f48a8-757a-4ff4-84d7-34cc9889bdec")
 		(property "Reference" "TP27"
-			(at 75.692 62.992 0)
+			(at 75.692 64.262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8858,7 +8817,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 61.468 0)
+			(at 73.152 62.738 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8868,7 +8827,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 67.31 0)
+			(at 73.66 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8877,7 +8836,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 62.23 0)
+			(at 73.66 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8886,7 +8845,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 64.77 0)
+			(at 73.66 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8977,7 +8936,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 29.21 0)
+		(at 106.68 27.94 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8985,7 +8944,7 @@
 		(dnp no)
 		(uuid "072e2412-0dbc-440c-8384-8354238093b3")
 		(property "Reference" "TP3"
-			(at 107.442 29.972 0)
+			(at 108.712 28.702 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8994,7 +8953,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 28.448 0)
+			(at 106.172 27.178 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9004,7 +8963,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 34.29 0)
+			(at 106.68 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9013,7 +8972,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 29.21 0)
+			(at 106.68 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9022,7 +8981,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 31.75 0)
+			(at 106.68 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9119,7 +9078,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 52.07 0)
+		(at 40.64 50.8 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9127,7 +9086,7 @@
 		(dnp no)
 		(uuid "08116b40-548a-4a02-a334-39f7530115df")
 		(property "Reference" "TP17"
-			(at 42.672 52.832 0)
+			(at 42.672 51.562 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9136,7 +9095,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 51.308 0)
+			(at 40.132 50.038 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9146,7 +9105,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 57.15 0)
+			(at 40.64 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9155,7 +9114,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 52.07 0)
+			(at 40.64 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9164,7 +9123,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 54.61 0)
+			(at 40.64 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9401,7 +9360,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 57.15 0)
+		(at 40.64 55.88 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9409,7 +9368,7 @@
 		(dnp no)
 		(uuid "0e23bbb5-824d-4f2c-843b-7124fe6fa054")
 		(property "Reference" "TP21"
-			(at 42.672 57.912 0)
+			(at 42.672 56.642 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9418,7 +9377,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 56.388 0)
+			(at 40.132 55.118 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9428,7 +9387,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 62.23 0)
+			(at 40.64 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9437,7 +9396,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 57.15 0)
+			(at 40.64 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9446,7 +9405,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 59.69 0)
+			(at 40.64 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9468,7 +9427,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 49.53 0)
+		(at 40.64 48.26 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9476,7 +9435,7 @@
 		(dnp no)
 		(uuid "0e7b59f0-21c9-400e-ac67-d2b8d417e844")
 		(property "Reference" "TP15"
-			(at 42.672 50.292 0)
+			(at 42.672 49.022 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9485,7 +9444,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 48.768 0)
+			(at 40.132 47.498 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9495,7 +9454,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 54.61 0)
+			(at 40.64 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9504,7 +9463,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 49.53 0)
+			(at 40.64 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9513,7 +9472,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 52.07 0)
+			(at 40.64 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9947,15 +9906,15 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 49.53 0)
+		(at 106.68 35.56 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "21307224-7490-40de-8031-bb0437aac527")
-		(property "Reference" "TP16"
-			(at 75.692 50.292 0)
+		(uuid "20f15035-acc9-42f7-beb5-cd84ee2e7c77")
+		(property "Reference" "TP9"
+			(at 108.712 36.322 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9964,7 +9923,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 48.768 0)
+			(at 106.172 34.798 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9974,7 +9933,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 54.61 0)
+			(at 106.68 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9983,7 +9942,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 49.53 0)
+			(at 106.68 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9992,7 +9951,74 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 52.07 0)
+			(at 106.68 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "fdc6394c-637f-4649-b037-74dbfb2fb2b7")
+		)
+		(instances
+			(project "BLDCM-MCU"
+				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
+					(reference "TP9")
+					(unit 0)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:TP")
+		(at 73.66 50.8 0)
+		(unit 0)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "21307224-7490-40de-8031-bb0437aac527")
+		(property "Reference" "TP16"
+			(at 75.692 51.562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Test point 0.5mm"
+			(at 73.152 50.038 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "BrenoCQ:TP_0.5mm"
+			(at 73.66 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 73.66 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Test point"
+			(at 73.66 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10551,7 +10577,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 44.45 132.08 0)
+		(at 43.18 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10559,7 +10585,7 @@
 		(dnp no)
 		(uuid "2b9280d4-ca93-4112-b11c-597e52eb4731")
 		(property "Reference" "#PWR0106"
-			(at 44.45 132.08 0)
+			(at 43.18 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10568,7 +10594,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 44.45 135.89 0)
+			(at 43.18 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10576,7 +10602,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 132.08 0)
+			(at 43.18 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10585,7 +10611,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 132.08 0)
+			(at 43.18 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10594,7 +10620,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 44.45 140.335 0)
+			(at 43.18 140.335 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10681,7 +10707,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 132.08 45.72 90)
+		(at 182.88 64.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10689,7 +10715,7 @@
 		(dnp no)
 		(uuid "2eb2b2f1-d3df-4d4d-b069-a54eb1ef1ad3")
 		(property "Reference" "C3"
-			(at 135.255 43.18 90)
+			(at 186.055 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10698,7 +10724,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 138.43 48.26 90)
+			(at 189.23 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10707,7 +10733,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 137.16 45.72 0)
+			(at 187.96 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10716,7 +10742,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 132.08 45.72 0)
+			(at 182.88 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10725,7 +10751,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 135.255 45.72 0)
+			(at 186.055 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10824,7 +10850,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 54.61 0)
+		(at 106.68 53.34 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10832,7 +10858,7 @@
 		(dnp no)
 		(uuid "33ee5e59-ea13-4f29-bfc1-f4e3718c71ca")
 		(property "Reference" "TP20"
-			(at 107.442 55.372 0)
+			(at 108.712 54.102 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10841,7 +10867,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 53.848 0)
+			(at 106.172 52.578 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10851,7 +10877,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 59.69 0)
+			(at 106.68 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10860,7 +10886,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 54.61 0)
+			(at 106.68 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10869,7 +10895,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 57.15 0)
+			(at 106.68 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10891,7 +10917,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 44.45 0)
+		(at 106.68 43.18 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10899,7 +10925,7 @@
 		(dnp no)
 		(uuid "34e980aa-41eb-427a-ad27-fc77b096e063")
 		(property "Reference" "TP12"
-			(at 107.442 45.212 0)
+			(at 108.712 43.942 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10908,7 +10934,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 43.688 0)
+			(at 106.172 42.418 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10918,7 +10944,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 49.53 0)
+			(at 106.68 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10927,7 +10953,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 44.45 0)
+			(at 106.68 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10936,7 +10962,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 46.99 0)
+			(at 106.68 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10958,7 +10984,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 46.99 128.27 90)
+		(at 45.72 128.27 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10966,7 +10992,7 @@
 		(dnp no)
 		(uuid "35f441fb-8bc9-47a3-9d35-4880441eda2c")
 		(property "Reference" "C10"
-			(at 51.435 125.73 90)
+			(at 50.165 125.73 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10975,7 +11001,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 53.34 130.175 90)
+			(at 52.07 130.175 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10984,7 +11010,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 52.07 128.27 0)
+			(at 50.8 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10993,7 +11019,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 46.99 128.27 0)
+			(at 45.72 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11002,7 +11028,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 50.165 128.27 0)
+			(at 48.895 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11095,73 +11121,6 @@
 			(project ""
 				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
 					(reference "U5")
-					(unit 0)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BrenoCQ:TP")
-		(at 73.66 41.91 0)
-		(unit 0)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "36e8a90e-0d36-46f9-93d9-5308e0a89125")
-		(property "Reference" "TP11"
-			(at 75.692 42.672 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "Test point 0.5mm"
-			(at 73.152 41.148 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.66 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Test point"
-			(at 73.66 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0425c322-fa62-4bb4-9723-6662a0bcde18")
-		)
-		(instances
-			(project ""
-				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
-					(reference "TP11")
 					(unit 0)
 				)
 			)
@@ -11305,7 +11264,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 41.91 128.27 90)
+		(at 40.64 128.27 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11313,7 +11272,7 @@
 		(dnp no)
 		(uuid "3bb4b981-f645-471a-96b4-dabb5c2edd79")
 		(property "Reference" "C9"
-			(at 41.275 125.73 90)
+			(at 40.005 125.73 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11322,7 +11281,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 41.275 130.175 90)
+			(at 40.005 130.175 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11331,7 +11290,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 46.99 128.27 0)
+			(at 45.72 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11340,7 +11299,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 41.91 128.27 0)
+			(at 40.64 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11349,7 +11308,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 45.085 128.27 0)
+			(at 43.815 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11518,7 +11477,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 67.31 0)
+		(at 106.68 66.04 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11526,7 +11485,7 @@
 		(dnp no)
 		(uuid "445e28db-31e3-4ddf-ba8e-067e046ea5f0")
 		(property "Reference" "TP33"
-			(at 107.442 68.072 0)
+			(at 108.712 66.802 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11535,7 +11494,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 66.548 0)
+			(at 106.172 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11545,7 +11504,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 72.39 0)
+			(at 106.68 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11554,7 +11513,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 67.31 0)
+			(at 106.68 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11563,7 +11522,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 69.85 0)
+			(at 106.68 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11660,7 +11619,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 59.69 0)
+		(at 40.64 58.42 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11668,7 +11627,7 @@
 		(dnp no)
 		(uuid "4af6fec2-ca0f-43aa-87ab-fcac66d16ec4")
 		(property "Reference" "TP23"
-			(at 42.672 60.452 0)
+			(at 42.672 59.182 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11677,7 +11636,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 58.928 0)
+			(at 40.132 57.658 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11687,7 +11646,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 64.77 0)
+			(at 40.64 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11696,7 +11655,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 59.69 0)
+			(at 40.64 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11705,7 +11664,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 62.23 0)
+			(at 40.64 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11727,7 +11686,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 62.23 114.3 0)
+		(at 60.96 114.3 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11735,7 +11694,7 @@
 		(dnp no)
 		(uuid "4af7431b-109b-4a16-a007-cee379f04288")
 		(property "Reference" "#PWR0108"
-			(at 62.23 114.3 0)
+			(at 60.96 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11744,7 +11703,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 62.23 118.11 0)
+			(at 60.96 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11752,7 +11711,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 62.23 114.3 0)
+			(at 60.96 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11761,7 +11720,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 62.23 114.3 0)
+			(at 60.96 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11770,7 +11729,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 62.23 122.555 0)
+			(at 60.96 122.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11792,7 +11751,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 46.99 0)
+		(at 40.64 45.72 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11800,7 +11759,7 @@
 		(dnp no)
 		(uuid "4bbbb7aa-994e-4ee9-acce-eed8f73f96a7")
 		(property "Reference" "TP13"
-			(at 42.672 47.752 0)
+			(at 42.672 46.482 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11809,7 +11768,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 46.228 0)
+			(at 40.132 44.958 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11819,7 +11778,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 52.07 0)
+			(at 40.64 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11828,7 +11787,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 46.99 0)
+			(at 40.64 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11837,7 +11796,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 49.53 0)
+			(at 40.64 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11859,7 +11818,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 154.94 43.18 90)
+		(at 154.94 34.29 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11867,7 +11826,7 @@
 		(dnp no)
 		(uuid "4bfe015e-908e-4fe8-9c51-2b6330a1c181")
 		(property "Reference" "C1"
-			(at 158.115 40.64 90)
+			(at 158.115 31.75 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11876,7 +11835,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 159.385 44.45 90)
+			(at 159.385 35.56 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11885,7 +11844,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0603"
-			(at 160.02 43.18 0)
+			(at 160.02 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11894,7 +11853,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 154.94 43.18 0)
+			(at 154.94 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11903,7 +11862,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 158.115 43.18 0)
+			(at 158.115 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11997,7 +11956,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:STM32F446RE")
-		(at 53.34 46.99 0)
+		(at 53.34 48.26 0)
 		(unit 2)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12005,7 +11964,7 @@
 		(dnp no)
 		(uuid "4ed059c8-bb15-4424-8d08-27faf0b82ff7")
 		(property "Reference" "U1"
-			(at 49.53 26.67 0)
+			(at 49.53 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12014,7 +11973,7 @@
 			)
 		)
 		(property "Value" "STM32F446RE"
-			(at 49.53 69.85 0)
+			(at 49.53 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12023,7 +11982,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:LQFP64"
-			(at 53.34 74.93 0)
+			(at 53.34 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12032,7 +11991,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stm32f446re.pdf"
-			(at 53.34 72.39 0)
+			(at 53.34 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12041,7 +12000,7 @@
 			)
 		)
 		(property "Description" "STM32F446RE"
-			(at 53.34 69.85 0)
+			(at 53.34 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12252,7 +12211,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 160.02 34.29 0)
+		(at 160.02 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12260,7 +12219,7 @@
 		(dnp no)
 		(uuid "50499e8c-96e0-4892-99de-00dd9480e71b")
 		(property "Reference" "#PWR0123"
-			(at 160.02 34.29 0)
+			(at 160.02 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12269,7 +12228,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 160.02 30.48 0)
+			(at 160.02 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12277,7 +12236,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 160.02 34.29 0)
+			(at 160.02 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12286,7 +12245,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 160.02 34.29 0)
+			(at 160.02 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12295,7 +12254,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 160.02 38.1 0)
+			(at 160.02 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12386,7 +12345,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 111.76 92.71 0)
+		(at 111.76 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12394,7 +12353,7 @@
 		(dnp no)
 		(uuid "5575657f-4965-4cf7-b9eb-7dd3d2987ce7")
 		(property "Reference" "#PWR0128"
-			(at 111.76 92.71 0)
+			(at 111.76 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12403,7 +12362,7 @@
 			)
 		)
 		(property "Value" "5V"
-			(at 113.03 88.9 0)
+			(at 113.03 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12412,7 +12371,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 111.76 92.71 0)
+			(at 111.76 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12421,7 +12380,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.76 92.71 0)
+			(at 111.76 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12430,7 +12389,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 111.76 96.52 0)
+			(at 111.76 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12452,7 +12411,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 139.7 45.72 90)
+		(at 190.5 64.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12460,7 +12419,7 @@
 		(dnp no)
 		(uuid "5885f5ec-9c39-4b9c-b5d6-d5fb6d7c6d35")
 		(property "Reference" "C4"
-			(at 142.875 43.18 90)
+			(at 193.675 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12469,7 +12428,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 146.05 48.26 90)
+			(at 196.85 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12478,7 +12437,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 144.78 45.72 0)
+			(at 195.58 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12487,7 +12446,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 139.7 45.72 0)
+			(at 190.5 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12496,7 +12455,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 142.875 45.72 0)
+			(at 193.675 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12521,7 +12480,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 147.32 45.72 90)
+		(at 198.12 64.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12529,7 +12488,7 @@
 		(dnp no)
 		(uuid "58a70a0e-a8fc-4118-852f-d7c56e47235f")
 		(property "Reference" "C5"
-			(at 150.495 43.18 90)
+			(at 201.295 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12538,7 +12497,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 153.67 48.26 90)
+			(at 204.47 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12547,7 +12506,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 152.4 45.72 0)
+			(at 203.2 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12556,7 +12515,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 45.72 0)
+			(at 198.12 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12565,7 +12524,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 150.495 45.72 0)
+			(at 201.295 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12737,7 +12696,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 198.12 34.29 0)
+		(at 198.12 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12745,7 +12704,7 @@
 		(dnp no)
 		(uuid "5d53d28b-5928-48a7-b360-8bf07690adc4")
 		(property "Reference" "#PWR0112"
-			(at 198.12 34.29 0)
+			(at 198.12 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12754,7 +12713,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 198.12 30.48 0)
+			(at 198.12 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12762,7 +12721,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 198.12 34.29 0)
+			(at 198.12 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12771,7 +12730,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 198.12 34.29 0)
+			(at 198.12 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12780,7 +12739,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 198.12 38.1 0)
+			(at 198.12 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12942,7 +12901,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 165.1 58.42 90)
+		(at 165.1 49.53 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12950,7 +12909,7 @@
 		(dnp no)
 		(uuid "61d4d1e6-52b4-43aa-a860-d71ec017cd6c")
 		(property "Reference" "C6"
-			(at 161.925 55.88 90)
+			(at 161.925 46.99 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12959,7 +12918,7 @@
 			)
 		)
 		(property "Value" "4.7uF"
-			(at 159.385 59.69 90)
+			(at 159.385 50.8 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12968,7 +12927,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0603"
-			(at 170.18 58.42 0)
+			(at 170.18 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12977,7 +12936,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 58.42 0)
+			(at 165.1 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12986,7 +12945,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 168.275 58.42 0)
+			(at 168.275 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13011,7 +12970,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 114.3 99.06 90)
+		(at 114.3 101.6 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13019,7 +12978,7 @@
 		(dnp no)
 		(uuid "63b2cca5-80eb-4a87-b8f5-2d84320a539b")
 		(property "Reference" "#PWR0129"
-			(at 114.3 99.06 0)
+			(at 114.3 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13028,7 +12987,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 117.475 99.06 90)
+			(at 117.475 101.6 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13037,7 +12996,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 114.3 99.06 0)
+			(at 114.3 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13046,7 +13005,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 114.3 99.06 0)
+			(at 114.3 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13055,7 +13014,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 122.555 99.06 0)
+			(at 122.555 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13146,7 +13105,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 44.45 124.46 0)
+		(at 43.18 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13154,7 +13113,7 @@
 		(dnp no)
 		(uuid "7043768e-f71d-4254-abdc-94cce324d056")
 		(property "Reference" "#PWR0107"
-			(at 44.45 124.46 0)
+			(at 43.18 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13163,7 +13122,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 44.45 120.65 0)
+			(at 43.18 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13171,7 +13130,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 44.45 124.46 0)
+			(at 43.18 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13180,7 +13139,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 44.45 124.46 0)
+			(at 43.18 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13189,7 +13148,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 44.45 128.27 0)
+			(at 43.18 128.27 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13211,7 +13170,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:STM32F446RE")
-		(at 85.09 52.07 0)
+		(at 86.36 50.8 0)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13219,7 +13178,7 @@
 		(dnp no)
 		(uuid "729bbba7-c67f-474f-bb90-0911e4db02a1")
 		(property "Reference" "U1"
-			(at 81.28 26.67 0)
+			(at 82.55 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13228,7 +13187,7 @@
 			)
 		)
 		(property "Value" "STM32F446RE"
-			(at 81.28 74.93 0)
+			(at 82.55 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13237,7 +13196,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:LQFP64"
-			(at 85.09 80.01 0)
+			(at 86.36 78.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13246,7 +13205,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stm32f446re.pdf"
-			(at 85.09 77.47 0)
+			(at 86.36 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13255,7 +13214,7 @@
 			)
 		)
 		(property "Description" "STM32F446RE"
-			(at 85.09 74.93 0)
+			(at 86.36 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13466,7 +13425,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 31.75 0)
+		(at 73.66 33.02 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13474,7 +13433,7 @@
 		(dnp no)
 		(uuid "7327175a-fec5-4d82-a886-d8aac62d02ef")
 		(property "Reference" "TP4"
-			(at 75.692 32.512 0)
+			(at 75.692 33.782 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13483,7 +13442,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 30.988 0)
+			(at 73.152 32.258 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13493,7 +13452,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 36.83 0)
+			(at 73.66 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13502,7 +13461,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 31.75 0)
+			(at 73.66 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13511,7 +13470,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 34.29 0)
+			(at 73.66 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13686,7 +13645,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:STM32F446RE")
-		(at 180.34 46.99 0)
+		(at 180.34 38.1 0)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13694,7 +13653,7 @@
 		(dnp no)
 		(uuid "76cbcb13-7ae5-4484-9946-e6ce0a1c030b")
 		(property "Reference" "U1"
-			(at 170.18 34.29 0)
+			(at 170.18 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13703,7 +13662,7 @@
 			)
 		)
 		(property "Value" "STM32F446RE"
-			(at 170.18 59.69 0)
+			(at 170.18 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13712,7 +13671,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:LQFP64"
-			(at 180.34 74.93 0)
+			(at 180.34 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13721,7 +13680,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.st.com/resource/en/datasheet/stm32f446re.pdf"
-			(at 180.34 72.39 0)
+			(at 180.34 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13730,7 +13689,7 @@
 			)
 		)
 		(property "Description" "STM32F446RE"
-			(at 180.34 69.85 0)
+			(at 180.34 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13941,15 +13900,15 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 39.37 0)
+		(at 106.68 38.1 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "794f0280-76a3-49d2-a25d-c981fae8f131")
-		(property "Reference" "TP9"
-			(at 75.692 40.132 0)
+		(uuid "777d724f-23a8-43e8-b08c-067e4e8e28ee")
+		(property "Reference" "TP10"
+			(at 108.712 38.862 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13958,7 +13917,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 38.608 0)
+			(at 106.172 37.338 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13968,7 +13927,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 44.45 0)
+			(at 106.68 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13977,7 +13936,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 39.37 0)
+			(at 106.68 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13986,7 +13945,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 41.91 0)
+			(at 106.68 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13995,12 +13954,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "53d807cd-b4dd-4950-a643-d249f66acece")
+			(uuid "b34124b4-6f5d-4990-af80-5f2adb97b5bf")
 		)
 		(instances
-			(project ""
+			(project "BLDCM-MCU"
 				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
-					(reference "TP9")
+					(reference "TP10")
 					(unit 0)
 				)
 			)
@@ -14008,7 +13967,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 64.77 0)
+		(at 73.66 66.04 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14016,7 +13975,7 @@
 		(dnp no)
 		(uuid "7a1da80c-ce8f-40f6-94b6-74dfe210aa6d")
 		(property "Reference" "TP30"
-			(at 75.692 65.532 0)
+			(at 75.692 66.802 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14025,7 +13984,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 64.008 0)
+			(at 73.152 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14035,7 +13994,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 69.85 0)
+			(at 73.66 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14044,7 +14003,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 64.77 0)
+			(at 73.66 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14053,7 +14012,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 67.31 0)
+			(at 73.66 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14075,7 +14034,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 124.46 54.61 0)
+		(at 175.26 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14083,7 +14042,7 @@
 		(dnp no)
 		(uuid "7ec04f60-b417-4463-9fa4-47780a881760")
 		(property "Reference" "#PWR0130"
-			(at 124.46 54.61 0)
+			(at 175.26 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14092,7 +14051,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 124.46 58.42 0)
+			(at 175.26 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14100,7 +14059,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 124.46 54.61 0)
+			(at 175.26 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14109,7 +14068,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 54.61 0)
+			(at 175.26 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14118,7 +14077,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 124.46 62.865 0)
+			(at 175.26 78.105 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14134,6 +14093,73 @@
 				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
 					(reference "#PWR0130")
 					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:TP")
+		(at 106.68 40.64 0)
+		(unit 0)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7f000834-8c28-4b3c-b758-7207ea0baf69")
+		(property "Reference" "TP11"
+			(at 108.712 41.402 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Value" "Test point 0.5mm"
+			(at 106.172 39.878 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "BrenoCQ:TP_0.5mm"
+			(at 106.68 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.68 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Test point"
+			(at 106.68 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "777f0cc0-a8c2-4fe2-9263-cc6ee393f4d5")
+		)
+		(instances
+			(project "BLDCM-MCU"
+				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
+					(reference "TP11")
+					(unit 0)
 				)
 			)
 		)
@@ -14404,7 +14430,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:C")
-		(at 124.46 45.72 90)
+		(at 175.26 64.77 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14412,7 +14438,7 @@
 		(dnp no)
 		(uuid "8793e7be-5461-4c06-b19d-f80a1a7ddb59")
 		(property "Reference" "C2"
-			(at 127.635 43.18 90)
+			(at 178.435 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14421,7 +14447,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 130.81 48.26 90)
+			(at 181.61 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14430,7 +14456,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:C_0402"
-			(at 129.54 45.72 0)
+			(at 180.34 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14439,7 +14465,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 45.72 0)
+			(at 175.26 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14448,7 +14474,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 127.635 45.72 0)
+			(at 178.435 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14603,7 +14629,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 29.21 0)
+		(at 40.64 30.48 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14611,7 +14637,7 @@
 		(dnp no)
 		(uuid "8f8cbb93-62a2-4767-97d6-02aefe6a06b8")
 		(property "Reference" "TP1"
-			(at 42.672 29.718 0)
+			(at 42.672 30.988 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14620,7 +14646,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 28.448 0)
+			(at 40.132 29.718 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14630,7 +14656,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 34.29 0)
+			(at 40.64 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14639,7 +14665,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 29.21 0)
+			(at 40.64 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14648,7 +14674,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 31.75 0)
+			(at 40.64 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14670,7 +14696,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 165.1 64.77 0)
+		(at 165.1 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14678,7 +14704,7 @@
 		(dnp no)
 		(uuid "911f9249-cc4f-47e8-a335-f84a3a477de6")
 		(property "Reference" "#PWR0126"
-			(at 165.1 64.77 0)
+			(at 165.1 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14687,7 +14713,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 165.1 68.58 0)
+			(at 165.1 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14695,7 +14721,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 165.1 64.77 0)
+			(at 165.1 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14704,7 +14730,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 165.1 64.77 0)
+			(at 165.1 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14713,7 +14739,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 165.1 73.025 0)
+			(at 165.1 64.135 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14729,73 +14755,6 @@
 				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
 					(reference "#PWR0126")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BrenoCQ:TP")
-		(at 40.64 41.91 0)
-		(unit 0)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "977bbf21-8053-4e5e-9552-086edf29fe22")
-		(property "Reference" "TP10"
-			(at 42.672 42.418 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "Test point 0.5mm"
-			(at 40.132 41.148 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 40.64 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Test point"
-			(at 40.64 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "5fc91521-462a-43b6-b422-9aa8b836ed1b")
-		)
-		(instances
-			(project ""
-				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
-					(reference "TP10")
-					(unit 0)
 				)
 			)
 		)
@@ -14871,7 +14830,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:Molex_05MM-30P-F")
-		(at 101.6 104.14 0)
+		(at 101.6 106.68 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14879,7 +14838,7 @@
 		(dnp no)
 		(uuid "9ae56272-ba5e-4a27-9acb-7d6509846c6c")
 		(property "Reference" "J1"
-			(at 96.52 91.44 0)
+			(at 96.52 93.345 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14888,7 +14847,7 @@
 			)
 		)
 		(property "Value" "52991-0308"
-			(at 96.52 134.62 0)
+			(at 96.52 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14897,7 +14856,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:52991-0308"
-			(at 102.87 139.7 0)
+			(at 102.87 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14906,7 +14865,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.molex.com/en-us/products/part-detail-pdf/529910308?display=pdf"
-			(at 101.6 137.16 0)
+			(at 101.6 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14915,7 +14874,7 @@
 			)
 		)
 		(property "Description" "Molex SlimStack 0.5mm pitch 30 pins receptor"
-			(at 101.6 134.62 0)
+			(at 101.6 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15162,7 +15121,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 59.69 0)
+		(at 73.66 60.96 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15170,7 +15129,7 @@
 		(dnp no)
 		(uuid "9f287666-b304-454a-be15-2393b279506c")
 		(property "Reference" "TP24"
-			(at 75.692 60.452 0)
+			(at 75.692 61.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15179,7 +15138,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 58.928 0)
+			(at 73.152 60.198 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15189,7 +15148,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 64.77 0)
+			(at 73.66 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15198,7 +15157,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 59.69 0)
+			(at 73.66 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15207,7 +15166,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 62.23 0)
+			(at 73.66 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15373,7 +15332,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 34.29 0)
+		(at 106.68 33.02 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15381,7 +15340,7 @@
 		(dnp no)
 		(uuid "a6589915-ff26-4379-83e5-bd28b204283f")
 		(property "Reference" "TP6"
-			(at 107.442 35.052 0)
+			(at 108.712 33.782 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15390,7 +15349,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 33.528 0)
+			(at 106.172 32.258 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15400,7 +15359,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 39.37 0)
+			(at 106.68 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15409,7 +15368,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 34.29 0)
+			(at 106.68 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15418,7 +15377,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 36.83 0)
+			(at 106.68 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15440,7 +15399,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 57.15 0)
+		(at 106.68 55.88 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15448,7 +15407,7 @@
 		(dnp no)
 		(uuid "a724b0bc-f0b2-44ba-b477-f18e359951ef")
 		(property "Reference" "TP22"
-			(at 107.442 57.912 0)
+			(at 108.712 56.642 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15457,7 +15416,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 56.388 0)
+			(at 106.172 55.118 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15467,7 +15426,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 62.23 0)
+			(at 106.68 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15476,7 +15435,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 57.15 0)
+			(at 106.68 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15485,7 +15444,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 59.69 0)
+			(at 106.68 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15507,7 +15466,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 62.23 0)
+		(at 40.64 60.96 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15515,7 +15474,7 @@
 		(dnp no)
 		(uuid "a7600b35-3f27-4305-b01b-38f6893a8a45")
 		(property "Reference" "TP26"
-			(at 42.672 62.992 0)
+			(at 42.672 61.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15524,7 +15483,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 61.468 0)
+			(at 40.132 60.198 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15534,7 +15493,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 67.31 0)
+			(at 40.64 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15543,7 +15502,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 62.23 0)
+			(at 40.64 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15552,7 +15511,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 64.77 0)
+			(at 40.64 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15769,7 +15728,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 24.13 91.44 0)
+		(at 22.86 91.44 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15777,7 +15736,7 @@
 		(dnp no)
 		(uuid "b20234e9-9bf9-40f5-aea3-314cbb09239d")
 		(property "Reference" "#PWR0101"
-			(at 24.13 91.44 0)
+			(at 22.86 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15786,7 +15745,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 24.13 87.63 0)
+			(at 22.86 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15794,7 +15753,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 24.13 91.44 0)
+			(at 22.86 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15803,7 +15762,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 24.13 91.44 0)
+			(at 22.86 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15812,7 +15771,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 24.13 95.25 0)
+			(at 22.86 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15834,7 +15793,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 36.83 0)
+		(at 40.64 38.1 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15842,7 +15801,7 @@
 		(dnp no)
 		(uuid "b666c07a-d57b-47e2-94f5-480ddfc69411")
 		(property "Reference" "TP7"
-			(at 42.672 37.338 0)
+			(at 42.672 38.608 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15851,7 +15810,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 36.068 0)
+			(at 40.132 37.338 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15861,7 +15820,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 41.91 0)
+			(at 40.64 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15870,7 +15829,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 36.83 0)
+			(at 40.64 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15879,7 +15838,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 39.37 0)
+			(at 40.64 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15901,7 +15860,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 29.21 0)
+		(at 73.66 30.48 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15909,7 +15868,7 @@
 		(dnp no)
 		(uuid "b7290166-32bb-4500-84f9-a4bbf6bd9a98")
 		(property "Reference" "TP2"
-			(at 75.692 29.972 0)
+			(at 75.692 31.242 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15918,7 +15877,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 28.448 0)
+			(at 73.152 29.718 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15928,7 +15887,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 34.29 0)
+			(at 73.66 35.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15937,7 +15896,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 29.21 0)
+			(at 73.66 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15946,7 +15905,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 31.75 0)
+			(at 73.66 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15968,7 +15927,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 67.31 0)
+		(at 40.64 66.04 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15976,7 +15935,7 @@
 		(dnp no)
 		(uuid "bc6fda79-0db5-4eda-b4a2-34ed6a564b08")
 		(property "Reference" "TP32"
-			(at 42.672 68.072 0)
+			(at 42.672 66.802 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15985,7 +15944,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 66.548 0)
+			(at 40.132 65.278 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15995,7 +15954,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 72.39 0)
+			(at 40.64 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16004,7 +15963,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 67.31 0)
+			(at 40.64 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16013,7 +15972,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 69.85 0)
+			(at 40.64 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16169,7 +16128,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 124.46 36.83 0)
+		(at 175.26 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16177,7 +16136,7 @@
 		(dnp no)
 		(uuid "c3bb640a-e133-4a16-81bd-f3d26cbc2ec6")
 		(property "Reference" "#PWR0131"
-			(at 124.46 36.83 0)
+			(at 175.26 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16186,7 +16145,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 124.46 33.02 0)
+			(at 175.26 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16194,7 +16153,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 124.46 36.83 0)
+			(at 175.26 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16203,7 +16162,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 124.46 36.83 0)
+			(at 175.26 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16212,7 +16171,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 124.46 40.64 0)
+			(at 175.26 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16234,7 +16193,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 195.58 57.15 0)
+		(at 195.58 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16242,7 +16201,7 @@
 		(dnp no)
 		(uuid "c42973d9-4757-4234-8bc3-0c45c2af0386")
 		(property "Reference" "#PWR0109"
-			(at 195.58 57.15 0)
+			(at 195.58 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16251,7 +16210,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 195.58 60.96 0)
+			(at 195.58 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16259,7 +16218,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 195.58 57.15 0)
+			(at 195.58 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16268,7 +16227,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 195.58 57.15 0)
+			(at 195.58 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16277,7 +16236,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 195.58 65.405 0)
+			(at 195.58 56.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16437,7 +16396,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 64.77 0)
+		(at 106.68 63.5 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16445,7 +16404,7 @@
 		(dnp no)
 		(uuid "c8c66d46-ff95-44d8-aa29-c0b8005e8720")
 		(property "Reference" "TP31"
-			(at 107.442 65.532 0)
+			(at 108.712 64.262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16454,7 +16413,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 64.008 0)
+			(at 106.172 62.738 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16464,7 +16423,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 69.85 0)
+			(at 106.68 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16473,7 +16432,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 64.77 0)
+			(at 106.68 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16482,7 +16441,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 67.31 0)
+			(at 106.68 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16654,7 +16613,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 154.94 49.53 0)
+		(at 154.94 40.64 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16662,7 +16621,7 @@
 		(dnp no)
 		(uuid "cbabe004-6e2f-49f4-990a-f022a49ff2fe")
 		(property "Reference" "#PWR0127"
-			(at 154.94 49.53 0)
+			(at 154.94 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16671,7 +16630,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 154.94 55.88 0)
+			(at 154.94 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16679,7 +16638,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 154.94 49.53 0)
+			(at 154.94 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16688,7 +16647,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 154.94 49.53 0)
+			(at 154.94 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16697,7 +16656,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 154.94 57.785 0)
+			(at 154.94 48.895 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16784,7 +16743,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 203.2 57.15 0)
+		(at 203.2 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16792,7 +16751,7 @@
 		(dnp no)
 		(uuid "d36e427c-25d1-40a6-9e1e-c1f28a3ac462")
 		(property "Reference" "#PWR0110"
-			(at 203.2 57.15 0)
+			(at 203.2 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16801,7 +16760,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 203.2 60.96 0)
+			(at 203.2 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16809,7 +16768,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 203.2 57.15 0)
+			(at 203.2 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16818,7 +16777,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 203.2 57.15 0)
+			(at 203.2 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16827,7 +16786,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 203.2 65.405 0)
+			(at 203.2 56.515 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16849,7 +16808,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 62.23 0)
+		(at 106.68 60.96 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16857,7 +16816,7 @@
 		(dnp no)
 		(uuid "d7b9304f-dfb2-4ccc-8905-63175b65e752")
 		(property "Reference" "TP28"
-			(at 107.442 62.992 0)
+			(at 108.712 61.722 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16866,7 +16825,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 61.468 0)
+			(at 106.172 60.198 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16876,7 +16835,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 67.31 0)
+			(at 106.68 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16885,7 +16844,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 62.23 0)
+			(at 106.68 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16894,7 +16853,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 64.77 0)
+			(at 106.68 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17133,7 +17092,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:VDD")
-		(at 91.44 92.71 0)
+		(at 91.44 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17141,7 +17100,7 @@
 		(dnp no)
 		(uuid "e0411229-0f56-4271-a46d-c9df2f6899aa")
 		(property "Reference" "#PWR0102"
-			(at 91.44 92.71 0)
+			(at 91.44 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17150,7 +17109,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 93.345 88.9 0)
+			(at 93.345 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17159,7 +17118,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 91.44 92.71 0)
+			(at 91.44 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17168,7 +17127,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 91.44 92.71 0)
+			(at 91.44 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17177,7 +17136,7 @@
 			)
 		)
 		(property "Description" "Source power symbol"
-			(at 91.44 96.52 0)
+			(at 91.44 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17398,7 +17357,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:GND")
-		(at 29.21 114.3 0)
+		(at 27.94 114.3 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17406,7 +17365,7 @@
 		(dnp no)
 		(uuid "e862c09b-29b0-4ecb-bcf0-2cc23e29f022")
 		(property "Reference" "#PWR0105"
-			(at 29.21 114.3 0)
+			(at 27.94 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17415,7 +17374,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 29.21 118.11 0)
+			(at 27.94 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17423,7 +17382,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 29.21 114.3 0)
+			(at 27.94 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17432,7 +17391,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 29.21 114.3 0)
+			(at 27.94 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17441,7 +17400,7 @@
 			)
 		)
 		(property "Description" "Ground power symbol"
-			(at 29.21 122.555 0)
+			(at 27.94 122.555 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17463,7 +17422,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 52.07 0)
+		(at 73.66 53.34 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17471,7 +17430,7 @@
 		(dnp no)
 		(uuid "e8c5a40a-5c87-4c31-9a7b-d0c7f9bf2483")
 		(property "Reference" "TP18"
-			(at 75.692 52.832 0)
+			(at 75.692 54.102 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17480,7 +17439,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 51.308 0)
+			(at 73.152 52.578 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17490,7 +17449,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 57.15 0)
+			(at 73.66 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17499,7 +17458,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 52.07 0)
+			(at 73.66 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17508,7 +17467,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 54.61 0)
+			(at 73.66 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17530,7 +17489,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 64.77 0)
+		(at 40.64 63.5 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17538,7 +17497,7 @@
 		(dnp no)
 		(uuid "ea76c060-74ac-4c65-89fd-8f3e2985aa58")
 		(property "Reference" "TP29"
-			(at 42.672 65.532 0)
+			(at 42.672 64.262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17547,7 +17506,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 64.008 0)
+			(at 40.132 62.738 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17557,7 +17516,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 69.85 0)
+			(at 40.64 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17566,7 +17525,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 64.77 0)
+			(at 40.64 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17575,7 +17534,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 67.31 0)
+			(at 40.64 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17597,7 +17556,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:ISM330DHCX")
-		(at 44.45 106.68 0)
+		(at 43.18 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17605,7 +17564,7 @@
 		(dnp no)
 		(uuid "ef28f644-b065-4f0e-b935-c490203d7228")
 		(property "Reference" "U3"
-			(at 34.29 91.44 0)
+			(at 33.02 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17614,7 +17573,7 @@
 			)
 		)
 		(property "Value" "ISM330DHCX"
-			(at 34.29 116.84 0)
+			(at 33.02 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17623,7 +17582,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:LGA-14L"
-			(at 45.72 120.65 0)
+			(at 44.45 120.65 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17632,7 +17591,7 @@
 			)
 		)
 		(property "Datasheet" "https://nl.mouser.com/datasheet/2/389/ism330dhcx-1849534.pdf"
-			(at 45.085 118.11 0)
+			(at 43.815 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17641,7 +17600,7 @@
 			)
 		)
 		(property "Description" "IMUs - Inertial Measurement Units iNEMO inertial module, Machine Learning Core, Finite State, digital output"
-			(at 44.45 115.57 0)
+			(at 43.18 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17702,7 +17661,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 105.41 46.99 0)
+		(at 106.68 45.72 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17710,7 +17669,7 @@
 		(dnp no)
 		(uuid "f1a24fb4-2541-4bc6-86a7-0311d2475451")
 		(property "Reference" "TP14"
-			(at 107.442 47.752 0)
+			(at 108.712 46.482 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17719,7 +17678,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 104.902 46.228 0)
+			(at 106.172 44.958 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17729,7 +17688,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 105.41 52.07 0)
+			(at 106.68 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17738,7 +17697,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 105.41 46.99 0)
+			(at 106.68 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17747,7 +17706,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 105.41 49.53 0)
+			(at 106.68 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17769,7 +17728,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 40.64 54.61 0)
+		(at 40.64 53.34 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17777,7 +17736,7 @@
 		(dnp no)
 		(uuid "f41d68ed-7cc9-477c-ac9d-e7b78b5b780b")
 		(property "Reference" "TP19"
-			(at 42.672 55.372 0)
+			(at 42.672 54.102 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17786,7 +17745,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 40.132 53.848 0)
+			(at 40.132 52.578 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17796,7 +17755,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 40.64 59.69 0)
+			(at 40.64 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17805,7 +17764,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 54.61 0)
+			(at 40.64 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17814,7 +17773,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 40.64 57.15 0)
+			(at 40.64 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17836,7 +17795,7 @@
 	)
 	(symbol
 		(lib_id "BrenoCQ:TP")
-		(at 73.66 36.83 0)
+		(at 73.66 38.1 0)
 		(unit 0)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17844,7 +17803,7 @@
 		(dnp no)
 		(uuid "f497c7c3-8e5c-4f6e-b199-f3607d8366e0")
 		(property "Reference" "TP8"
-			(at 75.692 37.592 0)
+			(at 75.692 38.862 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17853,7 +17812,7 @@
 			)
 		)
 		(property "Value" "Test point 0.5mm"
-			(at 73.152 36.068 0)
+			(at 73.152 37.338 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17863,7 +17822,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:TP_0.5mm"
-			(at 73.66 41.91 0)
+			(at 73.66 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17872,7 +17831,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 36.83 0)
+			(at 73.66 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17881,7 +17840,7 @@
 			)
 		)
 		(property "Description" "Test point"
-			(at 73.66 39.37 0)
+			(at 73.66 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
