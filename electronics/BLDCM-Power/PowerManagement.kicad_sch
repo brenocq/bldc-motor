@@ -465,6 +465,113 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "BrenoCQ:R"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R?"
+				(at -1.905 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "R"
+				(at 2.54 1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "BrenoCQ:R_0402"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -2.54 0.762)
+					(end 2.54 -0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "BrenoCQ:TPS2115ADRB"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -687,130 +794,6 @@
 					)
 					(fill
 						(type background)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Device:R"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "R"
-				(at 2.032 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "R"
-				(at 0 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at -1.778 0 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "R res resistor"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "R_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "R_0_1"
-				(rectangle
-					(start -1.016 -2.54)
-					(end 1.016 2.54)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "R_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 1.27)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
 					)
 				)
 			)
@@ -1969,8 +1952,8 @@
 		(uuid "f4e822e0-77ee-49ef-86eb-143d58bae314")
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 43.18 49.53 180)
+		(lib_id "BrenoCQ:R")
+		(at 43.18 49.53 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1978,7 +1961,7 @@
 		(dnp no)
 		(uuid "00cee73b-6280-4149-ae7b-f74998c92895")
 		(property "Reference" "R17"
-			(at 48.895 48.26 0)
+			(at 43.815 46.355 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1987,7 +1970,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 45.085 51.435 0)
+			(at 49.53 51.435 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1996,7 +1979,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:R_0402"
-			(at 44.958 49.53 90)
+			(at 43.18 47.752 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2014,7 +1997,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 43.18 49.53 0)
+			(at 41.275 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2107,8 +2090,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 38.1 49.53 180)
+		(lib_id "BrenoCQ:R")
+		(at 38.1 49.53 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2116,7 +2099,7 @@
 		(dnp no)
 		(uuid "02c65bf5-2a68-4e53-bcb6-fd222ea4e650")
 		(property "Reference" "R16"
-			(at 36.195 48.26 0)
+			(at 33.655 46.355 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2125,7 +2108,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 36.195 51.435 0)
+			(at 31.75 51.435 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2134,7 +2117,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:R_0402"
-			(at 39.878 49.53 90)
+			(at 38.1 47.752 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2152,7 +2135,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 38.1 49.53 0)
+			(at 36.195 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2241,8 +2224,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 152.4 55.88 180)
+		(lib_id "BrenoCQ:R")
+		(at 152.4 55.88 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2250,7 +2233,7 @@
 		(dnp no)
 		(uuid "215dffea-6666-4655-b267-8c73fa1999b4")
 		(property "Reference" "R15"
-			(at 150.495 54.61 0)
+			(at 147.32 53.975 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2259,7 +2242,7 @@
 			)
 		)
 		(property "Value" "500"
-			(at 150.495 57.785 0)
+			(at 147.32 57.15 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2268,7 +2251,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:R_0402"
-			(at 154.178 55.88 90)
+			(at 152.4 54.102 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2286,7 +2269,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 152.4 55.88 0)
+			(at 150.495 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2379,8 +2362,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 104.14 53.34 180)
+		(lib_id "BrenoCQ:R")
+		(at 104.14 53.34 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2388,7 +2371,7 @@
 		(dnp no)
 		(uuid "2b49cc92-0e69-489f-9856-16b58b1f47b1")
 		(property "Reference" "R18"
-			(at 102.235 52.07 0)
+			(at 99.06 51.435 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2397,7 +2380,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 102.235 55.245 0)
+			(at 97.79 55.245 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2406,7 +2389,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:R_0402"
-			(at 105.918 53.34 90)
+			(at 104.14 51.562 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2424,7 +2407,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 104.14 53.34 0)
+			(at 102.235 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3085,8 +3068,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 198.12 48.26 90)
+		(lib_id "BrenoCQ:R")
+		(at 198.12 48.26 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3094,7 +3077,7 @@
 		(dnp no)
 		(uuid "db1576d5-f19a-4bef-82e9-e533e755f302")
 		(property "Reference" "R14"
-			(at 198.755 45.72 90)
+			(at 200.025 46.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3103,7 +3086,7 @@
 			)
 		)
 		(property "Value" "100K"
-			(at 198.755 50.8 90)
+			(at 200.66 50.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3112,7 +3095,7 @@
 			)
 		)
 		(property "Footprint" "BrenoCQ:R_0402"
-			(at 198.12 50.038 90)
+			(at 199.898 48.26 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3130,7 +3113,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 198.12 48.26 0)
+			(at 198.12 46.355 0)
 			(effects
 				(font
 					(size 1.27 1.27)
