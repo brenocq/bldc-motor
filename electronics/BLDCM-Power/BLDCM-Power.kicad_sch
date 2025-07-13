@@ -4031,7 +4031,7 @@
 	)
 	(text "I = VIN/(R1+R2) =10V/30K = 333.3uA"
 		(exclude_from_sim no)
-		(at 229.87 26.67 0)
+		(at 229.87 26.035 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4086,7 +4086,7 @@
 	)
 	(text "VIN*(R2/(R1+R2)) = 10V*(10/(20+10)) = 3.33V"
 		(exclude_from_sim no)
-		(at 227.33 24.13 0)
+		(at 227.33 23.495 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4160,6 +4160,28 @@
 			(justify left bottom)
 		)
 		(uuid "ebbdaebc-012b-40cc-87ee-7721470a72a7")
+	)
+	(text_box "The resistors should be precise up to 1%"
+		(exclude_from_sim no)
+		(at 228.6 27.94 0)
+		(size 43.18 3.81)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+			(color 0 0 0 1)
+		)
+		(fill
+			(type color)
+			(color 255 255 150 1)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "e132770f-3c05-458e-b352-24158ee2e629")
 	)
 	(text_box "Only the first and last CAN nodes should have the 120 resistor soldered"
 		(exclude_from_sim no)
