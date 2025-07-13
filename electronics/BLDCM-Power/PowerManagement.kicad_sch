@@ -1856,6 +1856,16 @@
 		)
 		(uuid "f21b759f-56fe-487b-9d8a-0eb77e94449b")
 	)
+	(label "VIN_5V"
+		(at 106.68 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "08e581c8-ae80-4ff7-afc2-8cb3dca772d3")
+	)
 	(label "VIN"
 		(at 66.04 38.1 0)
 		(effects
