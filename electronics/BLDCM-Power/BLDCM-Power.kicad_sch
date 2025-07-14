@@ -3222,14 +3222,14 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "BrenoCQ:USB_12402012E212A"
+		(symbol "BrenoCQ:USB_217179-0001"
 			(pin_numbers
 				(hide yes)
 			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
-			(property "Reference" "U?"
+			(property "Reference" "J?"
 				(at -6.35 8.89 0)
 				(effects
 					(font
@@ -3237,15 +3237,15 @@
 					)
 				)
 			)
-			(property "Value" ""
-				(at 0 0 0)
+			(property "Value" "217179-0001"
+				(at 3.81 8.89 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "BrenoCQ:12402012E212A"
+			(property "Footprint" "BrenoCQ:217179-0001"
 				(at 1.27 -17.145 0)
 				(effects
 					(font
@@ -3254,7 +3254,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/12402012-10.pdf"
+			(property "Datasheet" "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/217/217179/2171790001_sd.pdf"
 				(at 0 -14.605 0)
 				(effects
 					(font
@@ -3263,7 +3263,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "USB2.0, Type C, Top mount, CH 1.68mm, Dual Row SMT"
+			(property "Description" "USB2.0, Type C, Molex, Top mount, Dual Row SMT, 16Ckt"
 				(at 0 -12.065 0)
 				(effects
 					(font
@@ -3272,7 +3272,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "*12402012E212A*"
+			(property "ki_fp_filters" "217179-0001"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3281,7 +3281,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "USB_12402012E212A_1_0"
+			(symbol "USB_217179-0001_1_0"
 				(rectangle
 					(start -7.62 7.62)
 					(end 7.62 -10.16)
@@ -9119,7 +9119,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Footprint" "BrenoCQ:C_0402"
+		(property "Footprint" "BrenoCQ:C_0805"
 			(at 127 88.9 0)
 			(effects
 				(font
@@ -11136,117 +11136,6 @@
 			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "R11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "BrenoCQ:USB_12402012E212A")
-		(at 251.46 134.62 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "7a719ed2-7a2e-41ab-a36c-a2f87dfd29ca")
-		(property "Reference" "J6"
-			(at 243.84 126.365 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Value" "12402012E212A"
-			(at 247.65 126.365 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Footprint" "BrenoCQ:12402012E212A"
-			(at 252.73 156.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/12402012-10.pdf"
-			(at 251.46 153.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "USB2.0, Type C, Top mount, CH 1.68mm, Dual Row SMT"
-			(at 251.46 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "A4_B9"
-			(uuid "fa96bdcc-55b1-47a9-be3f-b707dba5c936")
-		)
-		(pin "A5"
-			(uuid "bdfa3055-ebec-406e-aa4b-173b9e36b200")
-		)
-		(pin "A7"
-			(uuid "6bccc069-ad59-46c1-a2a0-daac626cbb75")
-		)
-		(pin "A6"
-			(uuid "310a70d3-ada5-4646-bbe2-966a96a9b768")
-		)
-		(pin "A8"
-			(uuid "6770b7e4-85bf-45ee-aa55-40f648d64a4f")
-		)
-		(pin "B7"
-			(uuid "ee45e166-2118-4c73-83d9-f7e7122206d1")
-		)
-		(pin "SH1"
-			(uuid "10ed0c19-4c1a-43ec-9db1-12fb29ff7c69")
-		)
-		(pin "B4_A9"
-			(uuid "16fcc922-3a66-4663-ae10-2321fa85ab6c")
-		)
-		(pin "SH4"
-			(uuid "d20aa4dd-7ee3-4ecf-852b-3a1f38a2490a")
-		)
-		(pin "A1_B12"
-			(uuid "b7530e5c-6712-4cb3-b974-b7a4df208180")
-		)
-		(pin "B1_A12"
-			(uuid "c9d045eb-a4a3-4b86-bc41-3fd011542c5e")
-		)
-		(pin "SH3"
-			(uuid "d1842a07-0224-46af-9cf7-c65aa97174c3")
-		)
-		(pin "B5"
-			(uuid "c6bddcaa-9a60-41ed-a60b-0e5a5d636751")
-		)
-		(pin "B8"
-			(uuid "60ada883-1309-4d4a-b88d-ac45a84de44f")
-		)
-		(pin "B6"
-			(uuid "5d764c25-40f6-4315-8a1b-5b59ffdac94d")
-		)
-		(pin "SH2"
-			(uuid "27b4c421-4b03-40e0-b532-22f0d4e2bc54")
-		)
-		(instances
-			(project ""
-				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
-					(reference "J6")
 					(unit 1)
 				)
 			)
@@ -13863,6 +13752,115 @@
 			(project "BLDCM-Power"
 				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
 					(reference "#PWR0136")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "BrenoCQ:USB_217179-0001")
+		(at 251.46 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e6684e9f-b857-49df-b61b-b5617dc00604")
+		(property "Reference" "J6"
+			(at 245.11 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "217179-0001"
+			(at 255.27 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "BrenoCQ:217179-0001"
+			(at 252.73 151.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.molex.com/content/dam/molex/molex-dot-com/products/automated/en-us/salesdrawingpdf/217/217179/2171790001_sd.pdf"
+			(at 251.46 149.225 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "USB2.0, Type C, Molex, Top mount, Dual Row SMT, 16Ckt"
+			(at 251.46 146.685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "A8"
+			(uuid "11102353-ec0c-440c-8207-b3695b6a6f99")
+		)
+		(pin "B1_A12"
+			(uuid "6104f1c4-0eab-474b-b7cb-c6bb48dfdda6")
+		)
+		(pin "SH3"
+			(uuid "433f6d89-24f7-4d9b-9f32-d549b956a656")
+		)
+		(pin "B4_A9"
+			(uuid "659b00c7-9d62-44cb-9dea-a4d406a63ee0")
+		)
+		(pin "B7"
+			(uuid "42b8a151-4273-4997-b4da-46504da841d7")
+		)
+		(pin "A6"
+			(uuid "a01c297d-7259-4789-a2f5-0e41b58f4b1d")
+		)
+		(pin "SH2"
+			(uuid "aa99b77b-1f5e-4ad4-8a40-4d16232d55cd")
+		)
+		(pin "A1_B12"
+			(uuid "b60ce3aa-5825-4f7c-8abe-870642121b25")
+		)
+		(pin "B6"
+			(uuid "b10e515a-6703-4349-ba94-22f9654f0356")
+		)
+		(pin "A4_B9"
+			(uuid "db01a0b1-5234-43b7-a91c-00e39e732fd6")
+		)
+		(pin "SH1"
+			(uuid "f723bde4-30ad-4cea-aab5-2c6e68403296")
+		)
+		(pin "A7"
+			(uuid "bcadcce6-929b-4370-ba2f-54043c56d6ed")
+		)
+		(pin "SH4"
+			(uuid "29a0f1ab-8871-4da1-8f62-aa6f9085bf6c")
+		)
+		(pin "A5"
+			(uuid "d457c7b3-08a3-4d6a-9f76-153a8de6c8bf")
+		)
+		(pin "B5"
+			(uuid "40820b6a-3686-45b8-ba4b-fa7160e25504")
+		)
+		(pin "B8"
+			(uuid "897823a7-3fe8-4d20-ba64-0f1a639e4215")
+		)
+		(instances
+			(project ""
+				(path "/70c0b777-4ad9-403d-bed6-4daf67ef9f8e"
+					(reference "J6")
 					(unit 1)
 				)
 			)
