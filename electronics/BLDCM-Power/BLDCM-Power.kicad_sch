@@ -7157,7 +7157,7 @@
 		)
 		(uuid "0049bb0a-f848-4783-b0ef-f292be7d524a")
 	)
-	(label "INA.U"
+	(label "CURR.U"
 		(at 203.2 25.4 180)
 		(effects
 			(font
@@ -7517,7 +7517,7 @@
 		)
 		(uuid "8f0823bc-ec77-4243-97b7-a295526ebb15")
 	)
-	(label "INA.U"
+	(label "CURR.U"
 		(at 58.42 157.48 180)
 		(effects
 			(font
@@ -7567,7 +7567,7 @@
 		)
 		(uuid "9e4636c2-bec1-4651-8f07-5c8e6d2fb4fb")
 	)
-	(label "INA.V"
+	(label "CURR.V"
 		(at 58.42 160.02 180)
 		(effects
 			(font
@@ -7697,7 +7697,7 @@
 		)
 		(uuid "c56026b4-55e0-4764-b461-1c899c0ad5c4")
 	)
-	(label "INA.W"
+	(label "CURR.W"
 		(at 58.42 162.56 180)
 		(effects
 			(font
@@ -7887,7 +7887,7 @@
 		)
 		(uuid "f5356559-79ed-452b-a9f3-6aa8b5d95844")
 	)
-	(label "INA.V"
+	(label "CURR.V"
 		(at 203.2 50.8 180)
 		(effects
 			(font
@@ -7917,7 +7917,7 @@
 		)
 		(uuid "fee6f664-1478-49a2-9490-2d962e9bc067")
 	)
-	(label "INA.W"
+	(label "CURR.W"
 		(at 203.2 76.2 180)
 		(effects
 			(font

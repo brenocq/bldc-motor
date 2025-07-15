@@ -549,7 +549,7 @@
         "track_width": 0.1329
       },
       {
-        "name": "INA",
+        "name": "CURR",
         "pcb_color": "rgb(255, 127, 31)",
         "priority": 6,
         "schematic_color": "rgb(255, 127, 31)"
@@ -623,8 +623,8 @@
         "pattern": "/USB.*"
       },
       {
-        "netclass": "INA",
-        "pattern": "/INA.*"
+        "netclass": "CURR",
+        "pattern": "/CURR.*"
       },
       {
         "netclass": "TMC",
