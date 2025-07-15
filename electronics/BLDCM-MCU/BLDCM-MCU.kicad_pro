@@ -509,13 +509,13 @@
       {
         "name": "3.3V",
         "pcb_color": "rgb(132, 0, 0)",
-        "priority": 9,
+        "priority": 10,
         "schematic_color": "rgb(132, 0, 0)"
       },
       {
         "name": "5V",
         "pcb_color": "rgb(194, 0, 0)",
-        "priority": 10,
+        "priority": 11,
         "schematic_color": "rgb(194, 0, 0)"
       },
       {
@@ -528,7 +528,7 @@
         "microvia_drill": 0.1,
         "name": "All Nets",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 12,
+        "priority": 13,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1,
         "via_diameter": 0.4,
@@ -538,13 +538,13 @@
       {
         "name": "CAN",
         "pcb_color": "rgb(139, 120, 6)",
-        "priority": 5,
+        "priority": 6,
         "schematic_color": "rgb(139, 120, 6)"
       },
       {
         "name": "CURR",
         "pcb_color": "rgb(255, 127, 31)",
-        "priority": 7,
+        "priority": 8,
         "schematic_color": "rgb(255, 127, 31)"
       },
       {
@@ -560,9 +560,15 @@
         "schematic_color": "rgb(52, 196, 255)"
       },
       {
+        "name": "SWD",
+        "pcb_color": "rgb(239, 105, 255)",
+        "priority": 3,
+        "schematic_color": "rgb(239, 105, 255)"
+      },
+      {
         "name": "TMC",
         "pcb_color": "rgb(123, 17, 163)",
-        "priority": 6,
+        "priority": 7,
         "schematic_color": "rgb(123, 17, 163)"
       },
       {
@@ -571,7 +577,7 @@
         "line_style": 0,
         "name": "USB",
         "pcb_color": "rgb(120, 164, 255)",
-        "priority": 8,
+        "priority": 9,
         "schematic_color": "rgb(120, 164, 255)"
       },
       {
@@ -587,19 +593,19 @@
       {
         "name": "VCP",
         "pcb_color": "rgb(24, 186, 183)",
-        "priority": 3,
+        "priority": 4,
         "schematic_color": "rgb(24, 186, 183)"
       },
       {
         "name": "VIN",
         "pcb_color": "rgb(255, 0, 0)",
-        "priority": 11,
+        "priority": 12,
         "schematic_color": "rgb(255, 0, 0)"
       },
       {
         "name": "VOLT",
         "pcb_color": "rgb(146, 185, 54)",
-        "priority": 4,
+        "priority": 5,
         "schematic_color": "rgb(146, 185, 54)"
       }
     ],
@@ -656,6 +662,10 @@
       {
         "netclass": "USB_90R",
         "pattern": "/USB.D*"
+      },
+      {
+        "netclass": "SWD",
+        "pattern": "/SW*|/RST"
       }
     ]
   },
