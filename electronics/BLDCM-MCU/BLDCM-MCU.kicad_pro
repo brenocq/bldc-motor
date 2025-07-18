@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 2.54
+          "drill": 0.55,
+          "height": 0.55,
+          "width": 0.55
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -58,7 +58,24 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "clearance|136849928|114092234|19521717-f907-403e-8c9b-77e59c8706ac|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          ""
+        ],
+        [
+          "clearance|139466227|116708514|f3c2409d-6614-4c4d-999c-d38f4abeb0e9|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          ""
+        ],
+        [
+          "solder_mask_bridge|136849928|114092234|19521717-f907-403e-8c9b-77e59c8706ac|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          ""
+        ],
+        [
+          "solder_mask_bridge|139466227|116708514|f3c2409d-6614-4c4d-999c-d38f4abeb0e9|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -188,7 +205,8 @@
       ],
       "track_widths": [
         0.0,
-        0.1
+        0.1,
+        0.2
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -747,12 +765,24 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Description",
+          "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "Default Editing",
+      "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
     },
