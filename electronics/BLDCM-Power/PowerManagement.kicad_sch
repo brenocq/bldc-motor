@@ -4,6 +4,12 @@
 	(generator_version "9.0")
 	(uuid "0ed59390-55ea-4a0d-b3b7-95b6525f3433")
 	(paper "A4")
+	(title_block
+		(title "BLDCM Power - Power Management")
+		(date "2025-07-19")
+		(rev "v1.0")
+		(company "Breno Cunha Queiroz")
+	)
 	(lib_symbols
 		(symbol "BrenoCQ:C"
 			(pin_numbers

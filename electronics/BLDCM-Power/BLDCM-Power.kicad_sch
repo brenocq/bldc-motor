@@ -5,8 +5,10 @@
 	(uuid "70c0b777-4ad9-403d-bed6-4daf67ef9f8e")
 	(paper "A4")
 	(title_block
-		(date "2025-05-06")
-		(rev "v3")
+		(title "BLDCM Power")
+		(date "2025-07-19")
+		(rev "v1.0")
+		(company "Breno Cunha Queiroz")
 	)
 	(lib_symbols
 		(symbol "BrenoCQ:BAT54S"
