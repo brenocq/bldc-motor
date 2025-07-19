@@ -60,19 +60,19 @@
       ],
       "drc_exclusions": [
         [
-          "clearance|136849928|114092234|19521717-f907-403e-8c9b-77e59c8706ac|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          "clearance|138348728|109088834|19521717-f907-403e-8c9b-77e59c8706ac|fca3d422-880e-4821-9267-8bbd5074da41",
           ""
         ],
         [
-          "clearance|139466227|116708514|f3c2409d-6614-4c4d-999c-d38f4abeb0e9|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          "clearance|140965027|111705114|f3c2409d-6614-4c4d-999c-d38f4abeb0e9|d64968bd-8e88-499a-a45c-a1330c8a1d38",
           ""
         ],
         [
-          "solder_mask_bridge|136849928|114092234|19521717-f907-403e-8c9b-77e59c8706ac|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          "solder_mask_bridge|138348728|109088834|19521717-f907-403e-8c9b-77e59c8706ac|fca3d422-880e-4821-9267-8bbd5074da41",
           ""
         ],
         [
-          "solder_mask_bridge|139466227|116708514|f3c2409d-6614-4c4d-999c-d38f4abeb0e9|1c74d6d7-618e-4f47-9325-8e00c4d12842",
+          "solder_mask_bridge|140965027|111705114|f3c2409d-6614-4c4d-999c-d38f4abeb0e9|d64968bd-8e88-499a-a45c-a1330c8a1d38",
           ""
         ]
       ],
@@ -692,7 +692,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "BLDCM-MCU-gerber/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "../../mechanical/BLDCM-MCU.step",
