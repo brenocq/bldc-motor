@@ -4,7 +4,7 @@
 
 # BLDC Motor Controller
 
-> [!NOTE]  
+> [!NOTE]
 > This project is currently in active development. Features and documentation are subject to change.
 
 ## Table of Contents
