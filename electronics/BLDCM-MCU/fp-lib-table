@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "BrenoCQ")(type "KiCad")(uri "${KIPRJMOD}/../brenocq-library/BrenoCQ.pretty")(options "")(descr ""))
+)

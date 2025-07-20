@@ -13080,7 +13080,7 @@
 				(justify right bottom)
 			)
 		)
-		(property "Footprint" "BrenoCQ:C_0603"
+		(property "Footprint" "BrenoCQ:C_0402"
 			(at 170.18 49.53 0)
 			(effects
 				(font
