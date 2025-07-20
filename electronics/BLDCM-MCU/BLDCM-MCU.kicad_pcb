@@ -8,8 +8,10 @@
 	)
 	(paper "A4")
 	(title_block
-		(title "BLDCM - MCU")
-		(date "2025-04-10")
+		(title "BLDCM MCU")
+		(date "2025-07-19")
+		(rev "v1.0")
+		(company "Breno Cunha Queiroz")
 	)
 	(layers
 		(0 "F.Cu" signal "Top Layer")

@@ -14,3 +14,9 @@ report.txt
 # KiCad autosave
 _autosave-*
 *auto_saved_files*
+
+# Generated gerber files
+*-gerber/
+
+# KiCad interactive HTML BOM
+*.html
