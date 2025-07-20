@@ -7,6 +7,21 @@
 > [!NOTE]  
 > This project is currently in active development. Features and documentation are subject to change.
 
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Folder Structure](#folder-structure)
+- [Mechanical Design](#mechanical-design)
+- [Electronics Design](#electronics-design)
+  - [MCU PCB (Top Board)](#mcu-pcb-top-board)
+  - [Power PCB (Bottom Board)](#power-pcb-bottom-board)
+- [Schematics](#schematics)
+  - [MCU PCB Schematic](#mcu-pcb-schematic)
+  - [Power PCB Schematic](#power-pcb-schematic)
+- [Firmware](#firmware)
+- [Simulation](#simulation)
+- [Results](#results)
+- [License](#license)
+
 ---
 
 ## Project Overview
