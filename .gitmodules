@@ -1,0 +1,3 @@
+[submodule "electronics/brenocq-library"]
+	path = electronics/brenocq-library
+	url = https://github.com/brenocq/brenocq-kicad-library.git
