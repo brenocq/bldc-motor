@@ -10,8 +10,8 @@
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Folder Structure](#folder-structure)
-- [Mechanical Design](#mechanical-design)
-- [Electronics Design](#electronics-design)
+- [Mechanical](#mechanical)
+- [Electronics](#electronics)
   - [MCU PCB (Top Board)](#mcu-pcb-top-board)
   - [Power PCB (Bottom Board)](#power-pcb-bottom-board)
 - [Firmware](#firmware)
@@ -40,7 +40,7 @@ The project is organized into logical directories to enhance maintainability and
 
 ---
 
-## Mechanical Design
+## Mechanical
 
 The mechanical aspects of this project are centered around integrating the custom electronics with an off-the-shelf **EM3215 BLDC motor**. It's important to note that, for this specific project, the **motor's original windings are being utilized**, and there are no plans to re-wrap the wire around the coils. The `mechanical` folder contains various CAD files (FreeCAD) for components like the rotor adapter, chassis, and PCB cutouts, ensuring a perfect fit and robust assembly.
 
@@ -50,7 +50,7 @@ The mechanical aspects of this project are centered around integrating the custo
 
 ---
 
-## Electronics Design
+## Electronics
 
 The electronics consist of two interconnected custom-designed Printed Circuit Boards (PCBs), designed using **KiCad**. Both boards are **4-layer designs** to facilitate efficient signal routing and power integrity. A **Molex PCB stack connector** is used to establish a robust electrical connection between the MCU and Power PCBs.
 
@@ -70,9 +70,10 @@ The top PCB serves as the brain of the controller, housing the main microcontrol
 - **ISM330DHCX IMU (Inertial Measurement Unit):** Provides acceleration and angular velocity data, useful for advanced motion control or system stabilization.
 
 **MCU PCB v1.0 Release Package:**
- - [Schematic](electronics/BLDCM-MCU/BLDCM-MCU.pdf)
- - [Interactive BOM](https://brenocq.s3.us-east-1.amazonaws.com/BLDCM/BLDCM-MCU-BOM-v1.0.html)
- - Gerbers
+- **[KiCad Project](https://github.com/brenocq/bldc-motor/tree/electronics/v1.0/electronics/BLDCM-MCU)**
+- **[Schematic (PDF)](https://github.com/brenocq/bldc-motor/blob/electronics/v1.0/electronics/BLDCM-MCU/BLDCM-MCU.pdf)**
+- **[Interactive BOM (HTML)](https://brenocq.s3.us-east-1.amazonaws.com/BLDCM/BLDCM-MCU-BOM-v1.0.html)**
+- **[Gerbers (ZIP)](https://github.com/brenocq/bldc-motor/releases/download/electronics%2Fv1.0/BLDCM-MCU-v1.0-gerber.zip)**
 
 ### Power PCB (Bottom Board)
 
@@ -92,9 +93,10 @@ The bottom PCB handles the high-current motor driving functions and essential po
 - **INA240 Current Sensors (x3):** Three precision analog-output current sensors enable high-speed, accurate phase current measurement for FOC.
 
 **Power PCB v1.0 Release Package:**
- - [Schematic](electronics/BLDCM-Power/BLDCM-Power.pdf)
- - [Interactive BOM](https://brenocq.s3.us-east-1.amazonaws.com/BLDCM/BLDCM-Power-BOM-v1.0.html)
- - Gerbers
+- **[KiCad Project](https://github.com/brenocq/bldc-motor/tree/electronics/v1.0/electronics/BLDCM-Power)**
+- **[Schematic (PDF)](https://github.com/brenocq/bldc-motor/blob/electronics/v1.0/electronics/BLDCM-Power/BLDCM-Power.pdf)**
+- **[Interactive BOM (HTML)](https://brenocq.s3.us-east-1.amazonaws.com/BLDCM/BLDCM-Power-BOM-v1.0.html)**
+- **[Gerbers (ZIP)](https://github.com/brenocq/bldc-motor/releases/download/electronics%2Fv1.0/BLDCM-Power-v1.0-gerber.zip)**
 
 ---
 
