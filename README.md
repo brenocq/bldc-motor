@@ -7,6 +7,18 @@
 > [!NOTE]  
 > This project is currently in active development. Features and documentation are subject to change.
 
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Folder Structure](#folder-structure)
+- [Mechanical Design](#mechanical-design)
+- [Electronics Design](#electronics-design)
+  - [MCU PCB (Top Board)](#mcu-pcb-top-board)
+  - [Power PCB (Bottom Board)](#power-pcb-bottom-board)
+- [Firmware](#firmware)
+- [Simulation](#simulation)
+- [Results](#results)
+- [License](#license)
+
 ---
 
 ## Project Overview
@@ -40,54 +52,49 @@ The mechanical aspects of this project are centered around integrating the custo
 
 ## Electronics Design
 
-The electronics consist of two interconnected custom-designed Printed Circuit Boards (PCBs), designed using **KiCad**. Both boards are **4-layer designs** to facilitate efficient signal routing and power integrity. A **Molex PCB stack connector** is used to establish the robust electrical connection between the MCU and Power PCBs.
+The electronics consist of two interconnected custom-designed Printed Circuit Boards (PCBs), designed using **KiCad**. Both boards are **4-layer designs** to facilitate efficient signal routing and power integrity. A **Molex PCB stack connector** is used to establish a robust electrical connection between the MCU and Power PCBs.
 
 ### MCU PCB (Top Board)
 
 The top PCB serves as the brain of the controller, housing the main microcontroller and various sensors and interfaces for user interaction and precise feedback.
 
-| Layer 1 (Top Copper) | Layer 2 (Inner 1) | Layer 3 (Inner 2) | Layer 4 (Bottom Copper) | 3D Top View | 3D Bottom View |
+| Top Layer | Layer 1 | Layer 2 | Bottom Layer | 3D Top View | 3D Bottom View |
 | :------------------: | :---------------: | :---------------: | :---------------------: | :---------: | :------------: |
-| ![image](https://github.com/user-attachments/assets/e3ad61e8-1968-4f51-974c-bd88d7b194d1) | ![image](https://github.com/user-attachments/assets/eda2a795-9acf-4874-b4b9-3f5ed1b4a181) |![image](https://github.com/user-attachments/assets/e96e2e1d-825a-4590-90dd-7f235e1fa9ca)|![image](https://github.com/user-attachments/assets/3b5efa68-7e7b-4f3e-bcba-d8abd25edf7d) | ![image](https://github.com/user-attachments/assets/b6fc8bb2-36ec-4e66-9482-b3439ea36996) | ![image](https://github.com/user-attachments/assets/9a11b0be-57d6-442e-8f05-b2bf757be1ca) |
+| <img height="130" alt="Layer 1 (Top Copper)" src="https://github.com/user-attachments/assets/a0bdffdf-dbb2-43c1-b529-12d50b2d14fd" /> | <img height="130" alt="Layer 2 (Inner 1)" src="https://github.com/user-attachments/assets/55852d03-11d7-4d15-98dc-e1f933781a28" /> | <img height="130" alt="Layer 3 (Inner 2)" src="https://github.com/user-attachments/assets/21bd59ee-b05b-4289-b452-49b394edb754" /> | <img height="130" alt="Layer 4 (Bottom Copper)" src="https://github.com/user-attachments/assets/6d4225da-9f7a-4c76-8256-08973aba0530" /> | <img height="130" alt="3D Top View" src="https://github.com/user-attachments/assets/0e6ac78a-482c-4bc0-8312-50df366507aa" /> | <img height="130" alt="3D Bottom View" src="https://github.com/user-attachments/assets/6db4fe6c-68bf-409a-b58a-c0ea64c7a62d" /> |
 
-**Key Components on the MCU PCB:**
+**MCU PCB Key Components:**
+- **STM32F4 Microcontroller:** The central processing unit for control algorithms, sensor data acquisition, and communication.
+- **AS5048A Angle Position Encoder:** Provides 14-bit absolute rotor position feedback for precise commutation and control.
+- **SK6805 LED Ring:** A customizable visual indicator for status and debugging.
+- **Reset Button:** For convenient system resets.
+- **ISM330DHCX IMU (Inertial Measurement Unit):** Provides acceleration and angular velocity data, useful for advanced motion control or system stabilization.
 
-* **STM32F4 Microcontroller:** The central processing unit for control algorithms, sensor data acquisition, and communication.
-* **MT6701 Angle Position Encoder:** Provides high-resolution absolute rotor position feedback for precise commutation and control.
-* **SK6805 LED Ring:** A customizable visual indicator for status and debugging.
-* **Reset Button:** For convenient system resets.
-* **ISM330DHCX IMU (Inertial Measurement Unit):** Provides acceleration and angular velocity data, useful for advanced motion control or system stabilization.
+**MCU PCB v1.0 Release Package:**
+ - [Schematic](electronics/BLDCM-MCU/BLDCM-MCU.pdf)
+ - [Interactive BOM](https://brenocq.s3.us-east-1.amazonaws.com/BLDCM/BLDCM-MCU-BOM-v1.0.html)
+ - Gerbers
 
 ### Power PCB (Bottom Board)
 
 The bottom PCB handles the high-current motor driving functions and essential power monitoring.
 
-| Layer 1 (Top Copper) | Layer 2 (Inner 1) | Layer 3 (Inner 2) | Layer 4 (Bottom Copper) | 3D Top View | 3D Bottom View |
+| Top Layer | Layer 1 | Layer 2 | Bottom Layer | 3D Top View | 3D Bottom View |
 | :------------------: | :---------------: | :---------------: | :---------------------: | :---------: | :------------: |
-| ![image](https://github.com/user-attachments/assets/d9922683-cbf5-4868-8b58-452e7566250c) | ![image](https://github.com/user-attachments/assets/d3ce2ac5-880d-4d81-8f6c-d508b4a6b694) | ![image](https://github.com/user-attachments/assets/56faf783-717c-470a-8ce2-7477bf948e30) | ![image](https://github.com/user-attachments/assets/879c9ce4-2996-44c6-8344-d4e239203147)| ![image](https://github.com/user-attachments/assets/ff8c0972-ba50-4a18-bf02-6bc89084233d) | ![image](https://github.com/user-attachments/assets/dca16bc5-c2b6-410b-afd7-4b836abd5348) |
+| <img height="130" alt="Power PCB Layer 1 (Top Copper)" src="https://github.com/user-attachments/assets/faa62cd5-9e9b-43b6-9e27-ffdd01d51ee1" /> | <img height="130" alt="Power PCB Layer 2 (Inner 1)" src="https://github.com/user-attachments/assets/73f51755-ee40-4ae1-b4b3-89a09125597c" /> | <img height="130" alt="Power PCB Layer 3 (Inner 2)" src="https://github.com/user-attachments/assets/59dc8296-1d9e-4efc-b00d-c2b493198382" /> | <img height="130" alt="Power PCB Layer 4 (Bottom Copper)" src="https://github.com/user-attachments/assets/ed9737b9-2924-47f6-ae12-5b252e8fc6ef" /> | <img height="130" alt="Power PCB 3D Top View" src="https://github.com/user-attachments/assets/97b7900b-0eeb-4e15-8f6d-265f3d73ea2c" /> | <img height="130" alt="Power PCB 3D Bottom View" src="https://github.com/user-attachments/assets/57febf18-13cf-4071-8960-21bef18e5e0f" /> |
 
-**Key Components on the Power PCB:**
+**Power PCB Key Components:**
+- **TMC6300 Motor Driver:** A 3-phase motor driver that translates the MCU's PWM and control signals into high-current outputs for the motor phases.
+- **TCAN1462 CAN Transceiver:** Enables robust CAN FD communication for daisy-chaining motors in series.
+- **J-Link Connector:** Provides easy SWD debugging and programming for the STM32 microcontroller.
+- **USB Connector:** Facilitates direct USB Full-Speed communication for data logging, control, and power input.
+- **Micro-Lock Plus Connectors:** Robust 4-pin Molex connectors that provide a vibration-resistant link for power delivery and CAN bus communications.
+- **Voltage Sensors (x4):** One monitors the DC bus voltage, while three dedicated sensors measure filtered phase voltages for safe operation and FOC.
+- **INA240 Current Sensors (x3):** Three precision analog-output current sensors enable high-speed, accurate phase current measurement for FOC.
 
-* **TMC6300 Motor Driver:** A powerful and integrated 3-phase motor driver, responsible for generating the PWM signals to control the motor phases.
-* **CAN (Controller Area Network) Transceiver:** Enables robust communication with other electronic systems. It will be used later to connect motors in series.
-* **J-Link Connector:** Provides easy debugging and programming interface for the STM32 microcontroller.
-* **USB Connector:** Allows for direct communication with a host PC for data logging, control, and visualizations.
-* **Voltage Sensor:** For monitoring the DC bus voltage, essential for safe operation and accurate power calculations.
-* **INA239-Q1 Current Sensors (x3):** One dedicated current sensor for each motor phase, enabling precise current measurement for advanced control algorithms like Field-Oriented Control (FOC).
-
----
-
-## Schematics
-
-Here you will find the schematics for both the MCU and Power PCBs. These diagrams detail the interconnections of all components and are crucial for understanding the electrical design. You can find a more up to date version of them by opening the KiCad project file.
-
-### MCU PCB Schematic
-
-![image](https://github.com/user-attachments/assets/f03aca32-99ec-416c-8252-476495d778d1)
-
-### Power PCB Schematic
-
-![image](https://github.com/user-attachments/assets/b6926eec-cd2d-4039-8d5a-8df13450388b)
+**Power PCB v1.0 Release Package:**
+ - [Schematic](electronics/BLDCM-Power/BLDCM-Power.pdf)
+ - [Interactive BOM](https://brenocq.s3.us-east-1.amazonaws.com/BLDCM/BLDCM-Power-BOM-v1.0.html)
+ - Gerbers
 
 ---
 
