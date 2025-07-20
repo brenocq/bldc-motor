@@ -10653,7 +10653,7 @@
 	(symbol
 		(lib_id "BrenoCQ:LED_SK6805-EC15")
 		(at 165.1 140.97 0)
-		(unit 0)
+		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -10720,7 +10720,7 @@
 			(project ""
 				(path "/08ef0390-9acd-4f64-8b35-22fbbdf177e4"
 					(reference "U12")
-					(unit 0)
+					(unit 1)
 				)
 			)
 		)
@@ -13080,7 +13080,7 @@
 				(justify right bottom)
 			)
 		)
-		(property "Footprint" "BrenoCQ:C_0402"
+		(property "Footprint" "BrenoCQ:C_0603"
 			(at 170.18 49.53 0)
 			(effects
 				(font

@@ -13146,17 +13146,6 @@
 		(layer "Edge.Cuts")
 		(uuid "511a9fd5-93c8-44c5-ab28-0cc366033c7c")
 	)
-	(gr_circle
-		(center 148.5011 105.0036)
-		(end 148.5011 89.0036)
-		(stroke
-			(width 0.254)
-			(type solid)
-		)
-		(fill no)
-		(layer "User.1")
-		(uuid "4e72a412-5195-4f52-bc92-1a973abf9fcf")
-	)
 	(gr_text "CAN"
 		(at 162.3 101.1 270)
 		(layer "F.SilkS")
