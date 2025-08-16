@@ -17,7 +17,7 @@ void initI2c(Gpio gpio);
 void initSpi(Gpio gpio, Mode mode);
 void initUart(Gpio gpio, Mode mode);
 void initTimer(Gpio gpio, Mode mode);
-void initTrace(Gpio gpio);
+void initTrace(Gpio gpio, Mode mode);
 void initUsb(Gpio gpio, Mode mode);
 
 /**
@@ -94,7 +94,7 @@ bool Gpio::init() {
         else if (gpioConfig.mode >= OTG_FS_DM && gpioConfig.mode <= OTG_HS_ULPI_NXT)
             initUsb(gpioConfig.gpio, gpioConfig.mode);
         else if (gpioConfig.mode >= Mode::SWO && gpioConfig.mode <= Mode::TRACE_D3)
-            initTrace(gpioConfig.gpio);
+            initTrace(gpioConfig.gpio, gpioConfig.mode);
         else
             return false;
     }
@@ -175,15 +175,26 @@ void Gpio::initTimer(Gpio gpio, Mode mode) {
     HAL_GPIO_Init(convert(gpio.port), &gpioInit);
 }
 
-void Gpio::initTrace(Gpio gpio) {
-    // constexpr uint8_t alternateFuncJtag = 0x00;
-    // GPIO_InitTypeDef gpioInit{};
-    // gpioInit.Pin = convert(gpio.pin);
-    // gpioInit.Mode = GPIO_MODE_AF_PP;
-    // gpioInit.Pull = GPIO_PULLUP;
-    // gpioInit.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    // gpioInit.Alternate = alternateFuncJtag;
-    // HAL_GPIO_Init(convert(gpio.port), &gpioInit);
+void Gpio::initTrace(Gpio gpio, Mode mode) {
+    GPIO_InitTypeDef gpioInit{};
+    gpioInit.Pin = convert(gpio.pin);
+    gpioInit.Mode = GPIO_MODE_AF_PP;
+    switch (mode) {
+        case Mode::SWO:
+            gpioInit.Pull = GPIO_NOPULL;
+            break;
+        case Mode::SWDIO:
+            gpioInit.Pull = GPIO_PULLUP;
+            break;
+        case Mode::SWCLK:
+            gpioInit.Pull = GPIO_PULLDOWN;
+            break;
+        default:
+            gpioInit.Pull = GPIO_PULLUP;
+    }
+    gpioInit.Speed = GPIO_SPEED_FREQ_HIGH;
+    gpioInit.Alternate = getAlternateFunc(gpio, mode);
+    HAL_GPIO_Init(convert(gpio.port), &gpioInit);
 }
 
 void Gpio::initUsb(Gpio gpio, Mode mode) {
