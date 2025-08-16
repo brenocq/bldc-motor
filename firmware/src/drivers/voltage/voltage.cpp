@@ -15,7 +15,8 @@ bool Voltage::init() {
 }
 
 float Voltage::read() {
-    float Vin = 3.33f * (Adc::read(Gpio::VOLT_PIN) / float(Adc::MAX_READ));
-    float Vout = Vin / R2 * (R1 + R2);
-    return Vout;
+    return 0.0f;
+    // float Vin = 3.33f * (Adc::read(Gpio::VOLT_PIN) / float(Adc::MAX_READ));
+    // float Vout = Vin / R2 * (R1 + R2);
+    // return Vout;
 }

@@ -63,19 +63,15 @@ bool transmit(Peripheral peripheral, Address address, uint8_t* data, uint16_t le
 bool receive(Peripheral peripheral, Address address, uint8_t* data, uint16_t len);
 
 //---------- I2C configs ----------//
-static constexpr Address PHASE_U_ADDR = 0x40 << 1;
-static constexpr Address PHASE_V_ADDR = 0x41 << 1;
-static constexpr Address PHASE_W_ADDR = 0x44 << 1;
+// static constexpr Address EXAMPLE_ADDR = 0x40 << 1;
 
 struct I2cConfig {
     Peripheral peripheral;
     Address address;
 };
 
-inline const std::array i2cList{
-    I2cConfig{Peripheral::I2C3, PHASE_U_ADDR},
-    I2cConfig{Peripheral::I2C3, PHASE_V_ADDR},
-    I2cConfig{Peripheral::I2C3, PHASE_W_ADDR},
+inline const std::array<I2cConfig, 0> i2cList{
+    // I2cConfig{Peripheral::I2C3, EXAMPLE_ADDR},
 };
 
 }; // namespace I2c

@@ -92,48 +92,48 @@ int main() {
     Hardware::delayMs(2000); // XXX Delay to show in tracer after programming
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
-    //Gpio::write(Gpio::PHASE_CS_U_PIN, true);
-    //Gpio::write(Gpio::PHASE_CS_V_PIN, true);
-    //Gpio::write(Gpio::PHASE_CS_W_PIN, true);
-    //if (!Uart::init())
-    //    Error::hardFault("Failed to initialize UART driver");
-    //if (!Spi::init())
-    //    Error::hardFault("Failed to initialize SPI driver");
+    Gpio::write(Gpio::DEBUG0_PIN, false);
+    Gpio::write(Gpio::DEBUG1_PIN, false);
+    Gpio::write(Gpio::DEBUG2_PIN, false);
+    // if (!Uart::init())
+    //     Error::hardFault("Failed to initialize UART driver");
+    // if (!Spi::init())
+    //     Error::hardFault("Failed to initialize SPI driver");
     //// if (!Usb::init())
     ////     Error::hardFault("Failed to initialize USB driver");
-    //if (!Adc::init())
-    //    Error::hardFault("Failed to initialize ADC driver");
-    //if (!Timer::init())
-    //    Error::hardFault("Failed to initialize TIMER driver");
-    //if (!Dma::init())
-    //    Error::hardFault("Failed to initialize DMA driver");
-    //if (!Interrupt::init())
-    //    Error::hardFault("Failed to initialize Interrupt driver");
+    // if (!Adc::init())
+    //     Error::hardFault("Failed to initialize ADC driver");
+    // if (!Timer::init())
+    //     Error::hardFault("Failed to initialize TIMER driver");
+    // if (!Dma::init())
+    //     Error::hardFault("Failed to initialize DMA driver");
+    // if (!Interrupt::init())
+    //     Error::hardFault("Failed to initialize Interrupt driver");
 
     //// Timer-DMA
-    //Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
-    //Uart::linkDmaTx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_TX_STREAM));
-    //Uart::linkDmaRx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_RX_STREAM));
-    //Hardware::delayMs(1);
+    // Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
+    // Uart::linkDmaTx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_TX_STREAM));
+    // Uart::linkDmaRx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_RX_STREAM));
+    // Hardware::delayMs(1);
 
-    //if (!led.init())
-    //    Error::hardFault("Failed to initialize led driver");
-    //if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
-    //    Error::hardFault("Failed to initialize encoder driver");
-    //if (!voltage.init())
-    //    Error::hardFault("Failed to initialize voltage driver");
-    //if (!phaseU.init(Phase::U, Spi::Peripheral::SPI1, Gpio::PHASE_CS_U_PIN))
-    //    Error::hardFault("Failed to initialize phase driver for phase U");
-    //if (!phaseV.init(Phase::V, Spi::Peripheral::SPI1, Gpio::PHASE_CS_V_PIN))
-    //    Error::hardFault("Failed to initialize phase driver for phase V");
-    //if (!phaseW.init(Phase::W, Spi::Peripheral::SPI1, Gpio::PHASE_CS_W_PIN))
-    //    Error::hardFault("Failed to initialize phase driver for phase W");
-    //if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
-    //    Error::hardFault("Failed to initialize IMU");
-    //if (!motor.init())
-    //    Error::hardFault("Failed to initialize motor driver");
-    //if (!AttaConnector::init())
-    //    Error::hardFault("Failed to initialize atta connector");
+    // if (!led.init())
+    //     Error::hardFault("Failed to initialize led driver");
+    // if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
+    //     Error::hardFault("Failed to initialize encoder driver");
+    // if (!voltage.init())
+    //     Error::hardFault("Failed to initialize voltage driver");
+    // if (!phaseU.init(Phase::U, Spi::Peripheral::SPI1, Gpio::PHASE_CS_U_PIN))
+    //     Error::hardFault("Failed to initialize phase driver for phase U");
+    // if (!phaseV.init(Phase::V, Spi::Peripheral::SPI1, Gpio::PHASE_CS_V_PIN))
+    //     Error::hardFault("Failed to initialize phase driver for phase V");
+    // if (!phaseW.init(Phase::W, Spi::Peripheral::SPI1, Gpio::PHASE_CS_W_PIN))
+    //     Error::hardFault("Failed to initialize phase driver for phase W");
+    // if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
+    //     Error::hardFault("Failed to initialize IMU");
+    // if (!motor.init())
+    //     Error::hardFault("Failed to initialize motor driver");
+    // if (!AttaConnector::init())
+    //     Error::hardFault("Failed to initialize atta connector");
 
     Log::success("Main", "Initialized");
 
@@ -145,8 +145,8 @@ int main() {
     //     led.setColor(i, 0, 1, 0);
     // led.show();
 
-    //float motorAngle = 0.0f;
-    //bool sign = true;
+    // float motorAngle = 0.0f;
+    // bool sign = true;
     while (true) {
         Gpio::write(Gpio::DEBUG0_PIN, true);
         Hardware::delayMs(50);
@@ -156,10 +156,10 @@ int main() {
         // Uart::update();
         // handleAttaConnector();
 
-        //motorAngle += 1.0f / 180 * M_PI;
-        //if (motorAngle >= 2 * M_PI)
-        //    motorAngle -= 2 * M_PI;
-        // motor.set(motorAngle, 1.0f);
+        // motorAngle += 1.0f / 180 * M_PI;
+        // if (motorAngle >= 2 * M_PI)
+        //     motorAngle -= 2 * M_PI;
+        //  motor.set(motorAngle, 1.0f);
 
         // Execute controller
         // Controller::Output control = foc.control({}, {}, 0.00005);
