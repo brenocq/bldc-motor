@@ -1,98 +1,153 @@
 #!/bin/bash
 set -e
 
-SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-BUILD_PATH="$SCRIPT_PATH/build"
+# --- Configuration ---
+# Get the script's absolute directory
+SCRIPT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+SOURCE_PATH="$SCRIPT_DIR"
+BUILD_PATH="$SCRIPT_DIR/build"
 
-printHelp()
+# Output files from the build
+FIRMWARE_ELF="$BUILD_PATH/bin/firmware.elf"
+FIRMWARE_BIN="$BUILD_PATH/bin/firmware.bin"
+
+# --- Functions ---
+
+help()
 {
-   echo "BLDC Motor Controller Script"
-   echo
-   echo "Usage: ./bldc [option(s)]"
-   echo
-   echo "Options:"
-   echo
-   echo "-h or --help"
-   echo "        This help menu"
-   echo
-   echo "-b or --build"
-   echo "        Build firmware"
-   echo
-   echo "-c or --clean or --clear"
-   echo "        Clean previous build"
-   echo
-   echo "-f or --flash"
-   echo "        Flash firmware"
-   echo
-   echo "-t or --trace"
-   echo "        Trace debugging. Print SWO output"
-   echo
-   echo "-g or --gdb"
-   echo "        Open OpenOCD and GDB to debug the firmware"
-   exit
-}
-
-build()
-{
-    mkdir -p $BUILD_PATH && cd $BUILD_PATH
-
-    cmake $SCRIPT_PATH
-    make -j
-
-    exit
+    echo "BLDC Motor Controller Script"
+    echo
+    echo "Usage: ./bldc [actions] [options]"
+    echo
+    echo "Actions (can be combined):"
+    echo "  -b, --build       Build firmware"
+    echo "  -c, --clean       Clean previous build"
+    echo "  -f, --flash       Flash firmware (implies --build if not already built)"
+    echo "  -t, --trace       Trace debugging. Print SWO output"
+    echo "  -g, --gdb         Open OpenOCD and GDB session"
+    echo
+    echo "Other Options:"
+    echo "  -h, --help        This help menu"
+    echo
+    echo "Example: ./bldc --clean --build --flash"
+    echo "Example: ./bldc --build"
+    exit 0
 }
 
 clean()
 {
-    rm -rf $BUILD_PATH
-    exit
+    echo "--- Cleaning build directory ---"
+    rm -rf "$BUILD_PATH"
+}
+
+build()
+{
+    echo "--- Configuring Firmware ---"
+    cmake -S "$SOURCE_PATH" -B "$BUILD_PATH"
+
+    echo "--- Building Firmware ---"
+    cmake --build "$BUILD_PATH" --parallel
+
+    echo "--- Build finished successfully ---"
 }
 
 flash()
 {
-	st-flash write $BUILD_PATH/bin/firmware.bin 0x08000000
-    exit
+    echo "--- Flashing firmware ---"
+    st-flash write "$FIRMWARE_BIN" 0x08000000
 }
 
 trace()
 {
-    st-trace --clock=144 --trace=2000000
-    exit
+    echo "--- Starting SWO trace ---"
+    st-trace --clock=144m --trace=1m
 }
 
 gdb()
 {
-    cd $SCRIPT_PATH/base/openocd
-    openocd -f stm32f4.cfg -c "gdb_port 3333" &
-    arm-none-eabi-gdb $BUILD_PATH/bin/firmware.elf -ex "target extended-remote localhost:3333"
-    exit
+    # Ensure OpenOCD is killed when the script exits (e.g., Ctrl+C)
+    trap 'echo -e "\n--- Shutting down OpenOCD ---"; kill $OPENOCD_PID' EXIT
+
+    echo "--- Starting OpenOCD ---"
+    openocd -f "$SCRIPT_DIR/base/openocd/stm32f4.cfg" -c "gdb_port 3333" &
+    OPENOCD_PID=$!
+
+    echo "--- Starting GDB (PID: $OPENOCD_PID) ---"
+    # Wait a moment for OpenOCD to start up before connecting GDB
+    sleep 1
+    arm-none-eabi-gdb "$FIRMWARE_ELF" -ex "target extended-remote localhost:3333"
+
+    # The trap will handle cleanup
 }
 
-# Parse arguments
+# --- Argument Parsing ---
+
+# Action flags
+DO_CLEAN=false
+DO_BUILD=false
+DO_FLASH=false
+DO_TRACE=false
+DO_GDB=false
+
+# If no arguments are provided, show help
+if [ $# -eq 0 ]; then
+    help
+fi
+
 while [[ $# -gt 0 ]]; do
   case $1 in
     -h|--help)
-      printHelp
-      ;;
-    -b|--build)
-      build
+      help
       ;;
     -c|--clear|--clean)
-      clean
+      DO_CLEAN=true
+      shift
+      ;;
+    -b|--build)
+      DO_BUILD=true
+      shift
       ;;
     -f|--flash)
-      flash
+      DO_FLASH=true
+      shift
       ;;
     -t|--trace)
-      trace
+      DO_TRACE=true
+      shift
       ;;
     -g|--gdb)
-      gdb
+      DO_GDB=true
+      shift
       ;;
-    -*|--*)
+    -*) # Handles unknown options
       echo "Unknown option $1"
-      echo "Tip: ./bldc --help"
-      exit
+      printHelp
       ;;
   esac
 done
+
+# --- Execute Actions in Logical Order ---
+
+if [ "$DO_CLEAN" = true ]; then
+    clean
+fi
+
+# A flash or GDB session implies a build is needed if not explicitly requested
+if [ "$DO_FLASH" = true ] || [ "$DO_GDB" = true ]; then
+    DO_BUILD=true
+fi
+
+if [ "$DO_BUILD" = true ]; then
+    build
+fi
+
+if [ "$DO_FLASH" = true ]; then
+    flash
+fi
+
+# GDB and Trace are mutually exclusive; they both try to talk to the chip
+if [ "$DO_GDB" = true ]; then
+    gdb
+elif [ "$DO_TRACE" = true ]; then
+    trace
+fi
