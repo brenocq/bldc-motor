@@ -108,7 +108,7 @@ struct TimerConfig {
 
 inline const std::array timerList{
     TimerConfig{LED_TIM, Mode::PWM, CounterMode::UP, LED_PERIOD},
-    TimerConfig{MOTOR_TIM, Mode::PWM, CounterMode::CENTER, MOTOR_PERIOD},
+    // TimerConfig{MOTOR_TIM, Mode::PWM, CounterMode::CENTER, MOTOR_PERIOD},
 };
 
 }; // namespace Timer

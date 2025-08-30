@@ -84,8 +84,10 @@ bool Dma::init() {
         hdma->Init.Mode = convert(dmaList[i].mode);
         hdma->Init.Priority = convert(dmaList[i].priority);
         hdma->Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-        if (HAL_DMA_Init(hdma) != HAL_OK)
+        if (HAL_DMA_Init(hdma) != HAL_OK) {
+            Log::error("Dma", "Failed to initialize DMA$0 STREAM$1 CH$2", int(dmaList[i].dma), int(dmaList[i].stream), int(dmaList[i].channel));
             return false;
+        }
     }
 
     Log::success("Dma", "Initialized");

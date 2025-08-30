@@ -184,5 +184,5 @@ void Log::log(const char* tagColor, std::string tag, const char* textColor, std:
 
     // Print [tag] text
     // transmit(std::string(tagColor) + "[" + tag + "] " + textColor + finalText.str() + COLOR_RESET + "\n");
-    transmit(std::string("[") + tag + "] " + finalText.str() + "\n");
+    transmit(std::string("[") + tag + "] " + finalText.str() + "\n\r");
 }

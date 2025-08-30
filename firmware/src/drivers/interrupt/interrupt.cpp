@@ -35,8 +35,8 @@ bool Interrupt::init() {
     HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
 
     // USB
-    HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
+    // HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 0);
+    // HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 
     Log::success("Interrupt", "Initialized");
     return true;

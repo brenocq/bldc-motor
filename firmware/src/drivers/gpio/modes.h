@@ -329,6 +329,44 @@ enum Mode {
     RTC_REFIN, ///< Real-time clock reference input
 };
 
+/**
+ * @brief Checks if the given mode is a USART/UART transmit pin.
+ * @param mode The GPIO mode to check.
+ * @return True if the mode is a TX pin, false otherwise.
+ */
+inline bool isUartTx(Mode mode) {
+    switch (mode) {
+        case Mode::USART1_TX:
+        case Mode::USART2_TX:
+        case Mode::USART3_TX:
+        case Mode::UART4_TX:
+        case Mode::UART5_TX:
+        case Mode::USART6_TX:
+            return true;
+        default:
+            return false;
+    }
 }
+
+/**
+ * @brief Checks if the given mode is a USART/UART receive pin.
+ * @param mode The GPIO mode to check.
+ * @return True if the mode is an RX pin, false otherwise.
+ */
+inline bool isUartRx(Mode mode) {
+    switch (mode) {
+        case Mode::USART1_RX:
+        case Mode::USART2_RX:
+        case Mode::USART3_RX:
+        case Mode::UART4_RX:
+        case Mode::UART5_RX:
+        case Mode::USART6_RX:
+            return true;
+        default:
+            return false;
+    }
+}
+
+} // namespace Gpio
 
 #endif // BLDC_DRIVERS_GPIO_MODES_H

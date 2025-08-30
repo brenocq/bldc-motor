@@ -159,7 +159,10 @@ void Gpio::initUart(Gpio gpio, Mode mode) {
     GPIO_InitTypeDef gpioInit{};
     gpioInit.Pin = convert(gpio.pin);
     gpioInit.Mode = GPIO_MODE_AF_PP;
-    gpioInit.Pull = GPIO_NOPULL;
+    if (isUartRx(mode))
+        gpioInit.Pull = GPIO_PULLUP;
+    else
+        gpioInit.Pull = GPIO_NOPULL;
     gpioInit.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     gpioInit.Alternate = getAlternateFunc(gpio, mode);
     HAL_GPIO_Init(convert(gpio.port), &gpioInit);
@@ -251,4 +254,3 @@ constexpr GPIO_TypeDef* Gpio::convert(Port port) {
 }
 
 constexpr uint16_t Gpio::convert(Pin pin) { return 1 << (uint8_t)pin; }
-

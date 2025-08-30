@@ -7,9 +7,19 @@
 #include <drivers/uart/uart.h>
 #include <utils/log.h>
 
-void Log::transmit(std::string str) {
-    // if (Uart::isInitialized() && !str.empty())
-    //     Uart::transmit((uint8_t*)str.data(), str.size());
+#define ENABLE_UART_LOG
+#define ENABLE_ITM_LOG
+
+void Log::transmit(const std::string& str) {
+#ifdef ENABLE_UART_LOG
+    // Send log through UART
+    if (Uart::isInitialized() && !str.empty())
+        Uart::transmit((uint8_t*)str.data(), str.size());
+#endif
+
+#ifdef ENABLE_ITM_LOG
+    // Send log through ITM
     for (size_t i = 0; i < str.size(); i++)
         ITM_SendChar(str[i]);
+#endif
 }

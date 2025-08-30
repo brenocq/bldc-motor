@@ -92,32 +92,36 @@ int main() {
     Hardware::delayMs(2000); // XXX Delay to show in tracer after programming
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
-    Gpio::write(Gpio::DEBUG0_PIN, false);
-    Gpio::write(Gpio::DEBUG1_PIN, false);
-    Gpio::write(Gpio::DEBUG2_PIN, false);
-    // if (!Uart::init())
-    //     Error::hardFault("Failed to initialize UART driver");
+    if (!Uart::init())
+        Error::hardFault("Failed to initialize UART driver");
     // if (!Spi::init())
     //     Error::hardFault("Failed to initialize SPI driver");
     //// if (!Usb::init())
     ////     Error::hardFault("Failed to initialize USB driver");
     // if (!Adc::init())
     //     Error::hardFault("Failed to initialize ADC driver");
-    // if (!Timer::init())
-    //     Error::hardFault("Failed to initialize TIMER driver");
-    // if (!Dma::init())
-    //     Error::hardFault("Failed to initialize DMA driver");
-    // if (!Interrupt::init())
-    //     Error::hardFault("Failed to initialize Interrupt driver");
+    if (!Timer::init())
+        Error::hardFault("Failed to initialize TIMER driver");
+    if (!Dma::init())
+        Error::hardFault("Failed to initialize DMA driver");
+    if (!Interrupt::init())
+        Error::hardFault("Failed to initialize Interrupt driver");
 
-    //// Timer-DMA
-    // Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
-    // Uart::linkDmaTx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_TX_STREAM));
-    // Uart::linkDmaRx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_RX_STREAM));
-    // Hardware::delayMs(1);
+    // Initialize debug pins as LOW
+    Gpio::write(Gpio::DEBUG0_PIN, false);
+    Gpio::write(Gpio::DEBUG1_PIN, false);
+    Gpio::write(Gpio::DEBUG2_PIN, false);
 
-    // if (!led.init())
-    //     Error::hardFault("Failed to initialize led driver");
+    // Timer-DMA
+    Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
+
+    // Link DMA to UART
+    Uart::linkDmaTx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_TX_STREAM));
+    Uart::linkDmaRx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_RX_STREAM));
+    Hardware::delayMs(1);
+
+    if (!led.init())
+        Error::hardFault("Failed to initialize led driver");
     // if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
     //     Error::hardFault("Failed to initialize encoder driver");
     // if (!voltage.init())
@@ -141,19 +145,17 @@ int main() {
     // int ledDelay = 0;
     // int count1 = 0;
 
-    // for (size_t i = 1; i < 16; i += 2)
-    //     led.setColor(i, 0, 1, 0);
-    // led.show();
+    for (size_t i = 0; i < 16; i++)
+        led.setColor(i, 0, 0, 1);
+    led.show();
 
     // float motorAngle = 0.0f;
     // bool sign = true;
     while (true) {
-        Gpio::write(Gpio::DEBUG0_PIN, true);
-        Hardware::delayMs(50);
-        Gpio::write(Gpio::DEBUG0_PIN, false);
-        Hardware::delayMs(100);
+        Log::success("Main", "Hello UART");
+        Hardware::delayMs(1000);
         // Usb::update();
-        // Uart::update();
+        Uart::update();
         // handleAttaConnector();
 
         // motorAngle += 1.0f / 180 * M_PI;

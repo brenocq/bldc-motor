@@ -31,6 +31,8 @@ Peripheral _default; ///< Peripheral to use if none is specified
 // Handle DMA transactions
 bool _txDmaBusy;
 bool _rxDmaBusy;
+bool _rxDmaLinked; ///< True if RX DMA is linked
+bool _txDmaLinked; ///< True if TX DMA is linked
 
 uint8_t _txBuffer[TX_BUFFER_SIZE];
 uint32_t _txBufferWriteIdx;
@@ -43,6 +45,9 @@ uint32_t _rxBufferReadIdx;
 
 bool Uart::init() {
     _initialized = false;
+    _txDmaLinked = false;
+    _rxDmaLinked = false;
+
     _txDmaBusy = false;
     _rxDmaBusy = false;
 
@@ -81,7 +86,10 @@ bool Uart::init() {
         huart->Init.Mode = UART_MODE_TX_RX;
         huart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
         huart->Init.OverSampling = UART_OVERSAMPLING_16;
-        HAL_UART_Init(huart);
+        if (HAL_UART_Init(huart) != HAL_OK) {
+            Log::error("Uart", "Failed to initialize UART$0", int(peripheral));
+            return false;
+        }
 
         // Register TX callback
         HAL_UART_RegisterCallback(huart, HAL_UART_TX_COMPLETE_CB_ID, transmitCompleteCallback);
@@ -98,6 +106,8 @@ bool Uart::init() {
 bool Uart::isInitialized() { return _initialized; }
 
 void Uart::update() {
+    if (!_initialized)
+        return;
     // Transmit pending transactions
     if (!_txDmaBusy) {
         // Calculate transmission size
@@ -118,14 +128,17 @@ void Uart::update() {
     }
 
     // Start DMA circular receive
-    if (!_rxDmaBusy)
+    if (!_rxDmaBusy) {
         if (HAL_UART_Receive_DMA(getHandle(Peripheral::DEFAULT), _rxBuffer, RX_BUFFER_SIZE) == HAL_OK)
             _rxDmaBusy = true;
         else
             Log::error("Uart", "Failed to start DMA receive");
+    }
 }
 
 void Uart::transmit(uint8_t* data, uint32_t size) {
+    if (!_initialized || !_txDmaLinked)
+        return;
     uint32_t availableSpace = 0;
     uint32_t headToEnd = 0;
 
@@ -155,6 +168,8 @@ void Uart::transmit(uint8_t* data, uint32_t size) {
 }
 
 uint32_t Uart::receive(uint8_t* data, uint32_t size) {
+    if (!_initialized || !_rxDmaLinked)
+        return 0;
     uint32_t rxBufferWriteIdx = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(getHandle(Peripheral::DEFAULT)->hdmarx);
 
     uint32_t readSize = 0;
@@ -170,14 +185,20 @@ uint32_t Uart::receive(uint8_t* data, uint32_t size) {
 
 // clang-format off
 #define LINK_DMA(__HANDLE__, __PPP_DMA_FIELD__, __DMA_HANDLE__) \
-    do {                                                         \
+    do {                                                        \
         (__HANDLE__)->__PPP_DMA_FIELD__ = (__DMA_HANDLE__);     \
-        (__DMA_HANDLE__)->Parent = (__HANDLE__);                  \
+        (__DMA_HANDLE__)->Parent = (__HANDLE__);                \
     } while (0U)
 // clang-format on
 
-void Uart::linkDmaTx(Peripheral peripheral, Dma::Handle* dmaHandle) { LINK_DMA(getHandle(peripheral), hdmatx, dmaHandle); }
-void Uart::linkDmaRx(Peripheral peripheral, Dma::Handle* dmaHandle) { LINK_DMA(getHandle(peripheral), hdmarx, dmaHandle); }
+void Uart::linkDmaTx(Peripheral peripheral, Dma::Handle* dmaHandle) {
+    LINK_DMA(getHandle(peripheral), hdmatx, dmaHandle);
+    _txDmaLinked = true;
+}
+void Uart::linkDmaRx(Peripheral peripheral, Dma::Handle* dmaHandle) {
+    LINK_DMA(getHandle(peripheral), hdmarx, dmaHandle);
+    _rxDmaLinked = true;
+}
 
 void Uart::transmitCompleteCallback(UART_HandleTypeDef* huart) { _txDmaBusy = false; }
 

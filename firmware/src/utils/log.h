@@ -111,7 +111,7 @@ class Log final {
     template <class... Args>
     static void log(const char* tagColor, std::string tag, const char* textColor, std::string text, Args&&... args);
 
-    static void transmit(std::string str);
+    static void transmit(const std::string& str);
 };
 
 #include <utils/log.inl>

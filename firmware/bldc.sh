@@ -60,7 +60,7 @@ flash()
 trace()
 {
     echo "--- Starting SWO trace ---"
-    st-trace --clock=144m --trace=1m
+    st-trace --clock=144m --trace=2m
 }
 
 gdb()

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.22)
 project(bldc_motor_controller LANGUAGES CXX C)
 
 # Compiler
@@ -6,7 +6,7 @@ enable_language(ASM)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_C_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-g++)
-# set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Folders
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/base/linker/STM32F4xx/STM32F446xE.ld)
