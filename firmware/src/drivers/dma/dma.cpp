@@ -19,22 +19,14 @@ uint32_t convert(Alignment alignment, Source source);
 uint32_t convert(Mode mode);
 uint32_t convert(Priority priority);
 
-Handle hdma1stream0;
-Handle hdma1stream1;
-Handle hdma1stream2;
-Handle hdma1stream3;
-Handle hdma1stream4;
-Handle hdma1stream5;
-Handle hdma1stream6;
-Handle hdma1stream7;
-Handle hdma2stream0;
-Handle hdma2stream1;
-Handle hdma2stream2;
-Handle hdma2stream3;
-Handle hdma2stream4;
-Handle hdma2stream5;
-Handle hdma2stream6;
-Handle hdma2stream7;
+// DMA handles
+Handle _dmaHandles[2][8]; // [dma][stream]
+
+// DMA instances
+static DMA_Stream_TypeDef* _dmaInstances[2][8] = {
+    {DMA1_Stream0, DMA1_Stream1, DMA1_Stream2, DMA1_Stream3, DMA1_Stream4, DMA1_Stream5, DMA1_Stream6, DMA1_Stream7},
+    {DMA2_Stream0, DMA2_Stream1, DMA2_Stream2, DMA2_Stream3, DMA2_Stream4, DMA2_Stream5, DMA2_Stream6, DMA2_Stream7},
+};
 
 } // namespace Dma
 
@@ -101,88 +93,14 @@ bool Dma::deinit() {
 }
 
 Dma::Handle* Dma::getHandle(Dma dma, Stream stream) {
-    if (dma == DMA1) {
-        switch (stream) {
-            case STREAM0:
-                return &hdma1stream0;
-            case STREAM1:
-                return &hdma1stream1;
-            case STREAM2:
-                return &hdma1stream2;
-            case STREAM3:
-                return &hdma1stream3;
-            case STREAM4:
-                return &hdma1stream4;
-            case STREAM5:
-                return &hdma1stream5;
-            case STREAM6:
-                return &hdma1stream6;
-            case STREAM7:
-                return &hdma1stream7;
-        }
-    } else if (dma == DMA2) {
-        switch (stream) {
-            case STREAM0:
-                return &hdma2stream0;
-            case STREAM1:
-                return &hdma2stream1;
-            case STREAM2:
-                return &hdma2stream2;
-            case STREAM3:
-                return &hdma2stream3;
-            case STREAM4:
-                return &hdma2stream4;
-            case STREAM5:
-                return &hdma2stream5;
-            case STREAM6:
-                return &hdma2stream6;
-            case STREAM7:
-                return &hdma2stream7;
-        }
-    }
+    if (dma >= 1 && dma <= 2)
+        return &_dmaHandles[dma - 1][stream];
     return nullptr;
 }
 
 DMA_Stream_TypeDef* Dma::getInstance(Dma dma, Stream stream) {
-    if (dma == DMA1) {
-        switch (stream) {
-            case STREAM0:
-                return DMA1_Stream0;
-            case STREAM1:
-                return DMA1_Stream1;
-            case STREAM2:
-                return DMA1_Stream2;
-            case STREAM3:
-                return DMA1_Stream3;
-            case STREAM4:
-                return DMA1_Stream4;
-            case STREAM5:
-                return DMA1_Stream5;
-            case STREAM6:
-                return DMA1_Stream6;
-            case STREAM7:
-                return DMA1_Stream7;
-        }
-    } else if (dma == DMA2) {
-        switch (stream) {
-            case STREAM0:
-                return DMA2_Stream0;
-            case STREAM1:
-                return DMA2_Stream1;
-            case STREAM2:
-                return DMA2_Stream2;
-            case STREAM3:
-                return DMA2_Stream3;
-            case STREAM4:
-                return DMA2_Stream4;
-            case STREAM5:
-                return DMA2_Stream5;
-            case STREAM6:
-                return DMA2_Stream6;
-            case STREAM7:
-                return DMA2_Stream7;
-        }
-    }
+    if (dma >= 1 && dma <= 2)
+        return _dmaInstances[dma - 1][stream];
     return nullptr;
 }
 
