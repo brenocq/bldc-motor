@@ -28,19 +28,27 @@ bool _initialized;
 Peripheral _default; ///< Peripheral to use if none is specified
 
 // Handle DMA transactions
-bool _txDmaBusy;
-bool _rxDmaBusy;
 bool _rxDmaLinked; ///< True if RX DMA is linked
 bool _txDmaLinked; ///< True if TX DMA is linked
 
+// Transmit buffer
 CircularBuffer<TX_BUFFER_SIZE> _txBuffer;
-uint8_t _rxBuffer[RX_BUFFER_SIZE];
-uint32_t _rxBufferReadIdx;
+bool _txDmaBusy;
+volatile size_t _lastTxDmaSize = 0;
+
+// Receive buffer
+// _rxDmaBuffer is the raw buffer written to by the DMA hardware
+uint8_t _rxDmaBuffer[RX_BUFFER_SIZE];
+bool _rxDmaBusy;
+// _rxBuffer is the application-side buffer where complete messages are stored
+CircularBuffer<RX_BUFFER_SIZE> _rxBuffer;
+// Tracks the last known position of the DMA write pointer in _rxDmaBuffer
+volatile uint16_t _lastRxDmaPos = 0;
 
 // Internal function to be called by the DMA complete ISR
 void txDmaComplete();
-// TODO Internal function to be called by the UART idle line ISR
-// void rxDmaEvent(uint16_t size);
+// Internal function to be called by the UART idle line ISR
+void rxDmaEvent(uint16_t size);
 
 } // namespace Uart
 
@@ -49,12 +57,12 @@ bool Uart::init() {
     _txDmaLinked = false;
     _rxDmaLinked = false;
 
-    _txDmaBusy = false;
-    _rxDmaBusy = false;
-
-    // Initialize circular buffer
+    // Initialize buffers
     _txBuffer.clear();
-    _rxBufferReadIdx = 0;
+    _txDmaBusy = false;
+    _rxBuffer.clear();
+    _lastRxDmaPos = 0;
+    _rxDmaBusy = false;
 
     // Get peripherals in use
     std::set<Peripheral> inUse;
@@ -103,25 +111,29 @@ bool Uart::init() {
 bool Uart::isInitialized() { return _initialized; }
 
 void Uart::update() {
-    if (!_initialized)
+    if (!_initialized || !_txDmaLinked || !_rxDmaLinked)
         return;
+
     // Transmit pending transactions
     if (!_txDmaBusy) {
         // DMA transmit
         uint32_t transmitSize = _txBuffer.getContiguousReadSize();
         if (transmitSize > 0) {
+            _lastTxDmaSize = transmitSize;
             uint8_t* dataToTransmit = _txBuffer.getReadPointer();
             if (HAL_UART_Transmit_DMA(getHandle(Peripheral::DEFAULT), dataToTransmit, transmitSize) == HAL_OK) {
                 // We advance the read pointer ONLY after the transfer is complete, which will happen in the txDmaComplete() function
                 _txDmaBusy = true;
-            } else
+            } else {
                 Log::error("Uart", "Failed to transmit, DMA error");
+                _lastTxDmaSize = 0; // Reset on failure
+            }
         }
     }
 
-    // Start DMA circular receive
+    // Start DMA circular receive (if not already started)
     if (!_rxDmaBusy) {
-        if (HAL_UART_Receive_DMA(getHandle(Peripheral::DEFAULT), _rxBuffer, RX_BUFFER_SIZE) == HAL_OK)
+        if (HAL_UART_Receive_DMA(getHandle(Peripheral::DEFAULT), _rxDmaBuffer, RX_BUFFER_SIZE) == HAL_OK)
             _rxDmaBusy = true;
         else
             Log::error("Uart", "Failed to start DMA receive");
@@ -136,18 +148,17 @@ void Uart::transmit(uint8_t* data, uint32_t size) {
 }
 
 uint32_t Uart::receive(uint8_t* data, uint32_t size) {
-    // TODO receive is not well implemented yet
     if (!_initialized || !_rxDmaLinked)
         return 0;
-    uint32_t rxBufferWriteIdx = RX_BUFFER_SIZE - __HAL_DMA_GET_COUNTER(getHandle(Peripheral::DEFAULT)->hdmarx);
 
-    uint32_t readSize = 0;
-    if (rxBufferWriteIdx >= _rxBufferReadIdx)
-        readSize = std::min(size, rxBufferWriteIdx - _rxBufferReadIdx);
-    else
-        readSize = std::min(size, RX_BUFFER_SIZE - _rxBufferReadIdx);
-    std::memcpy(data, &_rxBuffer[_rxBufferReadIdx], readSize);
-    _rxBufferReadIdx = (_rxBufferReadIdx + readSize) % RX_BUFFER_SIZE;
+    uint32_t readSize = _rxBuffer.getContiguousReadSize();
+    if (readSize > size)
+        readSize = size;
+
+    if (readSize > 0) {
+        std::memcpy(data, _rxBuffer.getReadPointer(), readSize);
+        _rxBuffer.advanceRead(readSize);
+    }
 
     return readSize;
 }
@@ -170,9 +181,36 @@ void Uart::linkDmaRx(Peripheral peripheral, Dma::Handle* dmaHandle) {
 }
 
 void Uart::txDmaComplete() {
-    // Advance the read pointer by the size of the last chunk that was sent.
-    _txBuffer.advanceRead(getHandle(_default)->hdmatx->Instance->NDTR);
+    // Advance the read pointer by the size of the last chunk that was sent
+    _txBuffer.advanceRead(_lastTxDmaSize);
+    _lastTxDmaSize = 0;
     _txDmaBusy = false;
+}
+
+void Uart::rxDmaEvent(uint16_t size) {
+    // Calculate the length of the newly received data chunk
+    uint16_t len = 0;
+    if (size > _lastRxDmaPos) {
+        // Simple case: no wrap-around
+        len = size - _lastRxDmaPos;
+        _rxBuffer.push(&_rxDmaBuffer[_lastRxDmaPos], len);
+    } else {
+        // DMA has wrapped around the buffer
+        // Part 1: from last position to the end of the buffer
+        len = RX_BUFFER_SIZE - _lastRxDmaPos;
+        _rxBuffer.push(&_rxDmaBuffer[_lastRxDmaPos], len);
+
+        // Part 2: from the beginning of the buffer to the new position
+        if (size > 0)
+            _rxBuffer.push(&_rxDmaBuffer[0], size);
+    }
+
+    // Update the last known position
+    _lastRxDmaPos = size;
+
+    // Re-arm the DMA reception to catch the next message
+    HAL_UARTEx_ReceiveToIdle_DMA(getHandle(_default), _rxDmaBuffer, RX_BUFFER_SIZE);
+    _rxDmaBusy = true;
 }
 
 UART_HandleTypeDef* Uart::getHandle(Peripheral peripheral) {
@@ -284,17 +322,13 @@ void Uart::disableClock(Peripheral peripheral) {
 extern "C" {
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef* huart) {
-    // TODO This could be made more generic to use more than one UART
     if (huart->Instance == Uart::getInstance(Uart::Peripheral::DEFAULT))
         Uart::txDmaComplete();
 }
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef* huart, uint16_t Size) {
-    // TODO
-    // TODO This could be made more generic to use more than one UART
-    // if (huart->Instance == Uart::getInstance(Uart::Peripheral::DEFAULT)) {
-    //    Uart::rxDmaEvent(Size);
-    //}
+    if (huart->Instance == Uart::getInstance(Uart::Peripheral::DEFAULT))
+        Uart::rxDmaEvent(Size);
 }
 
 } // extern "C"
