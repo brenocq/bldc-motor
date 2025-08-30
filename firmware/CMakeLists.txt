@@ -151,6 +151,7 @@ set(BLDC_SOURCES
 
     ../common/attaConnector.cpp
     src/utils/attaConnectorPlatform.cpp
+    src/utils/circularBuffer.cpp
     src/utils/error.cpp
     src/utils/log.cpp
 

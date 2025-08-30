@@ -29,15 +29,12 @@ constexpr uint32_t RX_BUFFER_SIZE = 1024;
 using Handle = UART_HandleTypeDef;
 
 bool init();
-
 bool isInitialized();
-
 void update();
 
 Handle* getHandle(Peripheral peripheral);
 
 void transmit(uint8_t* data, uint32_t size);
-
 uint32_t receive(uint8_t* data, uint32_t size);
 
 void linkDmaTx(Peripheral peripheral, Dma::Handle* dmaHandle);
