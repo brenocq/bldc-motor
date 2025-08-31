@@ -10,6 +10,8 @@
 
 namespace Hardware {
 
+bool init();
+
 void delay(float s);
 
 void delayMs(uint32_t ms);
