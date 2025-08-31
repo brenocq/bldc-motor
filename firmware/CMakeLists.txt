@@ -196,6 +196,8 @@ set(BLDC_SOURCES
     src/system/sysmem.c
     src/system/system_stm32f4xx.c
 
+    src/tasks/tasks.cpp
+
     ../common/attaConnector.cpp
     src/utils/attaConnectorPlatform.cpp
     src/utils/circularBuffer.cpp
