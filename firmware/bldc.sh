@@ -54,7 +54,7 @@ build()
 flash()
 {
     echo "--- Flashing firmware ---"
-    st-flash write "$FIRMWARE_BIN" 0x08000000
+    st-flash --reset write "$FIRMWARE_BIN" 0x08000000
 }
 
 trace()

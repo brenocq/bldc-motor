@@ -12,6 +12,9 @@
 #include <system/hal.h>
 #include <utils/error.h>
 #include <utils/log.h>
+// FreeRTOS includes
+#include <FreeRTOS.h>
+#include <task.h>
 
 bool Interrupt::init() {
     // TIM2
@@ -52,10 +55,18 @@ void HardFault_Handler() { Error::hardFault(); }
 void MemManage_Handler() { Error::memFault(); }
 void BusFault_Handler() { Error::busFault(); }
 void UsageFault_Handler() { Error::usageFault(); }
-void SVC_Handler() {}
 void DebugMon_Handler() {}
-void PendSV_Handler() {}
-void SysTick_Handler() { HAL_IncTick(); }
+
+void SysTick_Handler(void) {
+    HAL_IncTick();
+#if (INCLUDE_xTaskGetSchedulerState == 1)
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
+#endif
+        xPortSysTickHandler();
+#if (INCLUDE_xTaskGetSchedulerState == 1)
+    }
+#endif
+}
 
 //----- Peripheral interrupts -----//
 void TIM2_IRQHandler() { HAL_TIM_IRQHandler(Timer::getHandle(Timer::TIM2)); }

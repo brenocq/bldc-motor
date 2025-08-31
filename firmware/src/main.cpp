@@ -27,6 +27,37 @@
 #include <utils/error.h>
 #include <utils/log.h>
 
+// FreeRTOS includes
+#include <FreeRTOS.h>
+#include <cmsis_os.h>
+#include <task.h>
+
+/* Definitions for defaultTask */
+osThreadId_t defaultTaskHandle;
+const osThreadAttr_t defaultTask_attributes = {
+    .name = "defaultTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t)osPriorityNormal,
+};
+/* Definitions for taskOne */
+osThreadId_t taskOneHandle;
+const osThreadAttr_t taskOne_attributes = {
+    .name = "taskOne",
+    .stack_size = 1024 * 4,
+    .priority = (osPriority_t)osPriorityNormal,
+};
+/* Definitions for taskTwo */
+osThreadId_t taskTwoHandle;
+const osThreadAttr_t taskTwo_attributes = {
+    .name = "taskTwo",
+    .stack_size = 1024 * 4,
+    .priority = (osPriority_t)osPriorityNormal,
+};
+
+void StartDefaultTask(void* argument);
+void StartTaskOne(void* argument);
+void StartTaskTwo(void* argument);
+
 struct Color {
     float red;
     float green;
@@ -89,9 +120,10 @@ void handleAttaConnector() {
 int main() {
     HAL_Init();
     Clock::init();
-    Hardware::delayMs(2000); // XXX Delay to show in tracer after programming
     if (!Gpio::init())
         Error::hardFault("Failed to initialize GPIO driver");
+    osKernelInitialize();
+
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
     // if (!Spi::init())
@@ -141,22 +173,28 @@ int main() {
 
     Log::success("Main", "Initialized");
 
+    // defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+    // taskOneHandle = osThreadNew(StartTaskOne, NULL, &taskOne_attributes);
+    // taskTwoHandle = osThreadNew(StartTaskTwo, NULL, &taskTwo_attributes);
+
     // FocController foc;
     // int ledDelay = 0;
     // int count1 = 0;
 
-    for (size_t i = 0; i < 16; i++)
-        led.setColor(i, 0, 0, 1);
-    led.show();
+    // for (size_t i = 0; i < 16; i++)
+    //     led.setColor(i, 0, 0, 1);
+    // led.show();
+
+    // osKernelStart();
 
     // float motorAngle = 0.0f;
     // bool sign = true;
     while (true) {
-        Log::success("Main", "Hello UART");
+        Log::success("Main", "Hello FreeRTOS:: $0", tskKERNEL_VERSION_NUMBER);
         Hardware::delayMs(1000);
         // Usb::update();
         Uart::update();
-        // handleAttaConnector();
+        //  handleAttaConnector();
 
         // motorAngle += 1.0f / 180 * M_PI;
         // if (motorAngle >= 2 * M_PI)
@@ -184,4 +222,26 @@ int main() {
         // }
     }
     return 0;
+}
+
+void StartDefaultTask(void* argument) {
+    for (;;) {
+        osDelay(1);
+    }
+}
+
+void StartTaskOne(void* argument) {
+    for (;;) {
+        // Log::success("Main", "Task 1");
+        // Uart::update();
+        osDelay(500);
+    }
+}
+
+void StartTaskTwo(void* argument) {
+    for (;;) {
+        // Log::success("Main", "Task 2");
+        // Uart::update();
+        osDelay(1000);
+    }
 }
