@@ -17,24 +17,27 @@
 #include <task.h>
 
 bool Interrupt::init() {
+    // All peripheral interrupt priorities MUST be >= configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY (5)
+    const uint32_t safePrio = configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY;
+
     // TIM2
-    HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(TIM2_IRQn, safePrio, 0);
     HAL_NVIC_EnableIRQ(TIM2_IRQn);
 
     // DMA TIM2 CH1
-    HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, safePrio, 0);
     HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
     // USART6
-    HAL_NVIC_SetPriority(USART6_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(USART6_IRQn, safePrio, 0);
     HAL_NVIC_EnableIRQ(USART6_IRQn);
 
     // DMA USART6 TX
-    HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, safePrio, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
 
     // DMA USART6 RX
-    HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, safePrio, 0);
     HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
 
     // USB
@@ -57,7 +60,7 @@ void BusFault_Handler() { Error::busFault(); }
 void UsageFault_Handler() { Error::usageFault(); }
 void DebugMon_Handler() {}
 
-void SysTick_Handler(void) {
+void SysTick_Handler() {
     HAL_IncTick();
 #if (INCLUDE_xTaskGetSchedulerState == 1)
     if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {

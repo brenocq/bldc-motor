@@ -8,6 +8,12 @@ set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Build type
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
 # Folders
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/base/linker/STM32F4xx/STM32F446xE.ld)
 set(CMSIS_DIR ${CMAKE_SOURCE_DIR}/base/cube/CMSIS)
@@ -54,6 +60,12 @@ list(APPEND LINKER_FLAGS
     -Wl,--gc-sections
     #-Wl,--verbose
 )
+
+# Debug and Release flags
+set(CMAKE_C_FLAGS_RELEASE   "-O3 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_C_FLAGS_DEBUG   "-O0 -g")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
 
 # Target architecture flags apply to all steps (compile and link)
 add_compile_options(${TARGET_ARCH_FLAGS})

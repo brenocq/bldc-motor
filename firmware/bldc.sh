@@ -27,10 +27,11 @@ help()
     echo "  -g, --gdb         Open OpenOCD and GDB session"
     echo
     echo "Other Options:"
+    echo "  -d, --debug        Build with debug symbols (-g -O0)"
     echo "  -h, --help        This help menu"
     echo
     echo "Example: ./bldc --clean --build --flash"
-    echo "Example: ./bldc --build"
+    echo "Example: ./bldc --build --debug"
     exit 0
 }
 
@@ -42,8 +43,13 @@ clean()
 
 build()
 {
-    echo "--- Configuring Firmware ---"
-    cmake -S "$SOURCE_PATH" -B "$BUILD_PATH"
+    local BUILD_TYPE="Release"
+    if [ "$IS_DEBUG_BUILD" = true ]; then
+        BUILD_TYPE="Debug"
+    fi
+
+    echo "--- Configuring Firmware (${BUILD_TYPE}) ---"
+    cmake -S "$SOURCE_PATH" -B "$BUILD_PATH" -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 
     echo "--- Building Firmware ---"
     cmake --build "$BUILD_PATH" --parallel
@@ -88,6 +94,7 @@ DO_BUILD=false
 DO_FLASH=false
 DO_TRACE=false
 DO_GDB=false
+IS_DEBUG_BUILD=false
 
 # If no arguments are provided, show help
 if [ $# -eq 0 ]; then
@@ -119,6 +126,10 @@ while [[ $# -gt 0 ]]; do
       DO_GDB=true
       shift
       ;;
+    -d|--debug)
+      IS_DEBUG_BUILD=true
+      shift
+      ;;
     -*) # Handles unknown options
       echo "Unknown option $1"
       printHelp
@@ -135,6 +146,11 @@ fi
 # A flash or GDB session implies a build is needed if not explicitly requested
 if [ "$DO_FLASH" = true ] || [ "$DO_GDB" = true ]; then
     DO_BUILD=true
+fi
+
+# A GDB session always requires a debug build
+if [ "$DO_GDB" = true ]; then
+    IS_DEBUG_BUILD=true
 fi
 
 if [ "$DO_BUILD" = true ]; then

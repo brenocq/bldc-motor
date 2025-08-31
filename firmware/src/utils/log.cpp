@@ -7,7 +7,7 @@
 #include <drivers/uart/uart.h>
 #include <utils/log.h>
 
-#define ENABLE_UART_LOG
+//#define ENABLE_UART_LOG
 #define ENABLE_ITM_LOG
 
 void Log::transmit(const std::string& str) {
