@@ -7,6 +7,7 @@
 #include <tasks/tasks.h>
 #include <utils/log.h>
 
+#include <drivers/current/current.h>
 #include <drivers/voltage/voltage.h>
 
 // FreeRTOS includes
@@ -47,6 +48,11 @@ void attaConnectorTask(void* argument) {
         float v_v = volt_v_phase.read();
         float v_w = volt_w_phase.read();
         Log::success("AttaConnectorTask", "Voltages: SRC=$0V, U=$1V, V=$2V, W=$3V", v_src, v_u, v_v, v_w);
+
+        float i_u = curr_u_phase.read();
+        float i_v = curr_v_phase.read();
+        float i_w = curr_w_phase.read();
+        Log::success("AttaConnectorTask", "Currents: U=$0A, V=$1A, W=$2A", i_u, i_v, i_w);
 
         Log::success("AttaConnectorTask", "Running...");
         osDelay(500);

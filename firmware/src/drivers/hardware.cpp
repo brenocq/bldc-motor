@@ -6,6 +6,7 @@
 //--------------------------------------------------
 #include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
+#include <drivers/current/current.h>
 #include <drivers/dma/dma.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
@@ -60,6 +61,14 @@ bool Hardware::init() {
         Error::hardFault("Failed to initialize voltage V_PIN driver");
     if (!volt_w_phase.init(Gpio::VOLT_W_PIN))
         Error::hardFault("Failed to initialize voltage W_PIN driver");
+
+    // Initialize current sense
+    if (!curr_u_phase.init(Gpio::CURR_U_PIN))
+        Error::hardFault("Failed to initialize current U_PIN driver");
+    if (!curr_v_phase.init(Gpio::CURR_V_PIN))
+        Error::hardFault("Failed to initialize current V_PIN driver");
+    if (!curr_w_phase.init(Gpio::CURR_W_PIN))
+        Error::hardFault("Failed to initialize current W_PIN driver");
 
     // if (!led.init())
     //    Error::hardFault("Failed to initialize led driver");

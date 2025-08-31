@@ -34,7 +34,9 @@ inline const std::array adcList{
     AdcConfig{Gpio::VOLT_V_PIN, Peripheral::ADC1},
     AdcConfig{Gpio::VOLT_W_PIN, Peripheral::ADC1},
     // Current sense
-    //AdcConfig{Gpio::CURR_U_PIN, Peripheral::ADC2},
+    AdcConfig{Gpio::CURR_U_PIN, Peripheral::ADC2},
+    AdcConfig{Gpio::CURR_V_PIN, Peripheral::ADC2},
+    AdcConfig{Gpio::CURR_W_PIN, Peripheral::ADC2},
 };
 // clang-format on
 
