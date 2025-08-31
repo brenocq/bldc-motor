@@ -6,10 +6,11 @@
 //--------------------------------------------------
 #ifndef BLDC_DRIVERS_VOLTAGE_VOLTAGE_H
 #define BLDC_DRIVERS_VOLTAGE_VOLTAGE_H
+#include <drivers/gpio/gpio.h>
 
 class Voltage {
   public:
-    bool init();
+    bool init(Gpio::Gpio gpio);
 
     float read();
 
@@ -20,10 +21,15 @@ class Voltage {
     //            |
     //            |
     //           Vout
-    static constexpr float R1 = 200.0f;
-    static constexpr float R2 = 100.0f;
+    static constexpr float R1 = 20.0f;
+    static constexpr float R2 = 10.0f;
+
+    Gpio::Gpio _gpio;
 };
 
-inline Voltage voltage;
+inline Voltage volt_src;
+inline Voltage volt_u_phase;
+inline Voltage volt_w_phase;
+inline Voltage volt_v_phase;
 
 #endif // BLDC_DRIVERS_VOLTAGE_VOLTAGE_H

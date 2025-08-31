@@ -26,10 +26,17 @@ struct AdcConfig {
     Peripheral peripheral;
 };
 
+// clang-format off
 inline const std::array adcList{
+    // Voltage sense
     AdcConfig{Gpio::VOLT_SRC_PIN, Peripheral::ADC1},
-    AdcConfig{Gpio::CURR_U_PIN, Peripheral::ADC2},
+    AdcConfig{Gpio::VOLT_U_PIN, Peripheral::ADC1},
+    AdcConfig{Gpio::VOLT_V_PIN, Peripheral::ADC1},
+    AdcConfig{Gpio::VOLT_W_PIN, Peripheral::ADC1},
+    // Current sense
+    //AdcConfig{Gpio::CURR_U_PIN, Peripheral::ADC2},
 };
+// clang-format on
 
 } // namespace Adc
 

@@ -7,6 +7,8 @@
 #include <tasks/tasks.h>
 #include <utils/log.h>
 
+#include <drivers/voltage/voltage.h>
+
 // FreeRTOS includes
 #include <FreeRTOS.h>
 #include <cmsis_os.h>
@@ -27,7 +29,7 @@ bool Tasks::init() {
 void controllerTask(void* argument) {
     for (;;) {
         Log::success("ControllerTask", "Running...");
-        osDelay(100);
+        osDelay(1000);
     }
 }
 
@@ -40,6 +42,12 @@ void ledTask(void* argument) {
 
 void attaConnectorTask(void* argument) {
     for (;;) {
+        float v_src = volt_src.read();
+        float v_u = volt_u_phase.read();
+        float v_v = volt_v_phase.read();
+        float v_w = volt_w_phase.read();
+        Log::success("AttaConnectorTask", "Voltages: SRC=$0V, U=$1V, V=$2V, W=$3V", v_src, v_u, v_v, v_w);
+
         Log::success("AttaConnectorTask", "Running...");
         osDelay(500);
     }

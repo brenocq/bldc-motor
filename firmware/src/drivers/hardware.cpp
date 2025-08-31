@@ -4,6 +4,7 @@
 // Date: 2023-09-07
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include <drivers/adc/adc.h>
 #include <drivers/clock/clock.h>
 #include <drivers/dma/dma.h>
 #include <drivers/gpio/gpio.h>
@@ -11,6 +12,7 @@
 #include <drivers/interrupt/interrupt.h>
 #include <drivers/timer/timer.h>
 #include <drivers/uart/uart.h>
+#include <drivers/voltage/voltage.h>
 #include <system/hal.h>
 #include <utils/error.h>
 #include <utils/log.h>
@@ -25,10 +27,10 @@ bool Hardware::init() {
         Error::hardFault("Failed to initialize UART driver");
     // if (!Spi::init())
     //     Error::hardFault("Failed to initialize SPI driver");
-    //// if (!Usb::init())
-    ////     Error::hardFault("Failed to initialize USB driver");
-    // if (!Adc::init())
-    //     Error::hardFault("Failed to initialize ADC driver");
+    // if (!Usb::init())
+    //     Error::hardFault("Failed to initialize USB driver");
+    if (!Adc::init())
+        Error::hardFault("Failed to initialize ADC driver");
     if (!Timer::init())
         Error::hardFault("Failed to initialize TIMER driver");
     if (!Dma::init())
@@ -49,12 +51,21 @@ bool Hardware::init() {
     Uart::linkDmaRx(Uart::Peripheral::UART6, Dma::getHandle(Dma::UART_DMA, Dma::UART_RX_STREAM));
     Hardware::delayMs(1);
 
+    // Initialize voltage sense
+    if (!volt_src.init(Gpio::VOLT_SRC_PIN))
+        Error::hardFault("Failed to initialize voltage SRC_PIN driver");
+    if (!volt_u_phase.init(Gpio::VOLT_U_PIN))
+        Error::hardFault("Failed to initialize voltage U_PIN driver");
+    if (!volt_v_phase.init(Gpio::VOLT_V_PIN))
+        Error::hardFault("Failed to initialize voltage V_PIN driver");
+    if (!volt_w_phase.init(Gpio::VOLT_W_PIN))
+        Error::hardFault("Failed to initialize voltage W_PIN driver");
+
     // if (!led.init())
     //    Error::hardFault("Failed to initialize led driver");
     // if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
     //     Error::hardFault("Failed to initialize encoder driver");
-    // if (!voltage.init())
-    //     Error::hardFault("Failed to initialize voltage driver");
+
     // if (!phaseU.init(Phase::U, Spi::Peripheral::SPI1, Gpio::PHASE_CS_U_PIN))
     //     Error::hardFault("Failed to initialize phase driver for phase U");
     // if (!phaseV.init(Phase::V, Spi::Peripheral::SPI1, Gpio::PHASE_CS_V_PIN))

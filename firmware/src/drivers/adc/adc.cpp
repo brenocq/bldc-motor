@@ -12,12 +12,6 @@ namespace Adc {
 
 constexpr uint32_t timeout = 100; ///< Timeout 100ms
 
-Peripheral getPeripheral(Gpio::Gpio gpio);
-ADC_HandleTypeDef* getHandle(Peripheral peripheral);
-ADC_TypeDef* getInstance(Peripheral peripheral);
-void enableClock(Peripheral peripheral);
-void disableClock(Peripheral peripheral);
-
 ADC_HandleTypeDef hadc1;
 ADC_HandleTypeDef hadc2;
 ADC_HandleTypeDef hadc3;
@@ -96,29 +90,28 @@ static const std::array _adcAF{
 };
 // clang-format on
 
+Peripheral getPeripheral(Gpio::Gpio gpio);
+ADC_HandleTypeDef* getHandle(Peripheral peripheral);
+ADC_TypeDef* getInstance(Peripheral peripheral);
+Channel getChannel(Gpio::Gpio gpio, Peripheral peripheral);
+void enableClock(Peripheral peripheral);
+void disableClock(Peripheral peripheral);
+
 } // namespace Adc
 
 bool Adc::init() {
-    // Check for conflicts
-    bool conflict = false;
-    for (uint32_t i = 0; i < adcList.size(); i++)
-        for (uint32_t j = i + 1; j < adcList.size(); j++)
-            if (adcList[i].gpio == adcList[j].gpio || adcList[i].peripheral == adcList[j].peripheral)
-                conflict = true;
-    if (conflict)
-        return false;
-
     // Initialize ADCs
-    std::array<bool, 4> usedAdc = {false, false, false, false};
+    std::array<bool, 3> usedAdc = {false, false, false};
     for (const AdcConfig& adcConfig : adcList)
-        usedAdc[int(adcConfig.peripheral)] = true;
-    for (size_t i = 1; i < usedAdc.size(); i++) {
+        usedAdc[int(adcConfig.peripheral) - 1] = true;
+    for (size_t i = 0; i < usedAdc.size(); i++) {
         if (usedAdc[i]) {
-            enableClock(Peripheral(i));
+            Peripheral peripheral = Peripheral(i + 1);
+            enableClock(peripheral);
 
-            ADC_HandleTypeDef* handle = getHandle(Peripheral(i));
-            handle->Instance = getInstance(Peripheral(i));
-            handle->Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+            ADC_HandleTypeDef* handle = getHandle(peripheral);
+            handle->Instance = getInstance(peripheral);
+            handle->Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
             handle->Init.Resolution = ADC_RESOLUTION_12B;
             handle->Init.ScanConvMode = DISABLE;
             handle->Init.ContinuousConvMode = DISABLE;
@@ -134,28 +127,6 @@ bool Adc::init() {
                 return false;
         }
     }
-
-    // Link ADCs to GPIO
-    for (const AdcConfig& adcConfig : adcList) {
-        // Check which channel
-        Channel ch = CH_INVALID;
-        for (AdcAF af : _adcAF) {
-            if (af.gpio == adcConfig.gpio && af.peripheral == adcConfig.peripheral) {
-                ch = af.channel;
-                break;
-            }
-        }
-        if (ch == CH_INVALID)
-            return false;
-
-        // Configure ADC channel
-        ADC_ChannelConfTypeDef sConfig = {0};
-        sConfig.Channel = uint32_t(ch);
-        sConfig.Rank = 1;
-        sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
-        if (HAL_ADC_ConfigChannel(getHandle(adcConfig.peripheral), &sConfig) != HAL_OK)
-            return false;
-    }
     return true;
 }
 
@@ -170,7 +141,20 @@ bool Adc::deinit() {
 }
 
 uint16_t Adc::read(Gpio::Gpio gpio) {
-    auto handle = getHandle(getPeripheral(gpio));
+    Peripheral peripheral = getPeripheral(gpio);
+    Channel channel = getChannel(gpio, peripheral);
+    if (channel == Channel::CH_INVALID)
+        return 0xFFFF;
+
+    ADC_HandleTypeDef* handle = getHandle(peripheral);
+
+    // Configure the specific channel before reading
+    ADC_ChannelConfTypeDef sConfig = {0};
+    sConfig.Channel = static_cast<uint32_t>(channel);
+    sConfig.Rank = 1;
+    sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES; // Low noise setting
+    if (HAL_ADC_ConfigChannel(handle, &sConfig) != HAL_OK)
+        return 0xFFFF;
 
     // Start ADC conversion
     if (HAL_ADC_Start(handle) != HAL_OK)
@@ -225,6 +209,13 @@ ADC_TypeDef* Adc::getInstance(Peripheral peripheral) {
             break;
     }
     return nullptr;
+}
+
+Adc::Channel Adc::getChannel(Gpio::Gpio gpio, Peripheral peripheral) {
+    for (const auto& af : _adcAF)
+        if (af.gpio == gpio && af.peripheral == peripheral)
+            return af.channel;
+    return Channel::CH_INVALID;
 }
 
 void Adc::enableClock(Peripheral peripheral) {
