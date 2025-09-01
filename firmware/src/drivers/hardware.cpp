@@ -11,6 +11,7 @@
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <drivers/interrupt/interrupt.h>
+#include <drivers/spi/spi.h>
 #include <drivers/timer/timer.h>
 #include <drivers/uart/uart.h>
 #include <drivers/voltage/voltage.h>
@@ -26,8 +27,8 @@ bool Hardware::init() {
 
     if (!Uart::init())
         Error::hardFault("Failed to initialize UART driver");
-    // if (!Spi::init())
-    //     Error::hardFault("Failed to initialize SPI driver");
+    if (!Spi::init())
+        Error::hardFault("Failed to initialize SPI driver");
     // if (!Usb::init())
     //     Error::hardFault("Failed to initialize USB driver");
     if (!Adc::init())

@@ -18,6 +18,9 @@ SPI_TypeDef* getInstance(Peripheral peripheral);
 void enableClock(Peripheral peripheral);
 void disableClock(Peripheral peripheral);
 
+uint32_t convert(SpiConfig::Prescaler p);
+uint32_t convert(SpiConfig::DataSize ds);
+
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
@@ -27,7 +30,7 @@ SPI_HandleTypeDef hspi4;
 
 bool Spi::init() {
     // Get peripherals in use
-    std::array<bool, size_t(Peripheral::NUM)> inUse;
+    std::array<bool, size_t(Peripheral::NUM)> inUse = {false, false, false, false};
     for (Gpio::GpioConfig conf : Gpio::gpioList) {
         if (conf.mode == Gpio::Mode::SPI1_SCK || conf.mode == Gpio::Mode::SPI1_MISO || conf.mode == Gpio::Mode::SPI1_MOSI)
             inUse[int(Peripheral::SPI1)] = true;
@@ -38,7 +41,7 @@ bool Spi::init() {
     }
 
     // Initialize peripherals
-    for (size_t i = 0; i <= inUse.size(); i++) {
+    for (size_t i = 0; i < inUse.size(); i++) {
         Peripheral peripheral = Peripheral(i);
         if (!inUse[int(peripheral)])
             continue;
@@ -61,11 +64,11 @@ bool Spi::init() {
         hspi->Instance = getInstance(peripheral);
         hspi->Init.Mode = SPI_MODE_MASTER;
         hspi->Init.Direction = SPI_DIRECTION_2LINES;
-        hspi->Init.DataSize = SPI_DATASIZE_8BIT;
+        hspi->Init.DataSize = convert(cfg.dataSize);
         hspi->Init.CLKPolarity = (cfg.mode == SpiConfig::MODE_0 || cfg.mode == SpiConfig::MODE_1) ? SPI_POLARITY_LOW : SPI_POLARITY_HIGH;
         hspi->Init.CLKPhase = (cfg.mode == SpiConfig::MODE_0 || cfg.mode == SpiConfig::MODE_2) ? SPI_PHASE_1EDGE : SPI_PHASE_2EDGE;
         hspi->Init.NSS = cfg.cs == SpiConfig::CS_SOFT ? SPI_NSS_SOFT : SPI_NSS_HARD_OUTPUT;
-        hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32; // 3MHz
+        hspi->Init.BaudRatePrescaler = convert(cfg.prescaler);
         hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
         hspi->Init.TIMode = SPI_TIMODE_DISABLE;
         hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -191,5 +194,39 @@ void Spi::disableClock(Peripheral peripheral) {
             break;
         default:
             break;
+    }
+}
+
+uint32_t Spi::convert(SpiConfig::Prescaler p) {
+    switch (p) {
+        case SpiConfig::Prescaler::PRESCALER_2:
+            return SPI_BAUDRATEPRESCALER_2;
+        case SpiConfig::Prescaler::PRESCALER_4:
+            return SPI_BAUDRATEPRESCALER_4;
+        case SpiConfig::Prescaler::PRESCALER_8:
+            return SPI_BAUDRATEPRESCALER_8;
+        case SpiConfig::Prescaler::PRESCALER_16:
+            return SPI_BAUDRATEPRESCALER_16;
+        case SpiConfig::Prescaler::PRESCALER_32:
+            return SPI_BAUDRATEPRESCALER_32;
+        case SpiConfig::Prescaler::PRESCALER_64:
+            return SPI_BAUDRATEPRESCALER_64;
+        case SpiConfig::Prescaler::PRESCALER_128:
+            return SPI_BAUDRATEPRESCALER_128;
+        case SpiConfig::Prescaler::PRESCALER_256:
+            return SPI_BAUDRATEPRESCALER_256;
+        default:
+            return SPI_BAUDRATEPRESCALER_256; // Default to a safe value
+    }
+}
+
+uint32_t Spi::convert(SpiConfig::DataSize ds) {
+    switch (ds) {
+        case SpiConfig::DataSize::DATA_SIZE_8BIT:
+            return SPI_DATASIZE_8BIT;
+        case SpiConfig::DataSize::DATA_SIZE_16BIT:
+            return SPI_DATASIZE_16BIT;
+        default:
+            return SPI_DATASIZE_8BIT; // Default to 8-bit
     }
 }

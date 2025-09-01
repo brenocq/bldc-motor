@@ -15,6 +15,11 @@
 #define REG_CAST() operator uint8_t() const { return *((uint8_t*)this); }
 // clang-format on
 
+/**
+ * @brief Driver for the IMU ISM330DHCX
+ *
+ * Datasheet: https://nl.mouser.com/datasheet/2/389/ism330dhcx-1849534.pdf
+ */
 class Imu {
   public:
     bool init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect);
