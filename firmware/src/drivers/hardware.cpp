@@ -10,6 +10,7 @@
 #include <drivers/dma/dma.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
+#include <drivers/imu/imu.h>
 #include <drivers/interrupt/interrupt.h>
 #include <drivers/spi/spi.h>
 #include <drivers/timer/timer.h>
@@ -70,6 +71,9 @@ bool Hardware::init() {
         Error::hardFault("Failed to initialize current V_PIN driver");
     if (!curr_w_phase.init(Gpio::CURR_W_PIN))
         Error::hardFault("Failed to initialize current W_PIN driver");
+
+    if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
+        Error::hardFault("Failed to initialize IMU");
 
     // if (!led.init())
     //    Error::hardFault("Failed to initialize led driver");

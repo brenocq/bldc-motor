@@ -8,6 +8,7 @@
 #include <utils/log.h>
 
 #include <drivers/current/current.h>
+#include <drivers/imu/imu.h>
 #include <drivers/voltage/voltage.h>
 
 // FreeRTOS includes
@@ -43,16 +44,21 @@ void ledTask(void* argument) {
 
 void attaConnectorTask(void* argument) {
     for (;;) {
-        float v_src = volt_src.read();
-        float v_u = volt_u_phase.read();
-        float v_v = volt_v_phase.read();
-        float v_w = volt_w_phase.read();
-        Log::success("AttaConnectorTask", "Voltages: SRC=$0V, U=$1V, V=$2V, W=$3V", v_src, v_u, v_v, v_w);
+        // float v_src = volt_src.read();
+        // float v_u = volt_u_phase.read();
+        // float v_v = volt_v_phase.read();
+        // float v_w = volt_w_phase.read();
+        // Log::success("AttaConnectorTask", "Voltages: SRC=$0V, U=$1V, V=$2V, W=$3V", v_src, v_u, v_v, v_w);
 
-        float i_u = curr_u_phase.read();
-        float i_v = curr_v_phase.read();
-        float i_w = curr_w_phase.read();
-        Log::success("AttaConnectorTask", "Currents: U=$0A, V=$1A, W=$2A", i_u, i_v, i_w);
+        // float i_u = curr_u_phase.read();
+        // float i_v = curr_v_phase.read();
+        // float i_w = curr_w_phase.read();
+        // Log::success("AttaConnectorTask", "Currents: U=$0A, V=$1A, W=$2A", i_u, i_v, i_w);
+
+        std::array<int16_t, 3> acc = imu.getAcc();
+        std::array<int16_t, 3> gyr = imu.getGyr();
+        Log::success("AttaConnectorTask", "Acc: X=$0, Y=$1, Z=$2", acc[0], acc[1], acc[2]);
+        Log::success("AttaConnectorTask", "Gyr: X=$0, Y=$1, Z=$2", gyr[0], gyr[1], gyr[2]);
 
         Log::success("AttaConnectorTask", "Running...");
         osDelay(500);

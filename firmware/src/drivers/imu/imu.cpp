@@ -4,6 +4,7 @@
 // Date: 2023-11-25
 // By Breno Cunha Queiroz
 //--------------------------------------------------
+#include <drivers/hardware.h>
 #include <drivers/imu/imu.h>
 #include <limits>
 #include <utils/log.h>
@@ -12,6 +13,7 @@ bool Imu::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
     _peripheral = peripheral;
     _chipSelect = chipSelect;
     Gpio::write(_chipSelect, true);
+    Hardware::delayMs(1);
 
     // Check WHO_AM_I
     uint8_t whoAmI = readReg(REG_WHO_AM_I);
@@ -41,7 +43,7 @@ void Imu::getGyrAcc(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t*
 
 std::array<int16_t, 3> Imu::getAcc() {
     // Read raw
-    uint8_t address = uint8_t(REG_OUTX_L_A) | 0b10000000; // Read bit
+    uint8_t address = uint8_t(REG_OUTX_L_A) | 0x80; // Read bit
     std::array<int16_t, 3> accRaw;
     Gpio::write(_chipSelect, false);
     Spi::transmit(_peripheral, &address, sizeof(uint8_t));
@@ -61,7 +63,7 @@ std::array<int16_t, 3> Imu::getAcc() {
 
 std::array<int16_t, 3> Imu::getGyr() {
     // Read raw
-    uint8_t address = uint8_t(REG_OUTX_L_G) | 0b10000000; // Read bit
+    uint8_t address = uint8_t(REG_OUTX_L_G) | 0x80; // Read bit
     std::array<int16_t, 3> gyrRaw;
     Gpio::write(_chipSelect, false);
     Spi::transmit(_peripheral, &address, sizeof(uint8_t));
@@ -82,7 +84,7 @@ std::array<int16_t, 3> Imu::getGyr() {
 float Imu::getTemperature() { return 0; }
 
 uint8_t Imu::readReg(Reg reg) {
-    uint8_t address = uint8_t(reg) | 0b10000000; // Read bit
+    uint8_t address = uint8_t(reg) | 0x80; // Read bit
     uint8_t data;
     Gpio::write(_chipSelect, false);
     Spi::transmit(_peripheral, &address, sizeof(uint8_t));
