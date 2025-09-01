@@ -27,7 +27,7 @@ class Imu {
     void getGyrAcc(int16_t* gx, int16_t* gy, int16_t* gz, int16_t* ax, int16_t* ay, int16_t* az);
     std::array<int16_t, 3> getAcc();
     std::array<int16_t, 3> getGyr();
-    float getTemperature();
+    float getTemp();
 
   private:
     // clang-format off
@@ -136,12 +136,12 @@ class Imu {
             FS_2G = 0b00,
             FS_4G = 0b10,
             FS_8G = 0b11,
+            FS_16G = 0b01,
         };
     };
 
     struct Ctrl2G {
-        uint8_t none : 1;
-        uint8_t fullScale : 3;
+        uint8_t fullScale : 4;
         uint8_t odr : 4;
         REG_CAST();
 
@@ -160,16 +160,18 @@ class Imu {
         };
 
         enum FullScale : uint8_t {
-            FS_125DPS = 0b001,
-            FS_250DPS = 0b000,
-            FS_500DPS = 0b010,
-            FS_1000DPS = 0b100,
-            FS_2000DPS = 0b110,
+            FS_125DPS = 0b0010,
+            FS_250DPS = 0b0000,
+            FS_500DPS = 0b0100,
+            FS_1000DPS = 0b1000,
+            FS_2000DPS = 0b1100,
+            FS_4000DPS = 0b0001,
         };
     };
 
     uint8_t readReg(Reg reg);
     void writeReg(Reg reg, uint8_t data);
+    bool readMultiReg(Reg startReg, uint8_t* data, uint16_t len);
 
     static constexpr uint8_t WHO_AM_I_DEFAULT = 0x6B;
 

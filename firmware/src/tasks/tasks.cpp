@@ -57,8 +57,10 @@ void attaConnectorTask(void* argument) {
 
         std::array<int16_t, 3> acc = imu.getAcc();
         std::array<int16_t, 3> gyr = imu.getGyr();
+        float temp = imu.getTemp();
         Log::success("AttaConnectorTask", "Acc: X=$0, Y=$1, Z=$2", acc[0], acc[1], acc[2]);
         Log::success("AttaConnectorTask", "Gyr: X=$0, Y=$1, Z=$2", gyr[0], gyr[1], gyr[2]);
+        Log::success("AttaConnectorTask", "Temp: $0C", temp);
 
         Log::success("AttaConnectorTask", "Running...");
         osDelay(500);
