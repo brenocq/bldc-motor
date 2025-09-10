@@ -84,8 +84,8 @@ struct SpiConfig {
 inline const std::array spiList{
     // IMU SPI (9MHz)
     SpiConfig{Peripheral::SPI2, SpiConfig::MODE_3, SpiConfig::CS_SOFT, SpiConfig::PRESCALER_4, SpiConfig::DATA_SIZE_8BIT},
-    // Encoder SPI
-    SpiConfig{Peripheral::SPI3, SpiConfig::MODE_1, SpiConfig::CS_HARD, SpiConfig::PRESCALER_32, SpiConfig::DATA_SIZE_16BIT},
+    // Encoder SPI (9MHz)
+    SpiConfig{Peripheral::SPI3, SpiConfig::MODE_1, SpiConfig::CS_SOFT, SpiConfig::PRESCALER_4, SpiConfig::DATA_SIZE_16BIT},
 };
 
 }; // namespace Spi

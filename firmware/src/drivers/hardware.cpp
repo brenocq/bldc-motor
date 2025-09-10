@@ -8,6 +8,7 @@
 #include <drivers/clock/clock.h>
 #include <drivers/current/current.h>
 #include <drivers/dma/dma.h>
+#include <drivers/encoder/encoder.h>
 #include <drivers/gpio/gpio.h>
 #include <drivers/hardware.h>
 #include <drivers/imu/imu.h>
@@ -72,8 +73,13 @@ bool Hardware::init() {
     if (!curr_w_phase.init(Gpio::CURR_W_PIN))
         Error::hardFault("Failed to initialize current W_PIN driver");
 
+    // Initialize IMU
     if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
         Error::hardFault("Failed to initialize IMU");
+
+    // Initialize encoder
+    if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
+        Error::hardFault("Failed to initialize encoder");
 
     // if (!led.init())
     //    Error::hardFault("Failed to initialize led driver");

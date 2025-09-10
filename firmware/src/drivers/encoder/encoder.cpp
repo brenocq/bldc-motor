@@ -1,7 +1,7 @@
 //--------------------------------------------------
 // BLDC Motor Controller
 // encoder.cpp
-// Date: 2023-09-12
+// Date: 2025-09-10
 // By Breno Cunha Queiroz
 //--------------------------------------------------
 #include <drivers/encoder/encoder.h>
@@ -13,8 +13,13 @@ bool Encoder::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
     _chipSelect = chipSelect;
     Gpio::write(_chipSelect, true);
 
-    if (readAngle() == -1.0f) {
-        Log::error("Encoder", "Failed to initialize encoder, communication not possible");
+    // Initial NOP to initialize SPI (first transaction often fails and triggers the encoder's error flag)
+    uint16_t nop_cmd = createCommandFrame(REG_NOP, false);
+    transmitReceive(nop_cmd);
+
+    // Verify communication by reading a known register
+    if (!verifyCommunication()) {
+        Log::error("Encoder", "Failed to initialize");
         return false;
     }
 
@@ -22,61 +27,108 @@ bool Encoder::init(Spi::Peripheral peripheral, Gpio::Gpio chipSelect) {
     return true;
 }
 
-static uint8_t calculateCRC(uint32_t data) {
-    // Thanks to https://github.com/scottbez1/smartknob/blob/master/firmware/src/mt6701_sensor.cpp
-    static uint8_t tableCRC6[64] = {0x00, 0x03, 0x06, 0x05, 0x0C, 0x0F, 0x0A, 0x09, 0x18, 0x1B, 0x1E, 0x1D, 0x14, 0x17, 0x12, 0x11,
-                                    0x30, 0x33, 0x36, 0x35, 0x3C, 0x3F, 0x3A, 0x39, 0x28, 0x2B, 0x2E, 0x2D, 0x24, 0x27, 0x22, 0x21,
-                                    0x23, 0x20, 0x25, 0x26, 0x2F, 0x2C, 0x29, 0x2A, 0x3B, 0x38, 0x3D, 0x3E, 0x37, 0x34, 0x31, 0x32,
-                                    0x13, 0x10, 0x15, 0x16, 0x1F, 0x1C, 0x19, 0x1A, 0x0B, 0x08, 0x0D, 0x0E, 0x07, 0x04, 0x01, 0x02};
-    uint8_t idx = 0;
-    uint8_t crc = 0;
+std::optional<float> Encoder::readAngle() {
+    auto response = readRegister(REG_ANGLE);
+    if (!response)
+        return std::nullopt;
 
-    idx = (uint8_t)(((uint32_t)data >> 12u) & 0x0000003Fu);
-
-    crc = (uint8_t)(((uint32_t)data >> 6u) & 0x0000003Fu);
-    idx = crc ^ tableCRC6[idx];
-
-    crc = (uint8_t)((uint32_t)data & 0x0000003Fu);
-    idx = crc ^ tableCRC6[idx];
-
-    crc = tableCRC6[idx];
-
-    return crc;
+    // Convert the raw 14-bit angle (0-16383) to degrees
+    return (response->fields.data / 16383.0f) * 360.0f;
 }
 
-float Encoder::readAngle() {
-    uint16_t data = 0;
-    uint8_t status = 0;
-    uint8_t crc = 0;
+std::optional<uint16_t> Encoder::readMagnitude() {
+    auto response = readRegister(REG_MAGNITUDE);
+    if (!response)
+        return std::nullopt;
+    return uint16_t(response->fields.data);
+}
 
-    // Read angle
-    uint8_t bits[3];
-    Gpio::write(_chipSelect, false);
-    Spi::receive(_peripheral, bits, 3 * sizeof(uint8_t));
-    Gpio::write(_chipSelect, true);
-    data = (bits[0] << 6) | (bits[1] >> 2);
-    status = ((bits[1] & 0b11) << 2) | (bits[2] >> 6);
-    crc = bits[2] & 0b111111;
+bool Encoder::verifyCommunication() {
+    // Reading any register successfully is a good verification.
+    // We read the diagnostics register as it should always return a valid value.
+    auto response = readRegister(REG_CLEAR_ERROR);
+    return response.has_value();
+}
 
-    // Calculate angle
-    float angle = data / 16384.0f * 3.141592f * 2.0f; // Calculate angle in radians
+std::optional<Encoder::ReadFrame> Encoder::readRegister(Reg address) {
+    // 1. Create the command frame for the target register.
+    uint16_t read_cmd = createCommandFrame(address, true);
+    // 2. Create a NOP command to clock out the response.
+    uint16_t nop_cmd = createCommandFrame(REG_NOP, false);
 
-    // Check status
-    // if (status & STATUS_MAG_FIELD_TOO_STRONG)
-    //    Log::debug("Encoder", "Status: MAG_FIELD_TOO_STRONG");
-    // if (status & STATUS_MAG_FIELD_TOO_WEAK)
-    //    Log::debug("Encoder", "Status: MAG_FIELD_TOO_WEAK");
-    // if (status & STATUS_PUSH_BUTTON_DETECTED)
-    //    Log::debug("Encoder", "Status: PUSH_BUTTON_DETECTED");
-    // if (status & STATUS_LOSS_OF_TRACK)
-    //    Log::debug("Encoder", "Status: LOSS_OF_TRACK");
+    // 3. Send the read command (response is discarded), then send a NOP to get the actual response.
+    transmitReceive(read_cmd);
+    auto raw_response = transmitReceive(nop_cmd);
 
-    // Check CRC
-    uint8_t crcReceived = calculateCRC(uint32_t(data) << 4 | status);
-    if (crcReceived == crc)
-        return angle;
+    if (!raw_response) {
+        Log::error("Encoder", "SPI communication failed at HAL level.");
+        return std::nullopt;
+    }
 
-    // CRC error
-    Log::warning("Encoder", "CRC mismatch: " + std::to_string(crcReceived) + " instead of " + std::to_string(crc));
-    return -1.0f;
+    // 4. Parse the received frame to validate it.
+    ReadFrame response = parseReadFrame(*raw_response);
+
+    // 5. Check for sensor-level errors (bad parity or error flag set).
+    if (!response.parityOK || response.fields.errorFlag) {
+        Log::warning("Encoder", "Received frame with error. Parity OK: $0, Error Flag: $1", response.parityOK, uint16_t(response.fields.errorFlag));
+        return std::nullopt;
+    }
+
+    return response;
+}
+
+std::optional<uint16_t> Encoder::transmitReceive(uint16_t txData) {
+    uint16_t rxData = 0;
+
+    Gpio::write(_chipSelect, false); // CS Low
+    bool success = Spi::transmitReceive(_peripheral, reinterpret_cast<uint8_t*>(&txData), reinterpret_cast<uint8_t*>(&rxData), 1);
+    Gpio::write(_chipSelect, true); // CS High
+    Hardware::delayMs(1);           // Short delay to ensure sensor is ready
+
+    if (!success)
+        return std::nullopt;
+
+    // Swap the bytes of the received data back to the correct order for the CPU.
+    return rxData;
+}
+
+Encoder::ReadFrame Encoder::parseReadFrame(uint16_t rawFrame) {
+    ReadFrame frame;
+    frame.parityOK = validateReceivedParity(rawFrame);
+    frame.fields.errorFlag = (rawFrame >> 14) & 0x01;
+    frame.fields.data = rawFrame & 0x3FFF;
+    return frame;
+}
+
+uint16_t Encoder::createCommandFrame(Reg address, bool isRead) {
+    uint16_t command = address & 0x3FFF;
+    if (isRead) {
+        command |= (1 << 14); // Set the read/write bit (RWn)
+    }
+    if (calculateParityBit(command)) {
+        command |= (1 << 15); // Set the parity bit (PAR)
+    }
+    return command;
+}
+
+bool Encoder::validateReceivedParity(uint16_t rawFrame) {
+    uint8_t count = 0;
+    for (int i = 0; i < 16; i++) {
+        if ((rawFrame >> i) & 0x01) {
+            count++;
+        }
+    }
+    // For a valid even parity frame, the total number of set bits must be even.
+    return (count % 2) == 0;
+}
+
+uint8_t Encoder::calculateParityBit(uint16_t value) {
+    uint8_t count = 0;
+    for (int i = 0; i < 15; i++) {
+        if ((value >> i) & 0x01) {
+            count++;
+        }
+    }
+    // For even parity, the parity bit is 1 if the number of set bits is odd.
+    return (count % 2);
 }

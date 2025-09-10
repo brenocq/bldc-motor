@@ -8,6 +8,7 @@
 #include <utils/log.h>
 
 #include <drivers/current/current.h>
+#include <drivers/encoder/encoder.h>
 #include <drivers/imu/imu.h>
 #include <drivers/voltage/voltage.h>
 
@@ -55,12 +56,19 @@ void attaConnectorTask(void* argument) {
         // float i_w = curr_w_phase.read();
         // Log::success("AttaConnectorTask", "Currents: U=$0A, V=$1A, W=$2A", i_u, i_v, i_w);
 
-        std::array<int16_t, 3> acc = imu.getAcc();
-        std::array<int16_t, 3> gyr = imu.getGyr();
-        float temp = imu.getTemp();
-        Log::success("AttaConnectorTask", "Acc: X=$0, Y=$1, Z=$2", acc[0], acc[1], acc[2]);
-        Log::success("AttaConnectorTask", "Gyr: X=$0, Y=$1, Z=$2", gyr[0], gyr[1], gyr[2]);
-        Log::success("AttaConnectorTask", "Temp: $0C", temp);
+        // std::array<int16_t, 3> acc = imu.getAcc();
+        // std::array<int16_t, 3> gyr = imu.getGyr();
+        // float temp = imu.getTemp();
+        // Log::success("AttaConnectorTask", "Acc: X=$0, Y=$1, Z=$2", acc[0], acc[1], acc[2]);
+        // Log::success("AttaConnectorTask", "Gyr: X=$0, Y=$1, Z=$2", gyr[0], gyr[1], gyr[2]);
+        // Log::success("AttaConnectorTask", "Temp: $0C", temp);
+
+        std::optional<float> angle = encoder.readAngle();
+        std::optional<uint32_t> magnitude = encoder.readMagnitude();
+        if (angle.has_value() && magnitude.has_value())
+            Log::success("AttaConnectorTask", "Angle: $0 degrees. Magnitude: $1", angle.value(), magnitude.value());
+        else
+            Log::error("AttaConnectorTask", "Failed to read angle or magnitude from encoder");
 
         Log::success("AttaConnectorTask", "Running...");
         osDelay(500);
