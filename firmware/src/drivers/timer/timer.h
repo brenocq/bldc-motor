@@ -93,7 +93,7 @@ static constexpr uint16_t LED_PERIOD = 112;
 static constexpr Channel LED_CH = CH1;
 
 static constexpr Timer MOTOR_TIM = TIM1;
-static constexpr uint16_t MOTOR_PERIOD = 3000 - 1;
+static constexpr uint16_t MOTOR_PERIOD = 3000 - 1; // ~24kHz in center mode, 144MHz APB2
 static constexpr Channel MOTOR_CH_U = CH1;
 static constexpr Channel MOTOR_CH_V = CH2;
 static constexpr Channel MOTOR_CH_W = CH3;
@@ -108,7 +108,7 @@ struct TimerConfig {
 
 inline const std::array timerList{
     TimerConfig{LED_TIM, Mode::PWM, CounterMode::UP, LED_PERIOD},
-    // TimerConfig{MOTOR_TIM, Mode::PWM, CounterMode::CENTER, MOTOR_PERIOD},
+    TimerConfig{MOTOR_TIM, Mode::PWM, CounterMode::CENTER, MOTOR_PERIOD},
 };
 
 }; // namespace Timer

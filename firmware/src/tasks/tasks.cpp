@@ -10,6 +10,7 @@
 #include <drivers/current/current.h>
 #include <drivers/encoder/encoder.h>
 #include <drivers/imu/imu.h>
+#include <drivers/timer/timer.h>
 #include <drivers/voltage/voltage.h>
 
 // FreeRTOS includes
@@ -45,11 +46,11 @@ void ledTask(void* argument) {
 
 void attaConnectorTask(void* argument) {
     for (;;) {
-        // float v_src = volt_src.read();
-        // float v_u = volt_u_phase.read();
-        // float v_v = volt_v_phase.read();
-        // float v_w = volt_w_phase.read();
-        // Log::success("AttaConnectorTask", "Voltages: SRC=$0V, U=$1V, V=$2V, W=$3V", v_src, v_u, v_v, v_w);
+        float v_src = volt_src.read();
+        float v_u = volt_u_phase.read();
+        float v_v = volt_v_phase.read();
+        float v_w = volt_w_phase.read();
+        Log::success("AttaConnectorTask", "Voltages: SRC=$0V, U=$1V, V=$2V, W=$3V", v_src, v_u, v_v, v_w);
 
         // float i_u = curr_u_phase.read();
         // float i_v = curr_v_phase.read();
@@ -63,12 +64,12 @@ void attaConnectorTask(void* argument) {
         // Log::success("AttaConnectorTask", "Gyr: X=$0, Y=$1, Z=$2", gyr[0], gyr[1], gyr[2]);
         // Log::success("AttaConnectorTask", "Temp: $0C", temp);
 
-        std::optional<float> angle = encoder.readAngle();
-        std::optional<uint32_t> magnitude = encoder.readMagnitude();
-        if (angle.has_value() && magnitude.has_value())
-            Log::success("AttaConnectorTask", "Angle: $0 degrees. Magnitude: $1", angle.value(), magnitude.value());
-        else
-            Log::error("AttaConnectorTask", "Failed to read angle or magnitude from encoder");
+        // std::optional<float> angle = encoder.readAngle();
+        // std::optional<uint32_t> magnitude = encoder.readMagnitude();
+        // if (angle.has_value() && magnitude.has_value())
+        //     Log::success("AttaConnectorTask", "Angle: $0 degrees. Magnitude: $1", angle.value(), magnitude.value());
+        // else
+        //     Log::error("AttaConnectorTask", "Failed to read angle or magnitude from encoder");
 
         Log::success("AttaConnectorTask", "Running...");
         osDelay(500);

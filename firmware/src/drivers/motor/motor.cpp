@@ -71,7 +71,7 @@ void Motor::set(float angle, float magnitude) {
             return;
     }
 
-    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U, uPeriod);
-    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V, vPeriod);
-    setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W, wPeriod);
+    Timer::setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_U, uPeriod);
+    Timer::setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_V, vPeriod);
+    Timer::setPwm(Timer::MOTOR_TIM, Timer::MOTOR_CH_W, wPeriod);
 }

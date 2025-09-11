@@ -173,7 +173,7 @@ void Gpio::initTimer(Gpio gpio, Mode mode) {
     gpioInit.Pin = convert(gpio.pin);
     gpioInit.Mode = GPIO_MODE_AF_PP;
     gpioInit.Pull = GPIO_NOPULL;
-    gpioInit.Speed = GPIO_SPEED_FREQ_LOW;
+    gpioInit.Speed = GPIO_SPEED_FREQ_HIGH;
     gpioInit.Alternate = getAlternateFunc(gpio, mode);
     HAL_GPIO_Init(convert(gpio.port), &gpioInit);
 }

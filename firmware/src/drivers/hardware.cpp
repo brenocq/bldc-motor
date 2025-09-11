@@ -13,6 +13,7 @@
 #include <drivers/hardware.h>
 #include <drivers/imu/imu.h>
 #include <drivers/interrupt/interrupt.h>
+#include <drivers/motor/motor.h>
 #include <drivers/spi/spi.h>
 #include <drivers/timer/timer.h>
 #include <drivers/uart/uart.h>
@@ -43,9 +44,9 @@ bool Hardware::init() {
         Error::hardFault("Failed to initialize Interrupt driver");
 
     // Initialize debug pins as LOW
-    Gpio::write(Gpio::DEBUG0_PIN, false);
-    Gpio::write(Gpio::DEBUG1_PIN, false);
-    Gpio::write(Gpio::DEBUG2_PIN, false);
+    Gpio::write(Gpio::DEBUG0_PIN, Gpio::LOW);
+    Gpio::write(Gpio::DEBUG1_PIN, Gpio::LOW);
+    Gpio::write(Gpio::DEBUG2_PIN, Gpio::LOW);
 
     // Timer-DMA
     Timer::linkDma(Timer::LED_TIM, Timer::LED_CH, Dma::getHandle(Dma::LED_DMA, Dma::LED_STREAM));
@@ -83,19 +84,8 @@ bool Hardware::init() {
 
     // if (!led.init())
     //    Error::hardFault("Failed to initialize led driver");
-    // if (!encoder.init(Spi::Peripheral::SPI3, Gpio::ENC_CS_PIN))
-    //     Error::hardFault("Failed to initialize encoder driver");
-
-    // if (!phaseU.init(Phase::U, Spi::Peripheral::SPI1, Gpio::PHASE_CS_U_PIN))
-    //     Error::hardFault("Failed to initialize phase driver for phase U");
-    // if (!phaseV.init(Phase::V, Spi::Peripheral::SPI1, Gpio::PHASE_CS_V_PIN))
-    //     Error::hardFault("Failed to initialize phase driver for phase V");
-    // if (!phaseW.init(Phase::W, Spi::Peripheral::SPI1, Gpio::PHASE_CS_W_PIN))
-    //     Error::hardFault("Failed to initialize phase driver for phase W");
-    // if (!imu.init(Spi::Peripheral::SPI2, Gpio::IMU_CS_PIN))
-    //     Error::hardFault("Failed to initialize IMU");
-    // if (!motor.init())
-    //     Error::hardFault("Failed to initialize motor driver");
+    if (!motor.init())
+        Error::hardFault("Failed to initialize motor driver");
     // if (!AttaConnector::init())
     //     Error::hardFault("Failed to initialize atta connector");
 
