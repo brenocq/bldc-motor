@@ -4252,7 +4252,7 @@
 		)
 		(uuid "f6eae34f-02b8-4e3f-9527-e071a1dfc1dc")
 	)
-	(text_box "SPI2 -> IMU\nSPI3 -> ENC\nADC1 -> VOLT (source+phases)\nADC2 -> CURR (phases)\nTIM1 -> PWM\nTIM2 -> LED\nUSB FS\nCAN1"
+	(text_box "SPI2 -> IMU\nSPI3 -> ENC\nADC1 -> VOLT (source+phases)\nADC2 -> CURR (phases)\nTIM1 -> PWM\nTIM2 -> LED\nUSART6\nUSB FS\nCAN1"
 		(exclude_from_sim no)
 		(at 114.3 21.59 0)
 		(size 27.94 16.51)
